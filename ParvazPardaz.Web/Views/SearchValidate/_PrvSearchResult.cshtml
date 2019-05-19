@@ -1,0 +1,88 @@
+﻿@model SearchResultViewModel
+@if (Model.PostListViewModel.PostDetail != null && Model.PostListViewModel.PostDetail.Any())
+{
+    var counter = 0;
+    var idCount = 0;
+    foreach (var item in Model.PostListViewModel.PostDetail)
+    {
+        <article class="col-md-4">
+            <div class="blog-box">
+                <div class="entry-cover">
+                    <a href="@item.URL"><img src="@Url.Content(item.Thumbnail)" alt="@item.Title" /></a>
+                    @{var signid = "add_sign_count-" + idCount;
+                    var postid = "post-content-" + idCount;
+                    }
+                    <a id="@signid" class="add-sign-big color-Yellow"><img src="/ClientTheme/images/icon/big-plus.png" alt="big-plus" /></a>
+                </div>
+                <div class="post-box-inner">
+                    <div class="box-content">
+                        <a href="@item.URL" id="@item.Name.Replace(" ","-")" target="@item.Target" rel="@item.Rel" class="entry-title">@item.Name</a>
+                        <p>@item.PostSummery</p>
+                        <p class="time"><i class="fa fa-clock-o"></i> @item.PublishDatetime.ToString("yyyy/MM/dd")</p>
+                        <div class="post-content" id="@postid">
+                            <p>@item.PostSummery</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-social">
+                <a href="@item.URL" class="read-more " target="@item.Target" rel="@item.Rel">بیشتر</a>
+            </div>
+        </article>
+                    counter++;
+                    idCount++;
+                    if (counter == 3)
+                    {
+                        <div class="hidden-xs" style="clear:both;"></div>
+                        counter = 0;
+                    }
+    }
+    <div class="hidden-xs" style="clear:both;"></div>
+    if (!Model.IsBeHiddenBtnMore)
+    {
+        <div id="DivResult" style="text-align:center">
+            <article class="col-md-12 btnMore" style="padding:0; margin-bottom:0;">
+                @Html.HiddenFor(model => model.PageIndex, new { @id = "PageIndex" })
+                @Ajax.ActionLink("بیشتر", "Search", null, new { Title = Model.Title, PageIndex = "_morePageIndex_", PageSize = Model.PageSize }, new AjaxOptions()
+           {
+               InsertionMode = InsertionMode.ReplaceWith,
+               UpdateTargetId = "DivResult",
+               OnSuccess = "AjaxBtnMoreSuccess",
+               OnFailure = "AjaxBtnMoreFailure",
+               LoadingElementId = "preloader"
+           }, new { @class = "btn btn-block", style = "color:white; background-color:#101010", @id = "btnMore" })
+            </article>
+            <img id="preloader" alt="لطفا صبر کنید" style="display:none;" src="~/SiteClientTheme/img/Preloader/loadingAnimation.gif" />
+        </div>
+
+        <script type="text/javascript">
+            function AjaxBtnMoreSuccess(result) {
+                //alert("موفق");
+                //var index = document.getElementById("PageIndex").value;
+                //document.getElementById("PageIndex").value = parseInt(index) + 1;
+            }
+            function AjaxBtnMoreFailure() {
+                //alert("خطا");
+            }
+            $(document).ready(function () {
+                debugger;
+                var index = document.getElementById("PageIndex").value;
+                var i = parseInt(index) + 1;
+                var href = $("#btnMore").attr('href').replace("_morePageIndex_", i);
+                $("#btnMore").attr("href", href);
+
+                $("#btnMore").on("click", function (e) {
+                    e.preventDefault();
+                });
+            });
+        </script>
+    }
+}
+else
+{
+    <div class="alert alert-dismissible alert-warning">
+        <h4>کاربر گرامی!</h4>
+        <p>جستجوی شما نتیجه ای در بر نداشت</p>
+    </div>
+}

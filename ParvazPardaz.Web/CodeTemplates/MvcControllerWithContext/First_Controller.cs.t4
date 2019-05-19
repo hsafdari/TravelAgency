@@ -1,0 +1,289 @@
+﻿<#@ template language="C#" HostSpecific="True" Debug="True" #>
+<#@ output extension="cs" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Data.Linq" #>
+<#@ assembly name="EnvDTE" #>
+<#@ ScaffoldingAssembly Processor="ScaffoldingAssemblyLoader" #>
+<#
+var routePrefix = String.Empty;
+if (!String.IsNullOrWhiteSpace(AreaName)) {
+    routePrefix = "/" + AreaName;
+}
+routePrefix += "/" + ControllerRootName + "/";
+#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Microsoft.AspNet.Scaffolding.Core.Metadata" #>
+<#@ parameter type="System.String" name="ControllerName" #>
+<#@ parameter type="System.String" name="ControllerRootName" #>
+<#@ parameter type="System.String" name="Namespace" #>
+<#@ parameter type="System.String" name="AreaName" #>
+<#@ parameter type="System.String" name="ContextTypeName" #>
+<#@ parameter type="System.String" name="ModelTypeName" #>
+<#@ parameter type="System.String" name="ModelVariable" #>
+<#@ parameter type="Microsoft.AspNet.Scaffolding.Core.Metadata.ModelMetadata" name="ModelMetadata" #>
+<#@ parameter type="System.Boolean" name="UseAsync" #>
+<#@ parameter type="System.Boolean" name="IsOverpostingProtectionRequired" #>
+<#@ parameter type="System.String" name="BindAttributeIncludeText" #>
+<#@ parameter type="System.String" name ="OverpostingWarningMessage" #>
+<#@ parameter type="System.Collections.Generic.HashSet<System.String>" name="RequiredNamespaces" #>
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+<# if (UseAsync) { #>
+using System.Threading.Tasks;
+<# } #>
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
+<# foreach (var namespaceName in RequiredNamespaces) { #>
+using <#= namespaceName #>;
+<# } #>
+
+namespace <#= Namespace #>
+{
+<#
+    var contextTypeName = ContextTypeName;
+    var entitySetName = ModelMetadata.EntitySetName;
+    var entitySetVariable = entitySetName.ToLowerInvariant();
+    var primaryKeyName = ModelMetadata.PrimaryKeys[0].PropertyName;
+    var primaryKeyShortTypeName = ModelMetadata.PrimaryKeys[0].ShortTypeName;
+    var primaryKeyDefaultValue = ModelMetadata.PrimaryKeys[0].DefaultValue;
+    var primaryKeyType = ModelMetadata.PrimaryKeys[0].TypeName;
+    var primaryKeyNullableTypeName = GetNullableTypeName(primaryKeyType, primaryKeyShortTypeName);
+    var lambdaVar = ModelVariable[0];
+    var relatedProperties = ModelMetadata.RelatedEntities.ToDictionary(item => item.AssociationPropertyName);
+
+    string bindAttribute;
+    if (IsOverpostingProtectionRequired)
+    {
+        bindAttribute = String.Format("[Bind(Include=\"{0}\")] ", BindAttributeIncludeText);
+    }
+    else
+    {
+        bindAttribute = String.Empty;
+    }
+#>
+    public class <#= ControllerName #> : Controller
+    {
+        #region	Fields
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly I<#= ControllerRootName #>Service _<#= ControllerRootName.ToLowerInvariant() #>Service;
+        #endregion
+
+        #region	Ctor
+        public <#= ControllerName #>(IUnitOfWork unitOfWork, I<#= ControllerRootName #>Service <#= ControllerRootName.ToLowerInvariant() #>Service)
+        {
+            _unitOfWork = unitOfWork;
+            _<#= ControllerRootName.ToLowerInvariant() #>Service = <#= ControllerRootName.ToLowerInvariant() #>Service;
+        }
+        #endregion
+
+        #region Index
+        // GET: <#= routePrefix #>
+<# if (false) { #>
+        public async Task<ActionResult> Index(string msg)
+<# } else { #>
+        public ActionResult Index(string msg)
+<# } #>
+        {
+<#  var includeExpressions = "";
+        includeExpressions = String.Join("", relatedProperties.Values.Select(property => String.Format(".Include({0} => {0}.{1})", lambdaVar, property.AssociationPropertyName)));
+#>
+<# if(!String.IsNullOrEmpty(includeExpressions)) { #>
+<#		if (UseAsync) { #>
+            ViewBag.success = msg;
+            return View();
+<#		} else { #>
+            ViewBag.success = msg;
+            return View();
+<#		} #>
+<# } else { #>
+<#		if (UseAsync) { #>
+            ViewBag.success = msg;
+            return View();
+<#		} else { #>
+            ViewBag.success = msg;
+            return View();
+<#		} #>
+<# } #>
+        }
+
+        // GET: <#= routePrefix #>Get<#= ControllerRootName #>
+        public ActionResult Get<#= ControllerRootName #>([DataSourceRequest]DataSourceRequest Request)
+        {
+            var refrence = _<#= ControllerRootName.ToLowerInvariant() #>Service.Filter(x => x.IsDeleted == false);
+            var dataSourceResult = refrence.ToDataSourceResult(Request);
+            var result = _<#= ControllerRootName.ToLowerInvariant() #>Service.GetViewModels<<#= ControllerRootName #>GridViewModel>(dataSourceResult.Data.Cast<<#= ControllerRootName #>>());
+            dataSourceResult.Data = result;
+            return Json(dataSourceResult);
+        }
+        #endregion
+
+        #region Create
+        public ActionResult Create()
+        {
+<# foreach (var property in relatedProperties.Values) { #>
+            ViewBag.<#= property.ForeignKeyPropertyNames[0] #> = new SelectList(db.<#= property.EntitySetName #>, "<#= property.PrimaryKeyNames[0] #>", "<#= property.DisplayPropertyName #>");
+<# } #>
+            return View();
+        }
+
+        [HttpPost]
+<# if (UseAsync) { #>
+        public async Task<ActionResult> Create(<#= ModelTypeName #> <#= ModelVariable #>)
+<# } else { #>
+        public ActionResult Create(<#= ModelTypeName #> <#= ModelVariable #>)
+<# } #>
+        {
+            if (ModelState.IsValid)
+            {
+<# if(!String.IsNullOrEmpty(primaryKeyType) && String.Equals("System.Guid", primaryKeyType, StringComparison.OrdinalIgnoreCase)) { #>
+                <#= ModelVariable #>.<#= primaryKeyName #> = Guid.NewGuid();
+<# } #>
+                var new<#= ControllerRootName #> = await _<#= ControllerRootName.ToLowerInvariant() #>Service.CreateAsync<<#= ModelTypeName #>>(<#= ModelVariable #>);
+<# if (UseAsync) {#>
+                return RedirectToAction("Index", new { msg = "create" });
+<# } else { #>
+                return RedirectToAction("Index", new { msg = "create" });
+<# } #>
+            }
+
+<# foreach (var property in relatedProperties.Values) { #>
+            ViewBag.<#= property.ForeignKeyPropertyNames[0] #> = new SelectList(db.<#= property.EntitySetName #>, "<#= property.PrimaryKeyNames[0] #>", "<#= property.DisplayPropertyName #>", <#= ModelVariable #>.<#= property.ForeignKeyPropertyNames[0] #>);
+<# } #>
+            return View(<#= ModelVariable #>);
+        }
+        #endregion
+
+        #region Edit
+<# if (UseAsync) { #>
+        public async Task<ActionResult> Edit(<#= primaryKeyShortTypeName #> id)
+<# } else { #>
+        public ActionResult Edit(<#= primaryKeyShortTypeName #> id)
+<# } #>
+        {
+<# if (UseAsync) { #>
+            <#= ModelTypeName #> <#= ModelVariable #> = await _<#= ControllerRootName.ToLowerInvariant() #>Service.GetViewModelAsync<<#= ModelTypeName #>>(x => x.<#= primaryKeyName #> == id);            
+<# } else { #>
+            var <#= ModelVariable #> = db.<#= entitySetName #>.Find(id);
+<# } #>
+<# foreach (var property in relatedProperties.Values) { #>
+            ViewBag.<#= property.ForeignKeyPropertyNames[0] #> = new SelectList(db.<#= property.EntitySetName #>, "<#= property.PrimaryKeyNames[0] #>", "<#= property.DisplayPropertyName #>", <#= ModelVariable #>.<#= property.ForeignKeyPropertyNames[0] #>);
+<# } #>
+            return View(<#= ModelVariable #>);
+        }
+
+        [HttpPost]
+<# if (UseAsync) { #>
+        public async Task<ActionResult> Edit(<#= ModelTypeName #> <#= ModelVariable #>)
+<# } else { #>
+        public ActionResult Edit(<#= ModelTypeName #> <#= ModelVariable #>)
+<# } #>
+        {
+            if (ModelState.IsValid)
+            {
+                var update = await _<#= ControllerRootName.ToLowerInvariant() #>Service.UpdateAsync<<#= ModelTypeName #>>(<#= ModelTypeName.ToLowerInvariant() #>);
+<# if (UseAsync) { #>
+<# } else { #>
+<# } #>
+                return RedirectToAction("Index", new { msg = "update" });
+            }
+<# foreach (var property in relatedProperties.Values) { #>
+            ViewBag.<#= property.ForeignKeyPropertyNames[0] #> = new SelectList(db.<#= property.EntitySetName #>, "<#= property.PrimaryKeyNames[0] #>", "<#= property.DisplayPropertyName #>", <#= ModelVariable #>.<#= property.ForeignKeyPropertyNames[0] #>);
+<# } #>
+            return View(<#= ModelVariable #>);
+        }
+        #endregion
+
+        #region Delete
+<# if (UseAsync) { #>
+        public async Task<ActionResult> Delete(<#= primaryKeyShortTypeName #> id)
+<# } else { #>
+        public ActionResult Delete(<#= primaryKeyShortTypeName #> id)
+<# } #>
+        {
+<# if (UseAsync) { #>
+            <#= ModelTypeName #> <#= ModelVariable #> = await _<#= ControllerRootName.ToLowerInvariant() #>Service.GetViewModelAsync<<#= ModelTypeName #>>(x => x.<#= primaryKeyName #> == id);
+<# } else { #>
+            <#= ModelTypeName #> <#= ModelVariable #> = db.<#= entitySetName #>.Find(id);
+<# } #>
+            return View(<#= ModelVariable #>);
+        }
+
+        
+        [HttpPost]
+<# if (UseAsync) { #>
+        public async Task<ActionResult> Delete(<#= ModelTypeName #> <#= ModelVariable #>)
+<# } else { #>
+        public ActionResult Delete(<#= ModelTypeName #> <#= ModelVariable #>)
+<# } #>
+        {
+            if (ModelState.IsValid)
+            {
+<# if (UseAsync) { #>
+                var delete = await _<#= ControllerRootName.ToLowerInvariant() #>Service.DeleteAsync(x => x.<#= primaryKeyName #> == <#= ModelVariable #>.<#= primaryKeyName #>);            
+<# } else { #>
+            <#= ModelTypeName #> <#= ModelVariable #> = db.<#= entitySetName #>.Find(id);
+<# } #>
+                return RedirectToAction("Index", new { msg = "delete" });
+            }
+            return View(<#= ModelVariable #>);
+        }
+        #endregion
+        
+        #region DeleteLogically
+        [HttpPost]
+<# if (UseAsync) { #>
+        public async Task<ActionResult> DeleteLogically(<#= ModelTypeName #> <#= ModelVariable #>)
+<# } else { #>
+        public ActionResult DeleteLogically(<#= primaryKeyShortTypeName #> id)
+<# } #>
+        {
+            if (ModelState.IsValid)
+            {
+<# if (UseAsync) { #>
+                var delete = await _<#= ControllerRootName.ToLowerInvariant() #>Service.DeleteLogicallyAsync(x => x.<#= primaryKeyName #> == <#= ModelVariable #>.<#= primaryKeyName #>);
+<# } else { #>
+            <#= ModelTypeName #> <#= ModelVariable #> = db.<#= entitySetName #>.Find(id);
+<# } #>            
+                return RedirectToAction("Index", new { msg = "delete" });
+            }
+            return View(<#= ModelVariable #>);
+        }
+        #endregion
+    }
+}
+<#+
+// This function converts the primary key short type name to its nullable equivalent when possible. This is required to make
+// sure that an HTTP 400 error is thrown when the user tries to access the edit, delete, or details action with null values.
+    string GetNullableTypeName(string typeName, string shortTypeName)
+    {
+        // The exceptions are caught because if for any reason the type is user defined, then the short type name will be used.
+        // In that case the user will receive a server error if null is passed to the edit, delete, or details actions.
+        Type primaryKeyType = null;
+        try
+        {
+            primaryKeyType = Type.GetType(typeName);
+        }
+        catch
+        {
+        }
+        if (primaryKeyType != null && (primaryKeyType.IsPrimitive || IsGuid(typeName)))
+        {
+            return shortTypeName + "?";
+        }
+        return shortTypeName;
+    }
+
+    bool IsGuid(string typeName) {
+        return String.Equals("System.Guid", typeName, StringComparison.OrdinalIgnoreCase);
+    }
+#>

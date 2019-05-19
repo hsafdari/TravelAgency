@@ -1,0 +1,21 @@
+﻿@*<link rel="stylesheet" href="~/Content/assets/plugins/select2/select2.css">
+<script src="~/Content/assets/plugins/select2/select2.min.js"></script>
+<script src="assets/js/form-elements.js"></script>*@
+
+@model int
+@*@{
+    var values = ViewData.ModelMetadata.AdditionalValues;
+}*@
+
+<div class="form-group">
+    @*@Html.ListBoxFor(model => model, (SelectList)TempData["cities"], new { @class = "form-control search-select", data_placehoder = "انتخاب نمایید" })*@
+    @Html.DropDownListFor(model => model, (SelectList)TempData[ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty)], string.Empty, new { @class = "form-control search-select" })
+</div>
+<script>
+
+        $(".search-select").select2({
+            placeholder: "Select a State",
+            allowClear: true
+        });
+
+</script>

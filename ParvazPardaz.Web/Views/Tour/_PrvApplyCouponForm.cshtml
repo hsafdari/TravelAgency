@@ -1,0 +1,41 @@
+﻿@model ApplyCouponViewModel
+<script src="~/Scripts/nets/jquery-2.0.3.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@using (Ajax.BeginForm("", "ApplyCoupon", null, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "ApplyCouponSuccess", OnFailure = "ApplyCouponFailure" }, new { @id = "frm-applycoupon" }))
+{
+    @Html.TextBoxFor(x => x.Coupon, new { @class = "TxtCoupon", @placeholder = "کد را وارد کرده و روی دکمه اعمال بزنید" })
+    @Html.HiddenFor(x => x.TotalPrice, new { Value = Model.TotalPrice.ToString("#") })
+    @Html.HiddenFor(x => x.TotalTaxPrice, new { Value = Model.TotalTaxPrice.ToString("#") })
+    <input class="btn-4 active BtnApply" onclick="$('#frm-applycoupon').submit();" name="apply" value="اعمال کد" type="button">
+    @Html.ValidationMessageFor(model => model.Coupon, "", new { @class = "text-danger" })
+}
+
+<script>
+    function ApplyCouponSuccess(result) {
+        if (result.status == true) {
+            $('#totalDiscountPrice').html(result.disPrice);
+            $('#totalPayPrice').html(result.payPrice);
+            $('#frm-applycoupon').replaceWith("<p>کد تخفیف شما اعمال گشت</p>")
+
+        } else {
+            toastr.options = { "positionClass": "toast-top-right" }
+            toastr.error('لطفا کد تخفیف را به درستی وارد نمایید', 'کد تخفیف', { timeOut: 5000 })
+        }
+    }
+    function ApplyCouponFailure() {
+        toastr.options = { "positionClass": "toast-top-right" }
+        toastr.error('مرورگر شما دچار خطا شده است. لطفا از مرورگری دیگر استفاده نمایید', 'خطا', { timeOut: 5000 })
+    }
+    $(document).ready(function () {
+        jQuery("#frm-applycoupon").removeData("validator");
+        jQuery("#frm-applycoupon").removeData("unobtrusiveValidation");
+        jQuery.validator.unobtrusive.parse("#frm-applycoupon");
+
+        jQuery.validator.setDefaults({
+            ignore: [],
+        });
+    });
+</script>
+

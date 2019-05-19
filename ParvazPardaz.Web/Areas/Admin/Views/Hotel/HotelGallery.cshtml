@@ -1,0 +1,26 @@
+﻿@model ParvazPardaz.ViewModel.HotelGalleryViewModel
+@{
+    ViewBag.Title = "HotelGallery";
+}
+
+<div class="form-horizontal">
+    <h3>@ParvazPardaz.Resource.Tour.Tours.HotelGalleryManagement</h3>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(model => model.HotelID, new { @class = "control-label col-md-1" })
+        <div class="col-md-10">
+            @Html.HiddenFor(x => x.HotelID)
+            @Html.FileUploaderFor(c => c.File).AddMore(true).IsMultiple(false).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(true).Extension(new List<string>() { "jpg", "png", "jpeg" }).UploadUrl("/Admin/Hotel/UploadHotelGallery", new Dictionary<string, object>() { { "HotelID", Model.HotelID } }).Edit(Model.EditModeFileUploads).RemoveUrl("/Admin/Hotel/RemoveUpload/")
+
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-11">
+
+            @Html.ActionLink(ParvazPardaz.Resource.Tour.Tours.GoToIndex, "Index", null, new { @class = "btn btn-custom red" })
+        </div>
+    </div>
+</div>
+

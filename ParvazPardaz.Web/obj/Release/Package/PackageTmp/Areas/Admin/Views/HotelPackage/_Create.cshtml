@@ -1,0 +1,54 @@
+﻿@model HotelPackageViewModel
+<style>
+    #divMoreHoteRoom {
+        text-align: left;
+        padding-left: 75px;
+    }
+    #ListViewTourScheduleHotel tr td
+    {
+        text-align:right;
+    }
+    .hotelPackageSection
+    {
+        border-bottom:1px solid #999;
+    }
+</style>
+
+<div id="DivEntireHotelPackage">
+    <div id="AddEditTourScheduleHotel">
+        @*<h3>@ParvazPardaz.Resource.Tour.Tours.addhotelPackage</h3>*@
+        @Html.Partial("~/Areas/Admin/Views/HotelPackage/_AddHotelPackage.cshtml", new HotelPackageViewModel()
+{
+    //TourScheduleId = Model.TourPackageId,
+    CRUDMode = CRUDMode.Create,
+    //TourId = Model.TourId,
+    TourPackageId=Model.TourPackageId,
+    HotelRoomsInPackage = Model.HotelRoomsInPackage,
+    //HotelsInPackage =new List<HotelsInPackageViewModel>(),
+})
+    </div>
+    <div id="ListViewTourScheduleHotel">
+        @{
+        if (Model != null && Model.ListView != null && Model.ListView.Any())
+        {
+            foreach (var listView in Model.ListView)
+            {
+                @Html.Partial("~/Areas/Admin/Views/HotelPackage/_ListViewHotelPackage.cshtml", listView)
+            }
+        }
+        }
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

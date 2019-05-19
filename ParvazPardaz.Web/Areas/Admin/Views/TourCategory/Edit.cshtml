@@ -1,0 +1,35 @@
+﻿
+
+@model ParvazPardaz.ViewModel.EditTourCategoryViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.Tour.Tours.TourCategoryManagement </h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-1" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+}
+

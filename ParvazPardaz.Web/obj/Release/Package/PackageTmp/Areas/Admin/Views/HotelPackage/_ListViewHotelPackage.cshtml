@@ -1,0 +1,63 @@
+﻿@model  ListViewHotelPackageViewModel
+@Html.HiddenFor(model => model.TourPackageId)
+
+<div class="well nopadding " id="HotelPackage@(Model.SectionId)">
+    <div class="row nomargin">
+        <div class="col-md-12">
+            <div class="col-md-2 left-column" style="margin-top:0.5%">
+                <div>
+                    @Html.Label(ParvazPardaz.Resource.Tour.Tours.TourPackageTitle + " : ")
+                    @Html.DisplayFor(model => model.TourPackageTitle)
+                </div>
+                <div>
+                    @Html.Label(ParvazPardaz.Resource.Tour.Tours.Order + " : ")
+                    @Html.DisplayFor(model => model.OrderId)
+                </div>
+            </div>
+            <div class="col-md-8 nopadding  center-culomn text-left">
+                <table class="table table-responsive">
+                    <tbody>
+                        @foreach (var item in Model.hotelsInPackage)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.Label(ParvazPardaz.Resource.Tour.Tours.Hotel + " : ")
+                                    @Html.DisplayFor(model => item.HotelTitle)
+                                </td>
+                                <td>
+                                    @Html.Label(ParvazPardaz.Resource.Tour.Tours.City + " : ")
+                                    @Html.DisplayFor(model => item.CityTitle)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="col-md-12 nopadding">
+                    @foreach (var item in Model.hotelRoomsInPackage)
+                    {
+                        <p class="col-md-3">@string.Format("{0} : {1} ، بزرگسال : {2}", item.Title, String.Format("{0:n0}",item.AdultPrice), item.AdultCapacity)</p>
+                        <p class="col-md-3">@string.Format("{0} : {1} ، کودک : {2}", item.Title,String.Format("{0:n0}",item.ChildPrice), item.ChildCapacity)</p>
+                        <p class="col-md-3">@string.Format("{0} : {1} ، خردسال : {2}", item.Title, String.Format("{0:n0}",item.InfantPrice), item.InfantCapacity)</p>
+                    }
+                </div>
+            </div>
+            <div class="col-md-1 nopadding right-culomn" style="margin-top:0.5%">
+                @Ajax.ActionLink("ویرایش", "Edit", "HotelPackage", new { id = Model.Id }, new AjaxOptions()
+                           {
+                               InsertionMode = InsertionMode.Replace,
+                               HttpMethod = "GET",
+                               UpdateTargetId = "AddEditTourScheduleHotel"
+                           }, new { @class = "btn btn-sm btn-blue" })
+
+                @Ajax.ActionLink("حذف", "Delete", "HotelPackage", new { id = Model.Id, sectionId = Model.SectionId, tourScheduleId = Model.TourPackageId, tourId = Model.TourId },
+                new AjaxOptions()
+                         {
+                             OnSuccess = "SuccessRemoveForTourScheduleHotel",
+                             HttpMethod = "POST",
+                         }, new { @class = "btn btn-sm btn-red" })
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,590 @@
+﻿@model HotelPackageViewModel
+<link href="~/Plugins/EasyAutocomplete-1.3.5/easy-autocomplete.min.css" rel="stylesheet" />
+<link href="~/Plugins/EasyAutocomplete-1.3.5/easy-autocomplete.themes.min.css" rel="stylesheet" />
+<script src="~/Plugins/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script>
+<style>
+    #HotelTitle {
+        min-width: 350px !important;
+    }
+
+    .autoCompleteHotelTitle div {
+        width: 350px;
+    }
+
+    .select {
+        border: 1px solid #D5D5D5 !important;
+    }
+
+    div.k-window {
+        z-index: 1050 !important;
+    }
+
+    .CopySection {
+        margin: 20px 0 20px 0;
+    }
+
+    #mycheckboxdiv {
+        padding: 20px 0 50px 0;
+    }
+
+        #mycheckboxdiv .select2 {
+            width: 85% !important;
+        }
+
+    .Preloader {
+        width: 40px;
+    }
+
+    .select2 {
+        width: 100% !important;
+    }
+
+    /*#CoTransferList .select2 {
+        max-width: 190px !important;
+    }*/
+
+    .heigthOtherPrice {
+        height: 20px !important;
+    }
+
+    .CurrencyPriceSection {
+        color: red;
+    }
+
+    .k-window-title {
+        text-align: center !important;
+    }
+
+    .childsection {
+        background-color: #ff6a00;
+        color: #000000;
+    }
+</style>
+@using (Ajax.BeginForm(Model.CRUDMode == CRUDMode.Create ? "Create" : "Edit", "HotelPackage", null, new AjaxOptions()
+{
+    OnComplete = "",
+    InsertionMode = Model.CRUDMode == CRUDMode.Create ? InsertionMode.InsertBefore : InsertionMode.ReplaceWith,
+    UpdateTargetId = Model.CRUDMode == CRUDMode.Create ? "ListViewTourScheduleHotel" : "HotelPackage" + Model.SectionId,
+    HttpMethod = "POST",
+    OnBegin = "UnActiveBtnSubmit()",
+    OnSuccess = "LoadPartialForTourScheduleHotel(" + Model.TourPackageId + "," + Model.TourId + ")"
+}, new { id = "frmTourScheduleHotel" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.TourPackageId)
+    @Html.HiddenFor(model => model.TourId)
+    <div class="well">
+        <div class="form-horizontal">
+            <div class="row CreateSection">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.OrderId, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-3">
+                            @Html.EditorFor(model => model.OrderId, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OrderId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-md-3" style="text-align: right;right: 15px;">
+                        <input type="checkbox" name="CHKDisplayCurrencyPrice" id="CHKDisplayCurrencyPrice" value="0" />
+                        <span> نمایش قیمت دهی ارزی</span>
+                    </div>*@
+            </div>
+            <div class="clearfix"></div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!-- کپی پکیج های هتل از پکیج توری دیگر -->
+                    <div class="row CopySection" style="margin-right:20px">
+                        <div class="col-md-12" style="text-align: right;right: 15px;">
+                            <input type="checkbox" name="mycheckbox" id="mycheckbox" value="0" />
+                            <span> <strong>کپی پکیج های هتل ، از پکیج توری دیگر</strong></span>
+                            <div id="mycheckboxdiv" style="display:none">
+                                <div class="col-md-4">
+                                    @Html.Label("تور", new { style = "margin-left:10px" })
+                                    @Html.DropDownListFor(model => model.SelectedTourId, ViewBag.Tours as SelectList, new { @class = "form-control select", id = "SelectedTourId" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.Label("پکیج تور", new { style = "margin-left:10px" })
+                                    @Html.DropDownListFor(model => model.SelectedTourPackageId, ViewBag.TourPackages as SelectList, new { @class = "form-control select", id = "SelectedTourPackageId" })
+                                </div>
+                                <div class="col-md-2">
+                                    <a onclick="FetchAndSaveHotelPackage()" class="btn btn-sm btn-warning">
+                                        <i class="fa fa-files-o "></i> کپی و ثبت پکیج های هتل
+                                    </a>
+                                    <img id="Preloader" class="Preloader hidden" src="~/Content/Preloader/preloader.gif" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-hover CreateSection">
+                        <thead>
+                            <tr>
+                                <th colspan="2">انتخاب</th>
+                                <th colspan="3" class="adultsection">بزرگسال</th>
+                                <th colspan="3" class="childsection">کودک</th>
+                                <th colspan="3" class="infantsection">خردسال</th>
+                            </tr>
+                            <tr>
+                                <th class="CurrencyPriceSection">ارز</th>
+                                <th>نوع تخت</th>
+                                <th>قیمت(ریال)</th>
+                                <th class="CurrencyPriceSection">ارزی</th>
+                                <th>ظرفیت</th>
+                                <th class="childsection">قیمت(ریال)</th>
+                                <th class="childsection CurrencyPriceSection">ارزی</th>
+                                <th class="childsection">ظرفیت</th>
+                                <th>قیمت(ریال)</th>
+                                <th class="CurrencyPriceSection">ارزی</th>
+                                <th>ظرفیت</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="RoomTypeList">
+                            @if (Model.HotelRoomsInPackage != null && Model.HotelRoomsInPackage.Any())
+                            {
+                                for (int i = 0; i < Model.HotelRoomsInPackage.Count; i++)
+                                {
+                                    <tr class="RoomTypeSection RoomTypeItem">
+                                        <td class="CurrencyPriceSection">
+                                            @Html.DropDownListFor(model => Model.HotelRoomsInPackage[i].OtherCurrencyId, new SelectList(ViewBag.OtherCurrencyDDL as IEnumerable<SelectListItem>, "Value", "Text", Model.HotelRoomsInPackage[i].OtherCurrencyId), "انتخاب کنید", new { @class = "OtherCurrencyId" })
+                                            @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[i].OtherCurrencyId, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(model => Model.HotelRoomsInPackage[i].RoomTypeId, new SelectList(ViewBag.RoomTypeDDL as IEnumerable<SelectListItem>, "Value", "Text", Model.HotelRoomsInPackage[i].RoomTypeId), new { @class = "RoomTypeId" })
+                                            @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[i].RoomTypeId, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @*@Html.SpinFor(model => Model.HotelRoomsInPackage[i].AdultPrice, new { @class = "form-control Price", id = "HotelRoomsInPackage_" + i + "__AdultPrice" }).Limit(0, int.MaxValue).Postfix("ریال").CallConfigWithId(true)*@
+                                            @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].AdultPrice, "{0:#}", new { @class = "form-control AdultPrice", @min = "0", id = "HotelRoomsInPackage_" + i + "__AdultPrice" })
+                                            @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[i].AdultPrice, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td class="CurrencyPriceSection">
+                                            @if (Model.HotelRoomsInPackage[i].AdultOtherCurrencyPrice != null)
+                                            {
+                                            @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].AdultOtherCurrencyPrice, "{0:#}", new { @type = "number", @min = "0", @class = "form-control CurencyTextBox AdultOtherCurrencyPrice" })
+                                                
+                                            }
+                                            else
+                                            {
+                                            @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].AdultOtherCurrencyPrice, "{0:#}", new { @type = "number", @min = "0", @disabled = "disabled", @class = "form-control CurencyTextBox AdultOtherCurrencyPrice" })
+
+                                            }
+                                            @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[i].AdultOtherCurrencyPrice, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].AdultCapacity, new { @type = "number", @min = "0", @class = "form-control AdultCapacity", id = "HotelRoomsInPackage_" + i + "__AdultCapacity" })
+                                            @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[i].AdultCapacity, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td class="childsection">
+                                            @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].ChildPrice, "{0:#}", new { @type = "number", @min = "0", @class = "form-control ChildPrice childsection", id = "HotelRoomsInPackage_" + i + "__ChildPrice" })
+                                            @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[i].ChildPrice, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td class="childsection CurrencyPriceSection">
+                                            @if (Model.HotelRoomsInPackage[i].ChildOtherCurrencyPrice != null)
+                                            {
+                                            @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].ChildOtherCurrencyPrice, "{0:#}", new { @type = "number",@min = "0", @class = "childsection form-control CurencyTextBox ChildOtherCurrencyPrice" })
+                                                
+                                            }
+                                            else
+                                            {
+                                            @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].ChildOtherCurrencyPrice, "{0:#}", new { @type = "number", @disabled = "disabled", @min = "0", @class = "childsection form-control CurencyTextBox ChildOtherCurrencyPrice" })
+    
+                                            }
+                                            @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[i].ChildOtherCurrencyPrice, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td class="childsection">
+                                            @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].ChildCapacity, new { @type = "number", @min = "0", @class = "childsection form-control ChildCapacity", id = "HotelRoomsInPackage_" + i + "__ChildCapacity" })
+                                            @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[i].ChildCapacity, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].InfantPrice, "{0:#}", new { @type = "number", @min = "0", @class = "form-control InfantPrice", id = "HotelRoomsInPackage_" + i + "__InfantPrice" })
+                                            @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[i].InfantPrice, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td class="CurrencyPriceSection">
+                                            @if (Model.HotelRoomsInPackage[i].InfantOtherCurrencyPrice != null)
+                                            {
+                                                @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].InfantOtherCurrencyPrice, "{0:#}", new { @type = "number", @min = "0", @class = "form-control CurencyTextBox InfantOtherCurrencyPrice" })
+                                            }
+                                            else
+                                            {
+                                                @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].InfantOtherCurrencyPrice, "{0:#}", new { @type = "number", @min = "0", @disabled = "disabled", @class = "form-control CurencyTextBox InfantOtherCurrencyPrice" })
+                                            }
+
+                                            @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[i].InfantOtherCurrencyPrice, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => Model.HotelRoomsInPackage[i].InfantCapacity, new { @type = "number", @min = "0", @class = "form-control InfantCapacity", id = "HotelRoomsInPackage_" + i + "__InfantCapacity" })
+                                            @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[i].InfantCapacity, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @if (i > 0)
+                                            {
+                                                <a class="btn btn-remove" onclick="$(this).closest('.RoomTypeSection').remove();"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr class="RoomTypeItem">
+                                    <td class="CurrencyPriceSection">
+                                        @Html.DropDownListFor(model => Model.HotelRoomsInPackage[0].OtherCurrencyId, new SelectList(ViewBag.OtherCurrencyDDL as IEnumerable<SelectListItem>, "Value", "Text", Model.HotelRoomsInPackage[0].OtherCurrencyId), "انتخاب کنید", new { @class = "OtherCurrencyId" })
+                                        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[0].OtherCurrencyId, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(model => Model.HotelRoomsInPackage[0].RoomTypeId, new SelectList(ViewBag.RoomTypeDDL as IEnumerable<SelectListItem>, "Value", "Text", Model.HotelRoomsInPackage[0].RoomTypeId), new { @class = "RoomTypeId" })
+                                        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[0].RoomTypeId, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @*@Html.SpinFor(model => Model.HotelRoomsInPackage[0].AdultPrice, new { @class = "form-control Price", id = "HotelRoomsInPackage_" + 0 + "__AdultPrice" }).Limit(0, int.MaxValue).Postfix("ریال").CallConfigWithId(true)*@
+                                        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[0].AdultPrice, new { @class = "form-control AdultPrice", @min = "0", id = "HotelRoomsInPackage_" + 0 + "__AdultPrice" })
+                                        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[0].AdultPrice, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td class="CurrencyPriceSection">
+                                        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[0].AdultOtherCurrencyPrice, new { @type = "number", @min = "0", @disabled = "disabled", @class = "form-control CurencyTextBox AdultOtherCurrencyPrice" })
+                                        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[0].AdultOtherCurrencyPrice, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[0].AdultCapacity, new { @type = "number", @min = "0", @class = "form-control AdultCapacity", id = "HotelRoomsInPackage_" + 0 + "__AdultCapacity" })
+                                        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[0].AdultCapacity, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[0].ChildPrice, new { @type = "number", @min = "0", @class = "form-control ChildPrice", id = "HotelRoomsInPackage_" + 0 + "__ChildPrice" })
+                                        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[0].ChildPrice, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td class="CurrencyPriceSection">
+                                        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[0].ChildOtherCurrencyPrice, new { @type = "number", @disabled = "disabled", @min = "0", @class = "form-control CurencyTextBox ChildOtherCurrencyPrice" })
+                                        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[0].ChildOtherCurrencyPrice, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[0].ChildCapacity, new { @type = "number", @min = "0", @class = "form-control ChildCapacity", id = "HotelRoomsInPackage_" + 0 + "__ChildCapacity" })
+                                        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[0].ChildCapacity, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[0].InfantPrice, new { @type = "number", @min = "0", @class = "form-control InfantPrice", id = "HotelRoomsInPackage_" + 0 + "__InfantPrice" })
+                                        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[0].InfantPrice, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td class="CurrencyPriceSection">
+                                        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[0].InfantOtherCurrencyPrice, new { @type = "number", @min = "0", @disabled = "disabled", @class = "form-control CurencyTextBox InfantOtherCurrencyPrice" })
+                                        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[0].InfantOtherCurrencyPrice, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[0].InfantCapacity, new { @type = "number", @min = "0", @class = "form-control InfantCapacity", id = "HotelRoomsInPackage_" + 0 + "__InfantCapacity" })
+                                        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[0].InfantCapacity, "", new { @class = "text-danger" })
+                                    </td>
+
+                                    <td></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="14">
+                                    <a class="btn-addSection" onclick="addRoomType()"><i class="faLineHeight faLineHeight fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <table class="table table-striped table-hover CreateSection">
+                        <thead>
+                            <tr>
+                                <th>عنوان شهر</th>
+                                <th>عنوان هتل</th>
+                                <th>بورد هتل</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="HotelList">
+                            @if (Model.HotelsInPackage != null && Model.HotelsInPackage.Any())
+                            {
+                                for (int i = 0; i < Model.HotelsInPackage.Count; i++)
+                                {
+                                    <tr class="hotelPackageSection hotelPackageItem">
+                                        <td>
+                                            @Html.DropDownListFor(model => model.HotelsInPackage[i].CityId, new SelectList(ViewBag.City as IEnumerable<SelectListItem>, "Value", "Text", Model.HotelsInPackage[i].CityId), string.Empty, new { @class = "CityId form-control search-select select", onchange = "cityHotel(" + i + ")", id = "City_hotel" + i })
+                                            @Html.ValidationMessageFor(model => model.HotelsInPackage[i].CityId, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.HotelsInPackage[i].HotelId, new SelectList(ViewBag.Hotel as IEnumerable<SelectListItem>, "Value", "Text", Model.HotelsInPackage[i].HotelId), new { @class = "HotelId form-control search-select select", id = "Hotel" + i })
+                                            @Html.ValidationMessageFor(model => model.HotelsInPackage[i].HotelId, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.HotelsInPackage[i].HotelBoardId, new SelectList(ViewBag.HotelBoardDDL as SelectList, "Value", "Text", Model.HotelsInPackage[i].HotelBoardId), new { @class = "HotelBoardId form-control search-select select", id = "HotelBoardId" + i })
+                                            @Html.ValidationMessageFor(model => model.HotelsInPackage[i].HotelBoardId, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @if (i > 0)
+                                            {
+                                                <a class="btn btn-remove" onclick="$(this).closest('.hotelPackageSection').remove();"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr class="hotelPackageItem">
+                                    <td>
+                                        @Html.DropDownListFor(model => model.HotelsInPackage[0].CityId, ViewBag.City as IEnumerable<SelectListItem>, string.Empty, new { @class = "CityId form-control search-select select", onchange = "cityHotel(" + 0 + ")", id = "City_hotel0" })
+                                        @Html.ValidationMessageFor(model => model.HotelsInPackage[0].CityId, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.HotelsInPackage[0].HotelId, ViewBag.Hotel as IEnumerable<SelectListItem>, new { @class = "HotelId form-control search-select select", id = "Hotel0" })
+                                        @Html.ValidationMessageFor(model => model.HotelsInPackage[0].HotelId, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.HotelsInPackage[0].HotelBoardId, ViewBag.HotelBoardDDL as SelectList, new { @class = "HotelBoardId form-control search-select select", id = "HotelBoardId0" })
+                                        @Html.ValidationMessageFor(model => model.HotelsInPackage[0].HotelBoardId, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td colspan="14">
+                                    <a class="btn-addSection" onclick="addHotel()"><i class="faLineHeight faLineHeight fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group nomargin CreateSection">
+                <div class="col-md-1">
+                    <button id="btn-hotelpackage-submit" type="submit" class="btn btn-primary">
+                        <i class="@(Model.CRUDMode== CRUDMode.Create ? "fa fa-plus" : "fa fa-edit ")"></i>@(Model.CRUDMode == CRUDMode.Create ? ParvazPardaz.Resource.General.Generals.Add : ParvazPardaz.Resource.General.Generals.Update)
+                    </button>
+                </div>
+            </div>
+            <input type="hidden" id="HotelIndex" value="@(Model.HotelsInPackage.Any() ? (Model.HotelsInPackage.Count - 1):0)">
+            <input type="hidden" id="RoomTypeIndex" value="@(Model.HotelRoomsInPackage.Any() ? (Model.HotelRoomsInPackage.Count - 1) : 0)">
+        </div>
+    </div>
+}
+<script>
+
+    $('.select').select2({ dir: "RTL" });
+
+    $('.OtherCurrencyId').change(function () {
+        // debugger;
+        if ($(this).val()!=0) {
+            $(".CurencyTextBox").prop("disabled",false);
+        }
+        else
+        {
+            $(".CurencyTextBox").prop("disabled",true);
+        }
+    });
+
+    function UnActiveBtnSubmit(){
+        $('#btn-hotelpackage-submit')[0].setAttribute('disabled','disabled')
+        $('#btn-hotelpackage-submit').text("لطفا صبر کنید...");
+    }
+
+    function addHotel() {
+        var i = parseInt(document.getElementById("HotelIndex").value) + 1;
+        document.getElementById("HotelIndex").value = i;
+
+        $.ajax({
+            url: "/Admin/HotelPackage/GetHotelPartial",
+            type: "Get",
+            contentType: "application/html; charset=utf-8",
+            dataType: "html",
+            data: {
+                index: i
+            }
+        }).success(function (result) {
+            $("#HotelList").append(result);
+
+            $('.select').select2({ dir: "RTL" });
+        });
+    }
+    function addRoomType() {
+        var i = parseInt(document.getElementById("RoomTypeIndex").value) + 1;
+        document.getElementById("RoomTypeIndex").value = i;
+
+        $.ajax({
+            url: "/Admin/HotelPackage/GetRoomTypePartial",
+            type: "Get",
+            contentType: "application/html; charset=utf-8",
+            dataType: "html",
+            data: {
+                index: i
+            }
+        }).success(function (result) {
+            $("#RoomTypeList").append(result);
+
+            $("#frmTourScheduleHotel").removeData("validator");
+            $("#frmTourScheduleHotel").removeData("unobtrusiveValidation");
+            $.validator.unobtrusive.parse("#frmTourScheduleHotel");
+
+            $('.select').select2({ dir: "RTL" });
+            //if ($('input[name="CHKDisplayCurrencyPrice"]').is(':checked')) {
+            //    $('.CurrencyPriceSection').show();
+            //}
+            //else {
+            //    $('.CurrencyPriceSection').hide();
+            //}
+
+        });
+    }
+
+    function cityHotel(index) {
+        // debugger;
+        var items = "";
+        //select2-City_hotel0-container
+        var cityIDString = "#City_hotel" + index;
+        var hotelIDString = "#Hotel" + index;
+        var cityId = $(cityIDString).val();
+        if (cityId == "") {
+            items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+            $(hotelIDString).html(items);
+        }
+        else {
+            items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+            var x = $.getJSON("/Admin/HotelPackage/FindHotelByCityId/" + cityId, function (data) {
+                $.each(data, function (i, item) {
+                    items += "<option value=\"" + item.Value + "\" " + ((item.Selected == true) ? "Selected" : "") + " >" + item.Text + "</option>";
+                });
+                $(hotelIDString).html(items);
+            });
+        }
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#frmTourScheduleHotel").removeData("validator");
+        $("#frmTourScheduleHotel").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmTourScheduleHotel");
+
+        var options = {
+
+            url: function (phrase) {
+                return "/admin/hotel/GetHotelsByTourProgram/";
+            },
+
+            getValue: function (element) {
+                return element.HotelTitle;
+            },
+
+            template: {
+                type: "description",
+                fields: {
+                    description: "Description"
+                }
+            },
+
+            ajaxSettings: {
+                dataType: "json",
+                method: "Get",
+                data: {
+                    dataType: "json"
+                }
+            },
+
+            list: {
+                onSelectItemEvent: function () {
+                    var selectedItemValue = $("#HotelTitle").getSelectedItemData().Id;
+                    $("#HotelId").val(selectedItemValue).trigger("change");
+                },
+                //onHideListEvent: function () {
+                //    $("#HotelId").val("").trigger("change");
+                //}
+            },
+
+            preparePostData: function (data) {
+                data.phrase = $("#HotelTitle").val();
+                data.tourId = $("#TourId").val();
+                return data;
+            },
+
+            requestDelay: 400,
+            theme: "square"
+        };
+        $("#HotelTitle").easyAutocomplete(options);
+
+    });
+
+    $('#mycheckbox').change(function () {
+        $('#mycheckboxdiv').toggle(500);
+        $('.CreateSection').toggle(500);
+    });
+
+    $("#SelectedTourId").change(function FetchState() {
+        var items = "";
+        var selectedId = $("#SelectedTourId").val();
+        if (selectedId == "") {
+            //items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+            $("#SelectedTourPackageId").html(items);
+        }
+        else {
+            //items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+            var x = $.getJSON("/Admin/TourPackage/FindTourPackageByTourId/" + selectedId, function (data) {
+                $.each(data, function (i, item) {
+                    items += "<option value=\"" + item.Value + "\" " + ((item.Selected == true) ? "Selected" : "") + " >" + item.Text + "</option>";
+                });
+                $("#SelectedTourPackageId").html(items);
+            });
+        }
+    });
+
+    function FetchAndSaveHotelPackage() {
+        $("#Preloader").toggle();
+        var fromTourPackageId = $("#SelectedTourPackageId").val();
+        var toTourPackageId= @(Model.TourPackageId > 0 ? Model.TourPackageId:0);
+        if (fromTourPackageId > 0 &&  toTourPackageId > 0) {
+            $.ajax({
+                async: false,
+                type: "Post",
+                url: "/Admin/HotelPackage/CopyHotelPackages",
+                data: {
+                    fromTourPackageId: fromTourPackageId,
+                    toTourPackageId: toTourPackageId
+                },
+                success: function (result) {
+                    $("#ListViewTourScheduleHotel").html(result);
+                },
+                error: function (textStatus,v, errorThrown) {
+                    //alert("خطا");
+                }
+            });
+
+        } else {
+            alert("پکیج تور را اتنتخاب کنید");
+        }
+    }
+
+    // Arrange dynamic sections IDs
+    $("#frmTourScheduleHotel").submit(function (e) {
+        var RoomTypeElements = document.getElementsByClassName("RoomTypeItem");
+        for (var i = 0, len = RoomTypeElements.length; i < len; i++) {
+            RoomTypeElements[i].getElementsByClassName("RoomTypeId")[0].setAttribute("name", "HotelRoomsInPackage[" + i + "].RoomTypeId");
+            RoomTypeElements[i].getElementsByClassName("AdultPrice")[0].setAttribute("name", "HotelRoomsInPackage[" + i + "].AdultPrice");
+            RoomTypeElements[i].getElementsByClassName("ChildPrice")[0].setAttribute("name", "HotelRoomsInPackage[" + i + "].ChildPrice");
+            RoomTypeElements[i].getElementsByClassName("InfantPrice")[0].setAttribute("name", "HotelRoomsInPackage[" + i + "].InfantPrice");
+            RoomTypeElements[i].getElementsByClassName("AdultCapacity")[0].setAttribute("name", "HotelRoomsInPackage[" + i + "].AdultCapacity");
+            RoomTypeElements[i].getElementsByClassName("ChildCapacity")[0].setAttribute("name", "HotelRoomsInPackage[" + i + "].ChildCapacity");
+            RoomTypeElements[i].getElementsByClassName("InfantCapacity")[0].setAttribute("name", "HotelRoomsInPackage[" + i + "].InfantCapacity");
+            RoomTypeElements[i].getElementsByClassName("AdultOtherCurrencyPrice")[0].setAttribute("name", "HotelRoomsInPackage[" + i + "].AdultOtherCurrencyPrice");
+            RoomTypeElements[i].getElementsByClassName("ChildOtherCurrencyPrice")[0].setAttribute("name", "HotelRoomsInPackage[" + i + "].ChildOtherCurrencyPrice");
+            RoomTypeElements[i].getElementsByClassName("InfantOtherCurrencyPrice")[0].setAttribute("name", "HotelRoomsInPackage[" + i + "].InfantOtherCurrencyPrice");
+            RoomTypeElements[i].getElementsByClassName("OtherCurrencyId")[0].setAttribute("name", "HotelRoomsInPackage[" + i + "].OtherCurrencyId");
+        }
+
+        var CoTransferElements = document.getElementsByClassName("hotelPackageItem");
+        for (var i = 0, len = CoTransferElements.length; i < len; i++) {
+            //debugger;
+            CoTransferElements[i].getElementsByClassName("CityId")[0].setAttribute("name", "HotelsInPackage[" + i + "].CityId");
+            CoTransferElements[i].getElementsByClassName("HotelId")[0].setAttribute("name", "HotelsInPackage[" + i + "].HotelId");
+            CoTransferElements[i].getElementsByClassName("HotelBoardId")[0].setAttribute("name", "HotelsInPackage[" + i + "].HotelBoardId");
+        }
+    });
+</script>

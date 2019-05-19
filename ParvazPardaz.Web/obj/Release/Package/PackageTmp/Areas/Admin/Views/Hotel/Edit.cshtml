@@ -1,0 +1,564 @@
+﻿@model ParvazPardaz.ViewModel.EditHotelViewModel
+           @using System.Linq;
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<link href="~/Plugins/KendoDateTimePicker/Kendo.default.min.css" rel="stylesheet" />
+<link href="~/Plugins/KendoDateTimePicker/Kendo.common.min.css" rel="stylesheet" />
+
+<link href="~/Content/kendo/2014.3.1314/kendo.common-material.min.css" rel="stylesheet" />
+
+<link href="~/Content/kendo/2014.3.1314/kendo.material.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2014.3.1314/kendo.material.mobile.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2014.3.1314/kendo.rtl.min.css" rel="stylesheet" />
+<style>
+    .k-checkbox, .k-radio {
+        display: inline;
+        opacity: 1 !important;
+        width: 6px !important;
+        margin: 6px !important;
+    }
+</style>
+@*<link rel="stylesheet" href="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" />*@
+<style>
+    html, body {
+        overflow-x: hidden;
+    }
+</style>
+
+@using (Html.BeginForm("Edit", "Hotel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+   <div class="form-horizontal col-md-9">
+        <h3>@ParvazPardaz.Resource.Tour.Tours.HotelManagement </h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+
+       <div class="row">
+           <div class="col-md-12">
+               <div class="form-group">
+                   <div class="editor-label col-md-1">
+                       @ParvazPardaz.Resource.EShop.EShopResource.Groups
+                   </div>
+                   <div class="editor-field col-md-10">
+                       @Html.ListBoxFor(model => model._selectedPostGroups, new MultiSelectList(Model._postGroups, "Id", "Name"),
+  new { @class = "form-control search-select select", data_placehoder = "گروه را انتخاب کنید" })
+                       @Html.ValidationMessageFor(model => model._selectedPostGroups)
+                   </div>
+               </div>
+           </div>
+       </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-1" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tel, new { @class = "control-label col-md-1" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Tel, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Website, new { @class = "control-label col-md-1" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Website, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CityId, new { @class = "control-label col-md-1" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(x => x.CityId, ViewBag.CityDDL as IEnumerable<SelectListItem>, new { @class = "form-control search-select select" })
+                @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RateId, new { @class = "control-label col-md-1" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.RateId, ViewBag.HotelRanks as IEnumerable<SelectListItem>, new { @class = "form-control search-select select" })
+                @Html.ValidationMessageFor(model => model.RateId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       <div class="form-group">
+           @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-1" })
+           <div class="col-md-10">
+               @Html.TextBoxFor(model => model.Location, new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+           </div>
+       </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       <div class="form-group">
+           @Html.LabelFor(model => model.HotelRule, new { @class = "control-label col-md-2" })
+           <div class="col-md-9">
+               @Html.TextAreaFor(model => model.HotelRule, new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.HotelRule, "", new { @class = "text-danger" })
+           </div>
+       </div>
+       <div class="form-group">
+           @Html.LabelFor(model => model.CancelationPolicy, new { @class = "control-label col-md-2" })
+           <div class="col-md-9">
+               @Html.TextAreaFor(model => model.CancelationPolicy, new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.CancelationPolicy, "", new { @class = "text-danger" })
+           </div>
+       </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.HotelFacility, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.ListBoxFor(model => model.HotelFacility, ViewBag.HotelFacilities as IEnumerable<SelectListItem>, new { @class = "form-control search-select select" })*@
+                @foreach (var item in ViewBag.hotelFacility as MultiSelectList)
+                {
+                    <div style="display:inline-block; margin-left:15px;">
+                        <input @(item.Selected ? "checked=checked" : "") value="@item.Value" name="HotelFacility" type="checkbox">
+                        @item.Text
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Summary, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Summary, 5, 4, new { @class = "form-control", id="Summary" })
+                @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-1" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Latitude, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-1" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Longitude, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LatLongIframe, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LatLongIframe, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LatLongIframe, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MetaKeywords, new { @class = "control-label col-md-2" })
+            <div class="col-md-9">
+                @Html.TextAreaFor(model => model.MetaKeywords, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MetaKeywords, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MetaDescription, new { @class = "control-label col-md-2" })
+            <div class="col-md-9">
+                @Html.TextAreaFor(model => model.MetaDescription, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MetaDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PublishDatetime, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.PublishDatetime, "{0:yyyy/MM/dd}", new { @class = "form-control datepicker" })
+                @Html.ValidationMessageFor(model => model.PublishDatetime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sort, new { @class = "control-label col-md-2" })
+            <div class="col-md-3 number">
+                @Html.EditorFor(model => model.Sort, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Sort, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-2" })
+            <div class="col-md-3 number">
+                @Html.CheckBoxFor(model => model.IsActive, new { @class = "flat-red", style = "margin-right:50px; margin-left:50px;" })
+                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       <div class="form-group">
+           @Html.LabelFor(model => model.IsSummary, new { @class = "control-label col-md-2" })
+           <div class="col-md-3">
+               @Html.CheckBoxFor(model => model.IsSummary, new { @class = "flat-red", style = "margin-right:50px; margin-left:50px;" })
+               @Html.ValidationMessageFor(model => model.IsSummary, "", new { @class = "text-danger" })
+           </div>
+       </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActiveComments, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+
+                @Html.CheckBoxFor(model => model.IsActiveComments, new { @class = "flat-red", style = "margin-right:50px; margin-left:50px;" })
+
+                @Html.ValidationMessageFor(model => model.IsActiveComments, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AccessLevel, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EnumDropDownListFor(model => model.AccessLevel, new { @class = "form-control search-select select" })
+                @Html.ValidationMessageFor(model => model.AccessLevel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-external-link-square"></i>
+                @ParvazPardaz.Resource.EShop.EShopResource.Tags
+                <div class="panel-tools">
+                    <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TagTitles, new { @class = "control-label col-md-2" })
+                    <div class="col-md-9">
+                        @Html.ListBoxFor(model => model.TagTitles, Model.KeywordsDDL, new { @class = "form-control  TagTitles" })
+                        @Html.ValidationMessageFor(model => model.TagTitles, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-9">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+    
+   <div class="col-md-3">
+        <div class="form-group">
+            <div class="editor-label col-md-12">
+                @ParvazPardaz.Resource.EShop.EShopResource.HotelGroup
+
+            </div>
+            @*<div class="editor-field col-md-12">
+                    @Html.ListBoxFor(model => model._selectedPostGroups, new MultiSelectList(Model._postGroups, "Id", "Name"),
+                            new { @class = "form-control search-select select", data_placehoder = "کروه را انتخاب کنید" })
+                    @Html.ValidationMessageFor(model => model._selectedPostGroups)
+
+                </div>*@
+            <div class="col-md-12">
+                @(Html.Kendo()
+                    .TreeView()
+                    .DragAndDrop(false)
+    .Name("treeview")
+    .Events(events => events
+                    .Check("onCheck")
+        //.DataBound("OnLoad")
+                )
+
+                    .HtmlAttributes(new { @class = "tree-section" })
+                    .DataTextField("NodeText")
+            .TemplateId("treeview-template")
+        //.Events(ev => ev.Select("onSelectedNode"))
+                    .DataSource(ds =>
+                    {
+                        ds.Read(read => read.Action(actionName: "GetMenuItems", controllerName: "Post").Data("Parameterfn"));
+                        ds.Model(model => model
+                            .Id("Id")
+                            .HasChildren("Haschildren")
+                             );
+                    })
+
+                )
+                @*<div style="padding-top: 2em;">
+                    <h4>Status</h4>
+                    <p id="result">No nodes checked.</p>
+                </div>*@
+                @*<div id="hidden-rs">
+                    @{var count = 0;}
+                    @foreach (var item in Model._selectedPostGroups)
+                    {
+
+                        var name = "_selectedPostGroups[" + count + "]";
+                        <input type="hidden" name="@name" value="@item" />
+                        count++;
+                    }
+                </div>*@
+               
+            </div>
+            @*<div class="demo-section k-content">
+                    <div>
+                        <h4>Check nodes</h4>
+                        @(Html.Kendo().TreeView()
+                        .Name("treeview")
+                        .Checkboxes(checkboxes => checkboxes
+                            .Name("checkedFiles")
+                            .CheckChildren(true)
+                        )
+                         .Events(events => events
+                            .Check("onCheck")
+                        )
+                        .Items(treeview =>
+                        {
+                            treeview.Add().Text("My Documents").Id("1")
+                                .SpriteCssClasses("rootfolder")
+                                .Expanded(true)
+                                .Items(root =>
+                                {
+                                    root.Add().Text("Kendo UI Project").Id("2")
+                                        .Expanded(true)
+                                        .SpriteCssClasses("folder")
+                                        .Items(project =>
+                                        {
+                                            project.Add().Text("about.html").Id("3").SpriteCssClasses("html");
+                                            project.Add().Text("index.html").Id("4").SpriteCssClasses("html");
+                                            project.Add().Text("logo.png").Id("5").SpriteCssClasses("image");
+                                        });
+
+                                    root.Add().Text("New Web Site").Id("6")
+                                        .Expanded(true)
+                                        .SpriteCssClasses("folder")
+                                        .Items(item =>
+                                        {
+                                            item.Add().Text("mockup.jpg").Id("7").SpriteCssClasses("image");
+                                            item.Add().Text("Research.pdf").Id("8").SpriteCssClasses("pdf");
+                                        });
+
+                                    root.Add().Text("Reports").Id("9")
+                                        .Expanded(true)
+                                        .SpriteCssClasses("folder")
+                                        .Items(reports =>
+                                        {
+                                            reports.Add().Text("February.pdf").Id("10").SpriteCssClasses("pdf");
+                                            reports.Add().Text("March.pdf").Id("11").SpriteCssClasses("pdf");
+                                            reports.Add().Text("April.pdf").Id("12").SpriteCssClasses("pdf");
+                                        });
+                                });
+                        })
+                        )
+                    </div>
+                    <div style="padding-top: 2em;">
+                        <h4>Status</h4>
+                        <p id="result">No nodes checked.</p>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+}
+@section scripts{
+    <script src="~/Scripts/kendo.date/JalaliDate.js"></script>
+    <script src="~/Scripts/kendo.date/kendo.web.js"></script>
+    <script src="~/Scripts/kendo.date/fa-IR.js"></script>
+
+    <script type="text/javascript">
+        var $ = jQuery.noConflict();
+        $(document).ready(function () {
+            $(".datepicker").kendoDatePicker();
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $('.select').select2({
+            dir: "RTL"
+        });
+
+        $(document).ready(function () {
+
+            $('#Summary').jqEasyCounter({
+                'maxChars': 400,
+                'maxCharsWarning': 350
+            });
+
+            var $selectMulti = $(".TagTitles").select2({
+                tags: true,
+                multiple: true,
+                tokenSeparators: [',', '+'],
+                dir: "RTL",
+                placeholder: "کلیدواژه ها را انتخاب نمایید",
+
+            })
+
+            //
+            var isFirstLoad = $("#isfirst").val();
+            if (isFirstLoad == "true") {
+                $selectMulti.val(null).trigger("change");
+            }
+        })
+    </script>
+    <script>
+        var autocompleteUrl = "@Url.Action("GetCities", "City")"
+    </script>
+    <script>
+        $("#CityTitle").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: autocompleteUrl,
+                    type: "get",
+                    dataType: "json",
+                    cache: false,
+                    data: "term=" + $.trim(request.term),
+                    success: function (data) {
+
+                        response($.map(data, function (item) {
+                            return {
+                                label: (item.Title),
+                                value: (item.Value),
+                                id: item.Id,
+                            }
+                        }));
+
+                    }
+
+                });
+            },
+
+            select: function (event, ui) {
+                if (ui.item.id > 0) {
+                    $("#CityId").val(ui.item.id);
+                }
+            }
+        });
+    </script>
+
+<script>
+    var checked = [];
+    // function that gathers IDs of checked nodes
+    function checkedNodeIds(nodes, checkedNodes) {
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].checked) {
+                checkedNodes.push(nodes[i].id);
+            }
+
+            if (nodes[i].hasChildren) {
+                checkedNodeIds(nodes[i].children.view(), checkedNodes);
+            }
+        }
+    }
+
+    // show checked node IDs on datasource change
+    function onCheck() {
+        var checkedNodes = [],
+            treeView = $("#treeview").data("kendoTreeView"),
+            message;
+
+        checkedNodeIds(treeView.dataSource.view(), checkedNodes);
+
+        if (checkedNodes.length > 0) {
+            message = "IDs of checked nodes: " + checkedNodes.join(",");
+        } else {
+            message = "No nodes checked.";
+        }
+
+        $("#result").html(message);
+
+        //for (var i = 0; i < checkedNodes.length; i++) { checked[i] = parseInt(checkedNodes[i], 10); }
+        //$('.selectedPostGroup').val('sss');
+
+        //remove hidden node
+        var myNode = document.getElementById("hidden-rs");
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+        }
+        //add hidden node
+        for (var i = 0; i < checkedNodes.length; i++) {
+            var input = document.createElement("input");
+
+            input.setAttribute("type", "hidden");
+
+            input.setAttribute("name", "_selectedPostGroups[" + i + "]");
+
+            input.setAttribute("value", parseInt(checkedNodes[i], 10));
+
+            //append to form element that you want .
+            document.getElementById("hidden-rs").appendChild(input);
+        }
+
+
+    }
+    function OnLoad() {
+        this.expand('.k-item');
+    }
+</script>
+
+
+<script>
+        function Parameterfn(e) {
+            return {
+                Id: e.Id,
+                //MenugroupId:@(ViewBag.GroupId)
+            };
+        }
+</script>
+<script type="text/javascript">
+    var treeview;
+    //var $ = jQuery.noConflict();
+    function onSelectedNode(e) {
+        $("#chkroot").prop("checked", false);
+        var nodeId = treeview.dataItem(e.node).Id;
+        $("#hdnGroupId").val(nodeId);
+        //Hiding menu type element
+        document.getElementById('MenuTypeDiv').style.display = 'none';
+        var a = document.getElementById("MenuType");
+        a.value = "Type_0";
+    }
+    $(document).ready(function () {
+        treeview = $("#tree").data("kendoTreeView");
+        $("#chkroot").change(function () {
+            if ($(this).prop('checked') == true) {
+                $("#hdnGroupId").val(null);
+                //display menu type element
+                document.getElementById('MenuTypeDiv').style.display = 'block';
+            }
+        });
+    });
+    //function IsRootCheck() {
+    //    if (document.getElementById('MenuType').checked) {
+    //        //display menu type element
+    //        document.getElementById('MenuTypeDiv').style.display = 'block';
+    //    }
+    //    else{
+    //        //hiding menu type element
+    //        document.getElementById('MenuTypeDiv').style.display = 'none';
+    //        var a = document.getElementById("MenuType");
+    //        a.value = "Type_0";
+    //    }
+    //}
+</script>
+
+
+}

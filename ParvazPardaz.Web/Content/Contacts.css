@@ -1,0 +1,62 @@
+﻿.btn-remove {
+    color: #c9302c;
+    border-color: #ac2925;
+    margin-right:-10px
+}
+
+    .btn-remove:hover {
+        color: #fff;
+        background-color: #c9302c;
+        border-color: #ac2925;
+    }
+
+.btn-remove-section {
+    padding: 0px !important;
+    text-align: right;
+}
+
+
+/**/
+.btn-google {
+    color: #c9302c;
+    border-color: #ac2925;
+    margin-right:-10px
+}
+
+    .btn-google:hover {
+         color: #fff;
+        background-color: #c9302c;
+        border-color: #ac2925;
+    }
+.btn-giveGoogleAddress {
+    padding: 0px !important;
+    position: absolute;
+    float: left;
+    left: 20px;
+    top: 5px;
+}
+
+/*.partialSection {
+    border: 1px dotted #5f2c42;
+    padding-bottom: 20px;
+}*/
+
+.faLineHeight {
+    line-height: 1 !important;
+}
+
+.btn-addSection {
+    cursor: pointer;
+    float: left;
+    position: static;
+}
+
+.paddingTopSection {
+    padding-top: 30px !important;
+    color: #bbbaba !important;
+}
+
+.hr {
+    border-top: 0.2px dotted !important;
+    color: #e1dfdf !important;
+}

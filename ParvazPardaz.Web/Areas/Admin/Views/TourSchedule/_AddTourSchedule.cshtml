@@ -1,0 +1,479 @@
+﻿@model ParvazPardaz.ViewModel.TourScheduleViewModel
+
+<link rel="stylesheet" href="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" />
+<script src="~/Plugins/MaskedTextbox/jQueryMaskedInputPlugin1.4.1.js"></script>
+
+<style>
+    .form-group {
+        text-align: right !important;
+    }
+
+    .ddlPadding {
+        padding: 6px 5px !important;
+    }
+
+    .easy-autocomplete .eac-square {
+        width: 100px !important;
+    }
+
+    .select {
+        border: 1px solid #D5D5D5 !important;
+    }
+
+    div.k-window {
+        z-index: 1050 !important;
+    }
+
+    .select2 {
+        width: 400px !important;
+    }
+
+
+    #mycheckboxdiv {
+        margin-top: 20px;
+    }
+
+    #mycheckbox {
+        margin-right: 15px;
+        margin-left: 5px;
+    }
+</style>
+
+<link href="~/Plugins/EasyAutocomplete-1.3.5/easy-autocomplete.min.css" rel="stylesheet" />
+<link href="~/Plugins/EasyAutocomplete-1.3.5/easy-autocomplete.themes.min.css" rel="stylesheet" />
+<script src="~/Plugins/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script>
+
+@{
+    var pId = Model.TourPackageId;
+}
+@using (Ajax.BeginForm(Model.CRUDMode == CRUDMode.Create ? "Create" : "Edit", "TourSchedule", null, new AjaxOptions()
+{
+    OnComplete = "",
+    InsertionMode = Model.CRUDMode == CRUDMode.Create ? InsertionMode.InsertBefore : InsertionMode.ReplaceWith,
+    UpdateTargetId = Model.CRUDMode == CRUDMode.Create ? "ListViewTourSchedule" : "TourSchedule" + Model.SectionId,
+    HttpMethod = "POST",
+    OnSuccess = "LoadPartialForTourSchedule(" + @Model.TourPackageId + ")",
+    OnFailure = "Faild"
+}, new { id = "frmTourSchedule" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.TourId)
+    @Html.HiddenFor(model => model.TourPackageId)
+
+    <div class="well">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="text-right col-md-12">
+                            @Html.LabelFor(model => model.FromDate, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-6">
+                            @Html.TextBoxFor(model => model.FromDate, "{0:yyyy/MM/dd}", new { @class = "datepicker form-control" })
+                            @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-12">
+                            @Html.LabelFor(model => model.ToDate, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-8">
+                            @Html.TextBoxFor(model => model.ToDate, "{0:yyyy/MM/dd}", new { @class = "datepicker form-control" })
+                            @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.ExpireDate, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-8">
+                            @Html.TextBoxFor(model => model.ExpireDate, "{0:yyyy/MM/dd}", new { @class = "datepicker form-control" })
+                            @Html.ValidationMessageFor(model => model.ExpireDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.Capacity, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-6">
+                            @Html.SpinFor(model => model.Capacity, new { @class = "form-control", id = "inputCapacity" }).Limit(1, 500).Postfix(ParvazPardaz.Resource.Tour.Tours.Person).CallConfigWithId(true)
+                        </div>
+                        @*<div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="editor-label text-right col-md-7">
+                                        @Html.LabelFor(model => model.NonLimit, new { @class = "control-label" })
+                                    </div>
+                                    <div class="editor-field col-md-2">
+                                        @Html.CheckBoxFor(model => model.NonLimit, new { @class = "", onchange = "checkNonLimit(this)", id = "chkNonLimit" })
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" style="height:20px;">
+                    <h3 class="panel-title">مقاصد</h3>
+                </div>
+
+                <div class="panel-body">
+                    <!-- کپی مقاصد از زمانبندی های سفر مربوط به پکیج توری دیگر -->
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: right;right: 15px;">
+                            <input type="checkbox" name="mycheckbox" id="mycheckbox" value="0" />
+                            <span> کپی مقاصد از زمانبندی های سفر توری دیگر</span>
+                            <div id="mycheckboxdiv" style="display:none">
+                                <div class="col-md-4">
+                                    @Html.Label("تور", new { style = "margin-left:10px" })
+                                    @Html.DropDownListFor(model => model.SelectedTourId, ViewBag.Tours as SelectList, new { @class = "form-control select", id = "SelectedTourId" })
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.Label("پکیج تور", new { style = "margin-left:10px" })
+                                    @Html.DropDownListFor(model => model.SelectedTourPackageId, ViewBag.TourPackages as SelectList, new { @class = "form-control select", id = "SelectedTourPackageId" })
+                                </div>
+                                <div class="col-md-2">
+                                    @*<a class="btn btn-sm btn-warning" href="/Admin/TourSchedule/FetchCoTransferPartial?selectedPackageId=14" data-ajax-update="" data-ajax-success="" data-ajax-mode="replace" data-ajax-method="Post" data-ajax="true">
+                                            <i class="fa fa-files-o "></i> کپی مقاصد در اینجا
+                                        </a>*@
+
+                                    <a onclick="FetchCoTransferFromOtherTourPackage()" class="btn btn-sm btn-warning">
+                                        <i class="fa fa-files-o "></i> کپی مقاصد در اینجا
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <table class="table table-striped table-hover ">
+                        <thead>
+                            <tr>
+                                <th>از شهر</th>
+                                <th>از فرودگاه</th>
+                                <th>به شهر</th>
+                                <th>به فرودگاه</th>
+                                <th>تاریخ خروج</th>
+                                <th>ساعت خروج</th>
+                                <th>تاریخ ورود</th>
+                                <th>ساعت ورود</th>
+                                <th>وسیله نقلیه</th>
+                                <th>حمل و نقل</th>
+                                <th>@ParvazPardaz.Resource.Tour.Tours.VehicleTypeClass</th>
+                                <th>@ParvazPardaz.Resource.Tour.Tours.FlightNumber</th>
+                                <th>میزان بار</th>
+                                <th>نوع پرواز</th>
+                                <th>@ParvazPardaz.Resource.Tour.Tours.Description</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="CoTransferList">
+                            @if (Model.CompanyTransfer != null && Model.CompanyTransfer.Any())
+                            {
+                                for (int i = 0; i < Model.CompanyTransfer.Count; i++)
+                                {
+                                    <tr class="CoTransferItem partialSection">
+                                        <td>
+                                            @Html.DropDownListFor(model => model.CompanyTransfer[i].fromCityId, new SelectList(ViewBag.FromCity as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].fromCityId), ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "fromCityId form-control ddlPadding", id = "DDFromCity" + i, onchange = "FetchFromAirport(" + i + ")" })
+                                        </td>
+                                        <td>
+                                            @*@Html.TextBoxFor(model => model.CompanyTransfer[i].FromAirportTitle, new { @class = "form-control FromCityTitle", @id = "FromCityTitle" })*@
+                                            @Html.DropDownListFor(model => model.CompanyTransfer[i].FromAirportId, new SelectList(ViewBag.Airport as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].FromAirportId), new { @class = "FromAirportId form-control ddlPadding", id = "DDFromAirport" + i })
+                                            @Html.ValidationMessageFor(model => model.CompanyTransfer[i].FromAirportId, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.CompanyTransfer[i].destCityId, new SelectList(ViewBag.FromCity as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].destCityId), ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "destCityId form-control ddlPadding", id = "DDDestinationCity" + i, onchange = "FetchDestinationAirport(" + i + ")" })
+                                        </td>
+                                        <td>
+                                            @*@Html.TextBoxFor(model => model.CompanyTransfer[i].DestinationAirportTitle, new { @class = "form-control DestinationCityTitle", @id = "DestinationCityTitle" })*@
+                                            @Html.DropDownListFor(model => model.CompanyTransfer[i].DestinationAirportId, new SelectList(ViewBag.Airport as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].DestinationAirportId), new { @class = "DestinationAirportId form-control ddlPadding", id = "DDDestinationAirport" + i })
+                                            @Html.ValidationMessageFor(model => model.CompanyTransfer[i].DestinationAirportId, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.CompanyTransfer[i].DepartureDate, "{0:yyyy/MM/dd}", new { @class = "DepartureDate datepicker form-control" })
+                                            @Html.ValidationMessageFor(model => model.CompanyTransfer[i].DepartureDate, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.CompanyTransfer[i].DepartureTime, new { @class = "form-control DepartureTime", @id = "DepartureTime" })
+                                            @Html.ValidationMessageFor(model => model.CompanyTransfer[i].DepartureTime, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.CompanyTransfer[i].ArrivalDate, "{0:yyyy/MM/dd}", new { @class = "ArrivalDate datepicker form-control" })
+                                            @Html.ValidationMessageFor(model => model.CompanyTransfer[i].ArrivalDate, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.CompanyTransfer[i].ArrivalTime, new { @class = "form-control ArrivalTime", @id = "ArrivalTime" })
+                                            @Html.ValidationMessageFor(model => model.CompanyTransfer[i].ArrivalTime, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.CompanyTransfer[i].VehicleTypeId, new SelectList(ViewBag.VehicleTypes as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].VehicleTypeId), ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "VehicleTypeId form-control ddlPadding", id = "DDVehicleType" + i, onchange = "FetchCompanyTransfer(" + i + "); FetchVehicleTypeClass(this);" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.CompanyTransfer[i].CompanyTransferId, new SelectList(ViewBag.CompanyTransfers as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].CompanyTransferId), new { @class = "CompanyTransferId form-control ddlPadding", id = "DDCompanyTransfer" + i })
+                                            @Html.ValidationMessageFor(model => model.CompanyTransfer[i].CompanyTransferId, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.CompanyTransfer[i].VehicleTypeClassId, ViewBag.VehicleTypeClasses as IEnumerable<SelectListItem>, new { @class = "VehicleTypeClassId form-control" })
+                                            @Html.ValidationMessageFor(model => model.CompanyTransfer[i].VehicleTypeClassId, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.CompanyTransfer[i].FlightNumber, new { @class = "FlightNumber form-control" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.CompanyTransfer[i].BaggageAmount, new { @class = "BaggageAmount form-control" })
+                                        </td>
+                                        <td>
+                                            @Html.EnumDropDownListFor(model => model.CompanyTransfer[i].FlightDirection, new { @class = "FlightDirection form-control" })
+                                        </td>
+                                        <td>
+                                            @Html.TextAreaFor(model => model.CompanyTransfer[i].Description, new { @class = "Description form-control" })
+                                        </td>
+                                        <td style="text-align:left;">
+                                            @if (i > 0)
+                                            {
+                                                <a class="btn btn-remove" onclick="$(this).closest('.partialSection').remove();"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr class="CoTransferItem">
+                                    <td>
+                                        @Html.DropDownListFor(model => model.CompanyTransfer[0].fromCityId, ViewBag.FromCity as IEnumerable<SelectListItem>, ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "fromCityId form-control ddlPadding", id = "DDFromCity0", onchange = "FetchFromAirport(" + 0 + ")" })
+                                    </td>
+                                    <td>
+                                        @*@Html.TextBoxFor(model => model.CompanyTransfer[0].FromAirportTitle, new { @class = "form-control FromCityTitle", @id = "FromCityTitle" })*@
+                                        @Html.DropDownListFor(model => model.CompanyTransfer[0].FromAirportId, ViewBag.Airport as IEnumerable<SelectListItem>, new { @class = "FromAirportId form-control ddlPadding", id = "DDFromAirport0" })
+                                        @Html.ValidationMessageFor(model => model.CompanyTransfer[0].FromAirportId, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.CompanyTransfer[0].destCityId, ViewBag.FromCity as IEnumerable<SelectListItem>, ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "destCityId form-control ddlPadding", id = "DDDestinationCity0", onchange = "FetchDestinationAirport(" + 0 + ")" })
+                                    </td>
+                                    <td>
+                                        @*@Html.TextBoxFor(model => model.CompanyTransfer[0].DestinationAirportTitle, new { @class = "form-control DestinationCityTitle", @id = "DestinationCityTitle" })*@
+                                        @Html.DropDownListFor(model => model.CompanyTransfer[0].DestinationAirportId, ViewBag.Airport as IEnumerable<SelectListItem>, new { @class = "DestinationAirportId form-control ddlPadding", id = "DDDestinationAirport0" })
+                                        @Html.ValidationMessageFor(model => model.CompanyTransfer[0].DestinationAirportId, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.CompanyTransfer[0].DepartureDate, "{0:yyyy/MM/dd}", new { @class = "DepartureDate datepicker form-control" })
+                                        @Html.ValidationMessageFor(model => model.CompanyTransfer[0].DepartureDate, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.CompanyTransfer[0].DepartureTime, new { @class = "form-control DepartureTime", @id = "DepartureTime" })
+                                        @Html.ValidationMessageFor(model => model.CompanyTransfer[0].DepartureTime, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.CompanyTransfer[0].ArrivalDate, "{0:yyyy/MM/dd}", new { @class = "ArrivalDate datepicker form-control" })
+                                        @Html.ValidationMessageFor(model => model.CompanyTransfer[0].ArrivalDate, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.CompanyTransfer[0].ArrivalTime, new { @class = "form-control ArrivalTime", @id = "ArrivalTime" })
+                                        @Html.ValidationMessageFor(model => model.CompanyTransfer[0].ArrivalTime, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.CompanyTransfer[0].VehicleTypeId, ViewBag.VehicleTypes as IEnumerable<SelectListItem>, ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "VehicleTypeId form-control ddlPadding", id = "DDVehicleType0", onchange = "FetchCompanyTransfer(" + 0 + "); FetchVehicleTypeClass(this);" })
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.CompanyTransfer[0].CompanyTransferId, ViewBag.CompanyTransfers as IEnumerable<SelectListItem>, new { @class = "CompanyTransferId form-control ddlPadding", id = "DDCompanyTransfer0" })
+                                        @Html.ValidationMessageFor(model => model.CompanyTransfer[0].CompanyTransferId, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.CompanyTransfer[0].VehicleTypeClassId, ViewBag.VehicleTypeClasses as IEnumerable<SelectListItem>, new { @class = "VehicleTypeClassId form-control" })
+                                        @Html.ValidationMessageFor(model => model.CompanyTransfer[0].VehicleTypeClassId, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.CompanyTransfer[0].FlightNumber, new { @class = "FlightNumber form-control" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.CompanyTransfer[0].BaggageAmount, new { @class = "BaggageAmount form-control" })
+                                    </td>
+                                    <td>
+                                        @Html.EnumDropDownListFor(model => model.CompanyTransfer[0].FlightDirection, new { @class = "FlightDirection form-control" })
+                                    </td>
+                                    <td>
+                                        @Html.TextAreaFor(model => model.CompanyTransfer[0].Description, new { @class = "Description form-control" })
+                                    </td>
+
+                                    <td></td>
+                                </tr>
+                            }
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td colspan="15">
+                                    <a class="btn-addSection" onclick="addTourSchCoTransfer();"><i class="faLineHeight faLineHeight fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="@(Model.CRUDMode == CRUDMode.Create ? "fa fa-plus" : "fa fa-edit ")"></i>@(Model.CRUDMode == CRUDMode.Create ? ParvazPardaz.Resource.Tour.Tours.AddSchedule : ParvazPardaz.Resource.Tour.Tours.UpdateSchedule)
+                    </button>
+                </div>
+            </div>
+
+            @*<div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="editor-label text-right col-md-3">
+                                @Html.LabelFor(model => model.CompanyTransfer[0].ArrivalDate, new { @class = "control-label " })
+                            </div>
+                            <div class="editor-field col-md-8">
+                                @Html.TextBoxFor(model => model.CompanyTransfer[0].ArrivalDate, "{0:yyyy/MM/dd}", new { @class = "datepicker form-control" })
+                                @Html.ValidationMessageFor(model => model.CompanyTransfer[0].ArrivalDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>*@
+
+
+
+        </div>
+    </div>
+}
+
+<script src="~/Plugins/MaskedTextbox/jQueryMaskedInputPlugin1.4.1.js"></script>
+<script type="text/javascript" src="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="~/Plugins/bootstrap-datepicker/jquery-ui-timepicker-addon.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#frmTourScheduleCompanyTransfer").removeData("validator");
+        $("#frmTourScheduleCompanyTransfer").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmTourScheduleCompanyTransfer");
+
+        $(function ($) {
+            //$("#DepartureTime").mask('99:99')
+            //$("#ArrivalTime").mask("99:99");
+            $(".DepartureTime").mask('99:99')
+            $(".ArrivalTime").mask("99:99");
+        });
+
+
+        if ($("#chkNonLimitinputCapacityTourScheduleCompanyTransfer").prop('checked')) {
+            $("#inputCapacityTourScheduleCompanyTransfer").attr("disabled", "disabled");
+            $("#inputCapacityTourScheduleCompanyTransfer").val(0);
+        }
+        else {
+            $("#inputCapacityTourScheduleCompanyTransfer").removeAttr('disabled');
+        }
+    })
+
+    // Arrange dynamic sections IDs
+    $("#frmTourSchedule").submit(function (e) {
+        //debugger;
+        // var $ = jQuery.noConflict();
+        var CoTransferElements = document.getElementsByClassName("CoTransferItem");
+        for (var i = 0, len = CoTransferElements.length; i < len; i++) {
+            //debugger;
+            CoTransferElements[i].getElementsByClassName("fromCityId")[0].setAttribute("name", "CompanyTransfer[" + i + "].fromCityId");
+            CoTransferElements[i].getElementsByClassName("FromAirportId")[0].setAttribute("name", "CompanyTransfer[" + i + "].FromAirportId");
+            CoTransferElements[i].getElementsByClassName("destCityId")[0].setAttribute("name", "CompanyTransfer[" + i + "].destCityId");
+            CoTransferElements[i].getElementsByClassName("DestinationAirportId")[0].setAttribute("name", "CompanyTransfer[" + i + "].DestinationAirportId");
+            CoTransferElements[i].getElementsByClassName("DepartureDate")[0].setAttribute("name", "CompanyTransfer[" + i + "].DepartureDate");
+            CoTransferElements[i].getElementsByClassName("DepartureTime")[0].setAttribute("name", "CompanyTransfer[" + i + "].DepartureTime");
+            CoTransferElements[i].getElementsByClassName("ArrivalDate")[0].setAttribute("name", "CompanyTransfer[" + i + "].ArrivalDate");
+            CoTransferElements[i].getElementsByClassName("ArrivalTime")[0].setAttribute("name", "CompanyTransfer[" + i + "].ArrivalTime");
+            CoTransferElements[i].getElementsByClassName("VehicleTypeId")[0].setAttribute("name", "CompanyTransfer[" + i + "].VehicleTypeId");
+            CoTransferElements[i].getElementsByClassName("CompanyTransferId")[0].setAttribute("name", "CompanyTransfer[" + i + "].CompanyTransferId");
+            CoTransferElements[i].getElementsByClassName("VehicleTypeClassId")[0].setAttribute("name", "CompanyTransfer[" + i + "].VehicleTypeClassId");
+            CoTransferElements[i].getElementsByClassName("FlightNumber")[0].setAttribute("name", "CompanyTransfer[" + i + "].FlightNumber");
+            CoTransferElements[i].getElementsByClassName("BaggageAmount")[0].setAttribute("name", "CompanyTransfer[" + i + "].BaggageAmount");
+            CoTransferElements[i].getElementsByClassName("Description")[0].setAttribute("name", "CompanyTransfer[" + i + "].Description");
+        }
+    });
+
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#frmTourSchedule").removeData("validator");
+        $("#frmTourSchedule").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmTourSchedule");
+
+        $(".datepicker").mask('9999/99/99', { placeholder: "yyyy/MM/dd" })
+
+        if ($("#chkNonLimit").prop('checked')) {
+            $("#inputCapacity").attr("disabled", "disabled");
+            $("#inputCapacity").val(0);
+        }
+        else {
+            $("#inputCapacity").removeAttr('disabled');
+        }
+
+    });
+
+    $('#mycheckbox').change(function () {
+        $('#mycheckboxdiv').toggle(500);
+    });
+
+    $('.select').select2({
+        dir: "RTL",
+    });
+
+    $("#SelectedTourId").change(function FetchState() {
+        var items = "";
+        var selectedId = $("#SelectedTourId").val();
+        if (selectedId == "") {
+            //items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+            $("#SelectedTourPackageId").html(items);
+        }
+        else {
+            //items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+            var x = $.getJSON("/Admin/TourPackage/FindTourPackageByTourId/" + selectedId, function (data) {
+                $.each(data, function (i, item) {
+                    items += "<option value=\"" + item.Value + "\" " + ((item.Selected == true) ? "Selected" : "") + " >" + item.Text + "</option>";
+                });
+                $("#SelectedTourPackageId").html(items);
+            });
+        }
+    });
+
+    function FetchCoTransferFromOtherTourPackage() {
+        var packageId = $("#SelectedTourPackageId").val();
+        if (packageId > 0) {
+            $.ajax({
+                async: false,
+                type: "Post",
+                url: "/TourSchedule/FetchCoTransferPartial",
+                data: {
+                    selectedPackageId: packageId,
+                },
+                success: function (filledPartial) {
+                    //debugger;
+                    //filledPartial : مقاصد
+                    $("#CoTransferList").html(filledPartial);
+                    BindElementJs();
+                },
+                error: function (textStatus, errorThrown) {
+                    alert("خطا");
+                }
+            });
+        }
+    }
+</script>
+
+<input type="hidden" id="CoTransferIndex" value="@(Model.CompanyTransfer != null ? (Model.CompanyTransfer.Count - 1) : 0)">

@@ -1,0 +1,106 @@
+﻿@model  ListViewTourPackageViewModel
+@Html.HiddenFor(model => model.TourId)
+<div class="well nopadding " id="TourPackage@(Model.SectionId)">
+    <div class="row nomargin">
+        <div class="col-md-12">
+            <div class="col-md-2 nopadding left-column">
+                @Html.Label(ParvazPardaz.Resource.Tour.Tours.TourTitle + " : ")
+                @Html.DisplayFor(model => model.TourTitle)
+            </div>
+
+            <div class="col-md-8 nopadding center-culomn">
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.DateTitle):
+                                @Html.DisplayFor(model => model.DateTitle)
+                            </td>
+                            <td>
+                                @Html.LabelFor(model => model.FromPrice):
+                                @Html.DisplayFor(model => model.FromPrice)
+                            </td>
+                            <td>
+                                @Html.LabelFor(model => model.Code):
+                                @Html.DisplayFor(model => model.Code)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Title):
+                                @Html.DisplayFor(model => model.Title)
+                            </td>
+
+                            <td>
+                                @Html.LabelFor(model => model.TourPackageDaysTitle):
+                                @Html.DisplayFor(model => model.TourPackageDaysTitle)
+                            </td>
+                            <td>
+                                @Html.LabelFor(model => model.Priority):
+                                @Html.DisplayFor(model => model.Priority)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                @Html.LabelFor(model => model.Description):
+                                @Html.DisplayFor(model => model.Description)
+                            </td>
+                            <td>
+                                @Html.LabelFor(model => model.OfferPrice):
+                                @Html.DisplayFor(model => model.OfferPrice)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-2 right-culomn">
+                @Ajax.ActionLink("ویرایش", "Edit", "TourPackage", new { id = Model.Id }, new AjaxOptions()
+                        {
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "GET",
+                            UpdateTargetId = "AddEditTourPackage"
+                            
+                        }, new { @class = "btn btn-sm btn-blue" })
+
+                @Ajax.ActionLink("حذف", "Delete", "TourPackage", new { id = Model.Id, sectionId = Model.SectionId, tourId = Model.TourId }, new AjaxOptions()
+                        {
+                            OnSuccess = "SuccessRemoveTourPackage",
+                            HttpMethod = "POST",
+                            
+                        }, new { @class = "btn btn-sm btn-red" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="bottom-column">
+            <div class="col-md-4 ">
+                <div class="col-md-5">
+                    <!-- add TourSchedule -->
+                    <a class="btn btn-sm btn-default" onclick="setCurrentPackageId(@Model.Id)" href="/Admin/TourSchedule/Create?tourPackageId=@Model.Id" data-ajax-update="#TourScheduleCompanyTransferModal" data-ajax-success="ShowModalTourScheduleCompanyTransfer" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true"><i class="fa fa-plus-square fa-lg" style="color: blue; "></i> @ParvazPardaz.Resource.Tour.Tours.AddSchedule </a>
+                </div>
+                <div class="col-md-4">
+                    <!-- add HotelPackage -->
+                    <a class="btn btn-sm btn-default " href="/Admin/HotelPackage/Create?tourPackageId=@Model.Id" data-ajax-update="#TourScheduleHotelModal" data-ajax-success="ShowModalTourScheduleHotel" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true"><i class="fa fa-h-square fa-lg  " style="color: blue; "></i> افزودن پکیج هتل </a>
+                </div>
+                <div class="col-md-3">
+                    <!-- add HotelPackage -->
+                    <a href="#" onclick="copyToClipboard('/tour-@Model.CountryTitle-@Model.CityTitle?id=@Model.Id')" class="tooltips" data-original-title=" کپی لینک"><i class="fa fa-2x clip-copy-2"></i></a>
+                    <input id="hdn-@(Model.Id)" type="hidden" value="/tour-@Model.CountryTitle-@Model.CityTitle?id=@Model.Id" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function copyToClipboard(item) {
+        const el = document.createElement('textarea');
+        el.value = item;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+
+        alert("Copied the text to clipboard: " + item);
+    }
+
+</script>

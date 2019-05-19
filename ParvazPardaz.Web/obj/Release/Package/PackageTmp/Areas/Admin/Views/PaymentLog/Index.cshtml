@@ -1,0 +1,129 @@
+﻿@model ParvazPardaz.ViewModel.GridPaymentLogViewModel
+@using CIPResource = ParvazPardaz.Resource.Book.Book;
+
+@{
+    ViewBag.Title = "Index";
+
+}
+@if (ParvazPardaz.Resource.General.Generals.Direction == "RTL")
+{
+    if (ParvazPardaz.Resource.General.Generals.Regional == "AR")
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+    @Scripts.Render("~/Scripts/kendo/ar-IQ/js");
+    }
+    else
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+    @Scripts.Render("~/Scripts/kendo/fa-IR/js");
+    }
+}
+else
+{
+    @Styles.Render("~/content/kendo/LTR/css");
+    @Scripts.Render("/Scripts/kendo/en-US/js");
+}
+
+
+<h3>@CIPResource.OservationPaymentLog @(ViewBag.IsSuccessful == 1 ? CIPResource.Successful : CIPResource.Unsuccessful)</h3>
+<hr />
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid<ParvazPardaz.ViewModel.GridPaymentLogViewModel>()
+        .Name("Grid")
+        .Columns(columns =>
+            {
+                //columns.Bound(x => x.Id).ClientTemplate("<a href='/Admin/" + System.Threading.Thread.CurrentThread.CurrentCulture.Name.GetCultureShortName() + "/PaymentLog/Edit/#=Id#' class=\"tooltips\" data-original-title=\"" + @ParvazPardaz.Model.ParvazPardazResource.action.ActionResource.Edit + "\"><i class=\"EditAdmin fa fa-pencil-square-o\"></i></a> <a onclick=\"del(#=Id#)\" href=\"\\#\" class=\"tooltips\" data-original-title=\"" + @ParvazPardaz.Model.ParvazPardazResource.action.ActionResource.Delete + "\"><i class=\"DeleteAdmin fa fa-trash-o\"></i></a>").Filterable(false).Groupable(false).Sortable(false).Title(@ParvazPardaz.Model.ParvazPardazResource.action.ActionResource.Commands).Width(80);
+                columns.Bound(model => model.OrderId).Width(150);
+                columns.Bound(model => model.TrackingCode).Width(150);
+                columns.Bound(model => model.PaymentUniqueNumberID).Width(150);
+                columns.Bound(model => model.BankTitle).Width(150);
+                columns.Bound(model => model.PaymentResponseCode).Width(150);
+                columns.Bound(model => model.PaymentResponseMessage).Width(150);
+                columns.Bound(model => model.IsSuccessful).ClientTemplate("#=IsSuccessful ? '✔':'✘'#").Width(150);
+                columns.Bound(model => model.PaymentDate).ClientTemplate("#=(PaymentDate != null ? moment(PaymentDate).format('jYYYY/jMM/jDD HH:mm') : '')#").Width(150);
+                columns.Bound(model => model.TotalAmount).Width(150);
+            })
+            .Groupable()
+            .Pageable()
+            //.Selectable(selectable => selectable.Mode(GridSelectionMode.Single)
+            //.Type(GridSelectionType.Row))
+            //.Navigatable()
+            .Sortable()
+            .Scrollable(scr => scr.Height(400))
+            .Filterable()
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Sort(st =>
+                        {
+                            st.Add(s => s.CreatorDateTime).Descending();
+                            st.Add(s => s.Id).Descending();
+                        })
+
+                .Model(model => model.Id(item => item.Id))
+                .Read(read => read.Action("GetPaymentLog", "PaymentLog", null).Data("{ isSuccessful: " + @ViewBag.IsSuccessful + "}")).PageSize(50)
+            )
+    )
+    @Html.Partial("_Toastr")
+</div>
+
+@Html.Partial("_ConfirmationMessage")
+
+<input id="elementId" type="hidden" value="0" />
+<script>
+    var DeleteUrl = "/Admin/PaymentLog/Delete";
+
+    var wndRemove = $("#ConfirmationMessage").kendoWindow({
+        title: "",
+        modal: true,
+        visible: false,
+        resizable: false,
+        width: 400,
+    }).data("kendoWindow");
+
+    function del(id) {
+        document.getElementById("elementId").value = id;
+
+        wndRemove.center();
+        wndRemove.open();
+    }
+
+    $("#btnYes").click(function () {
+        debugger;
+        var selectedId = document.getElementById("elementId").value;
+        if (selectedId > 0) {
+            $.ajax({
+                url: DeleteUrl,
+                type: "post",
+                dataType: "json",
+                cache: false,
+                data: { Id: selectedId },
+                success: function (result) {
+                    var gridm = $("#Grid").data("kendoGrid");
+                    if (gridm != undefined && result) {
+                        if (gridm.dataSource.transport.cache._store)
+                            gridm.dataSource.transport.cache._store = {};
+                        gridm.dataSource.fetch();
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.DeleteAlert', '@ParvazPardaz.Resource.General.Generals.DeleteAlertTitle', { timeOut: 5000 })
+                    }
+                    else {
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                    }
+                },
+                error: function (xhr) {
+                    toastr.options = { "positionClass": "toast-top-center" }
+                    toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                }
+            });
+            wndRemove.close();
+        }
+
+    })
+
+    $("#btnNo").click(function () {
+        document.getElementById("elementId").value = 0;
+        wndRemove.close();
+    })
+</script>

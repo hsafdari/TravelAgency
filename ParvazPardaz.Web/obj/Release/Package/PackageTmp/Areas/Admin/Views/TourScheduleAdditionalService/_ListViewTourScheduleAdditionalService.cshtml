@@ -1,0 +1,70 @@
+﻿@model  ListViewTourScheduleAdditionalServiceViewModel
+
+@Html.HiddenFor(model => model.TourScheduleId)
+
+<div class="well nopadding " id="@Model.SectionId">
+    <div class="row nomargin">
+        <div class="col-md-11">
+            <div class="col-md-2 nopadding left-column">
+                @Html.DisplayFor(model=>model.AdditionalServiceTitle)
+            </div>
+            <div class="col-md-7 nopadding center-culomn text-left">
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Price):
+                                @*@Html.DisplayFor(model => model.Price)<!-- ,"{0:0,0}") -->*@
+                                @string.Format("{0:0,0}", @Model.Price)
+                            </td>
+                            @*<td>
+                                @Html.LabelFor(model => model.Capacity)
+                                @Html.DisplayFor(model => model.Capacity)
+                            </td>*@
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.Capacity + " : ")
+                                @{
+                                    if (Model.NonLimit)
+                                    {
+                                        @Html.Label(ParvazPardaz.Resource.Tour.Tours.NonLimit)
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(model => model.Capacity)
+                                    }
+                                }
+
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                           
+                            <td colspan="2">
+                                @Html.LabelFor(model => model.Description):
+                                @Html.DisplayFor(model => model.Description)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-2 right-culomn">
+                @Ajax.ActionLink("Edit", "Edit", "TourScheduleAdditionalService", new { id = Model.Id }, new AjaxOptions()
+           {
+               InsertionMode = InsertionMode.Replace,
+               HttpMethod = "GET",
+               UpdateTargetId = "AddEditTourScheduleAdditionalService"
+           }, new { @class = "btn btn-sm btn-blue" })
+                @*<a href="# " class="btn btn-default"> <i class="fa fa-edit"></i></a>*@
+
+                @Ajax.ActionLink("Remove", "Delete", "TourScheduleAdditionalService", new { id = Model.Id, sectionId = Model.SectionId, TourScheduleId = Model.TourScheduleId },
+                new AjaxOptions()
+           {
+               OnSuccess = "SuccessRemoveForTourScheduleAdditionalService",
+               HttpMethod = "POST",
+           }, new { @class = "btn btn-sm btn-red" })
+                @*<a href="# " class="btn btn-default"> <i class="fa fa-edit"></i></a>*@
+
+            </div>
+        </div>
+    </div>
+</div>

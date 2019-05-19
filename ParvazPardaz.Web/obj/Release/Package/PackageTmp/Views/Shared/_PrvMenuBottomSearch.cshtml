@@ -1,0 +1,16 @@
+﻿@model SearchViewModel
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@using (Ajax.BeginForm("Index", "SearchValidate", null, new AjaxOptions() { OnSuccess = "SearchAjaxSuccess", OnFailure = "SearchFailureAjax" }, new { @class = "navbar-form blogMarginTop searchform", style = "display:none", role = "search", id = "frmBottomSearch" }))
+{
+    @Html.TextBoxFor(model => model.Title, new { @class = "col-md-11", placeholder = "متن جستجو را بنویسید..." })
+    @Html.HiddenFor(model => model.currentUrl, new { @id = "currentUrl" })
+    <a id="BtnSearchSubmit" style="cursor:pointer" onclick="$('#frmBottomSearch').submit()" class="col-md-1 nopadding"><i class="fa fa-chevron-circle-left"></i></a>
+}
+
+<script>
+    $(function () {
+        var currentUrl = decodeURIComponent(window.location.pathname);
+        document.getElementById("currentUrl").value = currentUrl;
+    });
+</script>

@@ -1,0 +1,61 @@
+﻿@if (ViewBag.success == "create")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-center" }
+        toastr.success('@ParvazPardaz.Resource.General.Generals.CreateAlert', '@ParvazPardaz.Resource.General.Generals.CreateAlertTitle', { timeOut: 5000 })
+    </script>
+
+}
+@if (ViewBag.success == "update")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-center" }
+        toastr.info('@ParvazPardaz.Resource.General.Generals.EditAlert', '@ParvazPardaz.Resource.General.Generals.EditAlertTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "delete")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-center" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.DeleteAlert', '@ParvazPardaz.Resource.General.Generals.DeleteAlertTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "Error")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-center" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "Confirm")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-center" }
+        toastr.info('@ParvazPardaz.Resource.General.Generals.ConfirmAlert', '@ParvazPardaz.Resource.General.Generals.ConfirmTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "DuplicateItemError")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-center" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.DuplicateAlert', '@ParvazPardaz.Resource.General.Generals.DuplicateTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "notPermission")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-center" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.PermissionAlert', '@ParvazPardaz.Resource.General.Generals.ErrorTitle', { timeOut: 5000 })
+    </script>
+}
+    @if (ViewBag.success == "couldNotCascadeDelete")
+        {
+
+            <script>
+    toastr.options = { "positionClass": "toast-top-center" }
+    toastr.error('@ParvazPardaz.Resource.General.Generals.couldNotCascadeDelete', '@ParvazPardaz.Resource.General.Generals.ErrorTitle', { timeOut: 5000 })
+            </script>
+
+        }
+    
+

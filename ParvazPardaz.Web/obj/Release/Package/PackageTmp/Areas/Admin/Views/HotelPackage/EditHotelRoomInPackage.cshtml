@@ -1,0 +1,223 @@
+﻿@model ParvazPardaz.ViewModel.EditHotelRoomInPackageViewModel
+@{
+    ViewBag.Title = "ویرایش ظرفیت و قیمت اتاق هتل در پکیج هتل";
+}
+<link href="~/Plugins/KendoDateTimePicker/Kendo.default.min.css" rel="stylesheet" />
+<link href="~/Plugins/KendoDateTimePicker/Kendo.common.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<h3>@ParvazPardaz.Resource.Book.Book.ManagementRoomCapacity</h3>
+<hr />
+<div class="alert alert-dismissible alert-primary">
+    <strong>کاربر گرامی!</strong> جستجوی در بین مقادیر ستون های شناسه تور ، عنوان تور ، شناسه پکیج تور ، عنوان پکیج تور ، شناسه پکیج هتل ، عنوان پکیج هتل ، شناسه اتاق و عنوان اتاق انجام می شود
+</div>
+<table id="grid" class="table table-bordered table-hover table-full-width dataTable">
+    <thead>
+        <tr>
+            <th></th>
+            <th>@Html.DisplayNameFor(model => model.TourId)</th>
+            <th>@Html.DisplayNameFor(model => model.TourTitle)</th>
+            <th>@Html.DisplayNameFor(model => model.TourPackageId)</th>
+            <th>@Html.DisplayNameFor(model => model.TourPackageTitle)</th>
+            <th>@Html.DisplayNameFor(model => model.HotelPackageId)</th>
+            <th>@Html.DisplayNameFor(model => model.HotelPackageTitleString)</th>
+            <th>@Html.DisplayNameFor(model => model.HotelPackageHotelRoomId)</th>
+            <th>@Html.DisplayNameFor(model => model.HotelRoomTitle)</th>
+            <th>@Html.DisplayNameFor(model => model.TotalAdultCapacity)</th>
+            <th>@Html.DisplayNameFor(model => model.TotalChildCapacity)</th>
+            <th>@Html.DisplayNameFor(model => model.TotalInfantCapacity)</th>
+            @*<th>@Html.DisplayNameFor(model => model.BookingCapacity)</th>*@
+            @*<th>@Html.DisplayNameFor(model => model.RemainBookingCapacity)</th>*@
+            <th>@Html.DisplayNameFor(model => model.AdultCapacitySold)</th>
+            <th>@Html.DisplayNameFor(model => model.ChildCapacitySold)</th>
+            <th>@Html.DisplayNameFor(model => model.InfantCapacitySold)</th>
+            @*<th>@Html.DisplayNameFor(model => model.RemainBookingCapacity)</th>*@
+            <th>@Html.DisplayNameFor(model => model.AdultPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.ChildPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.InfantPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.AdultOtherCurrencyPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.ChildOtherCurrencyPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.InfantOtherCurrencyPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.OtherCurrencyTitle)</th>
+            <td>@Html.DisplayNameFor(Model => Model.CreatorUserName)</td>
+            <td>@Html.DisplayNameFor(Model => Model.CreatorDateTime)</td>
+            <td>@Html.DisplayNameFor(Model => Model.LastModifierUserName)</td>
+            <td>@Html.DisplayNameFor(Model => Model.LastModifierDate)</td>
+        </tr>
+    </thead>
+</table>
+@section scripts{
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+    <script src="~/Plugins/DataTables/extensions/dataTables.editor.min.js"></script>
+@*<script src="~/Plugins/DataTables/dataTables.editor.min.js"></script>*@
+    <script src="~/Scripts/kendo.date/JalaliDate.js"></script>
+    <script src="~/Scripts/kendo.date/kendo.web.js"></script>
+    <script src="~/Scripts/kendo.date/fa-IR.js"></script>
+    <script>
+        var table; var editor;
+        var $ = jQuery.noConflict();
+        $(document).ready(function () {
+            $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
+                return {
+                    "iStart": oSettings._iDisplayStart,
+                    "iEnd": oSettings.fnDisplayEnd(),
+                    "iLength": oSettings._iDisplayLength,
+                    "iTotal": oSettings.fnRecordsTotal(),
+                    "iFilteredTotal": oSettings.fnRecordsDisplay(),
+                    "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+                    "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
+                };
+            };
+            editor = new $.fn.dataTable.editor({
+                ajax: "/Admin/HotelPackage/updatePackagevalue",
+                table: "#grid",               
+                fields: [{
+                    label: "ظرفیت بزرگسال",
+                    name: "TotalAdultCapacity"
+                },{
+                    label: "ظرفیت کودک",
+                    name: "TotalChildCapacity"
+                },{
+                    label: "ظرفیت خردسال",
+                    name: "TotalInfantCapacity"
+                },{
+                    label: "قیمت جدید بزرگسال",
+                    name: "AdultPrice"
+                },{
+                    label: "قیمت جدید کودک",
+                    name: "ChildPrice"
+                },{
+                    label: "قیمت جدید خردسال",
+                    name: "InfantPrice"
+                },{
+                    label: "قیمت واحد ارزی بزرگسال",
+                    name: "AdultOtherCurrencyPrice"
+                },{
+                    label: "قیمت واحد ارزی کودک",
+                    name: "ChildOtherCurrencyPrice"
+                },{
+                    label: "قیمت واحد ارزی خردسال",
+                    name: "InfantOtherCurrencyPrice"
+                }]
+            });
+            var editIcon = function (data, type, row) {
+                if (type === 'display') {
+                    return data + ' <i class="fa fa-pencil"/>';
+                }
+                return data;
+            };
+
+            // Activate an inline edit on click of a table cell
+            $('#grid').on('click', 'tbody td', function (e) {
+                editor.inline(this, {
+                    buttons: { label: '&gt;', fn: function () { this.submit(); } }
+                });
+               // editor.inline(this);                
+
+            });
+            //editor.on('submitSuccess', function (e, json, data, action) { });
+
+            table = $("#grid").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                'select': true,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    var numStart = this.fnPagingInfo().iStart;
+                    var index = numStart + iDisplayIndexFull + 1;
+                    $("td:first", nRow).html(index);
+                    return nRow;
+                },
+                scrollX: true,
+                scrollCollapse: true,
+                language: {
+                    url: '/Plugins/DataTables/Persian.json'
+                },
+                "ajax": {
+                    "url": "/Admin/HotelPackage/GetHotelRoomInPackageTable",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columnDefs": [{
+                    "searchable": true,
+                    "orderable": false,
+                    "targets": 0
+                }],
+                "columns": [
+                    { "data": null },
+                    { "data": "TourId", name: "TourId", "autoWidth": true },
+                    { "data": "TourTitle", name: "TourTitle", "autoWidth": true },
+                    { "data": "TourPackageId", name: "TourPackageId", "autoWidth": true },
+                    { "data": "TourPackageTitle", name: "TourPackageTitle", "autoWidth": true },
+                    { "data": "HotelPackageId", name: "HotelPackageId", "autoWidth": true },
+                    { "data": "HotelPackageTitleString", name: "HotelPackageTitleString", "autoWidth": true },
+                    { "data": "HotelPackageHotelRoomId", name: "HotelPackageHotelRoomId", "autoWidth": true },
+                    { "data": "HotelRoomTitle", name: "HotelRoomTitle", "autoWidth": true },
+                    { "data": "TotalAdultCapacity", name: "TotalAdultCapacity", "autoWidth": true, render: editIcon },
+                    { "data": "TotalChildCapacity", name: "TotalChildCapacity", "autoWidth": true, render: editIcon },
+                    { "data": "TotalInfantCapacity", name: "TotalInfantCapacity", "autoWidth": true, render: editIcon },
+                    //{ "data": "BookingCapacity", name: "BookingCapacity", "autoWidth": true },
+                    //{ "data": "RemainBookingCapacity", name: "RemainBookingCapacity", "autoWidth": true },
+                    { "data": "AdultCapacitySold", name: "AdultCapacitySold", "autoWidth": true },
+                    { "data": "ChildCapacitySold", name: "ChildCapacitySold", "autoWidth": true },
+                    { "data": "InfantCapacitySold", name: "InfantCapacitySold", "autoWidth": true },
+                    //{ "data": "CapacitySold", name: "CapacitySold", "autoWidth": true },
+                    { "data": "AdultPrice", name: "AdultPrice", "autoWidth": true, render: editIcon },
+                    { "data": "ChildPrice", name: "ChildPrice", "autoWidth": true, render: editIcon },
+                    { "data": "InfantPrice", name: "InfantPrice", "autoWidth": true, render: editIcon },
+                    { "data": "AdultOtherCurrencyPrice", name: "AdultOtherCurrencyPrice", "autoWidth": true, render: editIcon },
+                    { "data": "ChildOtherCurrencyPrice", name: "ChildOtherCurrencyPrice", "autoWidth": true, render: editIcon },
+                    { "data": "InfantOtherCurrencyPrice", name: "InfantOtherCurrencyPrice", "autoWidth": true, render: editIcon },
+                    { "data": "OtherCurrencyTitle", name: "OtherCurrencyId", "autoWidth": true },
+                    { "data": "CreatorUserName", name: "CreatorUserName", "autoWidth": true },
+                    {
+                        "data": "CreatorDateTime", name: "CreatorDateTime", "autoWidth": true,
+                        render: function (data, type, row) {
+                            return (data != null ? moment(data).format('jYYYY/jMM/jDD HH:mm') : '');
+                        }
+                    },
+                    { "data": "LastModifierUserName", name: "LastModifierUserName", "autoWidth": true },
+                    {
+                        "data": "LastModifierDate", name: "LastModifierDate", "autoWidth": true,
+                        render: function (data, type, row) {
+                            return (data != null ? moment(data).format('jYYYY/jMM/jDD HH:mm') : '');
+                        }
+                    }
+                ],
+                "order": [[1, 'asc']]
+            });
+
+            // Add event listener for opening and closing details
+            $('#grid tbody').on('click', 'td.details-control', function (e) {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                    // Open this row
+                }
+            });          
+            $("#searchbutton").click(function () {
+                table.draw();
+            });
+            //table.on('order.dt search.dt page-link', function () {
+            //    table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            //        cell.innerHTML = i + 1;
+            //    });
+            //}).draw();
+
+        });
+
+    </script>
+}
+
+

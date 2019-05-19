@@ -1,0 +1,1 @@
+﻿$(".dl-horizontal dt").css('float', 'right');

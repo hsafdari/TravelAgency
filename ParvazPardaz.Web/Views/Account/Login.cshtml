@@ -1,0 +1,123 @@
+﻿@model ParvazPardaz.ViewModel.LoginCustomerViewModel
+@{
+    ViewBag.Title = "ورود به سایت";
+}
+
+<style>
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .message {
+        width: 100% !important;
+        text-align: center !important;
+    }
+</style>
+<div class="container" style="margin-top: 30px;">
+    <!-- Breadcrumb Start-->
+    <ul class="breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i></a></li>
+        <li><a href="#">حساب کاربری</a></li>
+        <li>ورود به سایت</li>
+    </ul>
+    <div class="panel panel-default well">
+        <div class="panel-body">
+            <div class="row">
+                <!--Right Part Start -->
+                <aside id="column-right" class="col-md-3 col-sm-3 hidden-xs">
+                    <h4 class="subtitle">حساب کاربری</h4>
+                    <div class="list-group">
+                        <ul class="list-item">
+                            <li><a href="/Account/Login">ورود</a></li>
+                            <li><a href="/Account/SignUp">ثبت نام</a></li>
+                            <li><a href="/Account/ForgetPassword">فراموشی رمز عبور</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                <!--Right Part End -->
+                <!--Middle Part Start-->
+                <div class="col-md-9 col-sm-9" id="content">
+                    <h4 class="title">@ViewBag.Title</h4>
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "registration-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-envelope-o"></i>
+                                    </div>
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "ایمیل" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-key"></i>
+                                    </div>
+                                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @placeholder = "کلمه عبور", @type = "password" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <div>
+                                        <input id="checkbox2" type="checkbox" name="RememberMe" value="true">
+                                        <label for="checkbox2">
+                                            <span></span>
+                                            مرا به یاد بسپار
+                                        </label>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group" style="margin-top:30px">
+                            <div class="col-sm-12">
+                                <button id="contacts-submit" type="submit" class="btn btn-default btn-info">ورود</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!--Middle Part End -->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@Html.Partial("_Toastr")
+
+
+
+@section scripts{
+    <script>
+        function RegisterSuccessful(result) {
+            debugger;
+            if (result.isRedirect == true) {
+                toastr.options = { "positionClass": "toast-top-left" }
+                toastr.success(result.validationMsg, result.validationTitle, { timeOut: 5000 })
+                window.location.href = result.redirectUrl;
+                setTimeout(function () {
+                    window.location.href = result.redirectUrl;
+                }, 5000);
+            }
+            else {
+                toastr.options = { "positionClass": "toast-top-left" }
+                toastr.error(result.validationMsg, result.validationTitle, { timeOut: 5000 })
+            }
+        }
+
+        function RegisterFailed() {
+
+        }
+    </script>
+}

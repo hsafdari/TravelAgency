@@ -1,0 +1,23 @@
+﻿@model IEnumerable<PostDetailViewModel>
+<aside class="widget widget_latest_post">
+    <h3 class="widget-title">آخرین اخبار</h3>
+    <div class="widget-inner">
+        <ul class="post">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <div class="col-md-5 col-sm-5 col-xs-4">
+                        <a href="#"><img src="@(item.ImageUrl98x98 == null ? "#" : item.ImageUrl98x98 + "-98x98" + item.Extention98x98)" alt="@item.Name98x98" /></a>
+                    </div>
+                    <div class="col-md-7 col-sm-7 col-xs-8">
+                        <a href="@item.URL" title="@item.Title" rel="@item.Rel" class="post-title">@item.Name </a>
+                        <p>
+                            <a href="#"> 33 <i class="fa fa-heart"></i></a>
+                            <span> @item.PublishDatetime.ToString("yyyy/MM/dd") <i class="fa fa-clock-o"></i></span>
+                        </p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</aside>

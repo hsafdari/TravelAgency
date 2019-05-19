@@ -1,0 +1,68 @@
+﻿@model  ListViewTourProgramDetailViewModel
+
+<style>
+    .center-culomn .table {
+        margin-bottom: 0 !important;
+        text-align:right !important;
+    }
+    td {
+        border: none !important;
+    }
+    .bottom-column {
+        margin-top:10px;
+        border:none;
+    }
+
+</style>
+@Html.HiddenFor(model => model.TourProgramId)
+<div class="well nopadding " id="@Model.SectionId">
+    <div class="row nomargin">
+        <div class="col-md-11">
+            <div class="col-md-2 nopadding left-column">
+                @*@Html.Label(ParvazPardaz.Resource.Tour.Tours.DayOrder + " : ")
+                    @Html.DisplayFor(model => model.DayOrder)*@
+            </div>
+            <div class="col-md-7 nopadding center-column text-left">
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.Title + " : ")
+                                @Html.DisplayFor(model => model.Title)
+                            </td>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.CityTitle + " : ")
+                                @Html.DisplayFor(model => model.CityTitle)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.Description + " : ")
+                                @Html.Raw(Model.Description)
+                                @*@Html.DisplayFor(model => model.Description)*@
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            @*<div class="col-md-2">
+                     @Ajax.ActionLink("Edit", "Edit", "TourProgram", new { id = Model.Id }, new AjaxOptions()
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "GET",
+                    UpdateTargetId = "AddEditTourProgram"
+                }, new { @class = "btn btn-sm btn-default" })
+                 </div>*@
+
+            <div class="col-md-2 nopadding bottom-column ">
+                @Ajax.ActionLink("حذف", "Delete", "TourProgramDetail", new { id = Model.Id, sectionId = Model.SectionId, tourProgramId = Model.TourProgramId },
+                new AjaxOptions()
+           {
+               OnSuccess = "SuccessRemoveForTourProgramDetail",
+               HttpMethod = "POST",
+           }, new { @class = "btn btn-sm btn-red" })
+                @*<a href="# " class="btn btn-default"> <i class="fa fa-edit"></i></a>*@
+            </div>
+        </div>
+    </div>
+</div>

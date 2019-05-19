@@ -1,0 +1,11 @@
+﻿
+@model List<int>
+@{
+    var values = ViewData.ModelMetadata.AdditionalValues;
+}
+
+@Html.ListBoxFor(model => model, (SelectList)TempData["cities"], new { @class = "form-control search-select select", data_placehoder = "چندین مورد را انتخاب نمایید" })
+
+<script type="text/javascript">
+    $('.select').select2();
+</script>

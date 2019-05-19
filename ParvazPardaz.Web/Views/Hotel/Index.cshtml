@@ -1,0 +1,478 @@
+﻿@{
+    ViewBag.Title = "هتل سارینا مشهد|کی سفر";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DisplayModeProvider.Instance.RequireConsistentDisplayMode = true;
+}
+@*<head>*@
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/ClientTheme/Hotel/css/main.css">
+
+<!-- Template Default Color -->
+@*</head>*@
+@*<body dir="ltr" class="text-right">*@
+<!-- <div style=" display: flex;justify-content: center;overflow: hidden;width: 100%;height: 20000px; position: absolute; z-index: -50000; ">
+    <img src="/ClientTheme/Hotel/img/home" alt="home-page" style=" position: absolute; opacity: 0.4; ">
+</div> -->
+@*<div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="landing-logo">
+                <a href="/" id="logo"><img src="/ClientTheme/Hotel/img/keysafarlogo.png" alt="کی سفر"></a>
+            </div>
+            <div class="landing-login-and-support d-flex">
+                <div class="landing-support">
+                    <a class="profile-modal-toggle" href="javascript:void(0)"><img width="30px" src="/ClientTheme/Hotel/img/icon/person.png"> <span>ورود / عضویت</span> </a>
+
+                </div>
+                <div class="landing-login">
+                    <a href="tel:+98212779"><img width="30px" src="/ClientTheme/Hotel/img/icon/headset.png"><span>پشتیبانی: &zwnj;2779 ۰۲۱</span></a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>*@ <!-- container -->
+<div class="amajcss">
+    <div class="container-fluid pr-4 pl-4">
+        <div class="row d-flex flex-column-reverse flex-lg-row pr-0 pl-0 pr-md-4 pl-md-4">
+            <div class="mycol-30 pr-2 pl-3">
+                <div class="">
+                    <h2 class="BG-peacock-blue white-one h4 pr-3 pl-3 pt-4 pb-4 mr-0 ml-0 mb-3 text-center">
+                        <a href="http://keysafar.com/tour-iran-mashhad" class="pt-3 pb-3 d-block">
+                            مشاهده پکیج های تور هتل سارینا
+                        </a>
+                    </h2>
+                    <h2 class="BG-my-green white-one h4 pr-3 pl-3 pt-2 pb-2 m-0 text-center">
+                        <span class="pt-3 pb-3 d-block">
+                            فاصله هتل تا اماکن مهم
+                        </span>
+                    </h2>
+                </div>
+                <div class="row p-3 B-gray mr-0 ml-0 mt-2 mb-2" style="font-size:14px;">
+                    <div class="col-6 pl-0 mb-1 mt-1">ورودی باب&zwnj;الکاظم:</div>
+                    <div class="col-6 pl-5 mb-1 mt-1 pr-0 my-green"> 7 دقیقه با ماشین</div>
+                    <div class="col-6 pl-0 mb-1 mt-1">ورودی باب الرضا:</div>
+                    <div class="col-6 pl-5 mb-1 mt-1 pr-0 my-green"> 5 دقیقه با ماشین</div>
+                    <div class="col-6 pl-0 mb-1 mt-1">حرم امام رضا علیه السلام :</div>
+                    <div class="col-6 pl-5 mb-1 mt-1 pr-0 my-green"> 7 دقیقه با ماشین</div>
+                    <div class="col-6 pl-0 mb-1 mt-1">بازار رضا:</div>
+                    <div class="col-6 pl-5 mb-1 mt-1 pr-0 my-green"> 7 دقیقه با ماشین</div>
+                    <div class="col-6 pl-0 mb-1 mt-1">پایانه مسافربری مشهد:</div>
+                    <div class="col-6 pl-5 mb-1 mt-1 pr-0 my-green"> 15 دقیقه با ماشین</div>
+                    <div class="col-6 pl-0 mb-1 mt-1">فرودگاه مشهد:</div>
+                    <div class="col-6 pl-5 mb-1 mt-1 pr-0 my-green"> 23 دقیقه با ماشین</div>
+                    <div class="col-6 pl-0 mb-1 mt-1">ایستگاه راه آهن مشهد:</div>
+                    <div class="col-6 pl-5 mb-1 mt-1 pr-0 my-green"> 14 دقیقه با ماشین</div>
+                    <div class="col-6 pl-0 mb-1 mt-1">نمایشگاه بین اللملی مشهد:</div>
+                    <div class="col-6 pl-5 mb-1 mt-1 pr-0 my-green"> 37 دقیقه با ماشین</div>
+                    <div class="col-6 pl-0 mb-1 mt-1">مرکز خرید الماس شرق:</div>
+                    <div class="col-6 pl-5 mb-1 mt-1 pr-0 my-green"> 30 دقیقه با ماشین</div>
+                    <div class="col-6 pl-0 mb-1 mt-1">سرزمین موج های آبی:</div>
+                    <div class="col-6 pl-5 mb-1 mt-1 pr-0 my-green"> 38 دقیقه با ماشین</div>
+                    <br>
+                </div>
+
+                <h2 class="BG-my-green white-one h4 pr-3 pl-3 pt-2 pb-2 m-0 mt-3 mb-3 text-center">
+                    <span class="pt-3 pb-3 d-block">
+                        امکانات هتل
+                    </span>
+                </h2>
+                <div class="row pr-3 pl-3 pt-2 pb-2 B-gray mr-0 ml-0 mt-2 mb-2">
+                    <ul class="possibilities">
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/restoran.png" alt="">
+                            رستوران
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Outdoor-restaurant.png" alt="">
+                            رستوران  فضای باز
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Conference-Room.png" alt="">
+                            سالن کنفرانس
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/pool.png" alt="">
+                            استخر
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/sauna.png" alt="">
+                            سونا
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/jacuzzi.png" alt="">
+                            جکوزی
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Elevator.png" alt="">
+                            آسانسور
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/parking.png" alt="">
+                            پارکینگ
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Coffee-Shop.png" alt="">
+                            کافی شاپ
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Smoking-room.png" alt="">
+                            اتاق سیگار
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Luggage-room.png" alt="">
+                            اتاق چمدان
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/VIP.png" alt="">
+                            بخش VIP درلابی
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Laundry.png" alt="">
+                            لاندری
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/shop.png" alt="">
+                            فروشگاه سوغات و صنایع دستی
+                        </li>
+                    </ul>
+                </div>
+
+                <h2 class="BG-my-green white-one h4 pr-3 pl-3 pt-2 pb-2 m-0 mt-3 mb-3 text-center">
+                    <span class="pt-3 pb-3 d-block">
+                        امکانات اتاق ها
+                    </span>
+                </h2>
+
+
+                <div class="row pr-3 pl-3 pt-2 pb-2 B-gray mr-0 ml-0 mt-2 mb-2">
+                    <ul class="possibilities">
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Furniture.png" alt="">
+                            مبلمان
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Safe-box.png" alt="">
+                            صندوق امانات
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/IPTV.png" alt="">
+                            IPTV
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Tea.png" alt="">
+                            چای ساز
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Refrigerator.png" alt="">
+                            یخچال مینی
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Wifi.png" alt="">
+                            اینترنت وای فای
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Hairdryer.png" alt="">
+                            سشوار
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Heating.png" alt="">
+                            سیستم گرمایش
+                        </li>
+                        <li class="mb-2 mt-2 pt-1 pb-1">
+                            <img class="mr-1" src="/ClientTheme/Hotel/img/icon/Central.png" alt="">
+                            و سرمایشِ مرکزی‌
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="mycol-100-30 pl-3 pr-3 flex-grow-1">
+                <div class="d-flex justify-content-between header-title BG-golden-yellow pt-2 pb-2 row mr-0 ml-0">
+
+                    <div class="text-center-xl">
+                        <h1 class="pt-5 d-inline-block PR ">
+                            <span class="star">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="white-one" width="33px" viewBox="0 0 19.5 19.5"><path d="M10.2.8l2.5 5.8 6.3.6c.5 0 .6.6.3.8l-4.8 4.2 1.4 6.2c.1.4-.3.8-.7.6l-5.5-3.3L4.3 19a.5.5 0 0 1-.8-.6L5 12.2.2 8a.5.5 0 0 1 .3-.8l6.3-.6L9.3.8c.2-.5.7-.5.9 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="white-one" width="33px" viewBox="0 0 19.5 19.5"><path d="M10.2.8l2.5 5.8 6.3.6c.5 0 .6.6.3.8l-4.8 4.2 1.4 6.2c.1.4-.3.8-.7.6l-5.5-3.3L4.3 19a.5.5 0 0 1-.8-.6L5 12.2.2 8a.5.5 0 0 1 .3-.8l6.3-.6L9.3.8c.2-.5.7-.5.9 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="white-one" width="33px" viewBox="0 0 19.5 19.5"><path d="M10.2.8l2.5 5.8 6.3.6c.5 0 .6.6.3.8l-4.8 4.2 1.4 6.2c.1.4-.3.8-.7.6l-5.5-3.3L4.3 19a.5.5 0 0 1-.8-.6L5 12.2.2 8a.5.5 0 0 1 .3-.8l6.3-.6L9.3.8c.2-.5.7-.5.9 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="white-one" width="33px" viewBox="0 0 19.5 19.5"><path d="M10.2.8l2.5 5.8 6.3.6c.5 0 .6.6.3.8l-4.8 4.2 1.4 6.2c.1.4-.3.8-.7.6l-5.5-3.3L4.3 19a.5.5 0 0 1-.8-.6L5 12.2.2 8a.5.5 0 0 1 .3-.8l6.3-.6L9.3.8c.2-.5.7-.5.9 0z" /></svg>
+                            </span>
+                            <span class="pl-3">
+                                هتــل سارینــا مشهــد
+                            </span>
+                        </h1>
+                    </div>
+                    <div class=" p-lg-2 pr-5 pl-5 pb-4 pt-2 align-items-center row mr-0 ml-0 myprace d-lg-flex ">
+                        <span class="text-center pr-2 col-12 col-xl-6 pl-0 pb-md-2 d-flex justify-content-between d-xl-block ">
+                            <span class="FS-24 nowrap">
+                                شروع قیمت برای یک شب
+                            </span>
+                            <span class="FS-36 font-weight-bold LH-1">
+                                <br class="d-none d-xl-block">
+                                @ViewBag.Price
+                            </span>
+                        </span>
+                        <div class="BG-white-one text-center pr-lg-5 pl-lg-5 pr-3 pl-3 col-12 col-xl-6  d-flex justify-content-between d-xl-block">
+                            <div class="h4 mb-0">
+                                تماس جهت رزرو
+                            </div>
+                            <div class="FS-30 font-weight-bold red">
+                                2779 - 021
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="slider">
+                    <!-- <div class="offer-parent">
+                        <img src="/ClientTheme/Hotel/img/offer.png" class="offer" alt="">
+                    </div> -->
+
+                    <div class="demo">
+                        <ul id="lightSlider">
+                            <li data-thumb="/ClientTheme/Hotel/img/tooltips/01.jpg">
+                                <img src="/ClientTheme/Hotel/img/01.jpg" />
+                            </li>
+                            <li data-thumb="/ClientTheme/Hotel/img/tooltips/hotel-(1).png">
+                                <img src="/ClientTheme/Hotel/img/hotel-(1).png" />
+                            </li>
+                            <li data-thumb="/ClientTheme/Hotel/img/tooltips/hotel-(2).png">
+                                <img src="/ClientTheme/Hotel/img/hotel-(2).png" />
+                            </li>
+                            <li data-thumb="/ClientTheme/Hotel/img/tooltips/hotel-(3).png">
+                                <img src="/ClientTheme/Hotel/img/hotel-(3).png" />
+                            </li>
+                            <li data-thumb="/ClientTheme/Hotel/img/tooltips/hotel-(4).png">
+                                <img src="/ClientTheme/Hotel/img/hotel-(4).png" />
+                            </li>
+                            <li data-thumb="/ClientTheme/Hotel/img/tooltips/hotel-(5).png">
+                                <img src="/ClientTheme/Hotel/img/hotel-(5).png" />
+                            </li>
+                            <li data-thumb="/ClientTheme/Hotel/img/tooltips/hotel-(6).png">
+                                <img src="/ClientTheme/Hotel/img/hotel-(6).png" />
+                            </li>
+                            <li data-thumb="/ClientTheme/Hotel/img/tooltips/hotel-(7).png">
+                                <img src="/ClientTheme/Hotel/img/hotel-(7).png" />
+                            </li>
+                            <li data-thumb="/ClientTheme/Hotel/img/tooltips/hotel-(8).png">
+                                <img src="/ClientTheme/Hotel/img/hotel-(8).png" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div>
+                    <h2 class="BG-my-green white-one h4 p-3 m-0 mt-3 mb-3 ">
+                        <span class="pt-3 pb-3 d-block">
+                            مشاهده پکیج های تور هتل سارینا
+                        </span>
+                    </h2>
+                </div>
+                <div>
+                    <div class="B-gray FS-18 brownish-grey-two LH-1-2 p-3 m-0 mt-3 mb-3 content">
+                        <p class=" ">
+                            هتل سارینا مشهد، یک هتلِ چهار ستاره‌ی تاپ است که به تازگی در شهر مقدس مشهد شروع به ارائه‌ی خدمات به زائرین حرم امام رضا (ع) کرده. این هتل با تکیه بر هولدینگ قدرتمند تک‌ستاره کارِ خود را آغاز کرده و در همین زمان اندک تبدیل به یکی از قدرتمندترین مراکز ارائه‌ی خدمات به گردشگران در شهر مشهد شده است.
+
+                            <span class="my-green" id="amajredmore2">
+                                « نمایش بیشتر »
+
+                            </span>
+                        </p>
+
+                        <div id="amajcontent2" style="display: none;">
+                            <p class=" ">
+                                هتل سارینا واقع در خیابان جهاد پنجم مشهد یکی از هتل‌های نزدیک به حرم است و رفت و آمد به حرم از این هتل بسیار سرراست و آسان. فاصله‌ی هتل سارینا تا حرم مطهر امام رئوف با اتومبیل 7 دقیقه و با پای پیاده 20 تا 30 دقیقه است. نزدیکی به حرم مطهر و چشم‌انداز زیبای حرم یکی از مهم‌ترین نکات مثبت این هتل است.
+                            </p>
+                            <h3 class="mt-4">
+                                اتاق‌های هتل سارینا
+                            </h3>
+                            <p class=" ">
+                                هتل چهارستاره‌ تاپِ سارینا با مجموع  211 واحد، آماده‌ی ارائه‌ی خدمات به گردشگران و زائرانِ حرمِ امام رئوف است؛ این هتل 12 اتاق سینگل، 143 اتاق دبل، 24 اتاق تریپل، 12 سوئیت، 12 سوئیت یک خواب و 1 سوئیت دو خواب دارد. هتل سارینا در راستای حمایت از حقوق معلولین و جانبازان عزیز، 6 واحد توین (واحد ویژه‌ی معلولین) هم طراحی کرده که این عزیزان هم بتوانند به آسانی از سفرشان به شهر امام رضا بهره ببرند و آسوده باشند.
+                            </p>
+                            <h3 class="mt-4">
+                                رستوران فضای باز تابستانی
+                            </h3>
+                            <ul class="p-0">
+                                <li>مجموعه‌ی آبی (استخر، سونا، جکوزی)</li>
+                                <li>لاندری</li>
+                                <li>پارکینگ سرپوشیده باظرفیت 75 خودرو</li>
+                                <li>کافی شاپ 24 ساعته </li>
+                                <li>روم سرویس</li>
+                                <li>اتاق سیگار </li>
+                                <li>آژانس هواپیمایی </li>
+                                <li>بخش VIP درلابی</li>
+                                <li>اتاق چمدان </li>
+                                <li>5 دستگاه آسانسور مخصوصِ میهمان</li>
+                                <li>خدمات پذیرش و خانه‌داری 24 ساعته</li>
+                                <li>فروشگاه سوغات و صنایع دستی خراسان رضوی</li>
+                            </ul>
+                            <h3 class="mt-4">
+                                استقبال از میهمانان
+                            </h3>
+                            <ul class="p-0">
+                                <li>ترانسفر استقبال از میهمانان از فرودگاه تا هتل</li>
+                                <li>ترانسفر به حرم 7 نوبت در شبانه روز</li>
+                                <li>تاکسی سرویس و گشت شهری</li>
+                            </ul>
+                            <h3 class="mt-4">
+                                هتل سارینا، از زیارت تا سیاحت
+                            </h3>
+                            <p class=" ">
+                                هتل سارینا با طراحی منحصر‌به‌فرد و زیبایش برای هر سلیقه‌ای مناسب است. بسیاری از مسافران هتل سارینا را به خاطر موقعیت مکانی خوب و نزدیکی‌اش به حرم انتخاب می‌کنند تا بتوانند زیارتی آسوده و بدون دغدغه را تجربه کنند. بسیاری دیگر از مسافران، از امکانات کامل و تجیزات خوب هتل سارینا بهره می‌برند و فضای لوکس این هتل را برای گذراندن دوران ماه عسل برمی‌گزینند. هتل سارینا هر سلیقه‌ای را شگفت‌زده می‌کن
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- ------------------------------------------------------------- -->
+
+                <h2 class="BG-my-green white-one h4 p-3 m-0 mt-3 mb-3 ">
+                    <span class="pt-3 pb-3 d-block white-one">
+                        قوانین هتل
+                    </span>
+                </h2>
+                <div class="row mr-0 ml-0 mt-2 justify-content-center">
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 PR-0 PL-0 pt-5 pb-5 B-gray text-center">
+                        <img class="mt-3" src="/ClientTheme/Hotel/img/icon/01.png" alt="">
+                        <div class="mt-4">
+                            <h4 class="mb-4">
+                                ساعت تحویل اتاق
+                            </h4>
+                            <p class="h4">
+                                ساعت تحویل اتاق:   14:00
+                            </p>
+                            <p class="h4">
+                                ساعت تخلیـه اتاق:   12:00
+                            </p>
+                            <p class="h5">
+                                (ساعت ورود به هتل ملاك نیست)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 PR-0 PL-0 pt-5 pb-5 B-gray text-center">
+                        <img class="mt-3" src="/ClientTheme/Hotel/img/icon/03.png" alt="">
+                        <div class="mt-4">
+                            <h4 class="mb-4">
+                                نرخ کودکان
+                            </h4>
+                            <p class="h4">
+                                نوزاد از 0 تا 2 رایگان
+                            </p>
+                            <p class="h5">
+                                خردسال از 2 تا 12 نیم‌بها
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 PR-0 PL-0 pt-5 pb-5 B-gray text-center">
+                        <img class="mt-3" src="/ClientTheme/Hotel/img/icon/02.png" alt="">
+                        <div class="mt-4 pr-4 pl-4">
+                            <h4 class="mb-4 ">
+                                افزایش زمان اقامت
+                            </h4>
+                            <p class="h4 text-justify FS-16">
+                                اگر برای افزايش زمان اقامت یا اخذ نیم‌شارژ تا ساعت 18:00 باید اقدام شود، معادل 50% و پس از آن هزينه‌ی كامل يک شب دريافت می‌شود.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="BG-white-three my-green pt-2 pb-2 text-center mt-2">
+                    <img src="/ClientTheme/Hotel/img/arrow.png" alt="">
+                    اطلاعات بیشتر
+                    <img src="/ClientTheme/Hotel/img/arrow.png" alt="">
+                </div>
+
+                <div class="FS-18 brownish-grey-two LH-1-2 p-3 m-0 mt-3 mb-3 B-gray content">
+                    <h3 class="mt-4">
+                        کنسلی اتاق
+                    </h3>
+                    <p>
+                        در تورهای چارتری درصورت كنسلی، تمامی وجه كسر و مبلغي استرداد نمی‌شود. در صورت كنسل کردن هتل تا 48 ساعت قبل از ورود ميهمان معادل 20%، بين 24 تا 48 ساعت قبل از ورود مسافر 50%، از 24 ساعت قبل تا زمان ورود معادل 70% از مبلغ هزينه‌ی يک شب به ازاء هر اتاق كسر خواهد شد. چناچه مسافر در موعد مقرر به هتل مراجعه نکند، اتاق رزرو شده به مدت يك شب خالی نگه داشته شده و خسارت وارده بر اساس هزينه‌ی يک شب هر اتاق محاسبه و از مبلغ پرداخت شده كسر خواهد شد.
+                        <span class="my-green" id="amajredmore">
+                            « نمایش بیشتر »
+                        </span>
+                    </p>
+                    <div id="amajcontent" style="display: none;">
+                        <p>
+                            رزروهای بدون پيش‌پرداخت و يا بدون مكاتبه‌ی رسمی و كسب تائيديه‌ی هتل، فاقد اعتبارند و هتل هيچ مسئوليتی در قبال آن نخواهد داشت.
+
+                        </p>
+
+                        <p>
+                            شماره و طبقه‌ی اتاق هنگامِ ورود ميهمان و توسط مسئول پذيرش تعيين می‌شود و هتل در زمان رزرو تعهدی در مورد شماره‌ی اتاق و طبقه نخواهد داشت.
+                        </p>
+
+                        <p>
+                            تغيير نام با درخواست مكتوب رزرو كننده بلامانع خواهد بود و مشمول هزينه نمی‌شود.
+
+                        </p>
+
+                        <p>
+                            تغيير تاريخ در صورت امكان و خالی بودنِ اتاق جديد، بدون هزينه است.در غير اين صورت ابطال رزرو قبلی و انجام رزرو جديد هر دو تابع مقررات هتل و شامل هزينه خواهد بود.
+
+                        </p>
+
+
+                        <p>
+                            همراه داشتن مدرک شناسایی معتبر(كارت ملی و شناسنامه‌ی عكس‌دار) برای پذيرش و اقامت در هتل برای همه‌ی نفرات و همچينين مدارک محرميت افرادی كه قصد اقامت در يک اتاق را دارند،الزامی‌ست.
+
+                        </p>
+
+
+                        <p>
+                            <strong>
+                                وسيله‌ی حمل و نقل:
+                            </strong>
+                            هتل هیچ‌گونه مسئوليتی در قبال وسيله‌ی حمل و نقل مسافر به هتل ندارد و در صورت كنسل شدنِ وسيله‌ی حمل و نقل، استردادِ هتل مطابق قوانين  خواهد بود كه ممكن است مشمول جريمه هم شود.
+
+                        </p>
+
+                        <p>
+                            <strong>
+                                موارد خاص:
+                            </strong>
+
+                            به علت بدی آب وهوا يا موارد فورس ماژور، در صورت تغيير تاريخ بدون هزينه و در صورت عدم رزرو، يک شب محاسبه می‌شود.
+                        </p>
+
+                    </div>
+                </div>
+
+                <h2 class="BG-my-green white-one h4 p-3 m-0 mt-3 mb-3 ">
+                    <span class="pt-3 pb-3 d-block">
+                        قوانین مکانی
+                    </span>
+                </h2>
+                <div class="FS-18 brownish-grey-two LH-1-2 p-3 B-gray mr-0 ml-0 mt-3 mb-2">
+
+                    <p>
+                        هتل سارینا مشهد، در خیابان جهاد 5 مشهد، نرسیده به بیمارستان سینا قرار دارد. یک جست و جوی کوتاه کافی‌ست تا موقعیت عالی این هتل را ببینید. از هتل سارینا تا باب‌الکاظم 24 دقیقه پیاده‌روی‌ست. این فاصله با اتومبیل به 7 دقیقه کاهش می‌یابد. زائران حرم امام رضا می‌توانند به راحتی از هتل تا حرم را در خیابان‌های زیبای مشهد قدم بزنند و از مسیر لذت ببرند.
+                    </p>
+
+                </div>
+                <div class="FS-18 brownish-grey-two LH-1-2 mapsframe  B-gray mr-0 ml-0 mt-3 mb-2">
+
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12865.344315731145!2d59.6008774!3d36.2798945!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6ed25cfd842ffd6e!2sSarina+Hotel!5e0!3m2!1sen!2sus!4v1555223373181!5m2!1sen!2sus"
+                            width="100%" height="490" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/ClientTheme/Hotel/libs/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/ClientTheme/Hotel/js/custom.js"></script>
+@*</body>*@
+

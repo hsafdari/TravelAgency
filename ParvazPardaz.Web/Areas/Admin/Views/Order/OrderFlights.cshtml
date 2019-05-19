@@ -1,0 +1,309 @@
+﻿@model GridSelectedFlightViewModel
+@{ ViewBag.Title = ParvazPardaz.Resource.Book.Book.sellesFlightReports;}
+<link href="~/Plugins/PersianEnDateTime/css/persian-datepicker.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<h3>@ViewBag.Title </h3>
+<hr />
+<div class="container">
+    @{Html.RenderPartial("_FlightSearch", Model.SearchViewModel);}
+    <div id="table">
+        <table id="grid" class="table table-bordered table-hover table-full-width dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>@Html.DisplayNameFor(model => model.Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.OrderId)</th>
+                    <th>@Html.DisplayNameFor(model => model.AirlineIATACode)</th>
+                    <th>@Html.DisplayNameFor(model => model.FlightDateTime)</th>
+                    <th>@Html.DisplayNameFor(model => model.FlightNo)</th>
+                    <th>@Html.DisplayNameFor(model => model.BuyerTitle)</th>
+                    <th>@Html.DisplayNameFor(model => model.NationalCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.TrackingCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.TourCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.TourTitle)</th>
+                    <th>@Html.DisplayNameFor(model => model.TourPackageCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.TourPackage)</th>
+                    <th>@Html.DisplayNameFor(model => model.FromIATACode)</th>
+                    <th>@Html.DisplayNameFor(model => model.ToIATACode)</th>
+                    <th>@Html.DisplayNameFor(model => model.FlightType)</th>
+                    <th>@Html.DisplayNameFor(model => model.AdultCount)</th>
+                    <th>@Html.DisplayNameFor(model => model.ChildCount)</th>
+                    <th>@Html.DisplayNameFor(model => model.InfantCount)</th>
+                    <th>@ParvazPardaz.Resource.Book.Book.OrderDate</th>
+                    <th>@Html.DisplayNameFor(model => model.LastModifierUserName)</th>
+                    <th>@Html.DisplayNameFor(model => model.LastModifierDate)</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th colspan="16" style="text-align:right">مجموع :</th>
+                    <th></th>
+                    <th colspan="1" style="text-align:right"></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $('.select2').select2({
+            dir: "RTL"
+        });
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+    @*<script src="~/Scripts/kendo.date/JalaliDate.js"></script>
+    <script src="~/Scripts/kendo.date/kendo.web.js"></script>
+    <script src="~/Scripts/kendo.date/fa-IR.js"></script>*@
+    <script>
+        var fetchCompanyTransferUrl = "@Url.Action("GetCompanyTransfers", "CompanyTransfer")"
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
+                return {
+                    "iStart": oSettings._iDisplayStart,
+                    "iEnd": oSettings.fnDisplayEnd(),
+                    "iLength": oSettings._iDisplayLength,
+                    "iTotal": oSettings.fnRecordsTotal(),
+                    "iFilteredTotal": oSettings.fnRecordsDisplay(),
+                    "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+                    "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
+                };
+            };
+            var table = $("#grid").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                'select': true,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    var numStart = this.fnPagingInfo().iStart;
+                    var index = numStart + iDisplayIndexFull + 1;
+                    $("td:first", nRow).html(index);
+                    return nRow;
+                },
+                "footerCallback": function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                    };
+                    // totalAdult over all pages
+                    totalAdult = api
+                        .column(16)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // totalAdult over this page
+                    pagetotalAdult = api
+                        .column(16, { page: 'current' })
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Update footer
+                    $(api.column(16).footer()).html(
+                        'بزرگسال' + pagetotalAdult + ' (' + totalAdult + ' totalAdult)'
+                    );
+                    // totalChild over all pages
+                    totalChild = api
+                        .column(17)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // totalChild over this page
+                    pagetotalChild = api
+                        .column(17, { page: 'current' })
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Update footer
+                    $(api.column(17).footer()).html(
+                        'کودک' + pagetotalChild + ' (' + totalChild + ' totalChild)'
+                    );
+
+                    // totalInfant over all pages
+                    totalInfant = api
+                        .column(18)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // totalInfant over this page
+                    pagetotalInfant = api
+                        .column(18, { page: 'current' })
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Update footer
+                    $(api.column(18).footer()).html(
+                        'خردسال' + pagetotalInfant + ' (' + totalInfant + ' totalInfant)'
+                    );
+                },
+                language: {
+                    url: '/Plugins/DataTables/Persian.json'
+                },
+                scrollX: true,
+                scrollCollapse: true,
+                "ajax": {
+                    "url": "/Admin/Order/GetOrderFlights",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: function (d) {
+                        d.fromdate = $("#fromdate").val(),
+                        d.todate = $("#todate").val(),
+                        d.reporttype = $("input[name='reporttype']:checked").val(),
+                        d.companytranferId = $("#DDCompanyTransfer").val(),
+                        d.fromairport = $("#fromairport").val(),
+                        d.toairport = $("toairport").val(),
+                        d.calendertype = $("#hdcalendertype").val()
+                    }
+                },
+                "columnDefs":
+            [{
+                "targets": [1],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": 'no-sort',
+                "orderable": false,
+            }]
+                    , "columns": [
+                    { "data": null },
+                    { "data": "Id", name: "Id", "autoWidth": true },
+                    { "data": "OrderId", name: "OrderId", "autoWidth": true },
+                    { "data": "AirlineIATACode", name: "AirlineIATACode", "autoWidth": true },
+                    {
+                        "data": "FlightDateTime", name: "FlightDateTime", "autoWidth": true,
+                        render: function (data, type, row) {
+                            return (data != null ? moment(data).format('YYYY/MM/DD') : '');
+                        }
+                    },
+                    { "data": "FlightNo", name: "FlightNo", "autoWidth": true },
+                    { "data": "BuyerTitle", name: "BuyerTitle", "autoWidth": true },
+                    { "data": "NationalCode", name: "NationalCode", "autoWidth": true },
+                    { "data": "TrackingCode", name: "TrackingCode", "autoWidth": true },
+                    { "data": "TourCode", name: "TourCode", "autoWidth": true },
+                    { "data": "TourTitle", name: "TourTitle", "autoWidth": true },
+                    { "data": "TourPackageCode", name: "TourPackageCode", "autoWidth": true },
+                    { "data": "TourPackage", name: "TourPackage", "autoWidth": true },
+                    { "data": "FromIATACode", name: "FromIATACode", "autoWidth": true },
+                    { "data": "ToIATACode", name: "ToIATACode", "autoWidth": true },
+                    { "data": "FlightTypeDisplay", name: "FlightTypeDisplay", "autoWidth": true },
+                    { "data": "AdultCount", name: "AdultCount", "autoWidth": true },
+                    { "data": "ChildCount", name: "ChildCount", "autoWidth": true },
+                    { "data": "InfantCount", name: "InfantCount", "autoWidth": true },
+                    {
+                        "data": "CreatorDateTime", name: "CreatorDateTime", "autoWidth": true,
+                        render: function (data, type, row) {
+                            return (data != null ? moment(data).format('YYYY/MM/DD HH:mm') : '');
+                        }
+                    },
+                    { "data": "LastModifierUserName", name: "LastModifierUserName", "autoWidth": true },
+                    {
+                        "data": "LastModifierDate", name: "LastModifierDate", "autoWidth": true,
+                        render: function (data, type, row) {
+                            return (data != null ? moment(data).format('jYYYY/jMM/jDD HH:mm') : '');
+                        }
+                    },
+                    ],
+                "order": [[2, 'desc']]
+            });
+
+            //$(".datepicker").kendoDatePicker();
+
+            $("#searchbutton").click(function () {
+                table.draw();
+            });
+            //$("#exportbutton").click(function () {
+            //var _reporttype = $("input[name='reporttype']:checked").val();
+            //var _fromdate= $("#fromdate").val();
+            //var _todate = $("#todate").val();
+            //var companytranferId= $("#DDCompanyTransfer").val();
+            //var fromairport = $("#fromairport").val();
+            //var toairport = $("toairport").val();
+
+            //$.ajax({
+            //    url: '/Admin/Order/ExportOrderFlights',
+            //    datatype: "json",
+            //    type: 'POST',
+            //    data: {
+            //        fromdate: _fromdate,
+            //        todate: _todate,
+            //        reporttype: _reporttype,
+            //        companytranferId: $("#DDCompanyTransfer").val(),
+            //        fromairport: $("#fromairport").val(),
+            //        toairport: $("toairport").val()
+            //    },
+            //    dataType: 'html',
+            //    success: function (data) {
+            //    }
+            //});
+            //});
+        });
+        function FetchCompanyTransfer() {
+            var coId = "#DDCompanyTransfer";
+            var vId = "#DDVehicleType";
+
+            var items = "";
+            var vehicleTypeId = $(vId).val();
+
+            if (vehicleTypeId == "") {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectVehicleType' + "</option>";
+                $(coId).html(items);
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+            }
+            else {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+                var x = $.getJSON(fetchCompanyTransferUrl + "/" + vehicleTypeId, null, function (data) {
+                    $.each(data, function (i, item) {
+                        items += "<option value=\"" + item.Id + "\">" + item.Title + "</option>";
+                    });
+                    $(coId).html(items);
+                });
+            }
+
+            $(coId).trigger("change");
+        }
+    </script>
+    <script src="~/Plugins/PersianEnDateTime/js/persian-date.min.js"></script>
+    <script src="~/Plugins/PersianEnDateTime/js/persian-datepicker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".datepicker").pDatepicker({
+                format: 'YYYY/MM/DD',
+                toolbox: {
+                    calendarSwitch: {
+                        enabled: true
+                    }
+                },
+                persianDigit: false,
+                onSelect: function () {
+
+                    var test = $(this)["0"].calendar_;
+                    $("#hdcalendertype").val(test);
+                }
+            });
+
+        });
+    </script>
+}

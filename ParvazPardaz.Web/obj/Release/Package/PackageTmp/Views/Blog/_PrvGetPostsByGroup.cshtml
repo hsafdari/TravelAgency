@@ -1,0 +1,73 @@
+﻿@model PostListViewModel
+@helper GetImgurl(ImageViewModel _image)
+{
+    //item.Image.ImageUrl + "-736x512" + item.Image.ImageExtension
+    if (_image != null)
+    {
+        string image = _image.Width == 700 ? _image.ImageUrl + "-700x525" + _image.ImageExtension : _image.ImageUrl + "-736x512" + _image.ImageExtension;
+        <img src="@image" alt="@Model.Title" />
+    }
+    else
+    {
+        <img src="~/ClientTheme/images/keysafarlogo725.jpg" alt="keysafar.com" />
+    }
+}
+@{
+    var counter = 0;
+    var idCount = 0;
+}
+@foreach (var item in Model.PostDetail)
+{
+    @*<p>@item.Name @item.Title</p><br />*@
+    <article class="col-md-4">
+        <!-- blog-box -->
+        <div class="blog-box">
+            <div class="entry-cover">
+                <a href="@item.URL" title="@item.Title" rel="@item.Rel">
+                    @if (@item.Image != null || item.Thumbnail == null)
+                    {
+                        @GetImgurl(item.Image)
+                    }
+                    else if (@item.Image == null && item.Thumbnail != null)
+                    {
+                        <img src="@item.Thumbnail" alt="@Model.Title" />
+                    }
+                </a>
+                @{
+                    var signid = "add_sign_count-" + idCount;
+                    var postid = "post-content-" + idCount;
+                }
+                <a id="@signid" title="@item.Title" rel="@item.Rel" class="add-sign-big color-Yellow"><img src="/ClientTheme/images/icon/big-plus.png" alt="@item.Title" /></a>
+            </div>
+
+            <div class="post-box-inner">
+                <div class="box-content">
+                    <!-- <span>Entertainment</span> -->
+                    <a href="@item.URL" id="@item.Name.Replace(" ","-")" target="@item.Target" rel="@item.Rel" class="entry-title">@item.Name</a>
+                    <p>@item.PostSummery</p>
+                    <p class="time"><i class="fa fa-clock-o"></i> @item.PublishDatetime.ToString("yyyy/MM/dd")</p>
+
+                    <div class="post-content" id="@postid">
+                        <p>@item.PostSummery</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- blog-box /- -->
+
+        <div class="blog-social">
+            <a href="@item.URL" class="read-more " target="@item.Target" rel="@item.Rel">بیشتر</a>
+        </div>
+    </article>
+
+                    counter++;
+                    idCount++;
+
+                    if (counter == 3)
+                    {
+                        <div class="hidden-xs" style="clear:both;"></div>
+                        counter = 0;
+                    }
+}
+
+

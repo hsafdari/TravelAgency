@@ -1,0 +1,22 @@
+﻿/*#region مشترک*/
+style, script {
+    display: none;
+}
+/*#endregion*/
+
+/*#region مودال لاگین*/
+#Recaptcha-error-section {
+    top: -16px !important;
+}
+
+.fullframe, .dim {
+    display: none;
+    opacity: 0;
+}
+/*#endregion*/
+
+/*#region فوتر*/
+footer .sitemap strong {
+    font-weight: bolder !important;
+}
+/*#endregion*/

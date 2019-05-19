@@ -1,0 +1,71 @@
+﻿@model ParvazPardaz.ViewModel.AddTourSliderViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+@section css{
+    <link href="~/Content/admin/View/Tour.css" rel="stylesheet" />
+}
+
+
+<ul id="progress">
+    <li>
+        <a style="color:#fff" href="/Admin/Tour/Edit/@Model.TourId">تور</a>
+    </li>
+    <li class="active">گالری تور</li>
+    <li>
+        <a style="color:#fff" href="/Admin/TourProgram/Create?tourId=@Model.TourId">برنامه سفر</a>
+    </li>
+    <li>
+        <a style="color:#fff" href="/Admin/TourPackage/Create?tourId=@Model.TourId">پکیج تور</a>
+    </li>
+</ul>
+@*<a href="@ViewBag.TourURL" target="_blank" class="btn btn-success" style="display:inline-block; float:left;">مشاهده تور سمت کاربر</a>*@
+<br />
+<br />
+@*@using (Html.BeginForm("CheckForm", "TourSlider", FormMethod.Post))
+    {*@
+@Html.HiddenFor(model => model.TourId)
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                <i class="fa fa-info-circle"></i>
+                <strong>توجه!</strong> تصویر را در اندازه عرض 365 و ارتفاع 365 پیکسل وارد کنید 
+                @*@ParvazPardaz.Resource.Tour.Tours.PicSizeTourPrimarySlider*@
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.File, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.FileUploaderFor(model => model.File).Limit(9).AddMore(true).IsMultiple(true).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(true).Extension(new List<string>() { "jpg", "png", "jpeg" }).Limit(20).UploadUrl("/Admin/TourSlider/Upload/", new Dictionary<string, object>() { { "TourId ", Model.TourId } }).RemoveUrl("/Admin/TourSlider/Delete/").Edit(Model.EditModeFileUploads).RemoveUrl("/Admin/TourSlider/Delete/")
+            @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PrimarySlider, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.FileUploaderFor(model => model.PrimarySlider).AddMore(true).IsMultiple(true).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(true).Extension(new List<string>() { "jpg", "png", "jpeg" }).Limit(1).UploadUrl("/Admin/TourSlider/Upload/", new Dictionary<string, object>() { { "TourId ", Model.TourId } }).RemoveUrl("/Admin/TourSlider/Delete/").Edit(Model.EditModeFileUploadsForPrimarySlider).RemoveUrl("/Admin/TourSlider/Delete/")
+           
+            @Html.ValidationMessageFor(model => model.PrimarySlider, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-11">
+            @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Edit", "Tour", new { id = Model.TourId }, new { @class = "btn btn-custom red", })
+            @*<input type="submit" class="btn btn-custom green" name="name" value="@ParvazPardaz.Resource.General.Generals.Next" />*@
+            @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Next, "Create", "TourProgram", new { tourId = Model.TourId }, new { @class = "btn btn-custom green", id = "BtnNext" })
+            @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Finish, "Index", "Tour", null, new { @class = "btn btn-custom green" })
+        </div>
+    </div>
+</div>
+@*}*@
+
+
+
+
+

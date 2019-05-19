@@ -1,0 +1,110 @@
+﻿@model IEnumerable<ParvazPardaz.Model.Entity.Core.Menu>
+@using System.Linq;
+@{
+    var fullName = Session["FullName"];
+}
+@helper ShowTree(IEnumerable<ParvazPardaz.Model.Entity.Core.Menu> menuitems)
+{
+    foreach (var item in menuitems)
+    {
+        if (item != null)
+        {
+            // -Parent , -Child --> Root
+            if (item.MenuChilds.Count == 0 && item.MenuParentId == null)
+            {
+               
+                    <a href="@item.MenuUrl" data-toggle="@item.Target">
+                        <span>                            
+                            @item.MenuTitle
+                        </span>
+                    </a>
+              
+            }
+            // -Parent , +Child --> Root
+            else if (item.MenuChilds.Count > 0 && item.MenuParentId == null)
+            {
+               
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="@item.MenuUrl">@item.MenuTitle <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        @ShowTree(item.MenuChilds)
+                    </ul>
+              
+            }
+            // +Parent , -Child  --> Child
+            else if (item.MenuChilds.Count == 0 && item.MenuParentId != null)
+            {
+                
+                    <a href="@item.MenuUrl" data-toggle="@item.Target">
+                        <span>
+                            @item.MenuTitle
+                        </span>
+                    </a>
+                
+            }
+            // +Parent , +Child  --> Child
+            else if (item.MenuChilds.Count > 0 && item.MenuParentId != null)
+            {
+                <li>
+                    <a href="@item.MenuUrl">@item.MenuTitle<i class="icon-arrow-right"></i></a>
+                    <ul class="">
+                        @ShowTree(item.MenuChilds)
+                    </ul>
+                </li>
+            }
+        }
+    }
+}
+<!-- **** -->
+<header>
+    <a href="/" id="logo"><img src="~/ClientTheme/images/Logo/keysafarlogo.png" alt="کی سفر"></a>  
+    <span id="MenuAuthSection">
+        <nav>
+            @ShowTree(Model)
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="profile-dropdown-toggle" href="javascript:void(0)">
+                    <img src="~/ClientTheme/Blog/Tour/img/person.png" />
+                    @if (fullName != null)
+                    {
+                        <span>
+                            @Html.Raw(fullName)
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            @(User.IsInRole("Customer") ? "سامانه کاربری" : "سامانه مدیریت")
+                        </span>
+                    }
+                </a>
+            }
+            else
+            {
+                <a class="profile-modal-toggle" href="javascript:void(0)"><img src="~/ClientTheme/Blog/Tour/img/person.png" /> <span>ورود / عضویت</span> </a>
+            }
+            <a href="tel:+98212779"><img src="~/ClientTheme/Blog/Tour/img/headset.png" /><span>پشتیبانی: ‌2779 ۰۲۱</span></a>
+            @*<a href="tel:+987644456096"><img src="~/ClientTheme/Blog/Tour/img/headset.png" /><span style="font-size:13px">پشتیبانی: 07644456096</span></a>*@
+        </nav>
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (!User.IsInRole("Customer"))
+            {
+                <ul class="profile-dropdown">
+                    <li><a href="/Admin/Dashboard/Index">داشبورد</a></li>
+                    <li><a href="/Account/LogOff">خروج از حساب کاربری</a></li>
+                </ul>
+            }
+            else if (User.IsInRole("Customer"))
+            {
+                <ul class="profile-dropdown">
+                    <li><a href="/Customer/Dashboard/Index">داشبورد</a></li>
+                    <li><a href="/Customer/MyAccount/MyProfile#user-info">اطلاعات کاربری</a></li>
+                    <li><a href="/Customer/Order/Index">سفارش های من</a></li>
+                    <li><a href="javascript:void(0)">تراکنش های مالی</a></li>
+                    <li><a href="javascript:void(0)">لیست مسافران</a></li>
+                    <li><a href="/Account/LogOff">خروج از حساب کاربری</a></li>
+                </ul>
+            }
+        }
+    </span>
+</header>

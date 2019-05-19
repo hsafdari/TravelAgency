@@ -1,0 +1,132 @@
+﻿@model TourScheduleViewModel
+
+@if (Model.CompanyTransfer != null && Model.CompanyTransfer.Any())
+{
+    for (int i = 0; i < Model.CompanyTransfer.Count(); i++)
+    {
+        <tr class="CoTransferItem partialSection">
+            <td>
+                @Html.DropDownListFor(model => model.CompanyTransfer[i].fromCityId, new SelectList(ViewBag.FromCity as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].fromCityId), ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "fromCityId form-control ddlPadding", id = "DDFromCity" + i, onchange = "FetchFromAirport(" + i + ")" })
+            </td>
+            <td>
+                @*@Html.TextBoxFor(model => model.CompanyTransfer[i].FromAirportTitle, new { @class = "form-control FromCityTitle", @id = "FromCityTitle" })*@
+                @Html.DropDownListFor(model => model.CompanyTransfer[i].FromAirportId, new SelectList(ViewBag.Airport as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].FromAirportId), new { @class = "FromAirportId form-control ddlPadding", id = "DDFromAirport" + i })
+                @Html.ValidationMessageFor(model => model.CompanyTransfer[i].FromAirportId, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.CompanyTransfer[i].destCityId, new SelectList(ViewBag.FromCity as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].destCityId), ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "destCityId form-control ddlPadding", id = "DDDestinationCity" + i, onchange = "FetchDestinationAirport(" + i + ")" })
+            </td>
+            <td>
+                @*@Html.TextBoxFor(model => model.CompanyTransfer[i].DestinationAirportTitle, new { @class = "form-control DestinationCityTitle", @id = "DestinationCityTitle" })*@
+                @Html.DropDownListFor(model => model.CompanyTransfer[i].DestinationAirportId, new SelectList(ViewBag.Airport as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].DestinationAirportId), new { @class = "DestinationAirportId form-control ddlPadding", id = "DDDestinationAirport" + i })
+                @Html.ValidationMessageFor(model => model.CompanyTransfer[i].DestinationAirportId, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.CompanyTransfer[i].DepartureDate, "{0:yyyy/MM/dd}", new { @class = "DepartureDate datepicker form-control" })
+                @Html.ValidationMessageFor(model => model.CompanyTransfer[i].DepartureDate, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.CompanyTransfer[i].DepartureTime, new { @class = "form-control DepartureTime", @id = "DepartureTime" })
+                @Html.ValidationMessageFor(model => model.CompanyTransfer[i].DepartureTime, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.CompanyTransfer[i].ArrivalDate, "{0:yyyy/MM/dd}", new { @class = "ArrivalDate datepicker form-control" })
+                @Html.ValidationMessageFor(model => model.CompanyTransfer[i].ArrivalDate, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.CompanyTransfer[i].ArrivalTime, new { @class = "form-control ArrivalTime", @id = "ArrivalTime" })
+                @Html.ValidationMessageFor(model => model.CompanyTransfer[i].ArrivalTime, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.CompanyTransfer[i].VehicleTypeId, new SelectList(ViewBag.VehicleTypes as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].VehicleTypeId), ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "VehicleTypeId form-control ddlPadding", id = "DDVehicleType" + i, onchange = "FetchCompanyTransfer(" + i + ")" })
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.CompanyTransfer[i].CompanyTransferId, new SelectList(ViewBag.CompanyTransfers as IEnumerable<SelectListItem>, "Value", "Text", Model.CompanyTransfer[i].CompanyTransferId), new { @class = "CompanyTransferId form-control ddlPadding", id = "DDCompanyTransfer" + i })
+                @Html.ValidationMessageFor(model => model.CompanyTransfer[i].CompanyTransferId, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.CompanyTransfer[i].VehicleTypeClassId, ViewBag.VehicleTypeClasses as IEnumerable<SelectListItem>, new { @class = "VehicleTypeClassId form-control" })
+                @Html.ValidationMessageFor(model => model.CompanyTransfer[i].VehicleTypeClassId, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.CompanyTransfer[i].FlightNumber, new { @class = "FlightNumber form-control" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.CompanyTransfer[i].BaggageAmount, new { @class = "BaggageAmount form-control" })
+            </td>
+            <td>
+                @Html.EnumDropDownListFor(model => model.CompanyTransfer[i].FlightDirection, new { @class = "FlightDirection form-control" })
+            </td>
+            <td>
+                @Html.TextAreaFor(model => model.CompanyTransfer[i].Description, new { @class = "Description form-control" })
+            </td>
+            <td style="text-align:left;">
+                @if (i > 0)
+                {
+                    <a class="btn btn-remove" onclick="$(this).closest('.partialSection').remove();"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                }
+            </td>
+        </tr>
+    }
+}
+else
+{
+    <tr class="partialSection CoTransferItem autocomplete">
+        <td>
+            @Html.DropDownListFor(model => model.CompanyTransfer[0].fromCityId, ViewBag.FromCity as IEnumerable<SelectListItem>, ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "fromCityId form-control ddlPadding", id = "DDFromCity0", onchange = "FetchFromAirport(0" + ")" })
+        </td>
+        <td>
+            @Html.DropDownListFor(model => model.CompanyTransfer[0].FromAirportId, ViewBag.Airport as IEnumerable<SelectListItem>, new { @class = "FromAirportId form-control ddlPadding", id = "DDFromAirport0" })
+            @Html.ValidationMessageFor(model => model.CompanyTransfer[0].FromAirportId, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Html.DropDownListFor(model => model.CompanyTransfer[0].destCityId, ViewBag.FromCity as IEnumerable<SelectListItem>, ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "destCityId form-control ddlPadding", id = "DDDestinationCity0", onchange = "FetchDestinationAirport(0" + ")" })
+        </td>
+        <td>
+            @Html.DropDownListFor(model => model.CompanyTransfer[0].DestinationAirportId, ViewBag.Airport as IEnumerable<SelectListItem>, new { @class = "DestinationAirportId form-control ddlPadding", id = "DDDestinationAirport0" })
+            @Html.ValidationMessageFor(model => model.CompanyTransfer[0].DestinationAirportId, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.CompanyTransfer[0].DepartureDate, "{0:yyyy/MM/dd}", new { @class = " DepartureDate datepicker form-control" })
+            @Html.ValidationMessageFor(model => model.CompanyTransfer[0].DepartureDate, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.CompanyTransfer[0].DepartureTime, new { @class = "DepartureTime form-control DepartureTime", @id = "DepartureTime" })
+            @Html.ValidationMessageFor(model => model.CompanyTransfer[0].DepartureTime, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.CompanyTransfer[0].ArrivalDate, "{0:yyyy/MM/dd}", new { @class = "ArrivalDate datepicker form-control" })
+            @Html.ValidationMessageFor(model => model.CompanyTransfer[0].ArrivalDate, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.CompanyTransfer[0].ArrivalTime, new { @class = "ArrivalTime form-control", @id = "ArrivalTime" })
+            @Html.ValidationMessageFor(model => model.CompanyTransfer[0].ArrivalTime, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Html.DropDownListFor(model => model.CompanyTransfer[0].VehicleTypeId, ViewBag.VehicleTypes as IEnumerable<SelectListItem>, ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "VehicleTypeId form-control ddlPadding", id = "DDVehicleType0", onchange = "FetchCompanyTransfer(0" + ")" })
+        </td>
+        <td>
+            @Html.DropDownListFor(model => model.CompanyTransfer[0].CompanyTransferId, ViewBag.CompanyTransfers as IEnumerable<SelectListItem>, new { @class = "CompanyTransferId form-control ddlPadding", id = "DDCompanyTransfer0" })
+            @Html.ValidationMessageFor(model => model.CompanyTransfer[0].CompanyTransferId, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Html.DropDownListFor(model => model.CompanyTransfer[0].VehicleTypeClassId, ViewBag.VehicleTypeClasses as IEnumerable<SelectListItem>, new { @class = "VehicleTypeClassId form-control" })
+            @Html.ValidationMessageFor(model => model.CompanyTransfer[0].VehicleTypeClassId, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.CompanyTransfer[0].FlightNumber, new { @class = "FlightNumber form-control" })
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.CompanyTransfer[0].BaggageAmount, new { @class = "BaggageAmount form-control" })
+        </td>
+        <td>
+            @Html.EnumDropDownListFor(model => model.CompanyTransfer[0].FlightDirection, new { @class = "FlightDirection form-control" })
+        </td>
+        <td>
+            @Html.TextAreaFor(model => model.CompanyTransfer[0].Description, new { @class = "Description form-control" })
+        </td>
+        <td style="text-align:left;">
+            <a class="btn btn-remove" onclick="$(this).closest('.partialSection').remove();"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </td>
+    </tr>
+}

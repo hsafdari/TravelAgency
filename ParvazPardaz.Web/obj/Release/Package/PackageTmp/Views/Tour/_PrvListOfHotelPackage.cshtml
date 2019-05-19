@@ -1,0 +1,73 @@
+﻿@model TourReserveViewModel
+@{
+    Layout = null;
+    var hotelPackages = ViewBag.HotelPackages as List<ListViewHotelPackageViewModel>;
+    var allhotelRooms = ViewBag.AllHotelRooms as List<ParvazPardaz.Model.Entity.Hotel.HotelRoom>;
+    int SelectedDepartureFlightId = ViewBag.SelectedDepartureFlightId;
+    //میزان مالیات بر ارزش افزوده
+    var vat = System.Convert.ToInt64(System.Configuration.ConfigurationManager.AppSettings["TaxPercentage"]);
+}
+@if (hotelPackages != null && hotelPackages.Any())
+{
+    <section id="HotelsSection" class="main tour-hotel white clearfix">
+        <h2 class="sectionTitle">انتخاب هتل</h2>
+        <ul class="sort-bar" sorter="example">
+            <li class="sort-ascend" sorter="name">نام و اطلاعات هتل</li>
+            <li class="" sorter="star">ستاره</li>
+            <li class="" sorter="facility">خدمات هتل</li>
+            <li class="" sorter="price">شروع قیمت از</li>
+        </ul>
+        <div class="form" sortable-target="example">
+            @foreach (var item in hotelPackages.ToList())
+            {
+                foreach (var h in item.hotelsInPackage)
+                {
+                    var AdultHotelRoomsInPackage = item.hotelRoomsInPackage.Where(x => x.AdultPrice > 0 && x.RoomTypeId == 2).OrderBy(x => x.AdultPrice).ToList();
+                    decimal pricevalue = ((AdultHotelRoomsInPackage.Any() ? AdultHotelRoomsInPackage.Select(x => new { price = x.AdultPrice + ((x.AdultPrice * vat) / 100) }).Select(x => x.price).First() : 0) / 10);
+                    string price = pricevalue != 0 ? pricevalue.ToString("#,0 تومان") : "";
+                    <label class="label" sortable-name="@h.HotelTitle" sortable-star="@h.RankOrderId" sortable-facility="@h.HotelBoardTitle" sortable-price="@pricevalue">
+                        <input type="radio" name="SelectedHotelPackageId" value="@item.Id" onclick="FetchTourData(@item.TourId); ResetRoomSection();" />
+                        <span class="radio-replace"></span>
+                        <img src="@h.Thumbnail" alt="@h.HotelTitle" class="hotel-logo">
+                        <span class="hotel-name">@h.HotelTitle</span>
+                        <img class="hotel-star" src="@h.RankLogo" alt="@h.RankOrderId" title="@h.HotelTitle" />
+
+                        <span class="hotel-facility">
+                            <img src="@(String.IsNullOrEmpty(h.HotelBoardLogo) == true ? "#" : h.HotelBoardLogo)" title="@h.HotelBoardTitle" alt="@h.HotelBoardTitle" />
+                            @h.HotelBoardTitle
+                        </span>
+                        <span class="hotel-price">
+                            @price
+                        </span>
+                        <span name="toggle" class="btn-2">اطلاعات</span>
+
+                        <div class="details roll">
+                            <p>
+                                <b>مکان هتل:</b>
+                                @string.Format("{0}{1}", h.CityTitle, (h.Location != null ? " ، " + h.Location : ""))
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <b>شرح خدمات:</b>
+                                @Html.Raw(h.Summary)
+                            </p>
+                            <ul class="slider cards" style="direction: ltr;">
+                                @if (h.HotelGalleryImages != null && h.HotelGalleryImages.Any())
+                                {
+                                    foreach (var img in h.HotelGalleryImages)
+                                    {
+                                        <li class="active"><img src="@img"></li>
+                                    }
+                                }
+                            </ul>
+                            <button class="btn-3" type="button" name="next" onclick="roll(1,this,3)"></button>
+                            <button class="btn-3" type="button" name="prev" onclick="roll(-1,this,3)"></button>
+                        </div>
+                    </label>
+                }
+            }
+        </div>
+    </section>
+}
+else
+{
+    <section id="HotelsSection" class="main tour-hotel clearfix"></section>
+}

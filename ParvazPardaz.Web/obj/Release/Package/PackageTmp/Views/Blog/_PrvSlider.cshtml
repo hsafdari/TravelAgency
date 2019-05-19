@@ -1,0 +1,244 @@
+﻿@model IEnumerable<PostDetailViewModel>
+<div id="slider-section" class="slider-section">
+    <aside>
+        <h6 class="hidden">مجله گردشگری</h6>
+        <div id="slider1_container" class="slider1-container">
+            <div data-u="slides" class="slides-new">
+                @{var a = ParvazPardaz.Infrastructure.RoundToUpNumber.Round(Model.Count(), 5);}
+                @for (int i = 0, slideitem = 0; i < a; i++)
+            {
+                var firstslideitem = 0;
+                <div>
+                    <div class="container">
+                        <div class="row">
+                            @for (int j = 0; j < 2; j++)
+                            {
+                                if (firstslideitem == 0)
+                                {
+                                <div class="col-md-6 slider-box-left">
+                                    <div class="full-box-inner">
+                                        <div class="image-box">
+                                            <a href="@Model.ElementAt(slideitem).URL" title="@Model.ElementAt(slideitem).Title" rel="@Model.ElementAt(slideitem).Rel"> <img src="@(Model.ElementAt(slideitem).ImageUrl575x530 == null ? "#" : Model.ElementAt(slideitem).ImageUrl575x530 + "-575x530" + Model.ElementAt(slideitem).Extention575x530)" alt="@Model.ElementAt(slideitem).Name575x530" /></a>
+                                            <a href="#" class="add-sign-big color-violate"><img src="/ClientTheme/images/icon/big-plus.png" alt="big-plus" /></a>
+                                        </div>
+                                        <ul class="comments-social">
+                                            <li><a href="#"><img src="/ClientTheme/images/icon/like-icon.png" alt="like" /></a></li>
+                                            <li class="dropdown">
+                                                <a href="#"><img src="/ClientTheme/images/icon/more-icon.png" alt="more-icon" /></a>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">Facebook</a></li>
+                                                    <li><a href="#">Twitter</a></li>
+                                                    <li><a href="#">Google</a></li>
+                                                    <li><a href="#">Linkedin</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <div class="box-content boxSliderHeight">
+                                            <a href="@Model.ElementAt(slideitem).URL" title="@Model.ElementAt(slideitem).Title" rel="@Model.ElementAt(slideitem).Rel" class="block-title">@Model.ElementAt(slideitem).Name</a>
+                                            <p class="time"><i class="fa fa-clock-o"></i> @Model.ElementAt(slideitem).PublishDatetime.ToString("yyyy/MM/dd")</p>
+
+                                            @*<div class="postGroups">
+                                                @if (@Model.ElementAt(slideitem).PostGroups.Count() > 0)
+                                                    {
+                                                    <a href="#" class="showPostG">دسته ها: </a>
+                                                        foreach (var group in Model.ElementAt(slideitem).PostGroups)
+                                                        {
+                                                    <a href="@group.URL" title="@group.Title" rel="@group.Rel">@group.Name </a>
+                                                        }
+                                                    }
+                                            </div>*@
+
+                                        </div>
+                                    </div>
+                                </div>
+                                    firstslideitem++;
+                                    slideitem++;
+                                }
+                                else
+                                {
+                                <div class="col-md-6 slider-box-right">
+                                    @for (int k = 0; k < 4; k++)
+                                        {
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="post-box">
+                                                <div class="image-box">
+                                                    <img src="@(Model.ElementAt(slideitem).ImageUrl277x186 == null ? "#" : Model.ElementAt(slideitem).ImageUrl277x186 + "-277x186" + Model.ElementAt(slideitem).Extention277x186)" alt="@Model.ElementAt(slideitem).Name277x186" />
+                                                    <a href="#" class="add-sign-small color-purpal"><img src="/ClientTheme/images/icon/small-plus.png" alt="big-plus" /></a>
+                                                </div>
+                                                <ul class="comments-social">
+                                                    <li><a href="#"><img src="/ClientTheme/images/icon/like-icon.png" alt="like" /></a></li>
+                                                    <li class="dropdown">
+                                                        <a href="#"><img src="/ClientTheme/images/icon/more-icon.png" alt="more-icon" /></a>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="#">Facebook</a></li>
+                                                            <li><a href="#">Twitter</a></li>
+                                                            <li><a href="#">Google</a></li>
+                                                            <li><a href="#">Linkedin</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <div class="post-box-inner">
+                                                    <a href="@Model.ElementAt(slideitem).URL" title="@Model.ElementAt(slideitem).Title" rel="@Model.ElementAt(slideitem).Rel" class="box-read-more"><img src="/ClientTheme/images/icon/arrow.png" alt="arrow" /> بیشتر</a>
+                                                    <div class="box-content">
+                                                        <a href="@Model.ElementAt(slideitem).URL" title="@Model.ElementAt(slideitem).Title" rel="@Model.ElementAt(slideitem).Rel" class="block-title">@Model.ElementAt(slideitem).Name</a>
+                                                        <p class="time"><i class="fa fa-clock-o"></i> @Model.ElementAt(slideitem).PublishDatetime.ToString("yyyy/MM/dd")</p>
+                                                        <p>@Model.ElementAt(slideitem).PostSummery </p>
+                                                        <a href="#"><i class="fa fa-heart"></i> @Model.ElementAt(slideitem).LikeCount</a>
+                                                        <a href="#"><img src="/ClientTheme/images/icon/comment-icon.png" alt="comment" /> 13</a>
+                                                        <a href="#"><i class="fa fa-eye"></i> @Model.ElementAt(slideitem).VisitCount</a>
+                                                        @*<div class="postGroups">
+                                                            @if (@Model.ElementAt(slideitem).PostGroups.Count() > 0)
+                                                                {
+
+                                                                <a href="#" class="postG">دسته ها: </a>
+                                                                    foreach (var group in Model.ElementAt(slideitem).PostGroups)
+                                                                    {
+                                                                <a href="@group.URL" title="@group.Title" rel="@group.Rel">@group.Name </a>
+                                                                    }
+                                                                }
+                                                        </div>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                                                slideitem++;
+                                        }
+
+                                </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+            <!-- Arrow Left -->
+            <span data-u="arrowleft" class="jssora13l">
+                <i class="fa fa-angle-left"></i>
+            </span>
+            <!-- Arrow Right -->
+            <span data-u="arrowright" class="jssora13r">
+                <i class="fa fa-angle-right"></i>
+            </span>
+        </div>
+        <div id="carousal-slider" class="carousal-slider1">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    @{var b = ParvazPardaz.Infrastructure.RoundToUpNumber.Round(Model.Count(), 5);}
+                    @for (int i = 0, slideitem = 0; i < b; i++)
+                    {
+                        var firstslideitem = 0;
+                        <div class="item @(i == 0 ? "active" : "") ">
+                            <div class="container">
+                                <div class="row">
+                                    @for (int j = 0; j < 2; j++)
+                                    {
+                                        if (firstslideitem == 0)
+                                        {
+                                            <div class="col-md-6 slider-box-left">
+                                                <div class="full-box-inner">
+                                                    <div class="image-box">
+                                                        <a href="@Model.ElementAt(slideitem).URL" target="@Model.ElementAt(slideitem).Target" rel="@Model.ElementAt(slideitem).Rel">
+                                                            <img src="@(Model.ElementAt(slideitem).ImageUrl575x530 == null ? "#" : Model.ElementAt(slideitem).ImageUrl575x530 + "-575x530" + Model.ElementAt(slideitem).Extention575x530)" alt="@Model.ElementAt(slideitem).Name575x530" />
+                                                        </a>
+                                                        <a href="@Model.ElementAt(slideitem).URL" target="@Model.ElementAt(slideitem).Target" rel="@Model.ElementAt(slideitem).Rel" class="add-sign-big color-violate"><img src="/ClientTheme/images/icon/big-plus.png" alt="big-plus" /></a>
+                                                    </div>
+                                                    <ul class="comments-social">
+                                                        <li><a href="#"><img src="/ClientTheme/images/icon/like-icon.png" alt="like" /></a></li>
+                                                        <li class="dropdown">
+                                                            <a href="#"><img src="/ClientTheme/images/icon/more-icon.png" alt="more-icon" /></a>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li><a href="#">Facebook</a></li>
+                                                                <li><a href="#">Twitter</a></li>
+                                                                <li><a href="#">Google</a></li>
+                                                                <li><a href="#">Linkedin</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="box-content">
+                                                        <section>
+                                                            <h1 class="hidden">@Model.ElementAt(slideitem).Name</h1>
+                                                            <a href="@Model.ElementAt(slideitem).URL" target="@Model.ElementAt(slideitem).Target" rel="@Model.ElementAt(slideitem).Rel" class="block-title">@Model.ElementAt(slideitem).Name</a>
+                                                            <p class="time"><i class="fa fa-clock-o"></i>@Model.ElementAt(slideitem).PublishDatetime.ToString("yyyy/MM/dd")</p>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            firstslideitem++;
+                                            slideitem++;
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-6 slider-box-right">
+                                                @for (int k = 0; k < 4; k++)
+                                                {
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <div class="post-box">
+                                                            <div class="image-box">
+                                                                <img src="@(Model.ElementAt(slideitem).ImageUrl277x186 == null ? "#" : Model.ElementAt(slideitem).ImageUrl277x186 + "-277x186" + Model.ElementAt(slideitem).Extention277x186)" alt="@Model.ElementAt(slideitem).Name277x186" />
+                                                                <a href="#" class="add-sign-small color-purpal"><img src="/ClientTheme/images/icon/small-plus.png" alt="big-plus" /></a>
+                                                            </div>
+                                                            <ul class="comments-social">
+                                                                <li><a href="#"><img src="/ClientTheme/images/icon/like-icon.png" alt="like" /></a></li>
+                                                                <li class="dropdown">
+                                                                    <a href="#"><img src="/ClientTheme/images/icon/more-icon.png" alt="more-icon" /></a>
+                                                                    <ul class="dropdown-menu" role="menu">
+                                                                        <li><a href="#">Facebook</a></li>
+                                                                        <li><a href="#">Twitter</a></li>
+                                                                        <li><a href="#">Google</a></li>
+                                                                        <li><a href="#">Linkedin</a></li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="post-box-inner">
+                                                                <a href="@Model.ElementAt(slideitem).URL" target="@Model.ElementAt(slideitem).Target" rel="@Model.ElementAt(slideitem).Rel" class="box-read-more"><img src="/ClientTheme/images/icon/arrow.png" alt="arrow" /> بیشتر</a>
+                                                                <div class="box-content">
+                                                                    <section>
+                                                                        <h1 class="hidden">@Model.ElementAt(slideitem).Name</h1>
+
+                                                                        <a href="@Model.ElementAt(slideitem).URL" target="@Model.ElementAt(slideitem).Target" rel="@Model.ElementAt(slideitem).Rel" class="block-title">@Model.ElementAt(slideitem).Name</a>
+                                                                        <p class="time"><i class="fa fa-clock-o"></i> @Model.ElementAt(slideitem).PublishDatetime.ToString("yyyy/MM/dd")</p>
+                                                                        <p>@Model.ElementAt(slideitem).PostSummery </p>
+                                                                        <a href="#"><i class="fa fa-heart"></i> @Model.ElementAt(slideitem).LikeCount</a>
+                                                                        <a href="#"><img src="/ClientTheme/images/icon/comment-icon.png" alt="comment" /> 13</a>
+                                                                        <a href="#"><i class="fa fa-eye"></i> @Model.ElementAt(slideitem).VisitCount</a>
+                                                                        @*<div class="postGroups">
+                                                                            @if (@Model.ElementAt(slideitem).PostGroups.Count() > 0)
+                                                                            {
+
+                                                                                <a href="#" class="postG">دسته ها: </a>
+                                                                                foreach (var group in Model.ElementAt(slideitem).PostGroups)
+                                                                                {
+                                                                                    <a href="@group.URL" target="@group.Target" rel="@group.Rel">@group.Name </a>
+                                                                                }
+                                                                            }
+                                                                        </div>*@
+                                                                    </section>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                                            slideitem++;
+                                                }
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+                    <span class="fa fa-angle-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+                    <span class="fa fa-angle-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+</div>

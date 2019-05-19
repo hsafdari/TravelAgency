@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ParvazPardaz.ViewModel.FooterUIViewModel>
+<footer class="footer  right-align">
+    <div class="row" style="padding-right:25px;">
+        @foreach (var footerSection in Model)
+        {
+            @Html.Raw(@footerSection.Content)
+        }
+        
+        <div class="col-md-3 pull-left">
+            <div class="text-center footerSocial">
+                <a rel="nofollow" href="https://t.me/joinchat/AAAAAEO0Yvj_xsxBSFZI3Q" target="_blank" class="btn btn-xs btn-social-icon btn-tumblr"><i class="fa fa-paper-plane-o"></i></a>
+                <a rel="nofollow" href="https://www.instagram.com/keysafar.ir" target="_blank" class="btn btn-xs btn-social-icon btn-instagram"><i class="fa fa-instagram"></i></a>
+                <a class="btn btn-xs btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                <a class="btn btn-xs btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i></a>
+                <a class="btn btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+                <a class="btn btn-xs btn-social-icon btn-vk"><i class="fa fa-vk"></i></a>
+                <a class="btn btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+            </div>
+
+            <div class="footer-contact-item">
+                <ul class="icon">
+                    <li> <a><i class="flaticon-suntour-map"></i>تهران ، خیابان پاسداران، ساختمان ۱۰۴، واحد ۶</a></li>
+                    <li> <a><i class="flaticon-suntour-map"></i>کیش، خیابان ابن سینا، مجتمع گنجینه ۱ ، قطعه TS25 ، طبقه اول، واحد </a></li>
+                    <li> <a href="tel:0212779"><i class="fa fa-fax"></i>0212779</a></li>                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                @*<div class="col-md-4 col-sm-6 ">
+                    <p><img alt="کی سفر" class="sign-footer-logo" src="/SiteClientTheme/img/logos/ParvazLogo.png"> طراحی و پیاده سازی شرکت <a href="http://parvazpardaz.com" rel="nofollow" target="_blank" title="ParvazPardaz">پرواز پرداز</a></p>
+                </div>*@
+                <div class="col-md-8 col-sm-6 " style="text-align:left">
+                    <a href="https://KeySafar.com/sitemap.xml">
+                        <img alt="sitemap" style="height:40px;" src="~/ClientTheme/images/icon/sitemap.png" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'BYekan';
+    src: url(/Content/home/css/fonts/BYekan.eot), 
+        url(/Content/home/css/fonts/BYekan.woff), 
+        url(/Content/home/css/fonts/BYekan.TTF);
+}
+
+body, html, h1, h2, h3, h4, h5, h6, tr, td, label, b, input, span, div, p, ul, li, a, textarea, select {
+    font-family: BYekan;
+}

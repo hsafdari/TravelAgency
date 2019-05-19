@@ -1,0 +1,170 @@
+﻿<link href="~/SiteClientTheme/css/BlogMenuStyle.css" rel="stylesheet" />
+@model IEnumerable<ParvazPardaz.Model.Entity.Core.Menu>
+@helper ShowTree(IEnumerable<ParvazPardaz.Model.Entity.Core.Menu> menuitems)
+{
+    foreach (var item in menuitems)
+    {
+        if (item != null)
+        {
+            //Parent- Child-
+            if (item.MenuChilds.Where(x => x.IsDeleted == false).ToList().Count == 0 && item.MenuParentId == null)
+            {
+                <li>
+                    <a href="@item.MenuUrl" target="@item.Target">
+                        <section>
+                            <span class="hidden">@item.MenuTitle</span>
+                            @item.MenuTitle
+                        </section>
+                    </a>
+                </li>
+            }
+            //Parent+ Child-
+            if (item.MenuChilds.Where(x => x.IsDeleted == false).ToList().Count == 0 && item.MenuParentId != null)
+            {
+                <li>
+                    <a href="@item.MenuUrl" target="@item.Target">
+                        <section>
+                            <span class="hidden">@item.MenuTitle</span>
+                            @item.MenuTitle
+                        </section>
+                    </a>
+                </li>
+            }
+            //Parent- Child+
+            if (item.MenuChilds.Where(x => x.IsDeleted == false).ToList().Count > 0 && item.MenuParentId == null)
+            {
+                <li>
+                    <section class="dropdown">
+                        <span class="hidden">@item.MenuTitle</span>
+                        <a href="@item.MenuUrl" class="dropdown-toggle" data-toggle="dropdown" target="@item.Target">
+                            @item.MenuTitle <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @ShowTree(item.MenuChilds.Where(x => x.IsDeleted == false))
+                        </ul>
+                    </section>
+                </li>
+            }
+            //Parent+ Child+
+            if (item.MenuChilds.Where(x => x.IsDeleted == false).ToList().Count > 0 && item.MenuParentId != null)
+            {
+                <li>
+                    <section class="dropdown-submenu">
+                        <span class="hidden">@item.MenuTitle</span>
+                        <a href="@item.MenuUrl" class="dropdown-toggle" data-toggle="dropdown" target="@item.Target">
+                            @item.MenuTitle
+                        </a>
+                        <ul class="dropdown-menu">
+                            @ShowTree(item.MenuChilds.Where(x => x.IsDeleted == false))
+                        </ul>
+                    </section>
+                </li>
+            }
+        }
+    }
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<div class="row transparent-menu rtl">
+    <div class=" clear-padding">
+        <div class="navbar-wrapper">
+            <div class="navbar navbar-default" role="navigation">
+                <div class="nav-container">
+                    <div class="container topMenu">
+                        <div class="col-md-12">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a id="btnSearch" href="javascript:void(0)" class="hidden-lg pull-left"><i class="fa fa-search"></i></a>
+                                <a href="tel:0212779" class="pull-left hidden-desktop hidden-tablet hidden-lg hidden-sm" style="padding:0px; cursor:pointer; direction:ltr; margin-top:10px; font-size:14px">0212779</a>
+                                <a class="navbar-brand" href="/"><img class="img-responsive" src="/ClientTheme/images/Logo/keyberimsafarlogo.png" alt="کی سفر"></a>
+                            </div>
+                            <div class="col-md-5  hidden-sm" id="imaginary_container">
+                                @Html.Action("GetMenuSearchPartial", "SearchValidate")
+                            </div>
+                            <div class="pull-left hidden-tablet hidden-xs hidden-sm ltr">
+                                <a href="tel:0212779" class="btn btn-default ltr">
+                                    <i class="fa fa-phone"></i>
+                                    021-2779
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mainMenu">
+                            <div class=" container navbar-collapse collapse">
+                                <aside>
+                                    <span class="hidden">منو</span>
+                                    <ul class="nav navbar-nav basicMenu">
+                                        @ShowTree(Model)
+                                    </ul>
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var $window = $(window);
+        if ($window.width() > 768) {
+            $("#mobileSearch").remove();
+            $(".searchform").css("display", "block");
+        }
+
+        $(document).on('click', '#btnSearch', function (event) {
+            $(".searchform").css("display", "block");
+        });
+
+        function closeSearch() {
+            var $form = $('.navbar-collapse form[role="search"].active')
+            $form.find('input').val('');
+            $form.removeClass('active');
+        }
+
+        // Show Search if form is not active // event.preventDefault() is important, this prevents the form from submitting
+        $(document).on('click', '.navbar-collapse form[role="search"]:not(.active) button[type="submit"]', function (event) {
+            event.preventDefault();
+            var $form = $(this).closest('form'),
+                $input = $form.find('input');
+            $form.addClass('active');
+            $input.focus();
+        });
+
+    });
+
+    function closeSearch() {
+        var $window = $(window);
+        if ($window.width() < 768) {
+            $(".searchform").css("display", "none");
+        }
+        var $form = $('.navbar-collapse form[role="search"].active')
+        $form.find('input').val('');
+        $form.removeClass('active');
+    }
+
+    function SearchAjaxSuccess(result) {
+        closeSearch();
+        //debugger;
+        if (result.status == "SearchContentRequired") {
+            toastr.options = { "positionClass": "toast-top-center" }
+            toastr.error('@ParvazPardaz.Resource.General.Generals.SearchContentRequiredAlert', '@ParvazPardaz.Resource.General.Generals.Search', { timeOut: 5000 })
+        } else if (result.status == "Success") {
+            window.location.href = "/Search?q=" + result.title;
+        }
+    }
+
+    function SearchFailureAjax() {
+        closeSearch();
+        toastr.options = { "positionClass": "toast-top-center" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.SearchContentRequiredAlert', '@ParvazPardaz.Resource.General.Generals.Search', { timeOut: 5000 })
+    }
+</script>

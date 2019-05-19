@@ -1,0 +1,51 @@
+﻿body, html {
+    overflow-x: hidden !important;
+}
+
+ul, ol {
+    font-size: 15px !important;
+}
+
+h4 {
+    font-size: 26px !important;
+}
+
+/* امتیازدهی ، اشتراک گذاری ، پسند ، تاریخ */
+
+#PostRate {
+    float: right !important;
+}
+
+.likeCount {
+    margin-left: 10px !important;
+}
+
+.likeDiv {
+    margin-top: -11px !important;
+    display: inline-block;
+}
+
+.socialDiv {
+    display: inline-block;
+}
+
+.rateTitle {
+    margin-top: 8px !important;
+    float: right !important;
+}
+
+.dateMarginTop {
+    margin-top: -13px !important;
+}
+
+.socials {
+    margin-top: -7px !important;
+}
+
+.marginBottom20px {
+    margin-bottom: 20px;
+}
+
+.transparent-menu .dropdown-menu {
+    margin-top:-10px !important;
+}

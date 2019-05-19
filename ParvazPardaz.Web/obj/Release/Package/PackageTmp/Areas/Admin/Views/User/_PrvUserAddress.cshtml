@@ -1,0 +1,102 @@
+﻿@model ParvazPardaz.ViewModel.MyProfileViewModel
+@using ParvazPardaz.Common.HtmlHelpers;
+@{
+    var index = Model.index;
+}
+
+
+<div class="partialSection UserAddressItem">
+    <div class="btn-remove-section"><a class="btn btn-xs btn-remove" onclick="var $ = jQuery.noConflict(); $(this).closest('.partialSection').remove();">حذف</a></div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddresses[index].AddressName, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EnumDropDownListFor(model => model.UserAddresses[index].AddressName, "", new { @class = "form-control DDLAddressName" })
+                    @Html.ValidationMessageFor(model => model.UserAddresses[index].AddressName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddresses[index].CityId, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.UserAddresses[index].CityId, Model.CityDDL, new { @class = "form-control DDLCityId" })
+                    @Html.ValidationMessageFor(model => model.UserAddresses[index].CityId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddresses[index].Street1, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.UserAddresses[index].Street1, new { @class = "form-control TxtStreet1" })
+                    @Html.ValidationMessageFor(model => model.UserAddresses[index].Street1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddresses[index].Telephone, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.UserAddresses[index].Telephone, new { @class = "form-control TxtTelephone" })
+                    @Html.ValidationMessageFor(model => model.UserAddresses[index].Telephone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddresses[index].Street2, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.UserAddresses[index].Street2, new { @class = "form-control TxtStreet2" })
+                    @Html.ValidationMessageFor(model => model.UserAddresses[index].Street2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddresses[index].Fax, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.UserAddresses[index].Fax, new { @class = "form-control TxtFax" })
+                    @Html.ValidationMessageFor(model => model.UserAddresses[index].Fax, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddresses[index].ZipCode, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.UserAddresses[index].ZipCode, new { @class = "form-control TxtZipCode" })
+                    @Html.ValidationMessageFor(model => model.UserAddresses[index].ZipCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddresses[index].IsDefault, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.CheckBoxFor(model => model.UserAddresses[index].IsDefault, new { @class = "ChkIsDefault" })
+                    @Html.ValidationMessageFor(model => model.UserAddresses[index].IsDefault, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddresses[index].Address, new { @class = "control-label col-md-3" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.UserAddresses[index].Address,2,40, new { @class = "TxtAddress" })
+                    @Html.ValidationMessageFor(model => model.UserAddresses[index].Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

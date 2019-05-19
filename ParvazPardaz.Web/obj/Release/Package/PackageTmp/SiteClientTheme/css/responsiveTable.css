@@ -1,0 +1,62 @@
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+only screen and (max-width: 760px),
+(max-device-width: 767px)  {
+
+	/* Force table to not be like tables anymore */
+	table.price-table,table.price-table thead,table.price-table tbody,table.price-table th,table.price-table td,table.price-table tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	table.price-table thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+table.price-table tr { border: 1px solid #ccc; }
+	
+	table.price-table td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	table.price-table td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		/*top: 6px;*/
+		right: 0;
+		/*width: 45%; */
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+	*/
+	table.price-table td:nth-of-type(1):before { content: "تخت دو نفره"; }
+	table.price-table td:nth-of-type(2):before { content: "تخت یک نفره"; }
+	table.price-table td:nth-of-type(3):before { content: "کودک با تخت"; }
+	table.price-table td:nth-of-type(4):before { content: "کودک بدون تخت"; }
+
+	
+	
+	/*  custom */
+	table.price-table tbody tr td
+	{
+		text-align:left !important;
+	}
+	
+	
+	
+	
+}

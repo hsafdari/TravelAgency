@@ -1,0 +1,387 @@
+﻿@model MyProfileViewModel
+@using ParvazPardaz.Common.HtmlHelpers;
+@{
+    ViewBag.Title = "MyProfile";
+
+}
+
+<style>
+    .Avatar {
+        position: absolute;
+        left: 20px;
+        top: 0;
+        right: auto;
+        width: 60px;
+        height: 60px;
+    }
+
+    html, body {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+</style>
+
+<link href="~/Content/DynamicUserAddress.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="@Url.Content("~/Plugins/jQuery.filer-master/css/jquery.filer.css")" rel="stylesheet" />
+<script type="text/javascript" src="@Url.Content("~/Plugins/jQuery.filer-master/js/jquery.filer.js")"></script>
+
+<div class="wrapper-wide">
+    <div id="container">
+        <div class="container">
+            <div class="row">
+                <!--Middle Part Start-->
+                <div class="col-sm-9" id="content">
+                    <h3 class="page-title">
+                        ویرایش پروفایل کاربری
+                    </h3>
+
+                    <img src="@Model.AvatarUrl.GetThumbUrl()" class="Avatar" />
+                    <hr />
+                    @using (Html.BeginForm("MyProfile", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id);
+                        @Html.HiddenFor(m => m.AvatarUrl)
+                        @Html.HiddenFor(m => m.AvatarSize)
+                        @Html.HiddenFor(m => m.AvatarExtension)
+                        @Html.HiddenFor(m => m.AvatarFileName)
+                        @Html.HiddenFor(m => m.ProfileType)
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.FileUploaderFor(model => model.File).Captions(ParvazPardaz.Resource.User.Users.SelectAvatar, ParvazPardaz.Resource.User.Users.SelectAvatarMsg).AddMore(false).IsMultiple(false).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(false)
+                                    @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="editor-label">
+                                        @ParvazPardaz.Resource.CMS.CMS.Roles
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.ListBoxFor(model => model._selectedRoles, ViewBag.Roles as IEnumerable<SelectListItem>, new { @class = "form-control search-select select", data_placehoder = @ParvazPardaz.Resource.User.Users.SelectRoles })
+                                        @Html.ValidationMessageFor(model => model._selectedRoles, "", new { @class = "text-danger" })
+                                    </div>
+                                    <p>@ParvazPardaz.Resource.CMS.CMS.PleaseSelectPanelUserRole</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Organization, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Organization, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.Organization, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.MobileNumber, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.MobileNumber, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PhoneNumber, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Fax, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Fax, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+                                </div>
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.RecoveryEmail, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.RecoveryEmail, new { @class = "form-control", placeholder = "", style = "direction:ltr;" })
+                                    @Html.ValidationMessageFor(model => model.RecoveryEmail, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.NationalCode, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.NationalCode, new { @class = "form-control", placeholder = "", style = "direction:ltr;" })
+                                    @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.UserName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "", @style="direction:ltr" })
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.BirthDate, new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.BirthDate, new { @class = "form-control datepicker", placeholder = "1366/12/5" })
+                                            @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Gender, new { @class = "control-label" })<br />
+                                            @Html.EnumDropDownListFor(model => model.Gender, new { @class = "form-control", placeholder = "" })
+                                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Facebook, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Facebook, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.Facebook, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Instagram, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Instagram, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.Instagram, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.LinkedIn, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.LinkedIn, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.LinkedIn, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Telegram, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Telegram, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.Telegram, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.OtherSocialNetwork, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.OtherSocialNetwork, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.OtherSocialNetwork, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.WebSiteUrl, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.WebSiteUrl, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.WebSiteUrl, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OwnDescription, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.OwnDescription, new { @class = "form-control", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.OwnDescription, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PublicDescription, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.PublicDescription, new { @class = "form-control", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.PublicDescription, "", new { @class = "text-danger" })
+                        </div>
+
+                        <h4 class="paddingTopSection">آدرس های من</h4><hr />
+                        <input type="hidden" id="UserAddressIndex" value=@( (Model.UserAddresses != null && Model.UserAddresses.Any()) ? (Model.UserAddresses.Count - 1) : -1)>
+
+                        <div id="UserAddressSection">
+                            @if (Model.UserAddresses != null && Model.UserAddresses.Any())
+                            {
+                                for (var i = 0; i < Model.UserAddresses.Count; i++)
+                                {
+                                    <div class="partialSection UserAddressItem">
+                                        <div class="btn-remove-section"><a class="btn btn-xs btn-remove" onclick="var $ = jQuery.noConflict(); $(this).closest('.partialSection').remove();">حذف</a></div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.UserAddresses[i].AddressName, new { @class = "control-label col-md-3" })
+                                                    <div class="col-md-9">
+                                                        @Html.EnumDropDownListFor(model => model.UserAddresses[i].AddressName, "", new { @class = "form-control DDLAddressName" })
+                                                        @Html.ValidationMessageFor(model => model.UserAddresses[i].AddressName, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.UserAddresses[i].CityId, new { @class = "control-label col-md-3" })
+                                                    <div class="col-md-9">
+                                                        @Html.DropDownListFor(model => model.UserAddresses[i].CityId, new SelectList(Model.CityDDL, "Value", "Text", Model.UserAddresses[i].CityId), new { @class = "form-control DDLCityId" })
+                                                        @Html.ValidationMessageFor(model => model.UserAddresses[i].CityId, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.UserAddresses[i].Street1, new { @class = "control-label col-md-3" })
+                                                    <div class="col-md-9">
+                                                        @Html.TextBoxFor(model => model.UserAddresses[i].Street1, new { @class = "form-control TxtStreet1" })
+                                                        @Html.ValidationMessageFor(model => model.UserAddresses[i].Street1, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.UserAddresses[i].Telephone, new { @class = "control-label col-md-3" })
+                                                    <div class="col-md-9">
+                                                        @Html.TextBoxFor(model => model.UserAddresses[i].Telephone, new { @class = "form-control TxtTelephone" })
+                                                        @Html.ValidationMessageFor(model => model.UserAddresses[i].Telephone, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.UserAddresses[i].Street2, new { @class = "control-label col-md-3" })
+                                                    <div class="col-md-9">
+                                                        @Html.TextBoxFor(model => model.UserAddresses[i].Street2, new { @class = "form-control TxtStreet2" })
+                                                        @Html.ValidationMessageFor(model => model.UserAddresses[i].Street2, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.UserAddresses[i].Fax, new { @class = "control-label col-md-3" })
+                                                    <div class="col-md-9">
+                                                        @Html.TextBoxFor(model => model.UserAddresses[i].Fax, new { @class = "form-control TxtFax" })
+                                                        @Html.ValidationMessageFor(model => model.UserAddresses[i].Fax, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.UserAddresses[i].ZipCode, new { @class = "control-label col-md-3" })
+                                                    <div class="col-md-9">
+                                                        @Html.TextBoxFor(model => model.UserAddresses[i].ZipCode, new { @class = "form-control TxtZipCode" })
+                                                        @Html.ValidationMessageFor(model => model.UserAddresses[i].ZipCode, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.UserAddresses[i].IsDefault, new { @class = "control-label col-md-3" })
+                                                    <div class="col-md-9">
+                                                        @Html.CheckBoxFor(model => model.UserAddresses[i].IsDefault, new { @class = "ChkIsDefault" })
+                                                        @Html.ValidationMessageFor(model => model.UserAddresses[i].IsDefault, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.UserAddresses[i].Address, new { @class = "control-label col-md-3" })
+                                                    <div class="col-md-9">
+                                                        @Html.TextAreaFor(model => model.UserAddresses[i].Address, 2, 40, new { @class = "TxtAddress" })
+                                                        @Html.ValidationMessageFor(model => model.UserAddresses[i].Address, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                        <div style="margin-bottom:100px;">
+                            <a class="btn-addSection" onclick="addNewUserAddress();"><i class="faLineHeight faLineHeight fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
+                        </div>
+
+                        @*<div class="field-group submit-field-group">
+                                <div class="row">
+                                    <div class="col-xxs-12 col-xs-12">
+                                        <input type="submit" value="ثبت تغییرات" class="btn btn-success" />
+                                        <!--<a href="#" class="">
+                                            <span class="left-grey-angle-icon bmw-icon"></span>
+                                            ورود به سایت
+                                        </a>-->
+                                        <div class="place-holder"></div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-11">
+                                <input type="submit" value="ثبت تغییرات" onclick="sortAddress()" class="btn btn-custom green" />
+                                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                <div class="col-md-offset-1 col-md-11">
+                                    <input type="submit" onclick="sortAddress()" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                                    @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+                                </div>
+                            </div>*@
+                    }
+                </div>
+                <!--Middle Part End -->
+                <!--Right Part Start -->
+                <!--Right Part End -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //واکشی پارشال-ویوو برای آدرس جدید
+    function addNewUserAddress() {
+        var i = parseInt(document.getElementById("UserAddressIndex").value) + 1;
+        document.getElementById("UserAddressIndex").value = i;
+        var $ = jQuery.noConflict();
+        $.ajax({
+            url: "/Customer/MyAccount/GetUserAddressSection",
+            type: "Get",
+            contentType: "application/html; charset=utf-8",
+            dataType: "html",
+            data: {
+                index: i
+            }
+        }).success(function (result) {
+            $("#UserAddressSection").append(result);
+        });
+    }
+</script>
+
+<!-- Arrange dynamic sections IDs -->
+<script type="text/javascript">
+    function sortAddress() {
+        var userAddressElements = document.getElementsByClassName("UserAddressItem");
+        //debugger;
+        for (var i = 0, len = userAddressElements.length; i < len; i++) {
+            //debugger;
+            userAddressElements[i].getElementsByClassName("DDLAddressName")[i].setAttribute("name", "UserAddresses[" + i + "].AddressName");
+            userAddressElements[i].getElementsByClassName("DDLCityId")[i].setAttribute("name", "UserAddresses[" + i + "].CityId");
+            userAddressElements[i].getElementsByClassName("TxtStreet1")[i].setAttribute("name", "UserAddresses[" + i + "].Street1");
+            userAddressElements[i].getElementsByClassName("TxtTelephone")[i].setAttribute("name", "UserAddresses[" + i + "].Telephone");
+            userAddressElements[i].getElementsByClassName("TxtStreet2")[i].setAttribute("name", "UserAddresses[" + i + "].Street2");
+            userAddressElements[i].getElementsByClassName("TxtFax")[i].setAttribute("name", "UserAddresses[" + i + "].Fax");
+            userAddressElements[i].getElementsByClassName("TxtZipCode")[i].setAttribute("name", "UserAddresses[" + i + "].ZipCode");
+            userAddressElements[i].getElementsByClassName("ChkIsDefault")[i].setAttribute("name", "UserAddresses[" + i + "].IsDefault");
+            userAddressElements[i].getElementsByClassName("TxtAddress")[i].setAttribute("name", "UserAddresses[" + i + "].Address");
+        }
+    }
+</script>
+
+@section scripts{
+
+    <script type="text/javascript">
+        $('.select').select2();
+    </script>
+
+}
+

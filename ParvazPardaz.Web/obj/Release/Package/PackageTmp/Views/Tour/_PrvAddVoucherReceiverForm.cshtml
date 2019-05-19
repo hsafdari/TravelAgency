@@ -1,0 +1,54 @@
+﻿@model ConfirmViewModel
+@*<script src="~/Scripts/nets/jquery-2.0.3.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+<div id="VoucherReceiverForm">
+    @using (Ajax.BeginForm("AddVoucherReceiverSection", "Tour", null, new AjaxOptions() { UpdateTargetId = "VoucherReceiversSection", InsertionMode = InsertionMode.ReplaceWith, HttpMethod = "Post", OnComplete = "VoucherReceiverComplete()" }, new { @id = "frm-addvoucherreceiver" }))
+    {
+        <div class="form">
+            @Html.TextBoxFor(x => x.VoucherReceiverItem.FullName, new { @placeholder = Html.DisplayNameFor(x => x.VoucherReceiverItem.FullName) })
+            @Html.TextBoxFor(x => x.VoucherReceiverItem.Email, new { @placeholder = Html.DisplayNameFor(x => x.VoucherReceiverItem.Email) })
+            @Html.TextBoxFor(x => x.VoucherReceiverItem.Mobile, new { @placeholder = Html.DisplayNameFor(x => x.VoucherReceiverItem.Mobile), @type="number" })
+            @Html.HiddenFor(x => x.VoucherReceiverItem.SectionIndex, new { @id = "SectionIndex" })
+            <input class="btn-4 active BtnVoucherSection" type="button" onclick="$('#SectionIndex').val($('input:hidden[name=VoucherSectionIndex]').val()); $('#frm-addvoucherreceiver').submit();" name="sumbit" value="افزودن">
+        </div>
+        <div class="form ValidationMessage">
+            @Html.ValidationMessageFor(model => model.VoucherReceiverItem.FullName, "", new { @class = "text-danger padding0", @style="padding:0px !important" })
+            @Html.ValidationMessageFor(model => model.VoucherReceiverItem.Email, "", new { @class = "text-danger padding0", @style = "padding:0px !important" })
+            @Html.ValidationMessageFor(model => model.VoucherReceiverItem.Mobile, "", new { @class = "text-danger padding0", @style = "padding:0px !important" })
+        </div>
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        jQuery("#frm-addvoucherreceiver").removeData("validator");
+        jQuery("#frm-addvoucherreceiver").removeData("unobtrusiveValidation");
+        jQuery.validator.unobtrusive.parse("#frm-addvoucherreceiver");
+    });
+
+    function VoucherReceiverComplete() {
+        $('#frm-addvoucherreceiver').remove();
+        $('#addRoom').attr("disabled", false);
+        var value = document.getElementById("VoucherSectionIndex").value;
+        document.getElementById("VoucherSectionIndex").value = parseInt(value) + 1;
+    }
+
+    $("input[type=number]").keydown(function (e) {
+
+        // مجاز : backspace, delete, tab, escape, enter
+        if ($.inArray(e.keyCode, [46, 18, 16, 8, 9, 27, 13, 110]) !== -1 ||
+            // مجاز: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // مجاز : home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+
+            return;
+        }
+
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+</script>

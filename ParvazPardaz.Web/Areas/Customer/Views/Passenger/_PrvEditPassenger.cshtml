@@ -1,0 +1,121 @@
+﻿@model AddPassengerViewModel
+@{Layout = null;}
+@Scripts.Render("~/bundles/CustomerScripts")
+<dt>
+    <span>@string.Format("{0} {1}", Model.FirstName, Model.LastName)</span>
+    <span>@Model.NationalCode</span>
+    <span>@Model.PassportNo</span>
+    <span>@(Model.Birthdate != null ? Model.Birthdate.Value.ToString("yyyy/MM/dd") : "")</span>
+    <span>@Model.AgeRange.GetDisplayValue()</span>
+    <button class="btn-5 edit" type="button" name="button"></button>
+</dt>
+<dd>
+    @using (Ajax.BeginForm("Edit", "Passenger", new { Area = "Customer" }, new AjaxOptions() { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "passengerList", OnSuccess = "PassengerAjaxSuccess", OnFailure = "PassengerAjaxFailure" }, new { @class = "form passengerItem" }))
+    {
+   
+        <label class="label">
+            <span class="label-text">جنسیت</span>
+            @Html.EnumDropDownListFor(x => x.Gender)     
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.AgeRange, new { @class = "AgeRange" })
+            @Html.ValidationMessageFor(x => x.Gender, "", new { @class = "form-error" })
+        </label>
+        <label class="label">
+            <span class="label-text">کد ملی</span>
+            @Html.TextBoxFor(x => x.NationalCode)
+            @Html.ValidationMessageFor(x => x.NationalCode, "", new { @class = "form-error" })
+        </label>
+    <label class="label dateFields">
+        <span class="label-text">تاریخ تولد میلادی</span>
+        @{
+        var georBirthDate = Model.Birthdate != null ? Model.Birthdate.Value.ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture) : "";
+        var year = Model.Birthdate != null ? georBirthDate.Split('/')[0] : "";
+        var month = Model.Birthdate != null ? georBirthDate.Split('/')[1] : "";
+        var day = Model.Birthdate != null ? georBirthDate.Split('/')[2] : "";
+        }
+        @Html.HiddenFor(x => x.Birthdate, new { @class = "HiddenDate", @Value = georBirthDate })
+        @Html.ValidationMessageFor(x => x.Birthdate, "", new { @class = "form-error" })
+        <input type="number" class="date-day " value="@day">
+        <select class="date-month">
+            <option value="01" @(month.Equals("01") ? "selected" : "")>ژانویه</option>
+            <option value="02" @(month.Equals("02") ? "selected" : "")>فوریه</option>
+            <option value="03" @(month.Equals("03") ? "selected" : "")>مارس</option>
+            <option value="04" @(month.Equals("04") ? "selected" : "")>آپریل</option>
+            <option value="05" @(month.Equals("05") ? "selected" : "")>می</option>
+            <option value="06" @(month.Equals("06") ? "selected" : "")>جون</option>
+            <option value="07" @(month.Equals("07") ? "selected" : "")>جولای</option>
+            <option value="08" @(month.Equals("08") ? "selected" : "")>آگوست</option>
+            <option value="09" @(month.Equals("09") ? "selected" : "")>سپتامبر</option>
+            <option value="10" @(month.Equals("10") ? "selected" : "")>اکتبر</option>
+            <option value="11" @(month.Equals("11") ? "selected" : "")>نوامبر</option>
+            <option value="12" @(month.Equals("12") ? "selected" : "")>دسامبر</option>
+        </select>
+        <input type="number" class="date-year" value="@year">
+    </label>
+        <label class="label">
+            <span class="label-text">کشور محل تولد</span>
+            @Html.DropDownListFor(x => x.BirthCountryId, ViewBag.CountryDDL as IEnumerable<SelectListItem>)
+            @Html.ValidationMessageFor(x => x.BirthCountryId, "", new { @class = "form-error" })
+        </label>
+        <label class="label">
+            <span class="label-text">شماره پاسپورت</span>
+            @Html.TextBoxFor(x => x.PassportNo)
+            @Html.ValidationMessageFor(x => x.PassportNo, "", new { @class = "form-error" })
+        </label>
+    <label class="label dateFields">
+        <span class="label-text">تاریخ انقضای پاسپورت</span>
+        @{
+        var georPassportDate = Model.PassportExpirationDate != null ? Model.PassportExpirationDate.Value.ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture) : "";
+        var pYear = Model.PassportExpirationDate != null ? georPassportDate.Split('/')[0] : "";
+        var pMonth = Model.PassportExpirationDate != null ? georPassportDate.Split('/')[1] : "";
+        var pDay = Model.PassportExpirationDate != null ? georPassportDate.Split('/')[2] : "";
+        }
+        @Html.HiddenFor(x => x.PassportExpirationDate, new { @class = "HiddenDate", @Value = georPassportDate })
+        @Html.ValidationMessageFor(x => x.PassportExpirationDate, "", new { @class = "form-error" })
+        <input type="number" class="date-day passport" value="@pDay">
+        <select class="date-month passport">
+            <option value="01" @(pMonth.Equals("01") ? "selected" : "")>ژانویه</option>
+            <option value="02" @(pMonth.Equals("02") ? "selected" : "")>فوریه</option>
+            <option value="03" @(pMonth.Equals("03") ? "selected" : "")>مارس</option>
+            <option value="04" @(pMonth.Equals("04") ? "selected" : "")>آپریل</option>
+            <option value="05" @(pMonth.Equals("05") ? "selected" : "")>می</option>
+            <option value="06" @(pMonth.Equals("06") ? "selected" : "")>جون</option>
+            <option value="07" @(pMonth.Equals("07") ? "selected" : "")>جولای</option>
+            <option value="08" @(pMonth.Equals("08") ? "selected" : "")>آگوست</option>
+            <option value="09" @(pMonth.Equals("09") ? "selected" : "")>سپتامبر</option>
+            <option value="10" @(pMonth.Equals("10") ? "selected" : "")>اکتبر</option>
+            <option value="11" @(pMonth.Equals("11") ? "selected" : "")>نوامبر</option>
+            <option value="12" @(pMonth.Equals("12") ? "selected" : "")>دسامبر</option>
+        </select>
+        <input type="number" class="date-year passport" value="@pYear">
+    </label>
+        <label class="label">
+            <span class="label-text">نام فارسی</span>
+            @Html.TextBoxFor(x => x.FirstName, new { @class = "OnlyPersianChar" })
+            <i class="form-info">لطفا از نامی استفاده کنید که در شناسنامه مسافر ذکر شده است</i>
+            @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "form-error" })
+        </label>
+        <label class="label">
+            <span class="label-text">نام خانوادگی فارسی</span>
+            @Html.TextBoxFor(x => x.LastName, new { @class = "OnlyPersianChar" })
+            <!-- class = "error" -->
+            @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "form-error" })
+        </label>
+        <label class="label lblEnFirstName">
+            <span class="label-text">نام انگلیسی</span>
+            @Html.TextBoxFor(x => x.EnFirstName, new { @class = "OnlyEnglishChar", @style = "direction:ltr" })
+            <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+            @Html.ValidationMessageFor(x => x.EnFirstName, "", new { @class = "form-error" })
+        </label>
+        <label class="label lblEnLastName">
+            <span class="label-text">نام خانوادگی انگلیسی</span>
+            @Html.TextBoxFor(x => x.EnLastName, new { @class = "OnlyEnglishChar", @style = "direction:ltr" })
+            <i class="form-info">لطفا هنگام ورود حروف نام خانوادگی لاتین دقت کنید!</i>
+            @Html.ValidationMessageFor(x => x.EnLastName, "", new { @class = "form-error" })
+        </label>
+    }
+    <div class="action">
+        <button class="btn-1 active" type="button" name="edit" onclick="$(this).closest('dd.active').find('form').submit();">ویرایش</button>
+        @*<button class="btn-1" type="button" name="delete">حذف</button>*@
+    </div>
+</dd>

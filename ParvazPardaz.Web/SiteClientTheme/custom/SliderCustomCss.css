@@ -1,0 +1,54 @@
+﻿.media-list {
+    background-color: white;
+    padding: 5px !important;
+}
+
+.media-body {
+    padding-left: 0px;
+    padding-right: 15px;
+}
+
+    .media-body h4, p {
+        color: black !important;
+    }
+
+.media-list li:last-child {
+    border: none !important;
+}
+
+.media {
+    border-bottom: solid 1px;
+    padding-bottom: 10px;
+}
+
+
+.media-body h4 {
+    margin-top: 20px !important;
+    font-size: 16px !important;
+}
+
+.media-list {
+    padding: 29px !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.no-padding-margin {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.tp-banner-slider {
+    margin-bottom: 5px !important;
+}
+
+.tp-banner-container {
+    direction: ltr !important;
+}
+
+
+
+
+

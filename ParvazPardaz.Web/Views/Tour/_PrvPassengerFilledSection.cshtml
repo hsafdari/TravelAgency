@@ -1,0 +1,386 @@
+﻿@model TourReserveViewModel
+@{
+    Layout = null;
+    int index = System.Convert.ToInt32(ViewBag.Index);
+    int roomIndex = System.Convert.ToInt32(ViewBag.RoomIndex);
+    var IsForeignTour = System.Convert.ToBoolean(ViewBag.IsForeignTour);
+    var passengerInfo = ViewBag.PassengerInfo as AddPassengerViewModel;
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<link rel="stylesheet" href="~/Content/assets/plugins/Select2_V4/css/select2.css">
+<style>
+    .select2 {
+        padding: 0px !important;
+    }
+</style>
+<script src="~/Content/assets/plugins/Select2_V4/js/select2.js"></script>
+<div class="passengerItem" role="group">
+    <legend>مسافر @ViewBag.AgeRangeTitle</legend>
+    <label class="label">
+        <span class="label-text">جنسیت</span>
+        @Html.EnumDropDownListFor(x => x.PassengerList[index].Gender, new { @Value = passengerInfo.Gender })
+        @Html.HiddenFor(x => x.PassengerList[index].AgeRange, new { @Value = passengerInfo.AgeRange, @class = "AgeRange" })
+        @Html.HiddenFor(x => x.PassengerList[index].RoomIndex, new { @Value = roomIndex, @class = "RoomIndex" })
+        <input type="hidden" class="SectionIndex" value="@index" />
+        @Html.ValidationMessageFor(model => model.PassengerList[index].Gender, "", new { @class = "form-error" })
+    </label>
+    <label class="label">
+        <span class="label-text">کد ملی</span>
+        @Html.TextBoxFor(x => x.PassengerList[index].NationalCode, new { @class = "NationalCode", @Value = passengerInfo.NationalCode })
+        @Html.ValidationMessageFor(model => model.PassengerList[index].NationalCode, "", new { @class = "form-error" })
+    </label>
+    <label class="label dateFields">
+        <span class="label-text">تاریخ تولد میلادی</span>
+        @{
+            var georBirthDate = passengerInfo.Birthdate != null ? passengerInfo.Birthdate.Value.ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture) : "";
+            var year = passengerInfo.Birthdate != null ? georBirthDate.Split('/')[0] : "";
+            var month = passengerInfo.Birthdate != null ? georBirthDate.Split('/')[1] : "";
+            var day = passengerInfo.Birthdate != null ? georBirthDate.Split('/')[2] : "";
+        }
+        @Html.HiddenFor(x => x.PassengerList[index].Birthdate, new { @class = "HiddenDate", @Value = georBirthDate })
+        @Html.ValidationMessageFor(model => model.PassengerList[index].Birthdate, "", new { @class = "form-error" })
+        <input type="number" class="date-day" value="@day">
+        <select class="date-month">
+            <option value="01" @(month.Equals("01") ? "selected" : "")>January</option>
+            <option value="02" @(month.Equals("02") ? "selected" : "")>February</option>
+            <option value="03" @(month.Equals("03") ? "selected" : "")>March</option>
+            <option value="04" @(month.Equals("04") ? "selected" : "")>April</option>
+            <option value="05" @(month.Equals("05") ? "selected" : "")>May</option>
+            <option value="06" @(month.Equals("06") ? "selected" : "")>June</option>
+            <option value="07" @(month.Equals("07") ? "selected" : "")>July</option>
+            <option value="08" @(month.Equals("08") ? "selected" : "")>August</option>
+            <option value="09" @(month.Equals("09") ? "selected" : "")>September</option>
+            <option value="10" @(month.Equals("10") ? "selected" : "")>October</option>
+            <option value="11" @(month.Equals("11") ? "selected" : "")>November</option>
+            <option value="12" @(month.Equals("12") ? "selected" : "")>December</option>
+        </select>
+        <input type="number" class="date-year" value="@year">
+    </label>
+    @if (IsForeignTour)
+    {
+        <label class="label">
+            <span class="label-text">کشور محل تولد</span>
+            @Html.DropDownListFor(x => x.PassengerList[index].BirthCountryId, new SelectList(ViewBag.CountryDDL as IEnumerable<SelectListItem>, "Value", "Text", passengerInfo.BirthCountryId))
+            @Html.ValidationMessageFor(model => model.PassengerList[index].BirthCountryId, "", new { @class = "form-error" })
+        </label>
+        <label class="label">
+            <span class="label-text">شماره پاسپورت</span>
+            @Html.TextBoxFor(x => x.PassengerList[index].PassportNo, new { @Class = "PassportNo", @Value = passengerInfo.PassportNo })
+            @Html.ValidationMessageFor(model => model.PassengerList[index].PassportNo, "", new { @class = "form-error" })
+        </label>
+    <label class="label dateFields">
+        <span class="label-text">تاریخ انقضای پاسپورت</span>
+        @{
+        var georPassportDate = passengerInfo.PassportExpirationDate != null ? passengerInfo.PassportExpirationDate.Value.ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture) : "";
+        var pYear = passengerInfo.PassportExpirationDate != null ? georPassportDate.Split('/')[0] : "";
+        var pMonth = passengerInfo.PassportExpirationDate != null ? georPassportDate.Split('/')[1] : "";
+        var pDay = passengerInfo.PassportExpirationDate != null ? georPassportDate.Split('/')[2] : "";
+        }
+        @Html.HiddenFor(x => x.PassengerList[index].PassportExpirationDate, new { @class = "HiddenDate", @Value = georPassportDate })
+        @Html.ValidationMessageFor(model => model.PassengerList[index].PassportExpirationDate, "", new { @class = "form-error" })
+        <input type="number" class="date-day passport" value="@pDay">
+        <select class="date-month passport">
+            <option value="01" @(pMonth.Equals("01") ? "selected" : "")>January</option>
+            <option value="02" @(pMonth.Equals("02") ? "selected" : "")>February</option>
+            <option value="03" @(pMonth.Equals("03") ? "selected" : "")>March</option>
+            <option value="04" @(pMonth.Equals("04") ? "selected" : "")>April</option>
+            <option value="05" @(pMonth.Equals("05") ? "selected" : "")>May</option>
+            <option value="06" @(pMonth.Equals("06") ? "selected" : "")>June</option>
+            <option value="07" @(pMonth.Equals("07") ? "selected" : "")>July</option>
+            <option value="08" @(pMonth.Equals("08") ? "selected" : "")>August</option>
+            <option value="09" @(pMonth.Equals("09") ? "selected" : "")>September</option>
+            <option value="10" @(pMonth.Equals("10") ? "selected" : "")>October</option>
+            <option value="11" @(pMonth.Equals("11") ? "selected" : "")>November</option>
+            <option value="12" @(pMonth.Equals("12") ? "selected" : "")>December</option>
+        </select>
+        <input type="number" class="date-year passport" value="@pYear">
+    </label>
+    }
+    <label class="label">
+        <span class="label-text">نام فارسی</span>
+        @Html.TextBoxFor(x => x.PassengerList[index].FirstName, new { @class = "OnlyPersianChar", @Value = passengerInfo.FirstName })
+        <i class="form-info">لطفا از نامی استفاده کنید که در شناسنامه مسافر ذکر شده است</i>
+        @Html.ValidationMessageFor(model => model.PassengerList[index].FirstName, "", new { @class = "form-error" })
+    </label>
+    <label class="label">
+        <span class="label-text">نام خانوادگی فارسی</span>
+        @Html.TextBoxFor(x => x.PassengerList[index].LastName, new { @class = "OnlyPersianChar", @Value = passengerInfo.LastName })
+        @Html.ValidationMessageFor(model => model.PassengerList[index].LastName, "", new { @class = "form-error" })
+    </label>
+    <label class="label lblEnFirstName">
+        <span class="label-text">نام انگلیسی</span>
+        @Html.TextBoxFor(x => x.PassengerList[index].EnFirstName, new { @class = "OnlyEnglishChar", @Value = passengerInfo.EnFirstName })
+        <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+        @Html.ValidationMessageFor(model => model.PassengerList[index].EnFirstName, "", new { @class = "form-error" })
+    </label>
+    <label class="label lblEnLastName">
+        <span class="label-text">نام خانوادگی انگلیسی</span>
+        @Html.TextBoxFor(x => x.PassengerList[index].EnLastName, new { @class = "OnlyEnglishChar", @Value = passengerInfo.EnLastName })
+        <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+        @Html.ValidationMessageFor(model => model.PassengerList[index].EnLastName, "", new { @class = "form-error" })
+    </label>
+    <button name="op" class="btn-4 edit active" onclick="event.preventDefault(); otherPassengers(this);">از مسافر سابق</button>
+    <div class="otherPassengerSection">
+        @Html.DropDownList("PreviousPassenger", ViewBag.PreviousPassengerDDL as SelectList, ParvazPardaz.Resource.General.Generals.PleaseSelect, new { @class = "select", @onChange = "FetchPassengerInfo(this)" })
+    </div>
+</div>
+<script>
+    //OnlyEnglishChar
+    $(".OnlyEnglishChar").on('keydown', function (e) { //change keyup
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+            // مجاز: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // مجاز : home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            return;
+        }
+        if (just_english(e.key) === true) {
+            return;
+        }
+        else {
+            //e.preventDefault();
+            toastr.options = { "positionClass": "toast-top-right" }
+            toastr.error('لطفا به انگلیسی بنویسید', 'خطا', { timeOut: 5000 })
+            setTimeout(function () {
+                $("#" + e.target.id).val("");
+            }, 1000);
+        }
+
+    });
+    function just_english(str) {
+        var p = /^[ A-Za-z]*$/;
+        if (p.test(str)) {
+            return true
+        }
+        return false;
+    }
+
+    //OnlyPersianChar
+    $(".OnlyPersianChar").on('keydown', function (e) { //change keyup
+
+        if ($.inArray(e.keyCode, [46, 18, 16, 8, 9, 27, 13, 110]) !== -1 ||
+            // مجاز: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === false)) ||
+            // مجاز : home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            return;
+        }
+
+        if (just_persian(e.key) === false) {
+            //e.preventDefault();
+            toastr.options = { "positionClass": "toast-top-right" }
+            toastr.error('لطفا به فارسی بنویسید', 'خطا', { timeOut: 5000 })
+            setTimeout(function () {
+                $("#" + e.target.id).val("");
+            }, 1000);
+        }
+    });
+    function just_persian(str) {
+        var p = /^[\u0600-\u06FF\s]+$/;
+        if (p.test(str)) {
+            return true;
+        }
+        return false;
+    }
+
+    function CalculatePassengerSection() {
+
+        var GenderDataList = []
+
+        $('.passengerCount').each(function (index, item) {
+            var hasAdult = ($(item).closest('td').data("hasadult") == "True");
+            var hasChild = ($(item).closest('td').data("haschild") == "True");
+            var hasInfant = ($(item).closest('td').data("hasinfant") == "True");
+            var ddlSelectedCount = parseInt($(this).find('select').find('option:selected').val());
+            if (ddlSelectedCount > 0) {
+                var GenderData = { PassengerCount: ddlSelectedCount, HasAdult: hasAdult, HasChild: hasChild, HasInfant: hasInfant };
+                GenderDataList.push(GenderData);
+            }
+        });
+        $.ajax({
+            type: "post",
+            dataType: "html",
+            cache: false,
+            url: "/tour/GetPassengersSection",
+            data: { viewModel: GenderDataList },
+            success: function (filledPartialView) {
+                $("#PassengersSection").html(filledPartialView);
+                //اعتبارسنجی فیلدهای مسافرین
+                //AddValidateRulesForPassengers();
+            },
+            error: function (textStatus, errorThrown) {
+            }
+        });
+    }
+
+    $("input[type=number]").keydown(function (e) {
+
+        // مجاز : backspace, delete, tab, escape, enter
+        if ($.inArray(e.keyCode, [46, 18, 16, 8, 9, 27, 13, 110]) !== -1 ||
+            // مجاز: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // مجاز : home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+
+            return;
+        }
+
+        var thisValue = $(this).val();
+        if (($(this).hasClass("date-day") == true && thisValue.length >= 2)) {
+            $(this).val("");
+            //روز نباید بیشتر از 2 رقم باشد
+            //e.preventDefault();
+        }
+        else if ($(this).hasClass("date-year") == true && thisValue.length >= 4) {
+            $(this).val("");
+            //سال نباید بیش از 4 رقم باشد
+            //e.preventDefault();
+        }
+
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+    $("input[type=number]").focusout(function (e) {
+        if ($(this).hasClass("date-year") == true && $(this).val().length < 4) {
+            $(this).val("")
+        }
+
+        if ($(this).hasClass("date-day") == true || $(this).hasClass("date-month") == true || $(this).hasClass("date-year") == true) {
+            FillHiddenDate(this);
+        }
+    });
+
+    function FillHiddenDate(thisElement) {
+        //بدست آوردن تاریخ تولد انتخاب شده
+        var day = $(thisElement).closest("label.label").find(".date-day").val();
+        var month = $(thisElement).closest("label.label").find(".date-month").find('option:selected').val();
+        var year = $(thisElement).closest("label.label").find(".date-year").val();
+        if (day !== "" && month !== "" && year !== "") {
+            $(thisElement).closest("label.label").find(".HiddenDate").val(year + "/" + month + "/" + day);
+        }
+    }
+
+    $(".date-month").on("change", function () {
+        FillHiddenDate(this);
+    });
+
+    $(".NationalCode").keydown(function (e) {
+        // مجاز : backspace, delete, tab, escape, enter
+        if ($.inArray(e.keyCode, [46, 18, 16, 8, 9, 27, 13, 110]) !== -1 ||
+            // مجاز: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // مجاز : home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+    $(".PassportNo").keydown(function (e) {
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+            // مجاز: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // مجاز : home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            return;
+        }
+        if (just_english(e.key) === true || ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) === false) {
+            return;
+        } else {
+            e.preventDefault();
+        }
+    });
+
+    $("input[type=number]").bind('keyup change', function (e) {
+        var thisValue = parseInt($(this).val());
+        if ($(this).hasClass("date-day") == true && (thisValue > 31 || thisValue < 1)) {
+            $(this).val("01");
+        }
+        else if ($(this).hasClass("date-year") == true && $(this).hasClass("passport") !== true) {
+            if (thisValue.toString().length >= 4) {
+                var ageRange = $(this).closest(".passengerItem").find(".AgeRange").val();
+                //بدست آوردن تاریخ تولد انتخاب شده
+                var day = $(this).closest("label.label").find(".date-day").val();
+                if (day == "") {
+                    $(this).closest("label.label").find(".date-day").val("01");
+                    day = $(this).closest("label.label").find(".date-day").val();
+                }
+                var month = $(this).closest("label.label").find(".date-month").find('option:selected').val();
+                var year = $(this).closest("label.label").find(".date-year").val();
+                var SelectedBirthDate = new Date(year, month, day, 0, 0, 0, 0);
+                var AdultStartBirthDate = new Date($("#AdultStartBirthDate").val());
+                var AdultEndBirthDate = new Date($("#AdultEndBirthDate").val());
+                var ChildStartBirthDate = new Date($("#ChildStartBirthDate").val());
+                var ChildEndBirthDate = new Date($("#ChildEndBirthDate").val());
+                var InfantStartBirthDate = new Date($("#InfantStartBirthDate").val());
+                var InfantEndBirthDate = new Date($("#InfantEndBirthDate").val());
+                switch (ageRange) {
+                    case "Adult":
+                        if (SelectedBirthDate < AdultStartBirthDate || SelectedBirthDate > AdultEndBirthDate) {
+                            $(this).val("");
+                            toastr.options = { "positionClass": "toast-top-right" }
+                            toastr.error('سن بزرگسال باید بیشتر از 12 سال باشد', 'خطا', { timeOut: 5000 })
+                        }
+                        break;
+
+                    case "Child":
+                        if (SelectedBirthDate < ChildStartBirthDate || SelectedBirthDate > ChildEndBirthDate) {
+                            $(this).val("");
+                            toastr.options = { "positionClass": "toast-top-right" }
+                            toastr.error('سن کودک باید بین 2 تا 12 سال باشد', 'خطا', { timeOut: 5000 })
+                        }
+                        break;
+
+                    case "Infant":
+                        if (SelectedBirthDate < InfantStartBirthDate || SelectedBirthDate > InfantEndBirthDate) {
+                            $(this).val("");
+                            toastr.options = { "positionClass": "toast-top-right" }
+                            toastr.error('سن نوزاد باید بین 10 روز تا 2 سال باشد', 'خطا', { timeOut: 5000 })
+                        }
+                        break;
+
+                    default:
+                        if ($(this).hasClass("date-day") == true || $(this).hasClass("date-month") == true || $(this).hasClass("date-year") == true) {
+                            FillHiddenDate(this);
+                        }
+                        break;
+                }
+            }
+        }
+        else if ($(this).hasClass("passport") == true) {
+            if (thisValue.toString().length >= 4) {
+                //بدست آوردن تاریخ انقضای پاسپورت انتخاب شده
+                var day = $(this).closest("label.label").find(".date-day").val();
+                if (day == "") {
+                    $(this).closest("label.label").find(".date-day").val("01");
+                    day = $(this).closest("label.label").find(".date-day").val();
+                }
+                var month = $(this).closest("label.label").find(".date-month").find('option:selected').val();
+                var year = $(this).closest("label.label").find(".date-year").val();
+                var SelectedPassportDate = new Date(year, month, day, 0, 0, 0, 0);
+                var PassportMinDAteTime = new Date($("#PassportMinDAteTime").val());
+                if (SelectedPassportDate < PassportMinDAteTime) {
+                    $(this).val("");
+                    $(this).closest("label.label").find(".date-day").val("");
+                    toastr.options = { "positionClass": "toast-top-right" }
+                    toastr.error('تاریخ انقضای پاسپورت باید حداقل 6 ماه اعتبار داشته باشد', 'خطا', { timeOut: 5000 })
+                }
+            }
+        }
+    });
+
+    jQuery(document).ready(function ($) {
+        inputNumber()
+    });
+</script>

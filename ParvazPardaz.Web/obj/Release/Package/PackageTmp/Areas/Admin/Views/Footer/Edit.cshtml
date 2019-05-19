@@ -1,0 +1,187 @@
+﻿@model ParvazPardaz.ViewModel.EditFooterViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>@ParvazPardaz.Resource.General.Generals.Edit</h2>
+<style>
+    .select {
+        min-width: 190px;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>@ParvazPardaz.Resource.CMS.CMS.ManagementFooter</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FooterType, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.FooterType, new { @class = "search-select select" })
+                @Html.ValidationMessageFor(model => model.FooterType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Content)
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderID, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderID)
+                @Html.ValidationMessageFor(model => model.OrderID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                <div style="margin-left:20px; margin-right:20px;">
+                    @Html.CheckBoxFor(model => model.IsActive, new { @class = "flat-red", style = "margin-right:50px" })
+                </div>
+                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Lang, new { @class = "control-label col-md-1" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Lang")
+                    @Html.ValidationMessageFor(model => model.Lang, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+}
+
+@if (ParvazPardaz.Resource.General.Generals.Regional == "FA")
+{
+    @Scripts.Render("~/Plugins/fa-IR/js")
+}
+else if (ParvazPardaz.Resource.General.Generals.Regional == "AR")
+{
+    @Scripts.Render("~/Plugins/ar-IQ/js")}
+else
+{
+    @Scripts.Render("~/Plugins/en-US/js")
+}
+@section scripts{
+    <script type="text/javascript">
+        $('.select').select2({
+            dir: "RTL"
+        });
+
+        $(document).ready(function () {
+            tinymce.init({
+                selector: "#Content",
+                force_p_newlines: false,
+                valid_elements: "*[*]",
+                convert_urls: false,
+                valid_children: "+body[i],+body[section],+div[i]",
+                theme: "modern",
+                height: 300,
+                setup: function (editor) {
+                    editor.addButton('BtnAddDefaultColumn', {
+                        text: '@ParvazPardaz.Resource.CMS.CMS.AddDefaultColumn',
+                        icon: false,
+                        onclick: function () {
+                            var content = '<ul class="sitemap">' +
+                                            '<li><a href="#"><strong>عنوان</strong></a></li>' +
+                                            '<li><a href="#">عبارت</a></li>' +
+                                            '<li><a href="#">عبارت</a></li>' +
+                                            '<li><a href="#">عبارت</a></li>' +
+                                            '<li><a href="#">عبارت</a></li>' +
+                                            '<li><a href="#">عبارت</a></li>' +
+                                            '<li><a href="#">عبارت</a></li>' +
+                                           '</ul>';
+                            editor.insertContent(content);
+                        }
+                    });
+                    editor.addButton('BtnAddFooterItem', {
+                        text: '@ParvazPardaz.Resource.CMS.CMS.AddSubFooter',
+                        icon: false,
+                        onclick: function () {
+                            editor.insertContent('<li><a href="#">عبارت</a></li>');
+                        }
+                    });
+                    editor.addButton('BtnAddHeaderTag', {
+                        text: '@ParvazPardaz.Resource.CMS.CMS.AddTitle',
+                        icon: false,
+                        onclick: function () {
+                            editor.insertContent('<h4 style="color: black;">@ParvazPardaz.Resource.CMS.CMS.Title</h4>');
+                        }
+                    });
+                },
+                plugins: [
+             "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+             "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+             "save table contextmenu directionality emoticons template paste textcolor"
+                ],
+                //content_css: "/Plugins/tinymce/content.css",
+                toolbar: "insertfile undo redo | BtnAddDefaultColumn | BtnAddFooterItem | BtnAddHeaderTag | link ",
+                file_browser_callback: RoxyFileBrowser,
+                style_formats: [
+            { title: 'Bold text', inline: 'b' },
+            { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } },
+            { title: 'Red header', block: 'h1', styles: { color: '#ff0000' } },
+            { title: 'Example 1', inline: 'span', classes: 'example1' },
+            { title: 'Example 2', inline: 'span', classes: 'example2' },
+            { title: 'Table styles' },
+            { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }
+                ]
+            });
+            var roxyFileman = '/Areas/Admin/scripts/RoxyFileManager/index.html?integration=tinymce4';
+            function RoxyFileBrowser(field_name, url, type, win) {
+                var cmsURL = roxyFileman;  // script URL - use an absolute path!
+                if (cmsURL.indexOf("?") < 0) {
+                    cmsURL = cmsURL + "?type=" + type;
+                }
+                else {
+                    cmsURL = cmsURL + "&type=" + type;
+                }
+                cmsURL += '&input=' + field_name + '&value=' + win.document.getElementById(field_name).value;
+                tinyMCE.activeEditor.windowManager.open({
+                    file: cmsURL,
+                    title: 'ParvazPardaz File Manager',
+                    width: 850, // Your dimensions may differ - toy around with them!
+                    height: 650,
+                    resizable: "yes",
+                    plugins: "media",
+                    inline: "yes", // This parameter only has an effect if you use the inlinepopups plugin!
+                    close_previous: "no"
+                }, {
+                    window: win,
+                    input: field_name
+                });
+                return false;
+            }
+        });
+</script>
+}
+
+

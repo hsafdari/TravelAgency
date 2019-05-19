@@ -1,0 +1,39 @@
+﻿@model TourProgramDetailViewModel
+
+<style>
+    .table {
+        text-align: right !important;
+    }
+</style>
+
+<div id="AddEditTourProgramDetail">
+    @Html.Partial("~/Areas/Admin/Views/TourProgramDetail/_AddTourProgramDetail.cshtml", new TourProgramDetailViewModel() { TourProgramId = Model.TourProgramId, CRUDMode = CRUDMode.Create, ActivitySelectList = Model.ActivitySelectList })
+</div>
+<div id="ListViewTourProgramDetail">
+    @{
+        if (Model != null && Model.ListView != null && Model.ListView.Any())
+        {
+            foreach (var listView in Model.ListView)
+            {
+                @Html.Partial("~/Areas/Admin/Views/TourProgramDetail/_ListViewTourProgramDetail.cshtml", listView)
+            }
+        }
+    }
+</div>
+
+<div class="form-group">
+    <div class="col-md-3">
+        <a onclick="Submit()" class="btn btn-custom green">@ParvazPardaz.Resource.General.Generals.Submit</a>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

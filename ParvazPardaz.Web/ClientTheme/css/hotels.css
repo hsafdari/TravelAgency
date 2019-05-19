@@ -1,0 +1,152 @@
+﻿
+/* 
+Author:Niloofar Taban
+Date: 1395/03/04
+url: 
+Company: ParvazPardaz
+Version: 1.0
+ LastUpdate:Niloofar Taban
+ Update Date:
+ */
+.hole-cont
+{
+    background-color:#fff;
+    border:1px solid #ccc;
+    border-radius:10px;
+}
+.short-description
+{
+    margin-top:10px;
+}
+
+.properties-value,.short-description
+{
+    font-weight:normal;
+}
+.properties-value-cont
+{
+    background-color:#fff2ed;
+    margin-bottom:5px;
+}
+.properties-key
+{
+    background-color:#e0e0e0;
+}
+.Gallery
+{
+    margin-top:30px; /*120px;*/
+    min-height:370px;
+}
+.gallery-item
+{
+    border:1px solid #ccc;
+    padding:0;
+    background-color:#fff;
+    height:250px;
+}
+/*****************************Start Slider*******************/
+
+.carousel-fade .carousel-inner .item {
+  opacity: 0;
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+}
+.carousel-fade .carousel-inner .active {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+/*****************************end Slider*******************/
+
+.slider-Countries
+{
+    box-shadow:0px 5px 10px #000;
+    padding:0;
+}
+
+
+.custom_caption_related
+{
+	background-color:rgba(0,0,0,0.5);
+	bottom:0px !important;
+	left:3.5% !important;
+	right:5% !important;
+	width:17.8em !important;
+	height:60px;
+	padding:0px !important;
+}
+@media(min-width:768px)
+{
+    .custom_caption_related {
+        width:14.2em !important;
+        right:6% !important;
+        left:4% !important;
+    }
+}
+@media(min-width:1200px)
+{
+    .custom_caption_related {
+        width:17.7em !important;
+        left:4% !important;
+        right:7% !important;
+    }
+}
+.custom_caption_related h3
+{
+	margin-top:5px !important;
+}
+
+.hr
+{
+    height:1px;
+    border:1px solid #ccc;
+}
+
+/**************************************************************/
+/*.effect2
+{
+  position: relative;
+}
+.effect2:before, .effect2:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  box-shadow: 0 15px 10px #777;
+  transform: rotate(-3deg);
+}
+.effect2:after
+{
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}*/
+
+
+
+
+
+
+.property-title
+{
+    color:#fa6f1c;
+}

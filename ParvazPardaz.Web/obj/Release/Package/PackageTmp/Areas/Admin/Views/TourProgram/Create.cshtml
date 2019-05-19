@@ -1,0 +1,152 @@
+﻿@model TourProgramViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+@section css{
+    <link href="~/Content/admin/View/Tour.css" rel="stylesheet" />
+    <link href="~/content/kendo/2014.3.1314/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/content/kendo/2014.3.1314/kendo.default.min.css" rel="stylesheet" />
+}
+
+
+
+<ul id="progress">
+    <li>
+        <a style="color:#fff" href="/Admin/Tour/Edit/@Model.TourId">تور</a>
+    </li>
+    <li>
+        <a style="color:#fff" href="/Admin/TourSlider/Create?tourId=@Model.TourId">گالری تور</a>
+    </li>
+    <li class="active">برنامه سفر</li>
+    <li>
+        <a style="color:#fff" href="/Admin/TourPackage/Create?tourId=@Model.TourId">پکیج تور</a>
+    </li>
+</ul>
+@*<a href="@ViewBag.TourURL" target="_blank" class="btn btn-success" style="display:inline-block; float:left;">مشاهده تور سمت کاربر</a>*@
+
+<br />
+<br />
+<hr />
+
+<div id="AddEditTourProgram">
+    @Html.Partial("_AddTourProgram", new TourProgramViewModel() { TourId = Model.TourId, CRUDMode = CRUDMode.Create })
+</div>
+<div id="ListViewTourProgram">
+    @{
+        if (Model != null && Model.ListView != null && Model.ListView.Any())
+        {
+            foreach (var listView in Model.ListView)
+            {
+                @Html.Partial("_ListViewTourProgram", listView)
+            }
+        }
+    }
+</div>
+
+<div class="form-group">
+    <div class="col-md-11">
+        @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Create", "TourSlider", new { tourId = Model.TourId }, new { @class = "btn btn-custom red", })
+        @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Next, "Create", "TourPackage", new { tourId = Model.TourId }, new { @class = "btn btn-custom green" })
+        @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Finish, "Index", "Tour", null, new { @class = "btn btn-custom green" })
+    </div>
+</div>
+
+
+<div id="TourProgramDetailModal" style="text-align: center; visibility: hidden;">
+</div>
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/kendo.mvc/kendo.web.min.js"></script>
+    <script src="~/Scripts/kendo.mvc/kendo.aspnetmvc.min.js"></script>
+
+    <script>
+        var autocompleteUrl = "@Url.Action("GetCities", "City")"
+        var loadPartialUrlForTourProgram = "@Url.Action("RefreshPartialView", "TourProgram")"
+        var loadPartialUrlForTourProgramDetail = "@Url.Action("RefreshPartialView", "TourProgramDetail")"
+    </script>
+
+
+    <script>
+        function SuccessRemove(data) {
+            if (data.Success) {
+                var sectionId = "#" + data.SectionId;
+                $(sectionId).fadeOut(1200, function () { $(this).remove() });
+                LoadPartial(data.TourId)
+            }
+        }
+
+
+        function LoadPartial(tourId) {
+            $.ajax({
+                url: loadPartialUrlForTourProgram,
+                type: 'GET',
+                cache: false,
+                data: { tourId: tourId },
+            }).done(function (result) {
+                $('#AddEditTourProgram').html(result);
+            });
+        }
+    </script>
+
+    <script>
+        var wndTourProgramDetailModal = $("#TourProgramDetailModal").kendoWindow({
+            title: "",
+            modal: true,
+            visible: false,
+            resizable: false,
+            width: 1000,
+            height: 500
+        }).data("kendoWindow");
+
+
+        function ShowModal() {
+            wndTourProgramDetailModal.center();
+            wndTourProgramDetailModal.open();
+        }
+
+        function Submit() {
+            wndTourProgramDetailModal.close();
+        }
+
+
+        function LoadPartiaForTourProgramDetail(tourProgramId) {
+            $.ajax({
+                url: loadPartialUrlForTourProgramDetail,
+                type: 'GET',
+                cache: false,
+                data: { tourProgramId: tourProgramId },
+            }).done(function (result) {
+                $('#AddEditTourProgramDetail').html(result);
+            });
+        }
+
+
+
+        function SuccessRemoveForTourProgramDetail(data) {
+            if (data.Success) {
+                var sectionId = "#" + data.SectionId;
+                $(sectionId).fadeOut(1200, function () { $(this).remove() });
+                LoadPartiaForTourProgramDetail(data.TourProgramId)
+            }
+        }
+
+
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+html,body,div,span,a,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0;text-decoration: none;}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+script {
+  display: none !important;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c2c2c2;
+  border: 0px none #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #00a8af;
+}
+::-webkit-scrollbar-track {
+  background: whitesmoke;
+  border: 0px none #ffffff;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+::selection { background: #ffcbb1; }
+::-moz-selection { background: #ffcbb1; }
+
+select::-ms-expand{
+  display: none;
+}
+select{
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  -ms-appearance:none;
+  -o-appearance:none;
+  appearance: none;
+  background:   white url('../img/icons/select.svg') no-repeat 5px  center;
+}
+select:focus{
+  background:  white url('../img/icons/select-t.svg') no-repeat 5px  center;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  background: white  url('../img/icons/spin.svg') no-repeat center center;
+  width: 20px;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 5px;
+  bottom: 0;
+  cursor: pointer;
+}
+input[type="number"]:focus::-webkit-inner-spin-button,
+input[type="number"]:focus::-webkit-outer-spin-button {
+  background: white  url('../img/icons/spin-t.svg') no-repeat center center;
+}
+input[type="number"]{
+  -moz-appearance: textfield !important;
+}

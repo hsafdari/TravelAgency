@@ -1,0 +1,670 @@
+﻿@model HotelDetailsViewModel
+
+@{
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+    string firstimage = string.Empty;
+    if (Model.Images.Count!=0)
+    {
+    firstimage = Model.Images.FirstOrDefault().ImageUrl + "-700x525" + Model.Images.FirstOrDefault().ImageExtension;
+    }
+}
+<link href="@Url.Content("~/Plugins/cool-share/plugin.css")" rel="stylesheet" />
+<style>
+    .CustomTitle {
+        font-size: 22px;
+        margin-bottom: 60px;
+        margin-top: 60px;
+    }
+
+    .about-skill-progres {
+        width: 100% !important;
+    }
+
+        .about-skill-progres .block-title span {
+            float: left !important;
+        }
+
+    .skill-progress-box span::after {
+        content: " از 5" !important;
+    }
+
+    .commentlist .comment {
+        padding-right: 0 !important;
+    }
+
+    .commentlist {
+        padding-right: 0 !important;
+    }
+
+    .section-header {
+        margin-top: 0 !important;
+    }
+
+    /*#region مودال لاگین */
+    .modal-dialog {
+        padding-top: 10% !important;
+    }
+
+    /*.modal-body {
+        height: 150px !important;
+    }*/
+
+    .destination-list__content .destinations-item .item-media .item-cat ul li a {
+        background-color: red !important;
+    }
+
+    .btn-is-disabled {
+        pointer-events: none; /* Disables the button completely. Better than just cursor: default; */
+        background-color: #b9b6b6 !important;
+        color: #ffffff;
+    }
+
+    #login-modal {
+        direction: rtl;
+    }
+    /*#endregion */
+
+    .jq-ry-container {
+        direction: ltr !important;
+    }
+
+    .rating {
+        margin-top: -15px !important;
+    }
+
+    .modal-body .form-group {
+        /*width: 30px !important;*/
+    }
+</style>
+<link href="~/ClientTheme/css/hotels.css" rel="stylesheet" />
+<link href="~/Plugins/GammaGallery/css/style.css" rel="stylesheet" />
+<link href="~/ClientTheme/css/menuNavigation.css" rel="stylesheet" />
+<link href="~/Plugins/LikeDisLike/dist/jquery.thumbs.css" rel="stylesheet" />
+<!--page-breadcrumb -->
+<div class="page-breadcrumb">
+    <div class="container">
+        <h1><a href="@Model.URL" target="@Model.Target" rel="@Model.Rel">@Model.Name</a></h1>
+        <ol class="breadcrumb pull-left">
+            <li><a href="/tourism/" class="breadCrumbNav">صفحه اصلی</a></li>
+            @if (Model.breadCrumbItems != null && Model.breadCrumbItems.Any())
+            {
+                for (int i = (Model.breadCrumbItems.Count - 1); i >= 0; i--)
+                {
+                    <li><a href="@Model.breadCrumbItems[i].URL">@Model.breadCrumbItems[i].Title</a></li>
+                }
+            }
+        </ol>
+    </div>
+</div>
+<!-- page-breadcrumb /- -->
+
+<a href="#menu-toggle" class="btn btn-default hidden-lg hidden-md hidden-sm btn-sidebar" id="menu-toggle"><i class="fa fa-arrow-left"></i>دیگر مطالب مرتبط</a>
+
+<!-- Single Post -->
+<div id="single-post" class="single-post wrapper" style="direction:rtl;">
+    <!-- Container -->
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper" class="widget-sidebar">
+                <!-- related Tours-->
+                @{Html.RenderPartial("_PrvTourSideBar", Model.RelatedTours);}
+                <!-- related Tours/-->
+                <!-- Latest Post -->
+                @{Html.RenderPartial("_PrvSideBar", Model.RelatedPosts);}
+                <!-- Latest Post /- -->
+                @Html.Partial("_PrvTags", Model.PostTags)
+            </div>
+            <div id="page-content-wrapper" class="col-xs-12" style="position:relative;">
+                <!-- col-md-8 -->
+                <div class="col-md-8 col-sm-6">
+                    <article>
+                        <!-- blog-box -->
+                        <div class="blog-box">
+                            <div class="entry-cover">
+                                @*<a href="@Model.URL"><img src="@firstimage" alt="@Model.Title" /></a>*@
+                                <a href="@Model.URL" target="@Model.Target" rel="@Model.Rel"><img src="@Model.Thumbnail" alt="@Model.Title" /></a>
+                            </div>
+                            <div id="menu" class="col-md-12 col-sm-12">
+                                <div id="menu_inside" class="col-md-12 col-sm-12">
+                                    <a href="#gallery" class="menu active">گالری تصاویر</a>
+                                    <span class="menu">|</span> <a href="#Facilities" class="menu">امکانات</a>
+                                    <span class="menu">|</span> <a href="#role" class="menu">  قوانین و مقررات هتل</a>
+                                    <span class="menu">|</span> <a href="#Introduction" class="menu"> معرفی هتل</a>
+                                    <span class="menu">|</span> <a href="#GoogleMap" class="menu"> نقشه هتل</a>
+                                    <span class="menu">|</span> <a href="#CommentSection" class="menu"> نظرات کاربران</a>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="blog-content">
+                                <h2 class="entry-title">@Model.Title </h2>
+                                <p class="time" style="direction:ltr;">
+                                    <i class="fa fa-clock-o"></i>@Model.PublishDatetime.ToString("yyyy/MM/dd")
+                                    <span class="pull-right"> <span class="pull-right rankText"> درجه هتل</span> <img src="@Model.HotelRank" alt="@Model.Title" /></span>
+                                    <span class="pull-right" style="margin-right:15px;">
+                                        <span class="socialShare"> <!-- The share buttons will be inserted here --> </span> 
+                                    </span>
+                                </p>
+                                <p></p>
+                                <div class="postContent">
+                                    @Html.Raw(Model.PostContent)
+                                </div>
+
+
+                                <!-- نقشه گوگل -->
+                                <h2 id="GoogleMap" class="CustomTitle">نقشه گوگل </h2>
+                                <div class="postContent">
+                                    @Html.Raw(Model.LatLongIframe)
+                                </div>
+
+                                @*@if (@Model.PostGroups != null)
+                                {
+                                    <a href="#" class="postG">@ParvazPardaz.Resource.Tour.Tours.Tags</a>
+                                    <div class="tags">
+                                        @foreach (var group in Model.PostGroups)
+                                        {
+                                        <a href="@group.URL">@group.Name</a>
+                                        }
+                                    </div>
+                                }*@
+
+                                <!-- گالری تصاویر -->
+                                <h2 class="CustomTitle" id="gallery">
+                                    @ParvazPardaz.Resource.Tour.Tours.ImagesGallery
+                                </h2>
+                                <div class="Gallery col-xs-12" style="direction:ltr">
+                                    <div class="gamma-container gamma-loading" id="gamma-container">
+                                        <ul class="gamma-gallery">
+                                            @foreach (var item in Model.Images)
+                                            {
+                                                <li>
+                                                    <div data-alt="@item.Id" data-description="@item.ImageTitle">
+                                                        @*<div data-min-width="261" data-src="@Url.Content(item.ImageUrl + "-700x525" + item.ImageExtension)"></div>*@
+                                                        <div data-src="@Url.Content(item.ImageUrl + "-700x525" + item.ImageExtension)"></div>
+                                                    </div>
+                                                    @*<noscript>
+                                                            <img src="@Url.Content(item.ImageUrl + "-261x177" + item.ImageExtension)" alt="@item.Id" />
+                                                        </noscript>*@
+                                                </li>
+                                            }
+                                        </ul>
+                                        <div class="gamma-overlay"></div>
+                                    </div>
+                                </div>
+
+                                <div class="blog-social blog-content-inner">
+                                    <aside class="widget widget_social_icons">
+                                        <h4>@ParvazPardaz.Resource.Tour.Tours.Shareit</h4>
+                                        <ul class="pull-right">
+                                            <li><a href="#" target="_blank" class="fb"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#" target="_blank" class="tw"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#" target="_blank" class="gp"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="#" target="_blank" class="lin"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a href="#" target="_blank" class="dr"><i class="fa fa-dribbble"></i></a></li>
+                                        </ul>
+                                    </aside>
+                                </div>
+                            </div>
+
+                        </div><!-- blog-box /- -->
+                    </article>
+                </div>
+                <!-- col-md-8 /- -->
+                <!-- col-md-4 -->
+                <div class="col-md-4 col-sm-6 hidden-xs widget-sidebar">
+                    <!-- related Tours-->
+                    @{Html.RenderPartial("_PrvTourSideBar", Model.RelatedTours);}
+                    <!-- related Tours/-->
+                    <!-- Latest Post -->
+                    @{Html.RenderPartial("_PrvSideBar", Model.RelatedPosts);}
+                    <!-- Latest Post /- -->
+                    @Html.Partial("_PrvTags", Model.PostTags)
+
+                </div>
+                <!-- col-md-4 /- -->
+            </div>
+            @*<div class="section-header">
+                    <h2>دیدگاه کاربران</h2>
+                </div>*@
+                <div id="page-content-wrapper" class="col-xs-12" style="position:relative;">
+                    <!-- col-md-8 -->
+                    <div class="col-md-8 col-sm-6">
+                        <div class="blog-content-inner single-post-comment">
+                            <!-- Section Header -->
+                            <div class="section-header">
+                                <h2 id="CommentSection">نقد و بررسی کاربران</h2>
+                            </div>
+                            <!-- Section Header /- -->
+
+                            <ul class="commentlist">
+                                @if (Model.CommentList != null && Model.CommentList.Any())
+                                {
+                                    foreach (var cmt in Model.CommentList.ToList())
+                                    {
+
+                                        var cmtIndex = Model.CommentList.IndexOf(cmt);
+
+                                        <li>
+                                            <div class="comment">
+                                                <span class="comment-info d-text-c">
+                                                    <span>@string.Format("{0} در {1:yyyy/MM/dd}", cmt.Name, cmt.CreatorDateTime) </span>
+                                                    @cmt.Subject
+                                                    @Html.Rate("CmtRate_" + @cmt.Id.ToString()).IsReadonly(true).Rating(Model.CommentList[cmtIndex].Rate).StarWidth("15px").NumberStar(5).Precision(2)
+                                                    <span class="rating" id="rating_@cmt.Id">
+                                                        @Ajax.ActionLink(".", "LikeComment", "Blog", new { commentId = cmt.Id }, new AjaxOptions() { OnBegin = "IsBeSubmit(this)", OnSuccess = "LikeDislikeSuccess" }, new { @class = "like sprite sprite-fa-thumbs-up-grey", Style = "color: transparent;", id = "like_" + cmt.Id.ToString() })
+                                                        <i class="likes">@cmt.Like</i>
+                                                        @Ajax.ActionLink(".", "DislikeComment", "Blog", new { commentId = cmt.Id }, new AjaxOptions() { OnBegin = "IsBeSubmit(this)", OnSuccess = "LikeDislikeSuccess" }, new { @class = "dislike sprite sprite-fa-thumbs-down-grey", Style = "color: transparent;", id = "dislike_" + cmt.Id.ToString() })
+                                                        @*<a style="cursor:pointer" class="dislike sprite sprite-fa-thumbs-down-grey"></a>*@
+                                                        <i class="dislikes">@cmt.DisLike</i>
+                                                    </span>
+                                                </span>
+
+                                                <p>
+                                                    @Html.Raw(cmt.CommentText)
+                                                </p>
+                                                <div>
+                                                    <ul class="list-group" style="font-size:12px !important; width:50%; margin:auto">
+
+                                                        @for (int i = 0; i < cmt.CommentReviews.Count(); i++)
+                                                        {
+                                                            @Html.HiddenFor(x => x.CommentList[cmtIndex].CommentReviews[i].ReviewId)
+                                                            <li class="list-group-item">
+                                                                @Model.CommentList[cmtIndex].CommentReviews[i].Title
+                                                                <span style="float:left; direction:ltr">
+                                                                    @Html.RateFor("CmtReviewRate_" + @cmtIndex.ToString() + "_" + @i.ToString(), model => model.CommentList[cmtIndex].CommentReviews[i].Rate).StarWidth("20px").IsCollectionItem(true).IsReadonly(true).Rating(Model.CommentList[cmtIndex].CommentReviews[i].Rate.Value).NumberStar(5).Precision(2)
+                                                                </span>
+                                                            </li>
+                                                        }
+
+                                                    </ul>
+                                                </div>
+                                                @*<a class="comment-reply-link d-text-c" href="#"><i class="fa fa-plus"></i> بیشتر</a>*@
+                                            </div>
+                                        </li>
+                                    }
+                                }
+
+                            </ul>
+                        </div>
+
+                        <div class="comment-form">
+                            <!-- Section Header -->
+                            @*<div class="section-header">
+                            <h2>ثبت دیدگاه جدید</h2>
+                        </div>*@
+                            <!-- Section Header /- -->
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @Html.Action("InitialCommentForm", "Blog", new { commentType = ParvazPardaz.Model.Enum.CommentType.Hotel, ownId = Model.Id, parentId = 0 })
+                            }
+                            else
+                            {
+                                <div id="SectionComment">
+                                    <a class="btn btn-default send-message" id="btnNext" data-toggle="modal" data-target="#login-modal">می خواهم این هتل را نقد کنم</a>
+                                    @*@Ajax.ActionLink("می خواهم این هتل را نقد کنم", "InitialCommentForm", "Blog", new { commentType = ParvazPardaz.Model.Enum.CommentType.Hotel, ownId = Model.Id, parentId = 0 }, new AjaxOptions() { InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "SectionComment" }, new { @class = "btn btn-default send-message" })*@
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- col-md-8 /- -->
+                    <!-- col-md-4 -->
+                    @if (Model.CommentList != null && Model.CommentList.Any())
+                    {
+                        <div class="col-md-4 col-sm-6 hidden-xs widget-sidebar">
+                            <div class="widget-inner author-rating">
+                                <h4 style="text-align:center">امتیاز کاربران</h4>
+                                <b>@string.Format("از بین {0} نفر", Model.CommentTotalScore.PersonCount)</b>
+                                <i class="rating">@Model.CommentTotalScore.TotalRate.ToString("F1")</i>
+                                <p>این هتل را پیشنهاد می دهید؟ با امتیاز دادن به این هتل دیگران را از میزان رضایت خود از هتل و خدمات آن مطلع سازید.</p>
+                                <div class="about-skill-progres">
+                                    @if (Model.CommentTotalScore.TotalCommentReviews != null && Model.CommentTotalScore.TotalCommentReviews.Any())
+                                    {
+                                        Random rnd = new Random();
+
+                                        foreach (var item in Model.CommentTotalScore.TotalCommentReviews)
+                                        {
+                                            System.Drawing.Color randomColor = System.Drawing.Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+
+                                            <div class="skill-progress-box">
+                                                <h3 class="block-title">@item.Title <span id="skill_type2_count-1">@item.Rate</span></h3>
+                                                <div class="progress">
+                                                    <div id="skill_bar2_count-1" class="progress-bar progress-bar-danger photoshop" role="progressbar" data-color="rgb(@randomColor.A, @randomColor.R, @randomColor.G,@randomColor.B);" style="width: @(item.Rate * 20)%; background-color: rgb(@randomColor.A, @randomColor.R, @randomColor.G,@randomColor.B);">
+                                                        <span class="sr-only">@string.Format("{0}% Complete", item.Rate * 20)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- col-md-4 /- -->
+                </div>
+            </div>
+    </div>
+    <!-- container /- -->
+</div>
+
+<!-- مودال لاگین -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <img alt="کی سفر" class="img-circle" id="img_logo" src="/ClientTheme/images/Logo/keyberimsafarlogo.png" style="width:250px; height:100px;">
+                <button type="button" id="btnCloseModal" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="awe-icon awe-icon-close-o" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Begin # DIV Form -->
+            <div id="div-forms">
+
+                <!-- Begin # Login Form -->
+                <div id="login-form">
+                    @*@Html.Partial("_PrvLogin", new ParvazPardaz.ViewModel.User.LoginViewModel())*@
+                </div>
+                <!-- End # Login Form -->
+                <!-- Begin | Lost Password Form -->
+                <div id="lost-form" style="display:none;">
+                    @*@Html.Partial("~/Views/Account/_PrvForgetPassword.cshtml", new ForgetPasswordViewModel())*@
+                </div>
+                <!-- End | Lost Password Form -->
+                <!-- Begin | Register Form -->
+                <div id="register-form" style="display:none;">
+                    @Html.Partial("_PrvSignup", new SignupViewModel())
+                </div>
+                <!-- End | Register Form -->
+
+            </div>
+            <!-- End # DIV Form -->
+
+        </div>
+    </div>
+</div>
+<!-- /مودال لاگین -->
+@section scripts{
+
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    @*<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>*@
+
+    <!-- Single Post /- -->
+    <script src=/Plugins/GammaGallery/js/modernizr.custom.70736.js></script>
+    <script src=/Plugins/GammaGallery/js/jquery.masonry.min.js></script>
+    <script src=/Plugins/GammaGallery/js/jquery.history.js></script>
+    <script src=/Plugins/GammaGallery/js/js-url.min.js></script>
+    <script src=/Plugins/GammaGallery/js/jquerypp.custom.js></script>
+    <script src=/Plugins/GammaGallery/js/gamma.js></script>
+
+    <script src="~/ClientTheme/libraries/SmoothScroll/jquery.smooth-scroll.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("iframe").width('100%');
+        });
+
+        //var elements = document.getElementsByClassName("CustomerId");
+        var elements = document.querySelectorAll("[class^=id_]");
+        for (var i = 0, len = elements.length; i < len; i++) {
+            var id = elements[i].className.split('_')[1];
+            elements[i].setAttribute("id", id);
+        }
+        //$('[class|=id_]').css("background","red");
+    </script>
+    <script type="text/javascript">
+        var $ = jQuery.noConflict();
+        $(function () {
+
+            var GammaSettings = {
+                // order is important!
+                viewport: [{
+                    width: 1200,
+                    columns: 5
+                }, {
+                    width: 900,
+                    columns: 4
+                }, {
+                    width: 500,
+                    columns: 3
+                }, {
+                    width: 320,
+                    columns: 2
+                }, {
+                    width: 0,
+                    columns: 2
+                }],
+                historyapi: false
+            };
+
+            Gamma.init(GammaSettings);
+        });
+
+
+        $(document).ready(function () {
+            "use strict";
+            $('#menu_inside a').smoothScroll({
+                easing: 'swing',
+                speed: 800
+            });
+
+        });
+        $(document).ready(function () {
+            //<!--var stickyNavTop = $('#menu').offset().top;-->
+            //var b = 570;
+            var container = $('#menu_inside');
+            var b = container.offset().top;
+            var stickyNav = function () {
+                var scrollTop = $(window).scrollTop();
+
+                if (scrollTop > b) {
+                    $('#menu').addClass('sticky');
+                } else {
+                    $('#menu').removeClass('sticky');
+                }
+            };
+
+            stickyNav();
+
+            $(window).scroll(function () {
+                stickyNav();
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tbl").addClass("table table-hover table-bordered");
+            $(".blog-box img").addClass("img-responsive");
+        });
+    </script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#single-post").toggleClass("toggled");
+            if ($("#single-post").hasClass("toggled")) {
+                $("#menu-toggle").html("بازگشت به مطلب اصلی <i class='fa fa-arrow-right'></i>");
+            }
+            else {
+                $("#menu-toggle").html("<i class='fa fa-arrow-left'></i>دیگر مطالب مرتبط");
+            }
+
+            //$("#page-content-wrapper").css("position", "absolute");
+        });
+    </script>
+
+    <!-- جاوااسکریپت سابمیت ها : مودال لاگین-ثبتنام-فراموشی و جستجوی پرواز -->
+    <script type="text/javascript">
+        //var $ = jQuery.noConflict();
+
+        var $formLogin = $('#login-form');
+        var $formLost = $('#lost-form');
+        var $formRegister = $('#register-form');
+        var $divForms = $('#div-forms');
+        var $modalAnimateTime = 300;
+        var $msgAnimateTime = 150;
+        var $msgShowTime = 2000;
+
+        function modalAnimate($oldForm, $newForm) {
+            var $oldH = $oldForm.height();
+            var $newH = $newForm.height();
+            $divForms.css("height", $oldH);
+            $oldForm.fadeToggle($modalAnimateTime, function () {
+                $divForms.animate({ height: $newH }, $modalAnimateTime, function () {
+                    $newForm.fadeToggle($modalAnimateTime);
+                });
+            });
+        }
+
+        function msgFade($msgId, $msgText) {
+            $msgId.fadeOut($msgAnimateTime, function () {
+                $(this).text($msgText).fadeIn($msgAnimateTime);
+            });
+        }
+
+        function msgChange($divTag, $iconTag, $textTag, $divClass, $iconClass, $msgText) {
+            var $msgOld = $divTag.text();
+            msgFade($textTag, $msgText);
+            $divTag.addClass($divClass);
+            $iconTag.removeClass("glyphicon-chevron-right");
+            $iconTag.addClass($iconClass + " " + $divClass);
+            setTimeout(function () {
+                msgFade($textTag, $msgOld);
+                $divTag.removeClass($divClass);
+                $iconTag.addClass("glyphicon-chevron-right");
+                $iconTag.removeClass($iconClass + " " + $divClass);
+            }, $msgShowTime);
+        }
+
+        $(function () {
+            $('#login_register_btn').click(function () { modalAnimate($formLogin, $formRegister) });
+            $('#register_login_btn').click(function () { modalAnimate($formRegister, $formLogin); });
+            $('#login_lost_btn').click(function () { modalAnimate($formLogin, $formLost); });
+            $('#lost_login_btn').click(function () { modalAnimate($formLost, $formLogin); });
+            $('#lost_register_btn').click(function () { modalAnimate($formLost, $formRegister); });
+            $('#register_lost_btn').click(function () { modalAnimate($formRegister, $formLost); });
+        });
+    </script>
+    <!-- /جاوااسکریپت مودال لاگین -->
+    <!-- جاوااسکریپت نتیجه لاگین/ثبت نام -->
+    <script type="text/javascript">
+        function SuccessLogin(result) {
+            //debugger
+            if (result == "Success") {
+                //واکشی فرم درج نقد
+                try {
+                    $.ajax({
+                        async: false,
+                        type: "POST",
+                        url: "/Blog/InitialCommentForm",
+                        data: {
+                            commentType: '@ParvazPardaz.Model.Enum.CommentType.Hotel',
+                            ownId: @Model.Id,
+                            parentId:0
+                        },
+                        success: function (fetchedForm) {
+                            $("#SectionComment").html(fetchedForm);
+                            document.getElementById("frm-login").reset();
+                            $('#login-modal').modal('toggle');
+                        },
+                        error: function (textStatus, errorThrown) {
+                            toastr.options = { "positionClass": "toast-top-center" }
+                            toastr.error('کاربر گرامی! مرورگر شما مورد نظر دچار مشکل شده است ، لطفا از مرورگر دیگری استفاده کنید', 'درج نقد', { timeOut: 5000 })
+                        }
+                    });
+                } catch (e) {
+                    toastr.options = { "positionClass": "toast-top-center" }
+                    toastr.error('کاربر گرامی! مرورگر شما مورد نظر دچار مشکل شده است ، لطفا از مرورگر دیگری استفاده کنید', 'درج نقد', { timeOut: 5000 })
+                }
+            }
+            else if (result == "Invalid") {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('کاربر گرامی! اطلاعات ورودی را مورد بررسی قرار دهید', 'ورود به سیستم', { timeOut: 5000 })
+                document.getElementById("frm-login").reset();
+            }
+            else if (result == "Banned") {
+                document.getElementById("frm-login").reset();
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('کاربر با اطلاعات وارد شده مسدود گردیده است', 'ورود به سیستم', { timeOut: 5000 })
+            }
+            else if (result == "Failure") {
+                document.getElementById("frm-login").reset();
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('کاربر گرامی! ورود به سیستم دچار مشکل گردیده است ، لطفا لحظاتی بعد اقدام کنید', 'ورود به سیستم', { timeOut: 5000 })
+            }else if (result == "SignupFailure") {
+                document.getElementById("frm-signup").reset();
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('کاربر گرامی! عضویت شما با مشکل مواجه شده است ، لطفا لحظاتی بعد اقدام کنید', 'عضویت در سیستم', { timeOut: 5000 })
+            }
+        }
+
+        function SuccessForgetPassword(data) {
+            //debugger;
+            if (data.isRedirect) {
+                //msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", data.msg);
+                //window.location.href = data.redirectUrl;
+            }
+            else {
+                //msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", data.validationMsg);
+
+                //$("#div-msg-validation-forget-password").hide("blind")
+                //$("#div-msg-validation-forget-password").html(data.validationMsg)
+                //$("#div-msg-validation-forget-password").show("blind")
+            }
+        }
+
+        function SuccessSignUp(data) {
+            //debugger;
+            if (data.isRedirect) {
+                //msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", data.validationMsg);
+                window.location.href = data.redirectUrl;
+            }
+            else {
+                //msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", data.validationMsg);
+                //$("#div-msg-validation-signup").hide("blind")
+                //$("#div-msg-validation-signup").html(data.validationMsg)
+                //$("#div-msg-validation-signup").show("blind")
+            }
+        }
+    </script>
+
+    <script src="~/Plugins/LikeDisLike/js/like-dislike.min.js"></script>
+    <script>
+        $('.rating').likeDislike({
+            reverseMode: false,
+            disabledClass: 'disable',
+            click: function (value, l, d, event) {
+                var likes = $(this.element).find('.likes');
+                var dislikes =  $(this.element).find('.dislikes');
+
+                likes.text(parseInt(likes.text()) + l);
+                dislikes.text(parseInt(dislikes.text()) + d);
+            }
+        });
+
+        function IsBeSubmit(element) {
+            //debugger;
+            if ($(element).hasClass('banned') == false) {
+                return true;
+            }else {
+                $(element).preventDefault();
+                return false;
+            }
+        }
+        function LikeDislikeSuccess(result) {
+            //debugger;
+            var secId = '#rating_' + result;
+            var likeId = '#like_' + result;
+            var dislike = '#dislike_' + result;
+
+            $(secId).likeDislike({
+                readOnly: true,
+                disabledClass: 'disable'
+            });
+
+            $(likeId).addClass("banned");
+            $(dislike).addClass("banned");
+        }
+    </script>
+}

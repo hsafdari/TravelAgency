@@ -1,0 +1,128 @@
+﻿<html lang="fa" dir="rtl">
+<head>
+    <title>به کی سفر خوش آمدید</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+</head>
+<body style="background-color: #24bdc3; margin: 0 !important; padding: 60px 0 !important;">
+    <table border="0" cellspacing="0" cellpadding="0" role="presentation" width="100%" style="width: 90%; max-width: 960px; margin: 40px auto; background: #fff; border-collapse: collapse !important;direction:rtl">
+        <link rel="stylesheet" href="http://164.215.128.132/ClientTheme/Blog/tour/css/font.css" />
+        <style media="all" type="text/css">
+            body, table, td, a {
+                -webkit-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
+            }
+
+            table, td {
+                mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                font-size: 0;
+            }
+
+            img {
+                -ms-interpolation-mode: bicubic;
+            }
+
+            img {
+                border: 0;
+                height: auto;
+                line-height: 100%;
+                outline: none;
+                text-decoration: none;
+            }
+
+            table {
+                border-collapse: collapse !important;
+            }
+
+            body {
+                height: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            @@media screen {
+                @@import url('http://164.215.128.132/ClientTheme/Blog/tour/css/font.css');
+            }
+
+            .center img {
+                width: 100%;
+                height: 32px;
+            }
+        </style>
+        <thead>
+            <tr>
+                <td width="320" style="width: 320px;">
+                    @Html.EmbedImage("~/ClientTheme/Blog/Email/email-header-slogan.png")
+                </td>
+                <td></td>
+                <td width="320" style="width: 320px;">
+                    @*<img src="/ClientTheme/Blog/Email/email-header-image.png">*@
+                    @Html.EmbedImage("~/ClientTheme/Blog/Email/email-header-image.png")
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.EmbedImage("~/ClientTheme/Blog/Email/email-header-shadow-r.png")
+                </td>
+                <td style="background: url('http://164.215.128.132/ClientTheme/Blog/Email/email-header-shadow-c.png') repeat-x;"></td>
+                <td>
+                    @Html.EmbedImage("~/ClientTheme/Blog/Email/email-header-shadow-l.png")
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3" style="color: #6d6e71; font-size: 18px; font-weight: normal; padding: 0 30px 30px 30px; font-family: IRANSans">
+                    <h1 style="color:#24bdc3; font-size:25px; font-weight: bold;"> @ViewBag.Name عزیز، خوش آمدید</h1>
+                    <p>خوشحالیم که به کی سفر پیوستید.<br>نام کاربری شمـا همان ایمیـلی است که با آن ثبت نام کردید.<br>توصیه‌ می‌کنیم برای بالا بردن سطح امنیت حساب کاربریتان، هر ماه رمز عبورتان را تغییر دهید.</p>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td width="320" style="width: 320px;">
+                    <a href="@(System.Configuration.ConfigurationManager.AppSettings["WebsiteUrl"].ToString())">
+                        @Html.EmbedImage("~/ClientTheme/Blog/Email/email-illustration-r.png")
+                    </a>
+                </td>
+                <td></td>
+                <td width="320" style="width: 320px;">
+                    <a href="@(System.Configuration.ConfigurationManager.AppSettings["WebsiteUrl"].ToString())/tourism/">
+                        @Html.EmbedImage("~/ClientTheme/Blog/Email/email-illustration-l.png")
+                    </a>
+                </td>
+            </tr>
+            <tr style="background: #f89521">
+                <td width="320" style="vertical-align: top; width:320px;">
+                    @Html.EmbedImage("~/ClientTheme/Blog/Email/email-footer-slogan.png")
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <a href="javascript:void(0)">
+                        @Html.EmbedImage("~/ClientTheme/Blog/Email/email-social-1.png")
+                    </a>
+                    <a href="javascript:void(0)">
+                        @Html.EmbedImage("~/ClientTheme/Blog/Email/email-social-2.png")
+                    </a>
+                    <a href="javascript:void(0)">
+                        @Html.EmbedImage("~/ClientTheme/Blog/Email/email-social-3.png")
+                    </a>
+                    <a href="https://www.instagram.com/charterantravel/">
+                        <img src="">
+                        @Html.EmbedImage("~/ClientTheme/Blog/Email/email-social-4.png")
+                    </a>
+                    <a href="https://twitter.com/Charterantravel">
+                        @Html.EmbedImage("~/ClientTheme/Blog/Email/email-social-5.png")
+                    </a>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

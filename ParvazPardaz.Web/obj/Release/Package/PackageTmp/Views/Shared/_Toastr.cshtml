@@ -1,0 +1,82 @@
+﻿@if (ViewBag.success == "PasswordReseted")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-right" }
+        toastr.success('@ParvazPardaz.Resource.General.Generals.YourPasswordReseted', '@ParvazPardaz.Resource.General.Generals.ResetPassword', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "LogIn")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-right" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.PleaseLogIn', '@ParvazPardaz.Resource.General.Generals.Reserve', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "create")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-right" }
+        toastr.success('@ParvazPardaz.Resource.General.Generals.CreateAlert', '@ParvazPardaz.Resource.General.Generals.CreateAlertTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "update")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-right" }
+        toastr.info('@ParvazPardaz.Resource.General.Generals.EditAlert', '@ParvazPardaz.Resource.General.Generals.EditAlertTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "delete")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-right" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.DeleteAlert', '@ParvazPardaz.Resource.General.Generals.DeleteAlertTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "Error")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-right" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "LackOfCredit")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-right" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.LackOfCredit', '@ParvazPardaz.Resource.General.Generals.ErrorTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "Confirm")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-right" }
+        toastr.info('@ParvazPardaz.Resource.General.Generals.ConfirmAlert', '@ParvazPardaz.Resource.General.Generals.ConfirmTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "DuplicateItemError")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-right" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.DuplicateAlert', '@ParvazPardaz.Resource.General.Generals.DuplicateTitle', { timeOut: 5000 })
+    </script>
+}
+@if (ViewBag.success == "SearchContentRequired")
+{
+    <script>
+        toastr.options = { "positionClass": "toast-top-right" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.SearchContentRequiredAlert', '@ParvazPardaz.Resource.General.Generals.Search', { timeOut: 5000 })
+    </script>
+}
+
+    @*@if (ViewBag.success == "couldNotCascadeDelete")
+        {
+
+            <script>
+                toastr.options = { "positionClass": "toast-top-right" }
+                toastr.error('@ParvazPardaz.Resources.Action.ActionResource.couldNotCascadeDelete', '@ParvazPardaz.Resources.Action.ActionResource.error', { timeOut: 5000 })
+            </script>
+
+        }
+    *@
+

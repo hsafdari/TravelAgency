@@ -1,0 +1,46 @@
+// @font-face {
+//   font-family: "Samim";
+//   font-style: normal;
+//   font-weight: bold;
+//   src: url('../fonts/samim/Samim-bold.eot');
+//   src: url('../fonts/samim/Samim-bold.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+//      url('../fonts/samim/Samim-bold.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+//      url('../fonts/samim/Samim-bold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+//      url('../fonts/samim/Samim-bold.ttf') format('truetype');
+// }
+// @font-face {
+//   font-family: "Samim";
+//   font-style: normal;
+//   font-weight: normal;
+//   src: url('../fonts/samim/Samim.eot');
+//   src: url('../fonts/samim/Samim.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+//      url('../fonts/samim/Samim.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+//      url('../fonts/samim/Samim.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+//      url('../fonts/samim/Samim.ttf') format('truetype');
+// }
+
+// ================================== Farsi-Digits =============================
+@font-face {
+  font-family: "Samim-FD";
+  font-style: normal;
+  font-weight: bold;
+  src: url('../fonts/samim/Farsi-Digits/Samim-bold-FD.eot');
+  src: url('../fonts/samim/Farsi-Digits/Samim-bold-FD.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+     url('../fonts/samim/Farsi-Digits/Samim-bold-FD.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+     url('../fonts/samim/Farsi-Digits/Samim-bold-FD.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+     url('../fonts/samim/Farsi-Digits/Samim-bold-FD.ttf') format('truetype');
+}
+@font-face {
+  font-family: "Samim-FD";
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/samim/Farsi-Digits/Samim-FD.eot');
+  src: url('../fonts/samim/Farsi-Digits/Samim-FD.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+     url('../fonts/samim/Farsi-Digits/Samim-FD.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+     url('../fonts/samim/Farsi-Digits/Samim-FD.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+     url('../fonts/samim/Farsi-Digits/Samim-FD.ttf') format('truetype');
+}
+
+a, p, h1 , h2 , h3 ,h4, h5, h6, li, button, input, div, table{
+  font-family: "Samim-FD";
+}

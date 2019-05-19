@@ -1,0 +1,37 @@
+﻿@model List<ParvazPardaz.ViewModel.AddPassengerViewModel>
+@foreach (var item in Model)
+{
+    <ul class="passenger list">
+        <li>
+            <span>نام و نام خانوادگی:</span>
+            <span>@item.FirstName @item.LastName</span>
+            <span>@item.EnFirstName @item.EnLastName </span>
+            <span>Name:</span>
+        </li>
+        <li>
+            <span>ملیت:</span>
+            <span>@item.BirthCountryTitle</span>
+            <span>@item.EnBirthCountryTitle</span>
+            <span>Nationality</span>
+        </li>
+        <li>
+            <span>تاریخ تولد:</span>
+            <span>@String.Format("{0:yyyy/MM/dd}",item.Birthdate)</span>
+            <span>@String.Format("{0}/{1}/{2}", item.Birthdate.Value.Year, item.Birthdate.Value.Month, item.Birthdate.Value.Day)</span>
+            <span>‌Brith Date:</span>
+        </li>
+        <li>
+            <span>جنسیت:</span>
+            <span>@item.Gender.GetDisplayValue()</span>
+            <span>@item.Gender</span>
+            <span>Gender:</span>
+        </li>
+        @*<li>
+            <span>شماره بلیط:</span>
+            <span>@item.ti</span>
+            <span>935115826547889</span>
+            <span>Ticket Number:</span>
+        </li>*@
+    </ul>
+}
+  

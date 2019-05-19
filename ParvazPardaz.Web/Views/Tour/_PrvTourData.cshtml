@@ -1,0 +1,15 @@
+﻿@model ParvazPardaz.Model.Entity.Tour.Tour
+@{
+    var tourSlider = Model.TourSliders;
+}
+@if (Model != null)
+{
+    <article id="TourDataSection" class="main tour-description white active clearfix">
+        <h1>@Model.Title</h1>
+        <div class="image-sq">
+            <img src="@(tourSlider !=null && tourSlider.Any() ? tourSlider.FirstOrDefault().ImageUrl : "")" alt="@Model.Title">
+        </div>
+        @Html.Raw(Model.Description)
+        <button name="toggle" class="btn-2 active">اطلاعات تور</button>
+    </article>
+}

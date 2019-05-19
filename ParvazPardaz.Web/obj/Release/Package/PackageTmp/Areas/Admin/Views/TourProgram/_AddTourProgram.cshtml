@@ -1,0 +1,218 @@
+﻿@model TourProgramViewModel
+
+<style>
+    .select2 {
+        width: 400px !important;
+    }
+
+    #mycheckboxdiv {
+        margin-top: 20px;
+    }
+
+    #mycheckbox {
+        margin-right: 15px;
+        margin-left: 5px;
+    }
+</style>
+<link rel="stylesheet" href="assets/plugins/iCheck/skins/all.css">
+
+@using (Ajax.BeginForm(Model.CRUDMode == CRUDMode.Create ? "Create" : "Edit", "TourProgram", null, new AjaxOptions()
+{
+    InsertionMode = Model.CRUDMode == CRUDMode.Create ? InsertionMode.InsertBefore : InsertionMode.Replace,
+    UpdateTargetId = Model.CRUDMode == CRUDMode.Create ? "ListViewTourProgram" : Model.SectionId,
+    HttpMethod = "POST",
+    OnSuccess = "LoadPartial(" + Model.TourId + ")"
+}, new { id = "frmTourProgram" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.CityId)
+    @Html.HiddenFor(model => model.TourId)
+
+    <div class="well">
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="@(Model.CRUDMode== CRUDMode.Create ? "fa fa-plus" : "fa fa-edit ")"></i>@(Model.CRUDMode == CRUDMode.Create ? ParvazPardaz.Resource.Tour.Tours.AddItinerary : ParvazPardaz.Resource.Tour.Tours.UpdateItinerary)
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-4">
+                            @Html.LabelFor(model => model.DayOrder, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-8">
+                            @*@Html.TextBoxFor(model => model.DayOrder, new { @class = "form-control" })*@
+                            @Html.SpinFor(model => model.DayOrder, new { @class = "form-control", }).Limit(1, 100).Postfix("اُم")
+                            @Html.ValidationMessageFor(model => model.DayOrder, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-4">
+                            @Html.LabelFor(model => model.DurationDay, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-8">
+                            @Html.SpinFor(model => model.DurationDay, new { @class = "form-control", }).Limit(1, 100).Postfix("روزه")
+                            @*@Html.TextBoxFor(model => model.DurationDay, new { @class = "form-control" })*@
+                            @Html.ValidationMessageFor(model => model.DurationDay, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.CityTitle, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-9">
+                            @Html.TextBoxFor(model => model.CityTitle, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CityTitle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="editor-label text-right col-md-1">
+                                @Html.LabelFor(model => model.SelectedActivities, new { @class = "control-label" })
+                            </div>
+                            <div class="editor-field col-md-10">
+                                @Html.DropDownListFor(model => model.SelectedActivities, ViewBag.Activities as IEnumerable<SelectListItem>, new { @class = "form-control search-select select", data_placehoder = @ParvazPardaz.Resource.User.Users.SelectRoles })
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-1">
+                            @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-10">
+                            @*@Html.TextAreaFor(model => model.Description, 5, 40, new { @class = "form-control" })*@
+                            @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="col-md-12"> 
+                    <input type="checkbox" name="mycheckbox" id="mycheckbox" value="0" />
+                    <span> کپی برنامه سفر از توری دیگر</span>
+                    <div id="mycheckboxdiv" style="display:none">
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.SelectedTourId, ViewBag.Tours as SelectList, new { @class = "form-control select", id = "SelectedTourId" })
+                        </div>
+                        <div class="col-md-2">
+                            <a onclick="AddTourProgramFromOtherTour()" class="btn btn-sm btn-warning">
+                                <i class="fa fa-plus"></i> افزودن برنامه سفر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@*<script src="assets/plugins/iCheck/jquery.icheck.min.js"></script>*@
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#frmTourProgram").removeData("validator");
+        $("#frmTourProgram").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmTourProgram");
+
+        $('.select').select2({
+            dir: "RTL",
+        });
+
+
+        $("#CityTitle").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: autocompleteUrl,
+                    type: "get",
+                    datatype: "json",
+                    cache: false,
+                    data: "term=" + $.trim(request.term),
+                    success: function (data) {
+
+                        response($.map(data, function (item) {
+                            return {
+                                label: (item.Title),
+                                value: (item.Value),
+                                id: item.Id,
+                            }
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                if (ui.item.id > 0) {
+                    $("#CityId").val(ui.item.id);
+                }
+            }
+        });
+
+
+
+
+
+    });
+
+    function AddTourProgramFromOtherTour() {
+        var tourId = $("#SelectedTourId").val();
+        if (tourId > 0) {
+
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "/TourProgram/CreateFromOtherTour",
+                data: {
+                    selectedTourId: tourId,
+                    currentTourId: @(Model.TourId)
+                },
+                success: function (relativeURL) {
+                    //alert(data);
+                    window.location.href = relativeURL;
+                    @*debugger;
+                    $("#ListViewTourProgram").html(data);
+                    LoadPartial(@(Model.TourId));*@
+                },
+                error: function (data, textStatus, errorThrown) {
+                    //debugger;
+                    //alert("error");
+                }
+            });
+        }
+    }
+
+    $(document).ready(function() {
+        //$('.icheckbox_square-red').on("click",function() {
+        //    $('#mycheckboxdiv').toggle(500);
+        //});
+
+        $('#mycheckbox').change(function() {
+            $('#mycheckboxdiv').toggle(500);
+        });
+    });
+</script>

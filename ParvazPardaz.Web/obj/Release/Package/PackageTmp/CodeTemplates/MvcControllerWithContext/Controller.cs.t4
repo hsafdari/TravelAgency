@@ -1,0 +1,287 @@
+﻿<#@ template language="C#" HostSpecific="True" Debug="True" #>
+<#@ output extension="cs" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Data.Linq" #>
+<#@ assembly name="EnvDTE" #>
+<#@ ScaffoldingAssembly Processor="ScaffoldingAssemblyLoader" #>
+<#
+var routePrefix = String.Empty;
+if (!String.IsNullOrWhiteSpace(AreaName)) {
+    routePrefix = "/" + AreaName;
+}
+routePrefix += "/" + ControllerRootName + "/";
+#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Microsoft.AspNet.Scaffolding.Core.Metadata" #>
+<#@ parameter type="System.String" name="ControllerName" #>
+<#@ parameter type="System.String" name="ControllerRootName" #>
+<#@ parameter type="System.String" name="Namespace" #>
+<#@ parameter type="System.String" name="AreaName" #>
+<#@ parameter type="System.String" name="ContextTypeName" #>
+<#@ parameter type="System.String" name="ModelTypeName" #>
+<#@ parameter type="System.String" name="AddModelTypeName" #>
+<#@ parameter type="System.String" name="EditModelTypeName" #>
+<#@ parameter type="System.String" name="ModelVariable" #>
+<#@ parameter type="System.String" name="AddModelVariable" #>
+<#@ parameter type="System.String" name="EditModelVariable" #>
+<#@ parameter type="Microsoft.AspNet.Scaffolding.Core.Metadata.ModelMetadata" name="ModelMetadata" #>
+<#@ parameter type="System.Boolean" name="UseAsync" #>
+<#@ parameter type="System.Boolean" name="IsOverpostingProtectionRequired" #>
+<#@ parameter type="System.String" name="BindAttributeIncludeText" #>
+<#@ parameter type="System.String" name ="OverpostingWarningMessage" #>
+<#@ parameter type="System.Collections.Generic.HashSet<System.String>" name="RequiredNamespaces" #>
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+<# if (UseAsync) { #>
+using System.Threading.Tasks;
+<# } #>
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using System.Linq;
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
+using ParvazPardaz.ViewModel;
+using ParvazPardaz.Common.Filters;
+using ParvazPardaz.Service.Security;
+using DataTables.Mvc;
+<# foreach (var namespaceName in RequiredNamespaces) { #>
+using <#= namespaceName #>;
+<# } #>
+
+namespace <#= Namespace #>
+{
+<#
+    var contextTypeName = ContextTypeName;
+    var entitySetName = ModelMetadata.EntitySetName;
+    var entitySetVariable = entitySetName.ToLowerInvariant();
+    var primaryKeyName = ModelMetadata.PrimaryKeys[0].PropertyName;
+    var primaryKeyShortTypeName = ModelMetadata.PrimaryKeys[0].ShortTypeName;
+    var primaryKeyDefaultValue = ModelMetadata.PrimaryKeys[0].DefaultValue;
+    var primaryKeyType = ModelMetadata.PrimaryKeys[0].TypeName;
+    var primaryKeyNullableTypeName = GetNullableTypeName(primaryKeyType, primaryKeyShortTypeName);
+    var lambdaVar = ModelVariable[0];   
+    var relatedProperties = ModelMetadata.RelatedEntities.ToDictionary(item => item.AssociationPropertyName);
+
+    string bindAttribute;
+    if (IsOverpostingProtectionRequired)
+    {
+        bindAttribute = String.Format("[Bind(Include=\"{0}\")] ", BindAttributeIncludeText);
+    }
+    else
+    {
+        bindAttribute = String.Empty;
+    }
+#>
+	[Mvc5AuthorizeAttribute(StandardRoles.Administrators, StandardRoles.SystemAdministrator)]
+    public class <#= ControllerName #> : Controller
+    {
+        #region	Fields
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly I<#= ControllerRootName #>Service _<#= ControllerRootName.ToLowerInvariant() #>Service;
+        #endregion
+
+        #region	Ctor
+        public <#= ControllerName #>(IUnitOfWork unitOfWork, I<#= ControllerRootName #>Service <#= ControllerRootName.ToLowerInvariant() #>Service)
+        {
+            _unitOfWork = unitOfWork;
+            _<#= ControllerRootName.ToLowerInvariant() #>Service = <#= ControllerRootName.ToLowerInvariant() #>Service;
+        }
+        #endregion
+
+        #region Index
+<# if (false) { #>
+        public async Task<ActionResult> Index(string msg)
+<# } else { #>
+        public ActionResult Index(string msg)
+<# } #>
+        {
+<#  var includeExpressions = "";
+        includeExpressions = String.Join("", relatedProperties.Values.Select(property => String.Format(".Include({0} => {0}.{1})", lambdaVar, property.AssociationPropertyName)));
+#>
+<# if(!String.IsNullOrEmpty(includeExpressions)) { #>
+<#		if (UseAsync) { #>
+            ViewBag.success = msg;
+            return View();
+<#		} else { #>
+            ViewBag.success = msg;
+            return View();
+<#		} #>
+<# } else { #>
+<#		if (UseAsync) { #>
+            ViewBag.success = msg;
+            return View();
+<#		} else { #>
+            ViewBag.success = msg;
+            return View();
+<#		} #>
+<# } #>
+        }
+
+        public ActionResult Get<#= ControllerRootName #>([DataSourceRequest]DataSourceRequest request)
+        {
+            var query = _<#= ControllerRootName.ToLowerInvariant() #>Service.GetViewModelForGrid();
+            var dataSourceResult = query.ToDataSourceResult(request);
+            return Json(dataSourceResult);
+        }
+
+        public JsonResult Get<#= ControllerRootName #>Table([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
+        {
+            #region Fetch Data
+            var query = _<#= ControllerRootName.ToLowerInvariant() #>Service.GetViewModelForGrid();
+            #endregion
+
+            #region Filtering
+            // Apply filters for searching
+            if (requestModel.Search.Value != string.Empty)
+            {
+                var value = requestModel.Search.Value.Trim();
+            }
+            var filteredCount = query.Count();
+            #endregion Filtering
+
+            #region Sorting
+            // Sorting
+            var sortedColumns = requestModel.Columns.GetSortedColumns();
+            var sortColumn = String.Empty;
+
+            foreach (var column in sortedColumns)
+            {
+                sortColumn += sortColumn != String.Empty ? "," : "";
+                sortColumn += (column.Data) + (column.SortDirection == Column.OrderDirection.Ascendant ? " asc" : " desc");
+            }
+
+            query = System.Linq.Dynamic.DynamicQueryable.OrderBy(query, sortColumn == string.Empty ? "Id asc" : sortColumn);//sortColumn + " " + sortColumnDirection);    
+            #endregion
+
+            #region Paging
+            // Paging
+            var data = query.Skip(requestModel.Start).Take(requestModel.Length).ToList();
+            #endregion
+
+            #region DataTablesResponse
+            var totalCount = query.Count();
+            var dataTablesResponse = new DataTablesResponse(requestModel.Draw, data, filteredCount, totalCount);
+            #endregion
+
+            return Json(dataTablesResponse, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Create
+        public ActionResult Create(string msg)
+        {
+            ViewBag.success = msg;
+            return View();
+        }
+
+
+        [HttpPost]
+<# if (UseAsync) { #>
+        public async Task<ActionResult> Create(Add<#= ModelTypeName #>ViewModel add<#= ModelTypeName #>ViewModel)
+<# } else { #>
+        public ActionResult Create(Add<#= ModelTypeName #>ViewModel add<#= ModelTypeName #>ViewModel)
+<# } #>
+        {
+            if (ModelState.IsValid)
+            {
+<# if(!String.IsNullOrEmpty(primaryKeyType) && String.Equals("System.Guid", primaryKeyType, StringComparison.OrdinalIgnoreCase)) { #>
+                add<#= ModelTypeName #>ViewModel.<#= primaryKeyName #> = Guid.NewGuid();
+<# } #>
+                var new<#= ControllerRootName #> = await _<#= ControllerRootName.ToLowerInvariant() #>Service.CreateAsync<Add<#= ModelTypeName #>ViewModel>(add<#= ModelTypeName #>ViewModel);
+<# if (UseAsync) {#>
+                return RedirectToAction("Create", new { msg = "create" });
+<# } else { #>
+                return RedirectToAction("Create", new { msg = "create" });
+<# } #>
+            }
+            return View(add<#= ModelTypeName #>ViewModel);
+        }
+        #endregion
+
+        #region Edit
+<# if (UseAsync) { #>
+        public async Task<ActionResult> Edit(<#= primaryKeyShortTypeName #> id)
+<# } else { #>
+        public ActionResult Edit(<#= primaryKeyShortTypeName #> id)
+<# } #>
+        {
+<# if (UseAsync) { #>
+            Edit<#= ModelTypeName #>ViewModel edit<#= ModelTypeName #>ViewModel = await _<#= ControllerRootName.ToLowerInvariant() #>Service.GetViewModelAsync<Edit<#= ModelTypeName #>ViewModel>(x => x.<#= primaryKeyName #> == id);            
+<# } else { #>
+            var edit<#= ModelTypeName #>ViewModel = db.<#= entitySetName #>.Find(id);
+<# } #>
+            return View(edit<#= ModelTypeName #>ViewModel);
+        }
+
+        [HttpPost]
+<# if (UseAsync) { #>
+        public async Task<ActionResult> Edit(Edit<#= ModelTypeName #>ViewModel edit<#= ModelTypeName #>ViewModel)
+<# } else { #>
+        public ActionResult Edit(Edit<#= ModelTypeName #>ViewModel edit<#= ModelTypeName #>ViewModel)
+<# } #>
+        {
+            if (ModelState.IsValid)
+            {
+                var update = await _<#= ControllerRootName.ToLowerInvariant() #>Service.UpdateAsync<Edit<#= ModelTypeName #>ViewModel>(edit<#= ModelTypeName #>ViewModel, t => t.<#= primaryKeyName #> == edit<#= ModelTypeName #>ViewModel.<#= primaryKeyName #>);
+                return RedirectToAction("Index", new { msg = "update" });
+            }
+            return View(edit<#= ModelTypeName #>ViewModel);
+        }
+        #endregion
+
+        #region Delete
+        [HttpPost]
+<# if (UseAsync) { #>
+        public async Task<JsonResult> Delete(<#= primaryKeyShortTypeName #> id)
+<# } else { #>
+        public ActionResult Delete(<#= primaryKeyShortTypeName #> id)
+<# } #>
+        {
+<# if (UseAsync) { #>
+            var model = await _<#= ControllerRootName.ToLowerInvariant() #>Service.DeleteLogicallyAsync(x => x.<#= primaryKeyName #> == id);            
+<# } else { #>
+            <#= ModelTypeName #> <#= ModelVariable #> = db.<#= entitySetName #>.Find(id);
+<# } #>
+            if (model.IsDeleted == true)
+            {
+                return Json(true, JsonRequestBehavior.DenyGet);
+            }
+            return Json(false, JsonRequestBehavior.DenyGet);
+        }
+        #endregion
+        
+    }
+}
+<#+
+// This function converts the primary key short type name to its nullable equivalent when possible. This is required to make
+// sure that an HTTP 400 error is thrown when the user tries to access the edit, delete, or details action with null values.
+    string GetNullableTypeName(string typeName, string shortTypeName)
+    {
+        // The exceptions are caught because if for any reason the type is user defined, then the short type name will be used.
+        // In that case the user will receive a server error if null is passed to the edit, delete, or details actions.
+        Type primaryKeyType = null;
+        try
+        {
+            primaryKeyType = Type.GetType(typeName);
+        }
+        catch
+        {
+        }
+        if (primaryKeyType != null && (primaryKeyType.IsPrimitive || IsGuid(typeName)))
+        {
+            return shortTypeName + "?";
+        }
+        return shortTypeName;
+    }
+
+    bool IsGuid(string typeName) {
+        return String.Equals("System.Guid", typeName, StringComparison.OrdinalIgnoreCase);
+    }
+#>

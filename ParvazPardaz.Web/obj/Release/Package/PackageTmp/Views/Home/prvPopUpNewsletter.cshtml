@@ -1,0 +1,35 @@
+﻿@model ParvazPardaz.ViewModel.Core.AddNewsLetterViewModel
+@using (Ajax.BeginForm("signup", "Home", null, new AjaxOptions { HttpMethod = "POST", OnSuccess = "success", OnFailure = "gotError" }, new { id = "frm-newsletter" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div id="popupsignupform" style=" margin-top:30% !important; direction:rtl">
+        <div style="clear:both"></div>
+        <div class="form-horizontal" role="form" style="background-color: #fecb04; border-radius: 5px 20px 10px 30px; padding: 40px 20px 40px 20px; ">
+            <div>
+                <div class="col-md-12" style="color: #14232a">ایمیل خود را ثبت و از اطلاعات گردشگری و قرعه كشی تور رایگان بهرمند شوید</div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="col-md-2 col-sm-2 col-xs-2 control-label"> ایمیل </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control text-left", id = "inputEmail", @Required = "Required", placeholder = " ایمیل " })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success" style="background-color: #14232a"> می خواهم ثبت کنم </button>
+                    <button type="button" onclick="SetHideInCookie()" class="btn btn-default" data-dismiss="modal">انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="well alert-success col-md-8 col-sm-8 col-xs-8" style="display:none;margin-top:30%" id="popupresult">
+        <p>با تشکر، اطلاعات شما با موفقیت ثبت شد</p>
+        <button type="button" class="btn btn-default" data-dismiss="modal">خروج</button>
+    </div>
+    <div class="well alert-success col-md-8 col-sm-8 col-xs-8" style="display: none; margin-top: 30%" id="popupresultdup">
+        <p>ایمیل شما قبلا در سامانه ثبت شده است</p>
+        <button type="button" class="btn btn-default" data-dismiss="modal">خروج</button>
+    </div>
+}

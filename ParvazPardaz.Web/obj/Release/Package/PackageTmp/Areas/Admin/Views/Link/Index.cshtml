@@ -1,0 +1,218 @@
+﻿@model ParvazPardaz.ViewModel.GridLinkViewModel
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+@if (ParvazPardaz.Resource.General.Generals.Direction == "RTL")
+{
+    if (ParvazPardaz.Resource.General.Generals.Regional == "AR")
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+    @Scripts.Render("~/Scripts/kendo/ar-IQ/js");
+    }
+    else
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+    @Scripts.Render("~/Scripts/kendo/fa-IR/js");
+    }
+}
+else
+{
+    @Styles.Render("~/content/kendo/LTR/css");
+    @Scripts.Render("/Scripts/kendo/en-US/js");
+}
+
+<h3>@ParvazPardaz.Resource.Link.LinkResource.LinkManagement </h3>
+
+<hr />
+
+<p>
+   
+    @if (Infrastructure.HasPermission.CanAccess("Edit", "/Admin/Link/Edit"))
+    {
+        <a onclick="edit()" class="btn btn-blue">
+            <i class="fa fa-edit"></i>
+            @ParvazPardaz.Resource.General.Generals.Edit
+        </a>
+    }
+    @if (Infrastructure.HasPermission.CanAccess("Delete", "/Admin/Link/Delete"))
+    {
+        <a onclick="del()" class="btn btn-red">
+            <i class="fa fa-trash-o"></i>
+            @ParvazPardaz.Resource.General.Generals.Delete
+        </a>
+    }
+</p>
+<div id="popUp"></div>
+<div class="k-rtl">
+    @(Html.Kendo().Grid<ParvazPardaz.ViewModel.GridLinkViewModel>()
+        .Name("Grid")
+        .Columns(columns =>
+            {
+                columns.Bound(model => model.typeId).Groupable(false).Width(70);
+                columns.Bound(model => model.URL).Groupable(false).Width(150).SetStringHtmlAttribute("class='url'");
+                columns.Bound(model => model.URL).Width(100).Groupable(false).Filterable(false).ClientTemplate("<a href='#=URL#' target='_blank'>مشاهده</a>");
+                //columns.Bound(model => model.URL).ClientTemplate("<a href='\\#' title='hi' onclick=\"copyToClipboard(#=URL#)\">کپی لینک</a>").Filterable(false).Groupable(false).Sortable(false).Width(80).Title("کپی لینک");
+                columns.Bound(model => model.URL).ClientTemplate("<a href='\\#' onclick=\"copyToClipboard('#=URL#')\" class=\"tooltips\" data-original-title=\" کپی لینک\"><i class=\"CopyToClipboard fa clip-copy-3 \"></i></a>").Filterable(false).Groupable(false).Sortable(false).Width(80).Title("کپی لینک").Width(50);
+                columns.Bound(model => model.Name).Width(150);
+                columns.Bound(model => model.Title).Width(150);
+                columns.Bound(model => model.Keywords).Width(150);
+                columns.Bound(model => model.Description).Width(150);
+                columns.Bound(model => model.Visible).Width(50);
+                columns.Bound(model => model.linkType).Width(150);
+                columns.Bound(model => model.CustomMetaTags).Width(150);
+                columns.Bound(model => model.CreatorUserName).Width(150);
+                columns.Bound(model => model.CreatorDateTime).Groupable(false).ClientTemplate("#=(CreatorDateTime != null ? moment(CreatorDateTime).format('jYYYY/jMM/jDD HH:mm') : '')#").Width(150);
+                columns.Bound(model => model.LastModifierUserName).Groupable(false).Width(150);
+                columns.Bound(model => model.LastModifierDate).Groupable(false).ClientTemplate("#=(LastModifierDate != null ? moment(LastModifierDate).format('jYYYY/jMM/jDD HH:mm') : '')#").Width(150);
+                columns.Bound(model => model.Target).Groupable(false).Width(100);
+                columns.Bound(model => model.Rel).Groupable(false).Width(150);
+            })
+            .Groupable()
+            .Pageable()
+            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single)
+            .Type(GridSelectionType.Row))
+            .Navigatable()
+            .Sortable()
+            .Scrollable(scr => scr.Height(400))
+            .Filterable()
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Sort(st =>
+                        {
+                            st.Add(s => s.CreatorDateTime).Descending();
+                            st.Add(s => s.Id).Descending();
+                        })
+
+                .Model(model => model.Id(item => item.Id))
+                .Read(read => read.Action("GetLink", "Link", null)).PageSize(50)
+            )
+    )
+    @Html.Partial("_Toastr")
+</div>
+
+@Html.Partial("_ConfirmationMessage")
+
+@section scripts{
+    <script>
+        var CreateUrl = "@Url.Action("Create", "Link")";
+        var EditUrl = "@Url.Action("Edit", "Link")";
+        var DeleteUrl = "@Url.Action("Delete", "Link")";
+    </script>
+
+    <script>
+        function GetSelectedItemParameters() {
+
+            var gview = $("#Grid").data("kendoGrid");
+            var SelectedItem = gview.dataItem(gview.select());
+            if (SelectedItem == null) {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlert', '@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlertTitle', { timeOut: 5000 })
+                return false;
+            }
+            else {
+                return SelectedItem;
+            }
+        }
+
+        function CheckSelectedGrid() {
+            var gview = $("#Grid").data("kendoGrid");
+            var selectedItem = gview.dataItem(gview.select());
+            if (selectedItem == null) {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlert', '@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlertTitle', { timeOut: 5000 })
+                return false;
+            }
+            else {
+                var selectedId = selectedItem.Id;
+                return selectedId;
+            }
+        }
+        var wndRemove = $("#ConfirmationMessage").kendoWindow({
+            title: "",
+            modal: true,
+            visible: false,
+            resizable: false,
+            width: 400,
+        }).data("kendoWindow");
+
+        function create(parameters) {
+            window.location.replace(CreateUrl);
+        }
+
+        function edit(parameters) {
+
+            var result = CheckSelectedGrid();
+            if (result) {
+                //window.location.replace(EditUrl + "/" + result);
+                $("#popUp").kendoWindow({
+                    title: "",
+                    modal: true,
+                    visible: false,
+                    resizable: false,
+                    width: 800,
+                    content: {
+                        url: "/Admin/Link/Edit/" + result,
+
+                    }
+                }).data("kendoWindow").center().open();
+            }
+        }
+
+        function del(parameters) {
+            var result = CheckSelectedGrid();
+            if (result) {
+                wndRemove.center();
+                wndRemove.open();
+            }
+        }
+        $("#btnYes").click(function () {
+            var gview = $("#Grid").data("kendoGrid");
+            var selectedItem = gview.dataItem(gview.select());
+            var selectedId = selectedItem.Id;
+            $.ajax({
+                url: DeleteUrl,
+                type: "post",
+                dataType: "json",
+                cache: false,
+                data: { Id: selectedId },
+                success: function (result) {
+                    var gridm = $("#Grid").data("kendoGrid");
+                    if (gridm != undefined && result) {
+                        if (gridm.dataSource.transport.cache._store)
+                            gridm.dataSource.transport.cache._store = {};
+                        gridm.dataSource.fetch();
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.DeleteAlert', '@ParvazPardaz.Resource.General.Generals.DeleteAlertTitle', { timeOut: 5000 })
+                    }
+                    else {
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                    }
+                },
+                error: function (xhr) {
+                    toastr.options = { "positionClass": "toast-top-center" }
+                    toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                }
+            });
+            wndRemove.close();
+        })
+        $("#btnNo").click(function () {
+            wndRemove.close();
+        })
+    </script>
+    <script type="text/javascript">
+        function copyToClipboard(url) {
+            var url = url;
+            window.prompt("Copy to clipboard: Ctrl+C, Enter", url);
+        }
+    </script>
+}
+
+

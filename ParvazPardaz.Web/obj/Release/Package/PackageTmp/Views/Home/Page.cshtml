@@ -1,0 +1,24 @@
+﻿@model PostDetailViewModel
+@{
+    ViewBag.Title = Model.Title;
+
+}
+<link rel="canonical" href="@Request.Url.AbsoluteUri.Replace("/tour/","/")" />
+@Styles.Render("~/bundles/TourCustomCss")
+<link href="~/ClientTheme/Blog/Tour/css/about.css" rel="stylesheet" />
+<section class="top-img">
+    <div>
+        <img src="@Model.ImageUrl" alt="@Model.Title">
+    </div>
+</section>
+<section class="section-about">
+    <div class="container">
+        <h1 class="title">
+            @Model.Title
+        </h1>
+        <section class="content" style="display:block;">
+            @Html.Raw(Model.PostContent)
+        </section>
+    </div>
+</section>
+

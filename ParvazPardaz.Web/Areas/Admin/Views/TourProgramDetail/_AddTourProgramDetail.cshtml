@@ -1,0 +1,206 @@
+﻿@model TourProgramDetailViewModel
+
+<style>
+    .select {
+        border: 1px solid #D5D5D5 !important;
+    }
+
+    div.k-window {
+        z-index: 1050 !important;
+    }
+
+    .select2 {
+        width: 100% !important;
+    }
+</style>
+
+
+@using (Ajax.BeginForm(Model.CRUDMode == CRUDMode.Create ? "Create" : "Edit", "TourProgramDetail", null, new AjaxOptions()
+{
+    InsertionMode = Model.CRUDMode == CRUDMode.Create ? InsertionMode.InsertBefore : InsertionMode.Replace,
+    UpdateTargetId = Model.CRUDMode == CRUDMode.Create ? "ListViewTourProgramDetail" : Model.SectionId,
+    HttpMethod = "POST",
+    //OnSuccess = "LoadPartiaForTourProgramDetail(" + Model.TourProgramId + ")"
+}, new { id = "frmTourProgramDetail", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.TourProgramId)
+
+    <div class="well">
+        <div class="form-horizontal">
+
+            <h3>افزودن جزییات</h3><hr />
+
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-1">
+                            @Html.LabelFor(model => model.TourActivityId, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-9">
+                            @Html.DropDownListFor(model => model.TourActivityId, Model.ActivitySelectList, new { @class = "form-control select" })
+                            @Html.ValidationMessageFor(model => model.TourActivityId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @*<div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <div class="editor-label text-right col-md-1">
+                                @Html.LabelFor(model => model.Title, new { @class = "control-label " })
+                            </div>
+                            <div class="editor-field col-md-9">
+                                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <div class="editor-label text-right col-md-1">
+                                @Html.LabelFor(model => model.File, new { @class = "control-label" })
+                            </div>
+                            <div class="editor-field col-md-9">
+                                @Html.FileUploaderFor(model => model.File).AddMore(false).IsMultiple(false).ItemAppendToEnd(false).RemoveConfirmation(false).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(false).Extension(new List<string>() { "jpg", "png", "jpeg" }).Limit(1)
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-1">
+                            @Html.LabelFor(model => model.DetailDescription, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-10" style="text-align:right">
+                            @Html.TextAreaFor(model => model.DetailDescription, new { @class = "form-control DetailDescription" })
+                            <p class="text-danger">توضیحات این قسمت به توضیحات فعالیت مورد نظرتان افزوده خواهد شد</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-7" style="text-align:right">
+                    <button type="button" onclick="SendNewFormData()" class="btn btn-primary">
+                        <i class="@(Model.CRUDMode== CRUDMode.Create ? "fa fa-plus" : "fa fa-edit ")"></i>@(Model.CRUDMode == CRUDMode.Create ? ParvazPardaz.Resource.Tour.Tours.AddItinerary : ParvazPardaz.Resource.Tour.Tours.UpdateItinerary)
+                    </button>
+                    <span id="DivPreloader" style="display: none">
+                        <img src="~/Content/Preloader/preloader.gif" style="width:50px;" />
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+
+    $('.select').select2({ dir: "RTL" });
+
+    $(document).ready(function () {
+        $("#frmTourProgramDetail").removeData("validator");
+        $("#frmTourProgramDetail").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmTourProgramDetail");
+    });
+
+
+    function SendNewFormData() {
+        debugger;
+        tinymce.triggerSave();
+        
+        dataString = new FormData($("#frmTourProgramDetail").get(-1));
+        contentType = false;
+        processData = false;
+        $("#DivPreloader").show();
+        //debugger;
+        $.ajax({
+            url: '/Admin/TourProgramDetail/Create/',
+            data: dataString,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                if (data == false) {
+                    toastr.options = { "positionClass": "toast-top-center" }
+                    toastr.error('لطفا تمامی فیلدها را وارد نمایید !', '', { timeOut: 5000 })
+                    $("#DivPreloader").hide();
+                }
+                else {
+                    $("#ListViewTourProgramDetail").append(data)
+                    LoadPartiaForTourProgramDetail($('#TourProgramId').val())
+                    $("#DivPreloader").hide();
+                }
+
+            }
+        });
+    }
+
+
+</script>
+
+<script src="~/Plugins/tinymce/tinymce.min.js" type="text/javascript"></script>
+<script src="~/Plugins/tinymce/langs/fa.js"></script>
+
+<script type="text/javascript">
+
+    tinymce.init({
+        selector: "#DetailDescription",
+        valid_elements: "*[*]",
+        menubar: false,
+        convert_urls: false,
+        valid_children: "+body[i],+body[section],+div[i]",
+        theme: "modern",
+        height: 200,
+        plugins: [
+            "autolink link"
+        ],
+        content_css: "/Plugins/tinymce/content.css",
+        toolbar: " link ",
+        file_browser_callback: RoxyFileBrowser,
+        style_formats: [
+    { title: 'Bold text', inline: 'b' },
+    { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } },
+    { title: 'Red header', block: 'h1', styles: { color: '#ff0000' } },
+    { title: 'Example 1', inline: 'span', classes: 'example1' },
+    { title: 'Example 2', inline: 'span', classes: 'example2' },
+    { title: 'Table styles' },
+    { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }
+        ]
+    });
+    var roxyFileman = '/Areas/Admin/scripts/RoxyFileManager/index.html?integration=tinymce4';
+    function RoxyFileBrowser(field_name, url, type, win) {
+        var cmsURL = roxyFileman;  // script URL - use an absolute path!
+        if (cmsURL.indexOf("?") < 0) {
+            cmsURL = cmsURL + "?type=" + type;
+        }
+        else {
+            cmsURL = cmsURL + "&type=" + type;
+        }
+        cmsURL += '&input=' + field_name + '&value=' + win.document.getElementById(field_name).value;
+        tinyMCE.activeEditor.windowManager.open({
+            file: cmsURL,
+            title: 'ParvazPardaz File Manager',
+            width: 850, // Your dimensions may differ - toy around with them!
+            height: 650,
+            resizable: "yes",
+            plugins: "media",
+            inline: "yes", // This parameter only has an effect if you use the inlinepopups plugin!
+            close_previous: "no"
+        }, {
+            window: win,
+            input: field_name
+        });
+        return false;
+    }
+</script>

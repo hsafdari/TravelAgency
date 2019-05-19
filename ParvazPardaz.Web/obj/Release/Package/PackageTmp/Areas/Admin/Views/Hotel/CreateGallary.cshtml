@@ -1,0 +1,55 @@
+﻿@model ParvazPardaz.ViewModel.ImageSliderViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+    @Html.HiddenFor(model => model.PostId)
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.Tour.Tours.HotelGalleryManagement </h3>
+        <hr />
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.ImageTitle, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+               @Html.EditorFor(model=>model.ImageTitle)
+                @Html.ValidationMessageFor(model => model.ImageTitle, "", new { @class = "text-danger" })
+            </div>
+        </div> 
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageDesc, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+              @Html.EditorFor(model => model.ImageDesc)
+                @Html.ValidationMessageFor(model => model.ImageDesc, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="alert alert-info">
+                    <i class="fa fa-info-circle"></i>
+                    <strong>توجه!</strong> تصویر را در اندازه عرض 869 و ارتفاع 400 پیکسل وارد کنید
+                    @*@ParvazPardaz.Resource.Tour.Tours.PicSizeHotel*@
+                </div>
+            </div>
+        </div> 
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.File, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.FileUploaderFor(model => model.File).Limit(50).AddMore(true).IsMultiple(true).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(true).Extension(new List<string>() { "jpg", "png", "jpeg" }).Limit(50).UploadUrl("/Admin/Hotel/CreateGallaryUpload/", new Dictionary<string, object>() { { "PostId ", Model.PostId } }).RemoveUrl("/Admin/Hotel/DeleteGallery/").Edit(Model.EditModeFileUploads).RemoveUrl("/Admin/Hotel/DeleteGallery/")
+                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+            </div>
+        </div>  
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-11">
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Edit", "Hotel", new { id = Model.PostId }, new { @class = "btn btn-custom red", })
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Finish, "Index", "Hotel", null, new { @class = "btn btn-custom green" })
+            </div>
+        </div>
+
+    </div>
+
+
+

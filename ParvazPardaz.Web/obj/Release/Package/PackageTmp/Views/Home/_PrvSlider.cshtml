@@ -1,0 +1,27 @@
+﻿@model List<ParvazPardaz.ViewModel.SlidersUITourHomeViewModel>
+@if (Model != null && Model.Any())
+{
+    <section class="roll">
+        <ul class="cards">
+            @foreach (var item in Model)
+        {
+        <li class="clearfix">
+            <a href="@item.NavigationUrl" target="_blank">
+                <div style="background: whitesmoke url('@item.ImageURL')"></div>
+                <h2>@item.ImageTitle</h2>
+                <h3>@item.NavDescription</h3>
+                <p>
+                    @item.footerLine1
+                    <br />
+                    @item.footerLine2
+                </p>
+                <em>@String.Format("{0:#,0}", item.Price.Value)</em>
+                <i>@item.HeaderDays</i>
+            </a>
+        </li>
+        }
+        </ul>
+        <button type="button" name="next" onclick="roll(1,this)"></button>
+        <button type="button" name="prev" onclick="roll(-1,this)"></button>
+    </section>
+}

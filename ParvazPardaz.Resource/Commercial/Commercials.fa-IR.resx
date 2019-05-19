@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="City" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="ContactGroupIdList" xml:space="preserve">
+    <value>گروه (های) دفترچه تلفن</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>جنسیت</value>
+  </data>
+  <data name="jobGroupParent" xml:space="preserve">
+    <value>گروه والد</value>
+  </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>عنوان کار</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>نام خانوادگی</value>
+  </data>
+  <data name="LetterTitle" xml:space="preserve">
+    <value>عنوان نامه</value>
+  </data>
+  <data name="ManagementContactGroups" xml:space="preserve">
+    <value>مدیریت گروه های دفترچه تلفن</value>
+  </data>
+  <data name="ManagementContacts" xml:space="preserve">
+    <value>مدیریت دفترچه های تلفن</value>
+  </data>
+  <data name="ManagementContactsForUser" xml:space="preserve">
+    <value>مدیریت دفترچه های تلفن برای</value>
+  </data>
+  <data name="ManagementInternetAddressTypes" xml:space="preserve">
+    <value>مدیریت انواع آدرس های اینترنتی</value>
+  </data>
+  <data name="ManagementJobGroup" xml:space="preserve">
+    <value>مدیریت گروه های کاری</value>
+  </data>
+  <data name="ManagementPhoneTypes" xml:space="preserve">
+    <value>مدیریت انواع شماره های تماس</value>
+  </data>
+  <data name="ManagementPostalAddressType" xml:space="preserve">
+    <value>مدیریت انواع آدرس پستی</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>عنوان</value>
+  </data>
+  <data name="UnitOfMeasurement" xml:space="preserve">
+    <value>واحد اندازه گیری</value>
+  </data>
+  <data name="UnitOfMeasurementMangement" xml:space="preserve">
+    <value>مدیریت واحدهای اندازه گیری</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>شخص</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>آدرس</value>
+  </data>
+  <data name="AdminConfirmDate" xml:space="preserve">
+    <value>تاریخ تایید مدیر سامانه</value>
+  </data>
+  <data name="BusinessPersonality" xml:space="preserve">
+    <value>شخصیت تجاری</value>
+  </data>
+  <data name="CellPhone" xml:space="preserve">
+    <value>تلفن</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>نام شرکت</value>
+  </data>
+  <data name="CountryCode" xml:space="preserve">
+    <value>کد کشور</value>
+  </data>
+  <data name="InternalCode" xml:space="preserve">
+    <value>کد داخلی</value>
+  </data>
+  <data name="IsAdminConfirmed" xml:space="preserve">
+    <value>مورد تایید مدیر سامانه؟</value>
+  </data>
+  <data name="JobGroupId" xml:space="preserve">
+    <value>گروه کاری</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>همراه</value>
+  </data>
+  <data name="OrganizationPost" xml:space="preserve">
+    <value>سمت</value>
+  </data>
+  <data name="Picture" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+  <data name="ServcieDescription" xml:space="preserve">
+    <value>خلاصه خدمات</value>
+  </data>
+  <data name="ManagementBusinessCard" xml:space="preserve">
+    <value>مدیریت کارت ویزیت</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>کد پستی</value>
+  </data>
+  <data name="BusinessCardFront" xml:space="preserve">
+    <value>روی کارت ویزیت</value>
+  </data>
+  <data name="BusinessCardBack" xml:space="preserve">
+    <value>پشت کارت ویزیت</value>
+  </data>
+  <data name="LegalPersonality" xml:space="preserve">
+    <value>شخصیت حقوقی</value>
+  </data>
+  <data name="NaturalPersonality" xml:space="preserve">
+    <value>شخصیت حقیقی</value>
+  </data>
+  <data name="IsSaveToContacts" xml:space="preserve">
+    <value>آیا مایل هستید اطلاعات تماس بالا در دفترچه تلفن شما ثبت گردد؟</value>
+  </data>
+  <data name="CardLanguage" xml:space="preserve">
+    <value>زبان کارت</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>ایمیل</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>وبسایت</value>
+  </data>
+  <data name="GeographicCoordinates" xml:space="preserve">
+    <value>موقعیت جغرافیایی</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>شرکت</value>
+  </data>
+  <data name="RequiredContactGroups" xml:space="preserve">
+    <value>حداقل یک گروه را انتخاب نمایید</value>
+  </data>
+  <data name="CompanyManager" xml:space="preserve">
+    <value>نام مدیر</value>
+  </data>
+  <data name="AddBusinessCard" xml:space="preserve">
+    <value>افزودن کارت ویزیت</value>
+  </data>
+  <data name="AdminConfirmFullName" xml:space="preserve">
+    <value>نام تایید کننده</value>
+  </data>
+  <data name="BusinessCards" xml:space="preserve">
+    <value>کارت های ویزیت</value>
+  </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>دفترچه های تلفن</value>
+  </data>
+  <data name="ManagementBank" xml:space="preserve">
+    <value>مدیریت بانک</value>
+  </data>
+  <data name="BankName" xml:space="preserve">
+    <value>نام بانک</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>نام و نام خانوادگی</value>
+  </data>
+  <data name="AllPhones" xml:space="preserve">
+    <value>شماره های تلفن</value>
+  </data>
+  <data name="AllInternetAddresses" xml:space="preserve">
+    <value>آدرس های اینترنتی</value>
+  </data>
+  <data name="ManagementMyContacts" xml:space="preserve">
+    <value>مدیریت دفترچه تلفن های من</value>
+  </data>
+  <data name="AddContacts" xml:space="preserve">
+    <value>افزودن دفترچه تلفن</value>
+  </data>
+  <data name="Cantacts" xml:space="preserve">
+    <value>دفترچه های تلفن</value>
+  </data>
+  <data name="ManagementMyFinancialAccounts" xml:space="preserve">
+    <value>مدیریت حسابهای بانکی من</value>
+  </data>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>شماره حساب</value>
+  </data>
+  <data name="AccountTitle" xml:space="preserve">
+    <value>عنوان حساب</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>بانک</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>شماره روی کارت</value>
+  </data>
+  <data name="ShabaNumber" xml:space="preserve">
+    <value>شماره شبا</value>
+  </data>
+  <data name="CardNumberField1" xml:space="preserve">
+    <value>فیلد اول شماره کارت</value>
+  </data>
+  <data name="CardNumberField2" xml:space="preserve">
+    <value>فیلد دوم شماره کارت</value>
+  </data>
+  <data name="CardNumberField3" xml:space="preserve">
+    <value>فیلد سوم شماره کارت</value>
+  </data>
+  <data name="CardNumberField4" xml:space="preserve">
+    <value>فیلد چهارم شماره کارت</value>
+  </data>
+  <data name="CardNumberField5" xml:space="preserve">
+    <value>فیلد پنجم شماره کارت</value>
+  </data>
+  <data name="Financial" xml:space="preserve">
+    <value>مالی</value>
+  </data>
+  <data name="AddFinancialAccount" xml:space="preserve">
+    <value>افزودن حساب بانکی</value>
+  </data>
+</root>

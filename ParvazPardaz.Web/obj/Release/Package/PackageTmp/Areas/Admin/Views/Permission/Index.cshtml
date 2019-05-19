@@ -1,0 +1,172 @@
+﻿@model ParvazPardaz.ViewModel.ControlActionViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<style>
+    .dataTables_processing {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+        margin-left: 250px;
+        margin-top: 1px;
+        display: block;
+        position: fixed !important;
+    }
+</style>
+<h3>@ParvazPardaz.Resource.General.Generals.ManagementPermission </h3>
+<hr />
+@*<div class="loader">جعفر در حال کار است</div>*@
+<p>
+    <h5>@ParvazPardaz.Resource.General.Generals.SearchParameters</h5>
+
+    <div>
+        <div class="form-group">
+            <label class="control-label col-md-4"></label>
+            <div class="col-md-4">
+                @Html.DropDownList("Roles", ViewBag.Roles as IEnumerable<SelectListItem>, new { @class = "search-select select", data_placehoder = @ParvazPardaz.Resource.User.Users.SelectRoles })
+           
+                <button type="button" id="searchbutton" name="searchbutton" class="btn btn-primary" value="@ParvazPardaz.Resource.General.Generals.Search">@ParvazPardaz.Resource.General.Generals.recoverAccess</button>
+            </div>
+        </div>
+    </div>
+
+</p>
+<div id="table">
+    <table id="grid" class="table table-bordered table-hover table-full-width dataTable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Selected)</th>
+                <th>@Html.DisplayNameFor(model => model.Controller)</th>
+                <th>@Html.DisplayNameFor(model => model.Method)</th>
+                <th>@Html.DisplayNameFor(model => model.Permission)</th>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+@Html.Partial("_Toastr")
+@Html.Partial("_ConfirmationMessage")
+
+@section scripts{
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+    <script>
+        var table;
+        $(document).ready(function () {
+            var $ = jQuery.noConflict();
+            table = $("#grid").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                'select': true,
+                oLanguage: { sProcessing: "<div class='loader'></div>" },
+                scrollX: true,
+                scrollCollapse: true,
+                "ajax": {
+                    "url": "/Admin/Permission/GetPermission",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: function (d) {
+                        d.RoleId = $("#Roles").val()
+                    }
+                },
+                "columnDefs":
+                [{
+                    "targets": [1],
+                    "visible": true,
+                    "searchable": false
+                },
+                {
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
+                , "columns": [
+                { "data": "Id", name: "Id", "autoWidth": true },
+                { "data": "Id", name: "Id", "autoWidth": true, "visible": true, },
+                //{ "data": "Selected", name: "Selected", "autoWidth": true },
+                {
+                    "data": "Selected", name: "Selected", "autoWidth": true,
+                    render: function (data, type, row) {
+                        if (data) {
+                            return ("<input type='checkbox' checked  onclick='selectitem(\"" + row.Permission + "\",\"" + row.Method + "\",this)'/>");
+                        }
+                        else {
+                            return ("<input type='checkbox'  onclick='selectitem(\"" + row.Permission + "\",\"" + row.Method + "\",this)'/>");
+
+                        }
+
+                    }
+                },
+                { "data": "Controller", name: "Controller", "autoWidth": true },
+                {
+                    "data": "Method", name: "Method", "autoWidth": true, render: function (data, type, row) {
+                        return ("<a href=\"" + row.Method + "\" target='_blank'>مشاهده آدرس<a/>");
+                    }
+                },
+                { "data": "Permission", name: "Permission", "autoWidth": true },
+                { "data": "Title", name: "Title", "autoWidth": true },
+                ],
+                "order": [[1, 'desc']]
+            });
+            // Add event listener for opening and closing details
+            $('#grid tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                    // Open this row
+
+                }
+            });
+            $("#searchbutton").click(function () {
+                table.ajax.reload();
+            });
+
+
+        });
+    </script>
+    <!-- Create -->
+    <script type="text/javascript">
+        function selectitem(Permission, method, thisElement) {
+            var RoleId = $("#Roles").val();
+
+            var access = $(thisElement).is(':checked');
+            //Change
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Permission/Change",
+                data: {
+                    RoleId: RoleId,
+                    Url: method,
+                    access: access,
+                    Permission: Permission
+                }
+            }).done(function (data) {
+            });
+        }
+    </script>
+}
+
+

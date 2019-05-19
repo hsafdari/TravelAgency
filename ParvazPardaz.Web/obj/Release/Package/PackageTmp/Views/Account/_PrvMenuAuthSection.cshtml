@@ -1,0 +1,45 @@
+﻿@{
+    var fullName = Session["FullName"];
+}
+<nav>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a class="profile-dropdown-toggle" href="javascript:void(0)">
+            <img src="~/ClientTheme/Blog/Tour/img/person.png" />
+            @if (fullName != null)
+            {
+                @Html.Raw(fullName)
+            }
+            else
+            {
+                @(User.IsInRole("Customer") ? "سامانه کاربری" : "سامانه مدیریت")
+            }
+        </a>
+    }
+    else
+    {
+        <a class="profile-modal-toggle" href="javascript:void(0)"><img src="~/ClientTheme/Blog/Tour/img/person.png" /> ورود / عضویت </a>
+    }
+    <a href="tel:+9821343456"><img src="~/ClientTheme/Blog/Tour/img/headset.png" />پشتیبانی: ‌۳۴۳۴۵۶ ۰۲۱</a>
+</nav>
+@if (User.Identity.IsAuthenticated)
+{
+    if (!User.IsInRole("Customer"))
+    {
+        <ul class="profile-dropdown">
+            <li><a href="/Admin/Dashboard/Index">داشبورد</a></li>
+            <li><a href="/Account/LogOff">خروج از حساب کاربری</a></li>
+        </ul>
+    }
+    else if (User.IsInRole("Customer"))
+    {
+        <ul class="profile-dropdown">
+            <li><a href="/Customer/Dashboard/Index">داشبورد</a></li>
+            <li><a href="/Customer/MyAccount/MyProfile#user-info">اطلاعات کاربری</a></li>
+            <li><a href="/Customer/Order/Index">سفارش های من</a></li>
+            <li><a href="javascript:void(0)">تراکنش های مالی</a></li>
+            <li><a href="javascript:void(0)">لیست مسافران</a></li>
+            <li><a href="/Account/LogOff">خروج از حساب کاربری</a></li>
+        </ul>
+    }
+}

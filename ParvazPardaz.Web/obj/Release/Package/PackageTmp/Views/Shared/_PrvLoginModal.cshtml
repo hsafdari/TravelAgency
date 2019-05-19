@@ -1,0 +1,149 @@
+﻿<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <img alt="کی سفر" class="img-circle" id="img_logo" src="/Content/charteran/assets/img/logo.png" style="width:250px; height:100px;" />
+                <button type="button" id="btnCloseModal" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="awe-icon awe-icon-close-o" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div id="div-forms">
+                <div id="login-form">
+                    @Html.Partial("_PrvLogin", new ParvazPardaz.ViewModel.LoginCustomerViewModel())
+                </div>
+                <div id="lost-form" style="display:none;">
+                    @*@Html.Partial("~/Views/Account/_PrvForgetPassword.cshtml", new ForgetPasswordViewModel())*@
+                </div>
+                <div id="register-form" style="display:none;">
+                    @Html.Partial("_PrvSignup", new SignupViewModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var $formLogin = $('#login-form');
+    var $formLost = $('#lost-form');
+    var $formRegister = $('#register-form');
+    var $divForms = $('#div-forms');
+    var $modalAnimateTime = 300;
+    var $msgAnimateTime = 150;
+    var $msgShowTime = 2000;
+
+    function modalAnimate($oldForm, $newForm) {
+        var $oldH = $oldForm.height();
+        var $newH = $newForm.height();
+        $divForms.css("height", $oldH);
+        $oldForm.fadeToggle($modalAnimateTime, function () {
+            $divForms.animate({ height: $newH }, $modalAnimateTime, function () {
+                $newForm.fadeToggle($modalAnimateTime);
+            });
+        });
+    }
+
+    function msgFade($msgId, $msgText) {
+        $msgId.fadeOut($msgAnimateTime, function () {
+            $(this).text($msgText).fadeIn($msgAnimateTime);
+        });
+    }
+
+    function msgChange($divTag, $iconTag, $textTag, $divClass, $iconClass, $msgText) {
+        var $msgOld = $divTag.text();
+        msgFade($textTag, $msgText);
+        $divTag.addClass($divClass);
+        $iconTag.removeClass("glyphicon-chevron-right");
+        $iconTag.addClass($iconClass + " " + $divClass);
+        setTimeout(function () {
+            msgFade($textTag, $msgOld);
+            $divTag.removeClass($divClass);
+            $iconTag.addClass("glyphicon-chevron-right");
+            $iconTag.removeClass($iconClass + " " + $divClass);
+        }, $msgShowTime);
+    }
+
+    $(function () {
+        $('#login_register_btn').click(function () { modalAnimate($formLogin, $formRegister) });
+        $('#register_login_btn').click(function () { modalAnimate($formRegister, $formLogin); });
+        $('#login_lost_btn').click(function () { modalAnimate($formLogin, $formLost); });
+        $('#lost_login_btn').click(function () { modalAnimate($formLost, $formLogin); });
+        $('#lost_register_btn').click(function () { modalAnimate($formLost, $formRegister); });
+        $('#register_lost_btn').click(function () { modalAnimate($formRegister, $formLost); });
+    });
+</script>
+<script type="text/javascript">
+    function SuccessLogin(result) {
+        //debugger
+        if (result.status == "Success") {
+            var formReserve = $('form[id="frm-reserve"]');
+            if (formReserve != null) {
+                formReserve.submit();
+            }
+            $("#login-modal").modal('toggle');
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetClientAuthSection", "Account")",
+                success: function (data) {
+                    $("#ClientAuthSection").html(data);
+                },
+                error: function (textStatus, errorThrown) {
+                        
+                }
+            });
+        }
+        else if (result.status == "TryAgain") {
+            toastr.options = { "positionClass": "toast-top-right" }
+            toastr.error(result.message, 'ورود به سیستم', { timeOut: 5000 })
+            document.getElementById("frm-login").reset();
+        }
+        else if (result.status == "LockedOut") {
+            document.getElementById("frm-login").reset();
+            toastr.options = { "positionClass": "toast-top-right" }
+            toastr.error(result.message, 'ورود به سیستم', { timeOut: 5000 })
+        }
+        else if (result.status == "Failure") {
+            document.getElementById("frm-login").reset();
+            toastr.options = { "positionClass": "toast-top-right" }
+            toastr.error(result.message, 'ورود به سیستم', { timeOut: 5000 })
+        }
+        else if (result.status == "EmailExist") {
+            document.getElementById("frm-signup").reset();
+            toastr.options = { "positionClass": "toast-top-right" }
+            toastr.error(result.message, 'عضویت در سیستم', { timeOut: 5000 })
+        }
+        else if (result.status == "SignupFailure") {
+            document.getElementById("frm-signup").reset();
+            toastr.options = { "positionClass": "toast-top-right" }
+            toastr.error('کاربر گرامی! عضویت شما با مشکل مواجه شده است ، لطفا لحظاتی بعد اقدام کنید', 'عضویت در سیستم', { timeOut: 5000 })
+        }
+    }
+
+    function SuccessForgetPassword(data) {
+        //debugger;
+        if (data.isRedirect) {
+            //msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", data.msg);
+            //window.location.href = data.redirectUrl;
+        }
+        else {
+            //msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", data.validationMsg);
+
+            //$("#div-msg-validation-forget-password").hide("blind")
+            //$("#div-msg-validation-forget-password").html(data.validationMsg)
+            //$("#div-msg-validation-forget-password").show("blind")
+        }
+    }
+
+    function SuccessSignUp(data) {
+        //debugger;
+        if (data.isRedirect) {
+            //msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", data.validationMsg);
+            window.location.href = data.redirectUrl;
+        }
+        else {
+            //msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", data.validationMsg);
+            //$("#div-msg-validation-signup").hide("blind")
+            //$("#div-msg-validation-signup").html(data.validationMsg)
+            //$("#div-msg-validation-signup").show("blind")
+        }
+    }
+</script>

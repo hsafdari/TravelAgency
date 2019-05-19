@@ -1,0 +1,74 @@
+﻿@model IEnumerable<HotelDetailsViewModel>
+@if (Model != null && Model.Any())
+{
+    @Styles.Render("~/bundles/blogcss")
+    @Scripts.Render("~/bundles/blogcjs")
+    <style>
+        .post-box {
+            background-color: white !important;
+        }
+            .post-box .box-read-more {
+                text-align: right !important;
+            }
+    </style>
+    @*<div style="height:300px">
+            <div class="jumbotron">
+                <img src="/ClientTheme/images/Logo/keyberimsafarlogo.png" alt="logo" id="logo" />
+                <p style="font-size:15px !important;"><strong>کاربر گرامی! </strong>تور در حال حاضر غیر فعال می باشد</p>
+            </div>
+        </div>*@
+    @*@if (Model != null && Model.Any())
+        {*@
+    <div class="political-world-section political-world-section relatedTourCarousel">
+        <div class="section-header">
+            <h2>@Model.First().CarouselTitle </h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="political-world owl-carousel owl-theme">
+                    @foreach (var item in Model)
+                    {
+                    <div class="item">
+                        <div class="col-md-12">
+                            <div class="post-box">
+                                <div class="image-box">
+                                    <img src="@(item.Thumbnail == null ? "#" : item.Thumbnail)" alt="@item.ThumbnailName" />
+                                    <a href="@(item.URL)" target="@item.Target" rel="@item.Rel" class="add-sign-small color-dark-pink"><img src="/ClientTheme/images/icon/small-plus.png" alt="@item.Title" /></a>
+                                </div>
+                                <div class="post-box-inner">
+                                    <a href="@(item.URL)" target="@item.Target" rel="@item.Rel" class="box-read-more"><img src="/ClientTheme/images/icon/arrow.png" alt="arrow" /> بیشتر</a>
+                                    <div class="box-content">
+                                        <a href="@(item.URL)" target="@item.Target" rel="@item.Rel" class="block-title">@(item.Name)</a>
+                                        <p class="time"><i class="fa fa-clock-o"></i>@item.PublishDatetime.ToString("yyyy/MM/dd")</p>
+                                        <p class="time">@(item.PostSummery)</p>
+
+                                        @if (!Model.First().CarouselTitle.Equals("تورهای مرتبط"))
+                                            {
+                                        <a href="#"><img src="/ClientTheme/images/icon/comment-icon.png" alt="comment" /> @item.CommentCount</a>
+                                        <a href="#"><i class="fa fa-eye"></i> @item.VisitCount</a>
+                                            }
+
+                                        <div class="postGroups">
+                                            @if (item.PostGroups != null && item.PostGroups.Count() > 0)
+                                                {
+                                            <a href="#" class="postG">دسته ها: </a>
+                                                    foreach (var group in item.PostGroups)
+                                                    {
+                                            <a href="@group.URL" target="@group.Target" rel="@group.Rel">@group.Name </a>
+                                                    }
+                                                }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+

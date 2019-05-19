@@ -1,0 +1,245 @@
+﻿@model ParvazPardaz.ViewModel.EditPostGroupViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/content/kendo/2014.3.1314/kendo.common.min.css" rel="stylesheet" />
+<link href="~/content/kendo/2014.3.1314/kendo.default.min.css" rel="stylesheet" />
+<link href="~/content/kendo/2014.3.1314/kendo.rtl.min.css" rel="stylesheet" />
+<script src="~/Scripts/kendo.mvc/kendo.web.min.js"></script>
+<script src="~/Scripts/kendo.mvc/kendo.aspnetmvc.min.js"></script>
+<script src="~/Scripts/kendo.mvc/cultures/kendo.culture.fa-IR.min.js"></script>
+<script src="~/Scripts/kendo/kendo.fa-IR.js"></script>
+<style scoped>
+    .k-in {
+        padding-right: 20px;
+    }
+</style>
+<style>
+    #treeview {
+        width: 300px;
+        margin: 0 auto;
+    }
+
+        #treeview .k-sprite {
+            background-image: url("<%=Url.Content(\"~/Content/assets/treeview/coloricons-sprite.png\")%>");
+        }
+
+    .rootfolder {
+        background-position: 0 0;
+    }
+
+    .folder {
+        background-position: 0 -16px;
+    }
+
+    .pdf {
+        background-position: 0 -32px;
+    }
+
+    .html {
+        background-position: 0 -48px;
+    }
+
+    .image {
+        background-position: 0 -64px;
+    }
+
+    .delete-link {
+        width: 12px;
+        height: 12px;
+        background: transparent url("/Content/assets/images/close.png") no-repeat 50% 50%;
+        overflow: hidden;
+        display: inline-block;
+        font-size: 0;
+        line-height: 0;
+        vertical-align: top;
+        margin: 2px 0 0 3px;
+        -webkit-border-radius: 5px;
+        -mox-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    .edit-link {
+        width: 16px;
+        height: 16px;
+        background: transparent url("/Content/assets/images/edit.png") no-repeat 50% 50%;
+        overflow: hidden;
+        display: inline-block;
+        font-size: 0;
+        line-height: 0;
+        vertical-align: top;
+        margin: 2px 0 0 3px;
+        -webkit-border-radius: 5px;
+        -mox-border-radius: 5px;
+        border-radius: 5px;
+    }
+    .nodID {
+        margin-left: 10px;
+    }
+
+    .nodTitle {
+        margin-right: 5px;
+    }
+</style>
+<div class="container">
+    <script id="treeview-template" type="text/kendo-ui-template">
+        <span class="nodID" id='#:item.Id#'>[#:item.Id#]</span>
+        #: item.NodeText #
+        <span class="nodTitle" id='#:item.Id#'>(#:item.Title#)</span>
+        @*<a class='delete-link' id='#:item.Id#' href="\#"></a>
+        <a class='edit-link' id='#:item.Id#' href="/Admin/PostGroup/Edit/#:item.Id#"></a>*@
+       
+    </script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <h3>@ParvazPardaz.Resource.EShop.EShopResource.PostGroupManagement </h3>
+            <hr />
+            <div class="form-horizontal col-md-6">
+              
+                @Html.HiddenFor(model => model.Id)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ParentId, new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @*@Html.DropDownListFor(d => d.ParentId, Model.PostGroupList, ParvazPardaz.Resource.General.Generals.DDLSelect, new { id = "DDCountry", @class = "form-control search-select select" }) <!-- , onchange = "FetchState()" -->*@
+                        <input type="hidden" name="ParentId" id="hdnGroupId" value="@Model.ParentId" />
+                        @if (@Model.ParetntTitle==null)
+                        {
+                            <div id="ParentTitle">سطح اول</div>
+                        }
+                        else
+                        {
+                                <div id="ParentTitle">@Model.ParetntTitle</div>
+                        }
+                        
+                        @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+
+                        @Html.CheckBoxFor(model => model.IsActive, new { @class = "flat-red", style = "margin-right:50px; margin-left:50px;" })
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-11">
+                        <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                        @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Create", null, new { @class = "btn btn-custom red" })
+                    </div>
+                </div>
+            </div>
+         <div class="form-horizontal col-md-6">
+           
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ParentId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <span>@ParvazPardaz.Resource.CMS.CMS.FirstLevel</span>
+                    <input type="checkbox" onclick="javascript:IsRootCheck();" title="@ParvazPardaz.Resource.CMS.CMS.FirstLevel" value="" id="chkroot" />
+                    @(Html.Kendo()
+                .TreeView()
+                .DragAndDrop(true)
+         .Name("tree")
+                .HtmlAttributes(new { @class = "tree-section" })
+                .DataTextField("NodeText")
+.TemplateId("treeview-template")
+                .Events(ev => ev.Select("onSelectedNode"))
+
+                .DataSource(ds =>
+                {
+                    ds.Read(read => read.Action(actionName: "GetMenuItems", controllerName: "PostGroup").Data("Parameterfn"));
+                    ds.Model(model => model
+                        .Id("Id")
+                        .HasChildren("Haschildren")
+                         );
+                }))
+                    <script>
+                        function Parameterfn(e) {
+                            return {
+                                Id: e.Id,
+                                //MenugroupId:@(ViewBag.GroupId)
+                            };
+                        }
+                    </script>
+                    <script type="text/javascript">
+                        var treeview;
+                        var trv = jQuery.noConflict();
+                        function onSelectedNode(e) {
+                            trv("#chkroot").prop("checked", false);
+                            var nodeId = treeview.dataItem(e.node).Id;
+                            var nodeTitle = treeview.dataItem(e.node).NodeText;
+                            trv("#hdnGroupId").val(nodeId);
+                            trv("#ParentTitle").text(nodeTitle);
+                            //Hiding menu type element
+                            //document.getElementById('MenuTypeDiv').style.display = 'none';
+                            //var a = document.getElementById("MenuType");
+                            //a.value = "Type_0";
+                        }
+                        trv(document).ready(function () {
+                            treeview = trv("#tree").data("kendoTreeView");
+                            trv("#chkroot").change(function () {
+                                if (trv(this).prop('checked') == true) {
+                                    trv("#hdnGroupId").val(null);
+                                    trv("#ParentTitle").text("سطح اول");
+                                    //display menu type element
+                                    //document.getElementById('MenuTypeDiv').style.display = 'block';
+                                }
+                            });
+                            if ('@Model.ParetntTitle' == '') {
+                              
+                                trv("#chkroot").prop('checked', true);
+                            }
+                        });
+                      
+                    </script>
+               
+                    <script type="text/javascript">
+                        var $ = jQuery.noConflict();
+                        $(document).ready(function () {
+
+                            $("#MenuType option[value='Type_0']").hide();
+                        });
+                    </script>
+                </div>
+                
+            </div>
+            </div>
+    }
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $('.select').select2({
+            dir: "RTL"
+        });
+    </script>
+}

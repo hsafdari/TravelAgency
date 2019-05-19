@@ -1,0 +1,42 @@
+﻿@model List<ParvazPardaz.ViewModel.TourSuggestionViewModel>
+@{
+    ViewBag.Title = "_PrvTourPackageOffer";
+}
+
+<h3>پیشنهاد کی سفر</h3>
+<div class="scrolls">
+    @foreach (var item in Model)
+    {
+        <a class="tourofferbox" target="_blank" href="@item.NavigationUrl">
+            <div class="offerrightside">
+                <h4>@item.TourTitle</h4>
+                <h5>@item.TourDate</h5>
+                <div class="offerflight">
+                    <img src="/ClientTheme/Blog/Tour/img/icons/plane.png" />
+                    <span>@item.AirlineTitle</span>
+                </div>
+                @*<div class="offerlocation">
+                        <img src="/ClientTheme/Blog/Tour/img/icons/plane.png" />
+                        <span>قشم</span>
+                    </div>*@
+                <div class="offerdaysbox">
+                    <div class="offerday">
+                        @item.TourDuration
+                    </div>
+                    <div class="offerdaytile">
+                        شب
+                    </div>
+                </div>
+                <div class="offerprice">
+                    @item.TourPrice
+                </div>
+            </div>
+
+            <div class="offerleftside">
+                <img src="@item.ImageUrl" alt="@item.TourTitle" />
+            </div>
+        </a>
+    }
+
+</div>
+

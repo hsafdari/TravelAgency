@@ -1,0 +1,52 @@
+﻿@model ParvazPardaz.ViewModel.EditHotelRankViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm("Edit", "HotelRank", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ImageFileName)
+    @Html.HiddenFor(model => model.ImageSize)
+    @Html.HiddenFor(model => model.ImageExtension)
+    @Html.HiddenFor(model => model.Icon)
+
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.Tour.Tours.HotelRankManagment </h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-1" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderId, new { @class = "control-label col-md-1" })
+            <div class="col-md-3 number">
+                @Html.SpinFor(model => model.OrderId, new { @class = "form-control" }).Limit(1, 500).Postfix("Rank")
+                @Html.ValidationMessageFor(model => model.OrderId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label(ParvazPardaz.Resource.General.Generals.Upload, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.FileUploaderFor(model => model.File).AddMore(false).IsMultiple(false).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButtonInEditMode(false).RemoveButton(true).Extension(new List<string>() { "jpg", "png", "jpeg","svg" }).Limit(1).Edit(new List<EditModeFileUpload>() { new EditModeFileUpload() { Name = Model.ImageFileName, Size = Model.ImageSize, Type = Model.ImageExtension, Url = Model.Icon } })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+}
+

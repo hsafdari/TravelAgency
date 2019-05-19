@@ -1,0 +1,47 @@
+﻿@model List<PostListDetailViewModel>
+@if (Model != null && Model.Any())
+{
+    <aside class="widget widget_latest_post">
+        <h3 class="widget-title">تورهای مرتبط </h3>
+        @helper GetImgurl(ImageViewModel _image)
+{
+
+    //item.Image.ImageUrl + "-736x512" + item.Image.ImageExtension
+    if (_image != null)
+    {
+        string image = _image.Width == 98 ? _image.ImageUrl + "-98x98" + _image.ImageExtension : _image.ImageUrl;
+            <img src="@image" alt="کی سفر" />
+    }
+    else
+    {
+            <img src="~/ClientTheme/images/keysafarlogo98.jpg" alt="keysafar.com" />
+    }
+
+}
+        <div class="widget-inner">
+            @if (Model != null)
+        {
+                <ul class="post">
+                    @foreach (var item in Model)
+                {
+                        <li>
+                            <div class="col-md-5 col-sm-5 col-xs-4">
+                                <a href="@item.URL" title="@item.Title" rel="@item.Rel">
+                                    @GetImgurl(item.Image)
+                                </a>
+                            </div>
+                            <div class="col-md-7 col-sm-7 col-xs-8">
+                                <a title="@item.Title" rel="@item.Rel" href="@item.URL" class="post-title">@item.Title</a>
+                                <p>
+                                    <span><i class="fa fa-clock-o"></i> @item.PublishDatetime.ToString("yyyy/MM/dd")</span>
+                                    <a href="#"><i class="fa fa-heart"></i> @item.LikeCount</a>
+
+                                </p>
+                            </div>
+                        </li>
+                }
+                </ul>
+        }
+        </div>
+    </aside>
+}

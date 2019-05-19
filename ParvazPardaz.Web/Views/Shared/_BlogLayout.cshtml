@@ -1,0 +1,150 @@
+﻿<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="@ViewBag.description">
+    <meta name="keywords" content="@ViewBag.keywords">
+    <meta name="author" content="کی سفر">
+    <meta http-equiv="Content-Language" content="fa">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta property="og:site_name" content="کی سفر" />
+    <meta property="og:image" content="/ClientTheme/images/Logo/keysafarlogo.png" />
+    <meta property="og:image:width" content="143" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.description" />
+    <meta property="og:type" content="article" />
+    <meta property="og:type" content="article:published_time-@ViewBag.PublishDatetime" />
+    <meta property="og:type" content="@ViewBag.keywords" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/ClientTheme/images/Logo/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/ClientTheme/images/Logo/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/ClientTheme/images/Logo/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/ClientTheme/images/Logo/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/ClientTheme/images/Logo/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>@ViewBag.Title | کی سفر</title>
+    @Styles.Render("~/bundles/blogcss")
+    @Scripts.Render("~/BlogLayoutTopJs")
+    @Html.Raw(ViewBag.CustomMetaTags)
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+</head>
+<body data-offset="200" data-spy="scroll" data-target=".primary-navigation">
+    <h2 class="hidden">@ViewBag.Title | کی سفر</h2>
+    <div id="site-loader" class="load-complete">
+        <div class="load-position">
+            <div class="logo"><img src="/ClientTheme/images/Logo/keysafarlogo.png" alt="کی سفر" id="logo" /></div>
+            <p class="h6 text-center">لطفا صبر کنید...</p>
+            <div class="loading">
+                <div class="loading-line"></div>
+                <div class="loading-break loading-dot-1"></div>
+                <div class="loading-break loading-dot-2"></div>
+                <div class="loading-break loading-dot-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="scroll-top" style="display:none"><i class="fa fa-angle-up"></i></div>
+    @*<a id="top"></a>*@
+    <!-- Header Section -->
+    <header id="header" class="header">
+        @Html.Action("GetMenus", "Blog", new { @Area = "" })
+    </header>
+    <!-- Header Section /- -->
+    <!-- Latest Updates -->
+    @Html.Action(actionName: "LatestUpdate", controllerName: "Blog")
+    <!-- Latest Updates /- -->
+    @RenderBody()
+    <!-- Footer Section -->
+    <div class="clearfix"></div>
+    @Html.Action("GetFooter", "Blog", new { @Area = "" })
+    <!-- Footer Section /- -->
+    <!-- jQuery Include -->
+    @Scripts.Render("~/bundles/blogcjs")
+    @Scripts.Render("~/persiaNumberJs")
+    @RenderSection("scripts", required: false)
+    <script src="@Url.Content("~/Plugins/cool-share/plugin.js")"></script>
+    <script src="@Url.Content("~/Plugins/cool-share/shareconfig.js")"></script>
+    <script>
+        $(document).ready(function () {
+            var cond = $(".navbar-toggle").css('display') == 'block';
+
+            if (cond) {
+                (function ($) {
+                    $(document).ready(function () {
+                        $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            $(this).parent().siblings().removeClass('open');
+                            $(this).parent().toggleClass('open');
+                        });
+                    });
+                })(jQuery);
+            }
+        })
+    </script>
+    <script>
+        $(window).scroll(function () {
+            var height = $(window).scrollTop();
+            var middle = ($(document).height() / 2);
+            if (height >= middle) {
+                $("#scroll-top").show();
+            } else {
+                $("#scroll-top").hide();
+            }
+        });
+        $("#scroll-top").on("click", function () {
+            $('html, body').animate({
+                scrollTop: 0
+            });
+        });
+    </script>
+    @*<script>
+        !function (t, e, n) {
+            t.yektanetAnalyticsObject = n, t[n] = t[n] || function () {
+                t[n].q.push(arguments)
+            }, t[n].q = t[n].q || [];
+            var a = new Date, r = a.getFullYear().toString() + "0" + a.getMonth() + "0" + a.getDate() + "0" + a.getHours(),
+                c = e.getElementsByTagName("script")[0], s = e.createElement("script");
+            s.async = 1, s.type = "text/javascript", s.src = "https://cdn.yektanet.com/rg_woebegone/scripts/5759/rg.complete.js?v=" + r, c.parentNode.insertBefore(s, c)
+        }(window, document, "yektanet");
+    </script>*@
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135317507-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-135317507-1');
+    </script>   
+    <script type="text/javascript">
+        window._mfq = window._mfq || [];
+        (function () {
+            var mf = document.createElement("script");
+            mf.type = "text/javascript"; mf.async = true;
+            mf.src = "//cdn.mouseflow.com/projects/5d387bca-7cb7-4548-94fa-322a10889ad2.js";
+            document.getElementsByTagName("head")[0].appendChild(mf);
+        })();
+    </script>
+  
+    <script type="text/javascript">
+        window.heap = window.heap || [], heap.load = function (e, t) { window.heap.appid = e, window.heap.config = t = t || {}; var r = t.forceSSL || "https:" === document.location.protocol, a = document.createElement("script"); a.type = "text/javascript", a.async = !0, a.src = (r ? "https:" : "http:") + "//cdn.heapanalytics.com/js/heap-" + e + ".js"; var n = document.getElementsByTagName("script")[0]; n.parentNode.insertBefore(a, n); for (var o = function (e) { return function () { heap.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }, p = ["addEventProperties", "addUserProperties", "clearEventProperties", "identify", "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"], c = 0; c < p.length; c++)heap[p[c]] = o(p[c]) };
+        heap.load("1606172511");
+    </script>
+    <!-- Start Alexa Certify Javascript -->
+    <script type="text/javascript">
+        _atrk_opts = { atrk_acct: "X48Ns1ah9W20em", domain: "keysafar.com", dynamic: true };
+        (function () { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://certify-js.alexametrics.com/atrk.js"; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(as, s); })();
+    </script>
+    <noscript><img src="https://certify.alexametrics.com/atrk.gif?account=X48Ns1ah9W20em" style="display:none" height="1" width="1" alt="" /></noscript>
+    <!-- End Alexa Certify Javascript -->
+</body>
+</html>

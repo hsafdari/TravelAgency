@@ -1,0 +1,17 @@
+﻿@model IEnumerable<SlidersUIViewModel>
+<section class="home-purpose">
+    <h2>قصد سفر به کجا را دارید؟</h2>
+    <em>با کی سفر، دستت بازه؛ منتظر چی هستی؟ چمدونتو ببند و راهی شو!</em>
+    <ul>
+        @foreach(var item in Model)
+        {
+            <li style="background: white url('@item.ImageURL')">
+            <h2>@item.ImageTitle</h2>
+            <p id="blowsliderp">
+               @item.ImageDescription
+            </p>
+            <a class="btn-4" href=@((item.NavigationUrl == null || item.NavigationUrl == "#")?"javascript:void(0)":@item.NavigationUrl)>مشاهده تورها </a>
+        </li>
+        }       
+    </ul>
+</section>

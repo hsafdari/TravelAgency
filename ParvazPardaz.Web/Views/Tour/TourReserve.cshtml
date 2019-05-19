@@ -1,0 +1,522 @@
+﻿@model TourReserveViewModel
+@{
+    ViewBag.Title = "افزودن مسافرین";
+    //List<ParvazPardaz.Model.Entity.Hotel.HotelRoom> RoomTypeList = ViewBag.RoomTypeList as List<ParvazPardaz.Model.Entity.Hotel.HotelRoom>;
+    var selectedRooms = ViewBag.SelectedRooms as SelectList;
+
+}
+@Styles.Render("~/bundles/TourCustomCss")
+<section class="main navigator">
+    @*<a href="" class="sectionTitle">انتخاب ویژگی‌های تور</a>*@
+    <h2 class="sectionTitle">ورود اطلاعات مسافر</h2>
+    <ul>
+        <li><a href="">تکمیل خرید</a></li>
+        <li><a href="">رزرو تور</a></li>
+    </ul>
+</section>
+@using (Html.BeginForm("Confirmation", "tour", FormMethod.Post, new { enctype = "multipart/form-data", @id = "frm-confirm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.SelectedDepartureFlightId)
+    @Html.HiddenFor(x => x.SelectedArrivalFlightId)
+    @Html.HiddenFor(x => x.SelectedHotelPackageId)
+    @Html.HiddenFor(x => x.TourSearchParams.AdultCount)
+    @Html.HiddenFor(x => x.TourSearchParams.ChildCount)
+    @Html.HiddenFor(x => x.TourSearchParams.InfantCount)
+    @Html.HiddenFor(x => x.TourSearchParams.FlightDate)
+    @Html.HiddenFor(x => x.TourSearchParams.DurationTime)
+    @Html.HiddenFor(x => x.TourSearchParams.DepartureCityId)
+    @Html.HiddenFor(x => x.TourSearchParams.ArrivalCityId)
+    if (Model.RoomSections != null && Model.RoomSections.Any())
+    {
+        for (int i = 0; i < Model.RoomSections.Count; i++)
+        {
+            @Html.HiddenFor(x => x.RoomSections[i].SelectedRoomTypeId)
+            @Html.HiddenFor(x => x.RoomSections[i].AdultCount)
+            @Html.HiddenFor(x => x.RoomSections[i].ChildCount)
+            @Html.HiddenFor(x => x.RoomSections[i].InfantCount)
+        }
+    }
+    <input type="hidden" id="AdultStartBirthDate" value="@ViewBag.AdultStartBirthDate" />
+    <input type="hidden" id="AdultEndBirthDate" value="@ViewBag.AdultEndBirthDate" />
+    <input type="hidden" id="ChildStartBirthDate" value="@ViewBag.ChildStartBirthDate" />
+    <input type="hidden" id="ChildEndBirthDate" value="@ViewBag.ChildEndBirthDate" />
+    <input type="hidden" id="InfantStartBirthDate" value="@ViewBag.InfantStartBirthDate" />
+    <input type="hidden" id="InfantEndBirthDate" value="@ViewBag.InfantEndBirthDate" />
+    <input type="hidden" id="PassportMinDAteTime" value="@DateTime.Now.AddMonths(6).ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture)" />
+    <section class="main tour-selected border">
+        <a href="javascript:void(0)" onclick="history.back();" class="btn-4 edit">ویرایش جزئیات</a>
+        <h1 class="sectionTitle">@ViewBag.TourTitle</h1>
+        <dl>
+            @if (Model.SelectedFlights != null && Model.SelectedFlights.Any())
+            {
+                var departureFlight = Model.SelectedFlights.FirstOrDefault(x => x.FlightDirection == ParvazPardaz.Model.Enum.EnumFlightDirectionType.Go);
+                var arrivalFlight = Model.SelectedFlights.FirstOrDefault(x => x.FlightDirection == ParvazPardaz.Model.Enum.EnumFlightDirectionType.Back);
+                <dt>بلیت رفت</dt>
+                <dd>
+                    <img src="@departureFlight.logo" alt="" width="50" height="50">
+                    <span>@departureFlight.FlightDate</span>
+                    <span>@departureFlight.FLightClass</span>
+                    <span>@string.Format("پرواز {0} {1}", departureFlight.FlightNumber, departureFlight.airline)</span>
+                </dd>
+                <dt>بلیت برگشت</dt>
+                <dd>
+                    <img src="@arrivalFlight.logo" alt="" width="50" height="50">
+                    <span>@arrivalFlight.FlightDate</span>
+                    <span>@departureFlight.FLightClass</span>
+                    <span>@string.Format("پرواز {0} {1}", arrivalFlight.FlightNumber, arrivalFlight.airline)</span>
+                </dd>
+            }
+            @if (Model.HotelInfos != null && Model.HotelInfos.Any())
+            {
+                foreach (var item in Model.HotelInfos)
+                {
+                    <dt>هتل</dt>
+                    <dd>
+                        <span>@item.hotel</span>
+                        <span>@item.stars</span>
+                        <span>@item.service</span>
+                    </dd>
+                }
+            }
+            <dt>اتاق و مسافر</dt>
+            <dd>
+                <span>
+                    @foreach (var item in selectedRooms)
+                    {
+                        <i>@string.Format("{0}{1} X اتاق {2}", selectedRooms.ToList().IndexOf(item) > 0 ? " ، " : "", item.Value, item.Text)</i>
+                    }
+                </span>
+            </dd>
+        </dl>
+    </section>
+
+    @Html.Partial("_PrvPassengersSection", Model)
+    <section class="main white tour-agreement clearfix">
+        <div class="form">
+            <label class="label">
+                @Html.CheckBoxFor(model => model.TermsAndConditions)
+                <span class="checkbox-replace"></span>
+                <div>
+                    <a href="/TermsandCondition/" target="_blank">قوانین وبسایت</a>
+                    و
+                    <a href="/TermsandCondition#tab1" target="_blank">قوانین خرید تور</a>
+                    را مطالعه کرده و قبول دارم.
+                    <br />
+                    @Html.ValidationMessageFor(model => model.TermsAndConditions, "", new { @class = "text-danger", @style = "display:none" })
+                </div>
+            </label>
+            <input id="BtnSubmit" class="btn-1 active" type="submit" name="submit" value="ادامه فرآیند خرید">
+        </div>
+    </section>
+}
+<input id="RoomSectionIndex" type="hidden" value="@Model.RoomSections.Count" />
+@section scripts{    
+    <script>
+        $.validator.setDefaults({
+            ignore: [],
+        });
+
+        $('.select').select2({
+            dir: "RTL"
+        });
+
+        function FetchPassengerInfo(thisElement) {
+            var selectedUserId = $(thisElement).find(":selected").val();
+            var selectedAgeRange = $(thisElement).closest(".passengerItem").find(".AgeRange").val();
+            var sectionIndex = $(thisElement).closest(".passengerItem").find(".SectionIndex").val();
+            var selectedRoomIndex = $(thisElement).closest(".passengerItem").find(".RoomIndex").val();
+            $.ajax({
+                type: "post",
+                dataType: "html",
+                cache: false,
+                url: "/GetPassengerFilledInfoSection",
+                data: {
+                    userId: selectedUserId,
+                    ageRange: selectedAgeRange,
+                    index: sectionIndex,
+                    roomIndex: selectedRoomIndex,
+                    isForeignTour: '@(Model.IsForeignTour)'
+                },
+                success: function (filledPartialView) {
+                    if (filledPartialView != null) {
+                        $(thisElement).closest(".passengerItem").replaceWith(filledPartialView);
+
+                        $("#frm-confirm").removeData("validator");
+                        $("#frm-confirm").removeData("unobtrusiveValidation");
+                        $.validator.unobtrusive.parse("#frm-confirm");
+                    }
+
+                    //اعتبارسنجی فیلدهای مسافرین
+                    //AddValidateRulesForPassengers();
+                },
+                error: function (textStatus, errorThrown) {
+                }
+            });
+        }
+
+        function otherPassengers(e) {
+            $(e).closest(".passengerItem").find(".otherPassengerSection").css("display", "block");
+        }
+
+        function FetchRoomSection() {
+            var roomSectionIndex = parseInt(document.getElementById("RoomSectionIndex").value) + 1;
+            document.getElementById("RoomSectionIndex").value = roomSectionIndex;
+            jQuery.ajax({
+                url: "/FetchRoomSection",
+                type: "post",
+                dataType: "html",
+                cache: false,
+                data: {
+                    index: roomSectionIndex
+                },
+                success: function (result) {
+                    jQuery("#RoomSection").replaceWith(result);
+                    $(".RoomTypeDDL").each(function (index, element) {
+                        ManagePersonCounter(element);
+                    });
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("error!");
+                }
+            });
+        }
+
+
+        function ManagePersonCounter(element) {
+            var selectedRoomTypeId = $(element).val();
+            var hiddenInputId = "hr_" + selectedRoomTypeId + "";
+            //آیا شامل بزرگسال می شود؟
+            var hasadult = $("#" + hiddenInputId + "").data("hasadult");
+            $(element).closest(".partialSection").find("input.AdultCount").attr("disabled", (hasadult == "False"));
+            if (hasadult == "False") {
+                $(element).closest(".partialSection").find("input.AdultCount").val('0');
+            }
+            //آیا شامل کودک می شود؟
+            var haschild = $("#" + hiddenInputId + "").data("haschild");
+            $(element).closest(".partialSection").find("input.ChildCount").attr("disabled", (haschild == "False"));
+            if (haschild == "False") {
+                $(element).closest(".partialSection").find("input.ChildCount").val('0');
+            }
+            //آیا شامل نوزاد می شود؟
+            var hasinfant = $("#" + hiddenInputId + "").data("hasinfant");
+            $(element).closest(".partialSection").find("input.InfantCount").attr("disabled", (hasinfant == "False"));
+            if (hasinfant == "False") {
+                $(element).closest(".partialSection").find("input.InfantCount").val('0');
+            }
+        }
+
+        $(document).ready(function () {
+            $(".RoomTypeDDL").each(function (index, element) {
+                ManagePersonCounter(element);
+            });
+
+            var totalAdult = 0;
+            var totalChild = 0;
+            var totalInfant = 0;
+            $(".AdultCount").each(function (index, element) {
+                var aCount = parseInt($(element).val());
+                if (aCount > 0) {
+                    totalAdult = totalAdult + parseInt(aCount);
+                }
+            });
+            $(".ChildCount").each(function (index, element) {
+                var cCount = parseInt($(element).val());
+                if (cCount > 0) {
+                    totalChild = totalChild + parseInt(cCount);
+                }
+            });
+            $(".InfantCount").each(function (index, element) {
+                var iCount = parseInt($(element).val());
+                if (iCount > 0) {
+                    totalInfant = totalInfant + parseInt(iCount);
+                }
+            });
+
+            CalculatePassengerSection();
+        });
+
+        var toastrLock = 0;
+
+        //OnlyEnglishChar
+        $(".OnlyEnglishChar").on('keydown', function (e) { //change keyup
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+                // مجاز: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // مجاز : home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+            if (just_english(e.key) === true) {
+                return;
+            }
+            else {
+                //e.preventDefault();
+                toastr.options = { "positionClass": "toast-top-right", "preventDuplicates": true, "preventOpenDuplicates": true }
+                toastr.error('لطفا به انگلیسی بنویسید', 'خطا', { timeOut: 5000 })
+                setTimeout(function () {
+                    $("#" + e.target.id).val("");
+                }, 1000);
+            }
+
+        });
+        function just_english(str) {
+            var p = /^[ A-Za-z]*$/;
+            if (p.test(str)) {
+                return true
+            }
+            return false;
+        }
+
+        //OnlyPersianChar
+        $(".OnlyPersianChar").on('keydown', function (e) { //change keyup
+
+            if ($.inArray(e.keyCode, [46, 18, 16, 8, 9, 27, 13, 110]) !== -1 ||
+                // مجاز: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === false)) ||
+                // مجاز : home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+
+            if (just_persian(e.key) === false) {
+                //e.preventDefault();
+                toastr.options = { "positionClass": "toast-top-right", "preventDuplicates": true, "preventOpenDuplicates": true }
+                toastr.error('لطفا به فارسی بنویسید', 'خطا', { timeOut: 5000 });
+               
+                setTimeout(function () {
+                    $("#" + e.target.id).val("");                   
+                }, 1000);
+            }
+        });
+        function just_persian(str) {
+            var p = /^[\u0600-\u06FF\s]+$/;
+            if (p.test(str)) {
+                return true;
+            }
+            return false;
+        }
+
+        function CalculatePassengerSection() {
+            var GenderDataList = []
+
+            $('.passengerCount').each(function (index, item) {
+                var hasAdult = ($(item).closest('td').data("hasadult") == "True");
+                var hasChild = ($(item).closest('td').data("haschild") == "True");
+                var hasInfant = ($(item).closest('td').data("hasinfant") == "True");
+                var ddlSelectedCount = parseInt($(this).find('select').find('option:selected').val());
+                if (ddlSelectedCount > 0) {
+                    var GenderData = { PassengerCount: ddlSelectedCount, HasAdult: hasAdult, HasChild: hasChild, HasInfant: hasInfant };
+                    GenderDataList.push(GenderData);
+                }
+            });
+            $.ajax({
+                type: "post",
+                dataType: "html",
+                cache: false,
+                url: "/GetPassengersSection",
+                data: { viewModel: GenderDataList },
+                success: function (filledPartialView) {
+                    $("#PassengersSection").html(filledPartialView);
+                    //اعتبارسنجی فیلدهای مسافرین
+                    //AddValidateRulesForPassengers();
+                },
+                error: function (textStatus, errorThrown) {
+                }
+            });
+        }
+
+        $(".NationalCode").keydown(function (e) {
+            // مجاز : backspace, delete, tab, escape, enter
+            if ($.inArray(e.keyCode, [46, 18, 16, 8, 9, 27, 13, 110]) !== -1 ||
+                // مجاز: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // مجاز : home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+
+        $(".PassportNo").keydown(function (e) {
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+                // مجاز: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // مجاز : home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+            if (just_english(e.key) === true || ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) === false) {
+                return;
+            } else {
+                e.preventDefault();
+            }
+        });
+
+        $("input[type=number]").keydown(function (e) {
+
+            // مجاز : backspace, delete, tab, escape, enter
+            if ($.inArray(e.keyCode, [46, 18, 16, 8, 9, 27, 13, 110]) !== -1 ||
+                // مجاز: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // مجاز : home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+
+            var thisValue = $(this).val();
+            if (($(this).hasClass("date-day") == true && thisValue.length >= 2)) {
+                //روز نباید بیشتر از 2 رقم باشد
+                $(this).val("");
+                //e.preventDefault();
+            }
+            else if ($(this).hasClass("date-year") == true && thisValue.length >= 4) {
+                //سال نباید بیش از 4 رقم باشد
+                $(this).val("");
+                //e.preventDefault();
+            }
+
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+
+        $("input[type=number]").focusout(function (e) {
+            if ($(this).hasClass("date-year") == true && $(this).val().length < 4) {
+                $(this).val("")
+            }
+
+            if ($(this).hasClass("date-day") == true || $(this).hasClass("date-month") == true || $(this).hasClass("date-year") == true) {
+                FillHiddenDate(this);
+            }
+        });
+
+        function FillHiddenDate(thisElement) {
+            //بدست آوردن تاریخ تولد انتخاب شده
+            var day = $(thisElement).closest("label.label").find(".date-day").val();
+            var month = $(thisElement).closest("label.label").find(".date-month").find('option:selected').val();
+            var year = $(thisElement).closest("label.label").find(".date-year").val();
+            if (day !== "" && month !== "" && year !== "") {
+                var m = parseInt(month, 10);
+                var d = parseInt(day, 10);
+                var y = parseInt(year, 10);
+                var date = new Date(y, m - 1, d);
+                if (date.getFullYear() == y && date.getMonth() + 1 == m && date.getDate() == d) {
+                    $(thisElement).closest("label.label").find(".HiddenDate").val(year + "/" + month + "/" + day);
+                } else {
+                    $(thisElement).closest("label.label").find(".date-day").val("");
+                    $(thisElement).closest("label.label").find(".date-year").val("");
+                    toastr.options = { "positionClass": "toast-top-right", "preventDuplicates": true, "preventOpenDuplicates": true }
+                    toastr.error('لطفا تاریخ را به درستی انتخاب نمایید', 'خطا', { timeOut: 5000 })
+                }
+            }
+        }
+
+        $(".date-month").on("change", function () {
+            FillHiddenDate(this);
+        });
+
+        $("input[type=number]").bind('keyup change', function (e) {
+            var thisValue = parseInt($(this).val());
+            if ($(this).hasClass("date-day") == true && (thisValue > 31 || thisValue < 1)) {
+                $(this).val("01");
+            }
+            else if ($(this).hasClass("date-year") == true && $(this).hasClass("passport") !== true) {
+                if (thisValue.toString().length >= 4) {
+                    var ageRange = $(this).closest(".passengerItem").find(".AgeRange").val();
+                    //بدست آوردن تاریخ تولد انتخاب شده
+                    var day = $(this).closest("label.label").find(".date-day").val();
+                    if (day == "") {
+                        $(this).closest("label.label").find(".date-day").val("01");
+                        day = $(this).closest("label.label").find(".date-day").val();
+                    }
+                    var month = $(this).closest("label.label").find(".date-month").find('option:selected').val();
+                    var year = $(this).closest("label.label").find(".date-year").val();
+                    var SelectedBirthDate = new Date(year, month, day, 0, 0, 0, 0);
+                    var AdultStartBirthDate = new Date($("#AdultStartBirthDate").val());
+                    var AdultEndBirthDate = new Date($("#AdultEndBirthDate").val());
+                    var ChildStartBirthDate = new Date($("#ChildStartBirthDate").val());
+                    var ChildEndBirthDate = new Date($("#ChildEndBirthDate").val());
+                    var InfantStartBirthDate = new Date($("#InfantStartBirthDate").val());
+                    var InfantEndBirthDate = new Date($("#InfantEndBirthDate").val());
+                    switch (ageRange) {
+                        case "Adult":
+                            if ($(this).val() != "" && (SelectedBirthDate < AdultStartBirthDate || SelectedBirthDate > AdultEndBirthDate)) {
+                                $(this).val("");
+                                toastr.options = { "positionClass": "toast-top-right", "preventDuplicates": true, "preventOpenDuplicates": true }
+                                toastr.error('سن بزرگسال باید بیشتر از 12 سال باشد', 'خطا', { timeOut: 5000 })
+                            }
+                            break;
+
+                        case "Child":
+                            if ($(this).val() != "" && (SelectedBirthDate < ChildStartBirthDate || SelectedBirthDate > ChildEndBirthDate)) {
+                                $(this).val("");
+                                toastr.options = { "positionClass": "toast-top-right", "preventDuplicates": true, "preventOpenDuplicates": true }
+                                toastr.error('سن کودک باید بین 2 تا 12 سال باشد', 'خطا', { timeOut: 5000 })
+                            }
+                            break;
+
+                        case "Infant":
+                            if (SelectedBirthDate < InfantStartBirthDate || SelectedBirthDate > InfantEndBirthDate) {
+                                $(this).val("");
+                                toastr.options = { "positionClass": "toast-top-right", "preventDuplicates": true, "preventOpenDuplicates": true }
+                                toastr.error('سن نوزاد باید بین 10 روز تا 2 سال باشد', 'خطا', { timeOut: 5000 })
+                            }
+                            break;
+
+                        default:
+                            if ($(this).hasClass("date-day") == true || $(this).hasClass("date-month") == true || $(this).hasClass("date-year") == true) {
+                                FillHiddenDate(this);
+                            }
+                            break;
+                    }
+                }
+            }
+            else if ($(this).hasClass("passport") == true) {
+                if (thisValue.toString().length >= 4) {
+                    //بدست آوردن تاریخ انقضای پاسپورت انتخاب شده
+                    var day = $(this).closest("label.label").find(".date-day").val();
+                    if (day == "") {
+                        $(this).closest("label.label").find(".date-day").val("01");
+                        day = $(this).closest("label.label").find(".date-day").val();
+                    }
+                    var month = $(this).closest("label.label").find(".date-month").find('option:selected').val();
+                    var year = $(this).closest("label.label").find(".date-year").val();
+                    var SelectedPassportDate = new Date(year, month, day, 0, 0, 0, 0);
+                    var PassportMinDAteTime = new Date($("#PassportMinDAteTime").val());
+                    if (SelectedPassportDate < PassportMinDAteTime) {
+                        $(this).val("");
+                        $(this).closest("label.label").find(".date-day").val("");
+                        toastr.options = { "positionClass": "toast-top-right", "preventDuplicates": true, "preventOpenDuplicates": true }
+                        toastr.error('تاریخ انقضای پاسپورت باید حداقل 6 ماه اعتبار داشته باشد', 'خطا', { timeOut: 5000 })
+                    }
+                }
+            }
+        });
+
+        $("#BtnSubmit").on("click", function () {
+            $(".field-validation-error").css("display", "block");
+        });
+
+        // Arrange dynamic sections IDs
+        $("#frm-confirm").submit(function (e) {
+            var elements = document.getElementsByClassName("partialSection");
+            for (var i = 0, len = elements.length; i < len; i++) {
+                elements[i].getElementsByClassName("SelectedRoomTypeId")[0].setAttribute("name", "RoomSections[" + i + "].SelectedRoomTypeId");
+                elements[i].getElementsByClassName("AdultCount")[0].setAttribute("name", "RoomSections[" + i + "].AdultCount");
+                elements[i].getElementsByClassName("ChildCount")[0].setAttribute("name", "RoomSections[" + i + "].ChildCount");
+                elements[i].getElementsByClassName("InfantCount")[0].setAttribute("name", "RoomSections[" + i + "].InfantCount");
+            }
+        });
+
+        jQuery.validator.addMethod("enforcetrue", function (value, element, param) {
+            return element.checked;
+        });
+        jQuery.validator.unobtrusive.adapters.addBool("enforcetrue");
+    </script>
+}

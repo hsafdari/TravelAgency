@@ -1,0 +1,356 @@
+﻿@model ConfirmViewModel
+@{
+    ViewBag.Title = "صفحه تایید اطلاعات و پرداخت";
+    var reserveInfo = ViewBag.TourReserveViewModel as TourReserveViewModel;
+    var selectedRooms = ViewBag.SelectedRooms as SelectList;
+}
+@Styles.Render("~/bundles/ConfirmCustomCss")
+<section class="main navigator">
+    @*<a href="" class="sectionTitle">انتخاب ویژگی‌های تور</a>
+        <a href="" class="sectionTitle">ورود اطلاعات مسافر</a>*@
+    <h2 class="sectionTitle">تکمیل خرید</h2>
+    <ul>
+        <li><a href="">رزرو تور</a></li>
+    </ul>
+</section>
+<b class="main">لطفا اطلاعات ورودی خود را به دقت بررسی و سپس برای پرداخت اقدام کنید. اگر نیاز به ویرایش اطلاعات دارید، می‌توانید از دکمه ویرایش استفاده کنید.</b>
+@using (Html.BeginForm("TourPayment", "Tour", FormMethod.Post, new { enctype = "multipart/form-data", @id = "frm-confirm" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="main white tour-data clearfix">
+        <a class="btn-4 edit" href="javascript:void(0)" onclick="history.back();">ویرایش جزئیات</a>
+        <h2 class="sectionTitle">اطلاعات تور</h2>
+        <div class="image-sq">
+            <img src="@Model.TourImageUrl" alt="@Model.TourTitle">
+        </div>
+        <h3>@Model.TourTitle</h3>
+        <div class="data">
+            @if (Model.SelectedFlights != null && Model.SelectedFlights.Any())
+            {
+                for (int i = 0; i < Model.SelectedFlights.Count(); i++)
+                {
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>بلیط @(Model.SelectedFlights[i].FlightDirection.GetDisplayValue())</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>شرکت هواپیمایی</td>
+                                <td>
+                                    <img src="@Model.SelectedFlights[i].logo" alt="@Model.SelectedFlights[i].airline" style="max-width: 32px; max-height: 32px;">
+                                    @Model.SelectedFlights[i].airline
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>شهر مبدا</td>
+                                <td>
+                                    @Html.Raw(Model.SelectedFlights[i].from)
+                                    @*<i></i>*@
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>شهر مقصد</td>
+                                <td>
+                                    @Html.Raw(Model.SelectedFlights[i].to)
+                                    @*<i></i>*@
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>زمان پرواز</td>
+                                <td>
+                                    @Model.SelectedFlights[i].FlightDate
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>شماره پرواز</td>
+                                <td>@Model.SelectedFlights[i].FlightNumber</td>
+                            </tr>
+                            <tr>
+                                <td>کلاس پروازی</td>
+                                <td>@Model.SelectedFlights[i].FLightClass</td>
+                            </tr>
+                            <tr>
+                                <td>شناسه نرخی</td>
+                                <td>@Model.SelectedFlights[i].VehicleTypeClassCode</td>
+                            </tr>
+                            <tr>
+                                <td>مقدار بار مجاز</td>
+                                <td>@Model.SelectedFlights[i].BaggageAmount</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            }
+            @if (Model.HotelInfos != null && Model.HotelInfos.Any())
+            {
+                foreach (var item in Model.HotelInfos)
+                {
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>هتل محل اقامت</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>نام هتل</td>
+                                <td>@item.hotel</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد ستاره</td>
+                                <td>@item.stars</td>
+                            </tr>
+                            <tr>
+                                <td>محل هتل</td>
+                                <td>
+                                    @item.Address
+                                    <i>@(item.location != null ? item.location : "")</i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>امکانات هتل</td>
+                                <td>
+                                    @item.service
+                                    <i></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>اتاق‌ها</td>
+                                <td>
+                                    @foreach (var room in selectedRooms)
+                                    {
+                                        <span>@string.Format("{0}{1} اتاق {2}", selectedRooms.ToList().IndexOf(room) > 0 ? " و " : "", room.Value, room.Text)</span>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>مسافران</td>
+                                <td>
+                                    مجموعا @ViewBag.PassengerTotalCount مسافر
+                                    <i>@string.Format("{0} بزرگسال{1}{2}", ViewBag.PassengerAdultCount, (ViewBag.PassengerChildCount > 0 ? " و " + ViewBag.PassengerChildCount + " کودک " : ""), (ViewBag.PassengerInfantCount > 0 ? " و " + ViewBag.PassengerInfantCount + " نوزاد " : ""))</i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>زمان چک‌این</td>
+                                <td>@ViewBag.CheckinDate</td>
+                            </tr>
+                            <tr>
+                                <td>زمان چک‌آوت</td>
+                                <td>@ViewBag.CheckoutDate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+    </section>
+    <section class="main white tour-passengers-data clearfix">
+        <h2 class="sectionTitle">اطلاعات اتاق و مسافران</h2>
+        @if (reserveInfo.RoomSections != null && reserveInfo.RoomSections.Any())
+        {
+            foreach (var room in reserveInfo.RoomSections)
+            {
+                <h3>اطلاعات مسافران اتاق @(reserveInfo.RoomSections.IndexOf(room) + 1)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>نوع مسافر</th>
+                            <th>نام و نام خانوادگی</th>
+                            <th>جنسیت</th>
+                            <th>کد ملی</th>
+                            <th>تاریخ تولد</th>
+                            <th>محل تولد</th>
+                            <th>شماره پاسپورت</th>
+                            <th>انقضای پاسپورت</th>
+                            <th>قیمت</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (reserveInfo.PassengerList != null && reserveInfo.PassengerList.Any())
+                        {
+                            foreach (var passenger in reserveInfo.PassengerList.Where(x => x.RoomIndex == reserveInfo.RoomSections.IndexOf(room)).ToList())
+                            {
+                                <tr>
+                                    <td>@passenger.AgeRange.GetDisplayValue()</td>
+                                    <td>
+                                        @string.Format("{0} {1}", passenger.FirstName, passenger.LastName)
+                                        <br>
+                                        @string.Format("{0} {1}", passenger.EnFirstName, passenger.EnLastName)
+                                    </td>
+                                    <td>@passenger.Gender.GetDisplayValue()</td>
+                                    <td>@passenger.NationalCode</td>
+                                    <td>@(passenger.Birthdate != null ? passenger.Birthdate.Value.ToString("yyyy/MM/dd") : "")</td>
+                                    <td>@passenger.BirthCountryTitle</td>
+                                    <td>@passenger.PassportNo</td>
+                                    <td>@(passenger.PassportExpirationDate != null ? passenger.PassportExpirationDate.Value.ToString("yyyy/MM/dd") : "")</td>
+                                    <td>@(passenger.AgeRangePriceInThisRoom != null ? (passenger.AgeRangePriceInThisRoom.Value / 10).ToString("#,0 تومان") : "0 تومان")</td>
+                                    <td><button type="button" onclick="history.back();" class="btn-4">ویرایش</button></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            }
+        }
+    </section>
+    <section class="main white tour-receipt-receiver ">
+        <h2 class="sectionTitle">دریافت کنندگان اطلاعات تور</h2>
+        <table class="data-table receipt-receiver">
+            <thead>
+                <tr>
+                    <th width="282">نام دریافت‌کننده</th>
+                    <th width="282">ایمیل</th>
+                    <th width="282">شماره تلفن همراه</th>
+                    <th width="86"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.VoucherReceivers != null && Model.VoucherReceivers.Any())
+                {
+                    for (int i = 0; i < Model.VoucherReceivers.Count; i++)
+                    {
+                        <tr class="voucherReceiversItem">
+                            <td>
+                                @Model.VoucherReceivers[i].FullName
+                                @Html.HiddenFor(x => x.VoucherReceivers[i].FullName, new { Value = Model.VoucherReceivers[i].FullName, @class = "VoucherFullName" })
+                                @Html.ValidationMessageFor(model => model.VoucherReceivers[i].FullName, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Model.VoucherReceivers[i].Email
+                                @Html.HiddenFor(x => x.VoucherReceivers[i].Email, new { Value = Model.VoucherReceivers[i].Email, @class = "VoucherEmail" })
+                                @Html.ValidationMessageFor(model => model.VoucherReceivers[i].Email, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Model.VoucherReceivers[i].Mobile
+                                @Html.HiddenFor(x => x.VoucherReceivers[i].Mobile, new { Value = Model.VoucherReceivers[i].Mobile, @class = "VoucherMobile" })
+                                @Html.ValidationMessageFor(model => model.VoucherReceivers[i].Mobile, "", new { @class = "text-danger" })
+                            </td>
+                            @if (i > 0)
+                            {
+                                <td class="textCenter"><a href="javascript:void(0)" class="" type="button" onclick="$(this).closest('tr').remove();">✖</a></td>
+                            }
+                        </tr>
+                    }
+                }
+                else
+                {
+                }
+                <tr id="VoucherReceiversSection"></tr>
+            </tbody>
+        </table>
+        <input type="hidden" name="VoucherSectionIndex" id="VoucherSectionIndex" value="@(Model.VoucherReceivers != null && Model.VoucherReceivers.Any() ? Model.VoucherReceivers.Count:0)" />
+        <div id="VoucherReceiverForm"></div>
+        <input id="addRoom" onclick="AddVoucherReceiverForm()" class="btn-7" type="button" name="add-room" value="اضافه کردن دریافت کننده اطلاعات تور جدید">
+    </section>
+    <section class="main white tour-pay-info half">
+        <h2 class="sectionTitle">اطلاعات پرداختی</h2>
+        <h3>کد تخفیف</h3>
+        <div id="CouponSection">
+            <input class="TxtCoupon" name="Coupon" value="" placeholder="کد را وارد کرده و روی دکمه اعمال بزنید" type="text">
+            <input class="btn-4 disabled" name="apply" value="اعمال کد" type="button">
+        </div>
+        @*@Html.Partial("_PrvApplyCouponForm", new ApplyCouponViewModel() { TotalPrice = Model.TotalPrice, TotalTaxPrice = Model.TotalTaxPrice })*@
+        <h3>اعتبار</h3>
+        <label onclick="@(!Model.IsAvailableCreditPay ? "event.preventDefault()":"")">
+            @Html.CheckBoxFor(x => x.IsBeCreditPay)
+            <span class="checkbox-replace" onclick="@(!Model.IsAvailableCreditPay ? "event.preventDefault()":"")"></span>
+            <i>استفاده از اعتبار (@Model.CreditValue تومان)</i>
+        </label>
+        <h3>درگاه بانکی</h3>
+        <label>
+            <input name="bank" type="radio">
+            <span class="radio-replace"></span>
+            <img src="~/ClientTheme/Blog/Tour/img/banks/parsian.svg">
+            <b>بانک پارسیان</b>
+        </label>
+        <label>
+            <input name="bank" type="radio">
+            <span class="radio-replace"></span>
+            <img src="~/ClientTheme/Blog/Tour/img/banks/pasargad.svg">
+            <b>بانک پاسارگاد</b>
+        </label>
+        <label>
+            <input name="bank" type="radio">
+            <span class="radio-replace"></span>
+            <img src="~/ClientTheme/Blog/Tour/img/banks/saman.svg">
+            <b>بانک سامان</b>
+        </label>
+    </section>
+    <section class="main white tour-pay-data half">
+        <h2 class="sectionTitle">اطلاعات قیمت</h2>
+        <p class="data">
+            @if (Model.RoomTypePriceInfos != null && Model.RoomTypePriceInfos.Any())
+            {
+                foreach (var item in Model.RoomTypePriceInfos)
+                {
+                    @Html.Raw(string.Format("{0} در اتاق {1} ✘ {2}", item.AgeRangeTitle, item.RoomTypeTitle, item.Count))
+                    <i>@((item.Price / 10).ToString("#,0 تومان"))</i>
+                    <br>
+                }
+            }
+            مالیات بر ارزش افزوده
+            <i>@((Model.TotalTaxPrice / 10).ToString("#,0 تومان"))</i>
+            <br>
+            مبلغ تخفیف
+            <i id="totalDiscountPrice" class="green-text">@((Model.TotalDiscountPrice / 10).ToString("#,0 تومان"))</i>
+        </p>
+        <h3>پرداخت نهایی شما</h3>
+        <em id="totalPayPrice" class="green-text">@((Model.TotalPayPrice / 10).ToString("#,0"))</em>
+        <i>تومان</i>
+    </section>
+}
+<section class="main  tour-pay">
+    <a href="javascript:void(0)" onclick="history.back();" class="btn-4 active">بازگشت</a>
+    <button type="button" onclick="$('#frm-confirm').submit();" class="btn-1 active">پرداخت آنلاین</button>
+</section>
+@Html.Partial("_Toastr")
+@section scripts{
+    <script>
+        //$.validator.setDefaults({
+        //    ignore: [],
+        //});
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST",
+                url: "/Tour/GetCouponForm",
+                data: {
+                    totalPrice: '@(Model.TotalPrice.ToString("#"))',
+                    totalTaxPrice: '@(Model.TotalTaxPrice.ToString("#"))'
+                },
+                success: function (partialView) {
+                    $("#CouponSection").replaceWith(partialView);
+                },
+                error: function (textStatus, errorThrown) {
+                }
+            });
+        });
+
+        function AddVoucherReceiverForm() {
+            $.ajax({
+                type: "POST",
+                url: "/Tour/AddVoucherReceiverForm",
+                //data: {},
+                success: function (partialView) {
+                    $("#VoucherReceiverForm").replaceWith(partialView);
+                    $('#addRoom').attr("disabled", true);
+                },
+                error: function (textStatus, errorThrown) {
+                }
+            });
+        }
+
+        $('#frm-confirm').on("submit", function () {
+            var elements = document.getElementsByClassName("voucherReceiversItem");
+            for (var i = 0, len = elements.length; i < len; i++) {
+                elements[i].getElementsByClassName("VoucherFullName")[0].setAttribute("name", "VoucherReceivers[" + i + "].FullName");
+                elements[i].getElementsByClassName("VoucherEmail")[0].setAttribute("name", "VoucherReceivers[" + i + "].Email");
+                elements[i].getElementsByClassName("VoucherMobile")[0].setAttribute("name", "VoucherReceivers[" + i + "].Mobile");
+            }
+        });
+    </script>
+}

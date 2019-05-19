@@ -1,0 +1,75 @@
+﻿@model ParvazPardaz.ViewModel.TourOrderDetailViewModel
+<div class="container">
+    @Html.HiddenFor(model=>model.TourId)
+    @Html.HiddenFor(model=>model.OrderId)
+    @Html.HiddenFor(model=>model.SectionId)
+    <div class="form-group">
+        <table id="tblflight">
+            <thead>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.CompanyTransfer</tr>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.CompanyTransferVehicleType</tr>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.FromAirport</tr>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.DestinationAirport</tr>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.FlightNumber</tr>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.ArrivalDate</tr>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.DepartureDate</tr>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.FlightClass</tr>
+               
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Flights)
+                {
+                    <tr>@item.CompanyTransfer.Title</tr>
+                    <tr>@item.FromAirportIataCode</tr>
+                    <tr>@item.DestinationAirportIataCode</tr>
+                    <tr>@item.FlightNumber</tr>
+                    <tr>@item.StartDateTime</tr>
+                    <tr>@item.EndDateTime</tr>
+                    <tr>@item.FlightClass</tr>
+                }
+            </tbody>
+        </table>     
+    </div>
+    <div class="form-group">
+        @*<table id="tblHotel">
+            <thead>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.Hotel</tr>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.CityTitle</tr>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.HotelRank</tr>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.HotelBoard</tr>
+                <tr>@ParvazPardaz.Resource.Tour.Tours.HotelRoom</tr>
+
+            </thead>
+            <tbody>
+            </tbody>
+        </table>*@
+        <div class="table-responsive">
+            <table id="HotelsSection" class="choose-a-hotel-table table"></table>
+
+        </div>
+    </div>
+    <div class="form-group">
+
+    </div>
+</div>
+
+<script>
+    function GetHotelPackage(id) {
+        $.ajax({
+            url: "/GetHotelPackages",
+            type: "post",
+            dataType: "html",
+            cache: false,
+            data: {
+                tourPackageId: id
+            },
+            success: function (result) {
+                $("#HotelsSection").html(result);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                debugger
+                alert("error!");
+            }
+        });
+    }
+</script>

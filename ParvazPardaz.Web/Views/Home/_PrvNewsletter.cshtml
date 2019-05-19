@@ -1,0 +1,28 @@
+﻿@using (Ajax.BeginForm("signup1", "Home", ajaxOptions: new AjaxOptions() { HttpMethod = "POST", OnSuccess = "success" }, htmlAttributes: new { @class = "subscription" }))
+{
+    @Html.AntiForgeryToken()
+    <label>با عضویت در خبرنامه کی سفر در جریان آخرین قیمت‌ها و تخفیف‌ها قرار بگیرید.</label>
+    <input type="email" id="sEmail" name="Email" value="" placeholder="ایمیل خود را وارد کنید" required>
+    <input class="btn-1 btn-2 active" type="submit" name="" value="مشترک می‌شوم">
+}
+
+<script>
+    function success(e)
+    {
+        if (e == "success") {
+            toastr.options = { "positionClass": "toast-top-right" }
+            toastr.success('اطلاعات با موفقیت ثبت شد', 'تبریک', { timeOut: 5000 });
+          
+        }
+        else if (e == "fail")
+        {
+            toastr.options = { "positionClass": "toast-top-right" }
+            toastr.error('خطای سیستمی', 'خطا', { timeOut: 5000 })
+        }
+        else if (e == "duplicate") {
+            toastr.options = { "positionClass": "toast-top-right" }
+            toastr.error('ایمیل تکراری می باشد', 'خطا', { timeOut: 5000 })
+        }
+        $("#Email").val("");
+    }
+</script>

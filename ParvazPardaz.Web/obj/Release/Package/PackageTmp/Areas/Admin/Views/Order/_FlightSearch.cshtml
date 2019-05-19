@@ -1,0 +1,45 @@
+﻿@model FlightSearchParamViewModel
+@using (Html.BeginForm("ExportOrderFlights", "Order"))
+{
+    <div id="search" class="container">
+        <div class="form-group col-md-3">
+            <div class="form-group">
+                @Html.Label(ParvazPardaz.Resource.Book.Book.sales)
+                @Html.RadioButtonFor(model => model.reporttype, @ParvazPardaz.Resource.Book.Book.sales, new {@checked="checked"})
+                @Html.Label(ParvazPardaz.Resource.Book.Book.reserve)
+                @Html.RadioButtonFor(model => model.reporttype, @ParvazPardaz.Resource.Book.Book.reserve)               
+            </div>
+            <div class="form-group">
+                <label>از تاریخ</label>
+                @*@Html.TextBoxFor(model => model.fromdate, "{0:yyyy/MM/dd}", new { @class = "datepicker" })*@
+                <input type="text" id="fromdate" name="fromdate" class="datepicker" />
+            </div>
+            <div class="form-group">
+                <label>تا تاریخ</label>
+                @*@Html.TextBoxFor(model => model.todate, "{0:yyyy/MM/dd}", new { @class = "datepicker" })*@
+                <input type="text" id="todate" name="todate" class="datepicker" />
+            </div>
+        </div>
+        <div class="from-group col-md-6">
+            <div class="form-group">
+                <label>وسیله نقلیه</label>
+                @Html.DropDownList("DDVehicleType", ViewBag.VehicleTypes as IEnumerable<SelectListItem>, "انتخاب کنید", new { @class = "select2", onchange = "FetchCompanyTransfer()" })
+            </div>
+            <div class="form-group">
+                <label>شرکت حمل ونقل</label>
+                <select id="DDCompanyTransfer" name="companytranferId" class="select2 col-md-6"></select>
+            </div>
+            <div class="form-group">
+                <label>از</label>
+                @Html.DropDownListFor(model => model.fromairport, ViewBag.Airport as IEnumerable<SelectListItem>, "انتخاب کنید", new { @class = "select2" })
+                <label>به</label>
+                @Html.DropDownListFor(model => model.toairport, ViewBag.Airport as IEnumerable<SelectListItem>, "انتخاب کنید", new { @class = "select2" })
+            </div>
+        </div>
+        <input type="hidden" id="hdcalendertype" />
+        <div class="from-group col-md-3">
+            <button type="button" id="searchbutton" name="searchbutton" class="btn btn-primary" value="@ParvazPardaz.Resource.General.Generals.Search">@ParvazPardaz.Resource.General.Generals.Search</button>
+            <button type="submit" id="exportbutton" name="exportbutton" class="btn btn-success" value="@ParvazPardaz.Resource.General.Generals.ExportExcel">@ParvazPardaz.Resource.General.Generals.ExportExcel</button>            
+        </div>
+    </div>
+}

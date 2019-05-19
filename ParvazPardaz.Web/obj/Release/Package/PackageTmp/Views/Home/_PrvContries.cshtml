@@ -1,0 +1,57 @@
+﻿@*@model IEnumerable<CountryHomeViewModel>
+<aside>
+    <section class="hotels">
+        <div class="container">
+            <div class="row">
+                <h2 class="home-section-title text-center">
+                    هتل ها
+                </h2>
+                @foreach (var country in Model.ToList())
+                {
+                    
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="hotel">
+                        <img src="~/SiteClientTheme/img/Preloader/preloader.gif" style="width: 100% !important; min-height: 120px !important;" alt="@country.Title" onload="this.onload = null; this.src='@(country.ImageUrl)';">
+                    <div class="stars">
+                        <div class="star">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star gold"></i>
+                            <i class="fa fa-star gold"></i>
+                            <i class="fa fa-star gold"></i>
+                            <i class="fa fa-star gold"></i>
+                        </div>
+                    </div>
+                    <div class="hotel-text">
+                        <h5>
+@country.Title
+                        </h5>
+                        <p>
+                            <i class="fa fa-map-marker"></i>
+                            @country.Title
+                        </p>
+                        <p>
+
+                        </p>
+                        <div class="text-center">
+                            <a href="@country.ImageUrl" class="btn bg-red white text-center BR0" name="button">ادامه مطلب</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                            
+                }
+            </div>
+            </div></section>
+</aside>
+
+
+
+            <script>
+                $(function () {
+                    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                        $(".filter-grid").prepend($(".NowruzTour"));
+                    }
+
+                })
+            </script>*@
+

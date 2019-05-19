@@ -1,0 +1,150 @@
+﻿@model TourScheduleHotelRoomViewModel
+@using (Ajax.BeginForm("Create", "TourScheduleHotelRoom", null, new AjaxOptions() { OnSuccess = "frmTourScheduleHotelRoomSubmitSucceeded", HttpMethod = "POST" }, new { id = "frmTourScheduleHotelRoom" }))
+{
+    @Html.HiddenFor(model => model.TourScheduleId)
+    <div class="well">
+        <div class="form-horizontal">
+            <fieldset>
+                @for (int i = 0; i < Model.TourScheduleHotelRoomDynamicControls.Count; i++)
+                {
+                    if (Model.TourScheduleHotelRoomDynamicControls[i].IsPrimary)
+                    {
+                        @Html.HiddenFor(model => model.TourScheduleHotelRoomDynamicControls[i].HotelRoomId)
+                        @Html.HiddenFor(model => model.TourScheduleHotelRoomDynamicControls[i].IsPrimary)
+                        @Html.HiddenFor(model => model.TourScheduleHotelRoomDynamicControls[i].CRUDMode)
+                        @Html.HiddenFor(model => model.TourScheduleHotelRoomDynamicControls[i].NonLimit)
+                        @Html.HiddenFor(model => model.TourScheduleHotelRoomDynamicControls[i].Id)
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="editor-label text-right col-md-4">
+                                    @Html.DisplayFor(model => model.TourScheduleHotelRoomDynamicControls[i].HotelRoomTitle)
+                                    @Html.Label(ParvazPardaz.Resource.Tour.Tours.Price)
+                                </div>
+                                <div class="editor-field col-md-5">
+                                    @Html.SpinFor(model => model.TourScheduleHotelRoomDynamicControls[i].Price, new { @class = "form-control Price-HotelRoom" }).Limit(0, 99999999).PreFix("$").CallConfigWithClass(true, "Price-HotelRoom").ConfigScript(i == 0 ? true : false)
+                                    @Html.ValidationMessageFor(model => model.TourScheduleHotelRoomDynamicControls[i].Price, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="editor-label text-right col-md-1">
+                                    @Html.LabelFor(model => model.TourScheduleHotelRoomDynamicControls[i].Capacity, new { @class = "control-label" })
+                                </div>
+                                <div class="editor-field col-md-8">
+                                    @Html.SpinFor(model => model.TourScheduleHotelRoomDynamicControls[i].Capacity, new { @class = "form-control Capacity-HotelRoom" }).Limit(0, 10).Postfix("Person").CallConfigWithClass(true, "Capacity-HotelRoom").ConfigScript(i == 0 ? true : false)
+                                    @Html.ValidationMessageFor(model => model.TourScheduleHotelRoomDynamicControls[i].Capacity, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+
+                @if (Model.TourScheduleHotelRoomDynamicControls.Any(a => a.IsPrimary == false))
+                {
+                    <div class="clearfix"></div>
+                    <div class="col-md-12">
+                        <div class="form-group" id="divMoreHoteRoom">
+                            <button href="#collapse" type="button" class="nav-toggle" id="btnMoreHoteRoom">More Hotel Room</button>
+                        </div>
+                    </div>
+                    <div id="collapse" style="display:none">
+                        @for (int i = 0; i < Model.TourScheduleHotelRoomDynamicControls.Count; i++)
+                        {
+
+                            if (Model.TourScheduleHotelRoomDynamicControls[i].IsPrimary == false)
+                            {
+                                @Html.HiddenFor(model => model.TourScheduleHotelRoomDynamicControls[i].HotelRoomId)
+                                @Html.HiddenFor(model => model.TourScheduleHotelRoomDynamicControls[i].IsPrimary)
+                                @Html.HiddenFor(model => model.TourScheduleHotelRoomDynamicControls[i].CRUDMode)
+                                @Html.HiddenFor(model => model.TourScheduleHotelRoomDynamicControls[i].NonLimit)
+                                @Html.HiddenFor(model => model.TourScheduleHotelRoomDynamicControls[i].Id)
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="editor-label text-right col-md-4">
+                                            @Html.DisplayFor(model => model.TourScheduleHotelRoomDynamicControls[i].HotelRoomTitle)
+                                            @Html.Label(ParvazPardaz.Resource.Tour.Tours.Price)
+                                        </div>
+                                        <div class="editor-field col-md-5">
+                                            @Html.SpinFor(model => model.TourScheduleHotelRoomDynamicControls[i].Price, new { @class = "form-control Price-HotelRoom" }).Limit(0, 99999999).CallConfigWithClass(true, "Price-HotelRoom").ConfigScript(i == 0 ? true : false)
+                                            @Html.ValidationMessageFor(model => model.TourScheduleHotelRoomDynamicControls[i].Price, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="editor-label text-right col-md-1">
+                                            @Html.LabelFor(model => model.TourScheduleHotelRoomDynamicControls[i].Capacity, new { @class = "control-label" })
+                                        </div>
+                                        <div class="editor-field col-md-8">
+                                            @Html.SpinFor(model => model.TourScheduleHotelRoomDynamicControls[i].Capacity, new { @class = "form-control Capacity-HotelRoom" }).Limit(0, 10).Postfix("Person").CallConfigWithClass(true, "Capacity-HotelRoom").ConfigScript(i == 0 ? true : false)
+                                            @Html.ValidationMessageFor(model => model.TourScheduleHotelRoomDynamicControls[i].Capacity, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        }
+                    </div>
+                    <hr />
+                }
+            </fieldset>
+        </div>
+    </div>
+
+    <br />
+
+
+    <div class="form-group">
+        <div class="col-md-1">
+            <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Submit class="btn btn-custom green" />
+        </div>
+    </div>
+
+}
+
+
+<script type="text/javascript">
+
+    $('#btnMoreHoteRoom').click(function () {
+        $("").toggle("slow");
+
+        //get collapse content selector
+        var collapse_content_selector = $(this).attr('href');
+
+        //make the collapse content to be shown or hide
+        var toggle_switch = $(this);
+        $(collapse_content_selector).toggle(function () {
+            if ($(this).css('display') == 'none') {
+                //change the button label to be 'Show'
+                toggle_switch.html('More Hotel Room');
+            } else {
+                //change the button label to be 'Hide'
+                toggle_switch.html('Hide Hotel Room');
+            }
+        });
+    })
+
+
+    $(document).ready(function () {
+        $("#frmTourScheduleHotelRoom").removeData("validator");
+        $("#frmTourScheduleHotelRoom").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmTourScheduleHotelRoom");
+    })
+
+
+
+
+    //$(document).ready(function () {
+    //    $("#demo1").TouchSpin({
+    //        min: 1,
+    //        max: 100,
+    //        step: 0.1,
+
+    //        postfix: '%'
+    //    });
+    //})
+
+</script>

@@ -1,0 +1,60 @@
+﻿@model TourReserveViewModel
+@{
+    Layout = null;
+}
+
+@if (Model.HotelPackages != null && Model.HotelPackages.Any())
+{
+    <thead>
+        <tr>
+            <th> نام هتل </th>
+            <th> موقعیت </th>
+            @foreach (var hrip in Model.HotelPackages[0].hotelRoomsInPackage)
+            {
+                <th>@hrip.Title</th>
+            }
+            <th>انتخاب</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.HotelPackages.ToList())
+        {
+            foreach (var h in item.hotelsInPackage)
+            {
+                <tr>
+                    <td>
+                        <div>
+                            <div>
+                                @h.HotelTitle
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div>
+                                @h.CityTitle
+                            </div>
+                        </div>
+                    </td>
+                    @foreach (var hrip in item.hotelRoomsInPackage)
+                    {
+                        <td>
+                            <div>
+                                <div>
+                                    @hrip.Price.ToString("#")
+                                </div>
+                            </div>
+                        </td>
+                    }
+                    <td class="choice">
+                        <div>
+                            <div>
+                                <button type="button" name="button"> انتخاب </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+}

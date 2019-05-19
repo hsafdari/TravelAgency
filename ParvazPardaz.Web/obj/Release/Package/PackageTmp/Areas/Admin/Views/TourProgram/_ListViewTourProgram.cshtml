@@ -1,0 +1,76 @@
+﻿@model  ListViewTourProgramViewModel
+@Html.HiddenFor(model => model.TourId)
+<div class="well nopadding " id="@Model.SectionId">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2 nopadding left-column">
+                @Html.Label(ParvazPardaz.Resource.Tour.Tours.DayOrder + " : ")
+                @Html.DisplayFor(model => model.DayOrder)
+            </div>
+            <div class="col-md-8 nopadding center-culomn">
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.DurationDay + " : ")
+                                @Html.DisplayFor(model => model.DurationDay)
+                            </td>
+                            
+                        
+                            @*<td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.Activity + " : ")
+                                @Html.DisplayFor(model => model.Activities)
+                            </td>*@
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.Label("عنوان روز" + " : ")
+                                @Html.DisplayFor(model => model.Description)
+                            </td>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.CityTitle + " : ")
+                                @Html.DisplayFor(model => model.CityTitle)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-2 right-culomn">
+                @Ajax.ActionLink("ویرایش", "Edit", "TourProgram", new { id = Model.Id }, new AjaxOptions()
+           {
+               InsertionMode = InsertionMode.Replace,
+               HttpMethod = "GET",
+               UpdateTargetId = "AddEditTourProgram"
+           }, new { @class = "btn btn-sm btn-blue" })
+                @*<a href="# " class="btn btn-default"> <i class="fa fa-edit"></i></a>*@
+
+
+
+                @Ajax.ActionLink("حذف", "Delete", "TourProgram", new { id = Model.Id, sectionId = Model.SectionId, tourId = Model.TourId },
+                new AjaxOptions()
+           {
+               OnSuccess = "SuccessRemove",
+               HttpMethod = "POST",
+           }, new { @class = "btn btn-sm btn-red" })
+                @*<a href="# " class="btn btn-default"> <i class="fa fa-edit"></i></a>*@
+
+
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12 ">
+            <div class="bottom-column">
+                @*@Ajax.ActionLink("Add Detail", "Create", "TourProgramDetail", new { tourProgramId = Model.Id },
+                new AjaxOptions()
+           {
+               OnSuccess = "ShowModal",
+               HttpMethod = "GET",
+               UpdateTargetId = "TourProgramDetailModal",
+           }, new { @class = "btn btn-sm btn-default" })*@
+                <a class="btn btn-sm btn-default" href="/Admin/TourProgramDetail/Create?tourProgramId=@Model.Id" data-ajax-update="#TourProgramDetailModal" data-ajax-success="ShowModal" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true"><i class="fa fa-plus-square fa-lg" style="color: blue; "></i> افزودن جزییات </a>            </div>
+        </div>
+    </div>
+
+
+</div>

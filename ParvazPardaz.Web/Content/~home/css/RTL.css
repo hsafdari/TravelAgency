@@ -1,0 +1,97 @@
+/* CSS Document */
+.flight-item .item-media, .trip-item .item-media, .attraction-item .item-media, .hotel-item .item-media {
+    float: right !important;
+}
+
+.flight-item .item-body, .trip-item .item-body, .attraction-item .item-body, .hotel-item .item-body {
+    float: right !important;
+}
+
+.flight-item .item-price-more, .trip-item .item-price-more, .attraction-item .item-price-more, .hotel-item .item-price-more {
+    float: left !important;
+}
+
+    .flight-item .item-price-more::after, .trip-item .item-price-more::after, .attraction-item .item-price-more::after, .hotel-item .item-price-more::after {
+        border-left: none !important;
+    }
+
+.filter-item-wrapper .flight-item .item-price-more {
+    border-right: 2px dotted #d4d4d4;
+}
+
+select {
+    padding: 0 31px !important;
+}
+
+.page-sidebar .sidebar-title .clear-filter {
+    float: left !important;
+}
+
+.page-sidebar .sidebar-title h2 {
+    float: right !important;
+}
+
+.page-sidebar .sidebar-title .clear-filter a::before {
+    content: "×";
+    display: inline-block;
+    font-size: 20px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.page-sidebar .sidebar-title .clear-filter a::after {
+    content: "" !important;
+}
+
+.category-heading-content > h2 {
+    letter-spacing: 0 !important;
+}
+
+.breadcrumb ul li a::after {
+    /* border-color:transparent #ddd transparent transparent !important; */
+    display: none !important;
+}
+
+.breadcrumb ul li a {
+    margin-right: 0 !important;
+    margin-left: 32px;
+}
+
+    .breadcrumb ul li a::before {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: transparent #ddd transparent transparent;
+        border-image: none;
+        border-style: solid;
+        border-width: 6px;
+        bottom: 0;
+        content: "";
+        display: inline-block;
+        height: 0;
+        margin: auto;
+        position: absolute;
+        left: -25px;
+        top: 0;
+        transform: scaleY(0.6);
+        width: 0;
+    }
+
+.rtlSearchBoard {
+    float: right !important;
+}
+
+.awe-search-tabs__content .ui-tabs-panel .form-elements .awe-icon {
+    right: auto !important;
+    left: 1px !important;
+}
+.ui-tabs .ui-tabs-nav li {
+    float:right !important;
+}
+
+.awe-search-tabs-2 .awe-search-tabs__content .ui-tabs-panel .form-group:nth-child(1) .form-elements {
+    width: calc(50% - 30px);
+    margin-left: 10px;
+    margin-right:auto !important;
+}

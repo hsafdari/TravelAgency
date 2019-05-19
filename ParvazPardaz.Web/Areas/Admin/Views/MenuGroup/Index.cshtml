@@ -1,0 +1,200 @@
+﻿@model ParvazPardaz.ViewModel.GridMenuGroupViewModel
+
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+
+@if (ParvazPardaz.Resource.General.Generals.Direction == "RTL")
+{
+    if (ParvazPardaz.Resource.General.Generals.Regional == "AR")
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+    @Scripts.Render("~/Scripts/kendo/ar-IQ/js");
+    }
+    else
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+    @Scripts.Render("~/Scripts/kendo/fa-IR/js");
+    }
+}
+else
+{
+    @Styles.Render("~/content/kendo/LTR/css");
+    @Scripts.Render("/Scripts/kendo/en-US/js");
+}
+
+<h3>@ParvazPardaz.Resource.CMS.CMS.ManagementMenuGroup </h3>
+
+<hr />
+
+<p>
+   @if (Infrastructure.HasPermission.CanAccess("Edit", "/Admin/MenuGroup/Edit"))
+    {
+    <a onclick="edit()" class="btn btn-blue">
+        <i class="fa fa-edit"></i>
+        @ParvazPardaz.Resource.General.Generals.Edit
+    </a>
+   }
+  @if (Infrastructure.HasPermission.CanAccess("List", "/Admin/Menu/Index"))
+    {
+    <a onclick="managementMenuItems()" class="btn btn-info">
+        <i class="fa fa-link"></i>
+        @ParvazPardaz.Resource.CMS.CMS.ManagementMenu
+    </a>
+  }
+</p>
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid<ParvazPardaz.ViewModel.GridMenuGroupViewModel>()
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            //columns.Bound(model => model.Id).ClientTemplate("<a href=\"/Admin/MenuGroup/Edit/#=Id#\" class=\"tooltips\" data-original-title=\"" + @ParvazPardaz.Resource.General.Generals.Edit + "\"><i class=\"EditAdmin fa fa-pencil-square-o\"></i></a>").Filterable(false).Groupable(false).Sortable(false).Width(80).Title(@ParvazPardaz.Resource.CMS.CMS.Commands).Width(100);
+            columns.Bound(model => model.GroupName).Width(150);
+            columns.Bound(model => model.IsRoot).Width(150);
+            columns.Bound(model => model.CreatorUserName).Width(150);
+            columns.Bound(model => model.CreatorDateTime).ClientTemplate("#=(CreatorDateTime != null ? moment(CreatorDateTime).format('jYYYY/jMM/jDD HH:mm') : '')#").Width(150);
+            columns.Bound(model => model.LastModifierUserName).Width(150);
+            columns.Bound(model => model.LastModifierDate).ClientTemplate("#=(LastModifierDate != null ? moment(LastModifierDate).format('jYYYY/jMM/jDD HH:mm') : '')#").Width(150);
+
+        })
+            .Groupable()
+            .Pageable()
+            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single)
+            .Type(GridSelectionType.Row))
+            .Navigatable()
+            .Sortable()
+            .Scrollable(scr => scr.Height(400))
+            .Filterable()
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Sort(st =>
+                        {
+                            st.Add(s => s.CreatorDateTime).Descending();
+                            st.Add(s => s.Id).Descending();
+                        })
+
+                .Model(model => model.Id(item => item.Id))
+                .Read(read => read.Action("GetMenuGroup", "MenuGroup", null)).PageSize(50)
+            )
+    )
+    @Html.Partial("_Toastr")
+</div>
+
+@Html.Partial("_ConfirmationMessage")
+
+@section scripts{
+    <script>
+        var CreateUrl = "@Url.Action("Create", "MenuGroup")";
+        var EditUrl = "@Url.Action("Edit", "MenuGroup")";
+        var DeleteUrl = "@Url.Action("Delete", "MenuGroup")";
+    </script>
+
+    <script>
+        function CheckSelectedGrid() {
+            var gview = $("#Grid").data("kendoGrid");
+            var selectedItem = gview.dataItem(gview.select());
+            if (selectedItem == null) {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlert', '@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlertTitle', { timeOut: 5000 })
+                return false;
+            }
+            else {
+                var selectedId = selectedItem.Id;
+                return selectedId;
+            }
+        }
+        var wndRemove = $("#ConfirmationMessage").kendoWindow({
+            title: "",
+            modal: true,
+            visible: false,
+            resizable: false,
+            width: 400,
+        }).data("kendoWindow");
+
+        function create(parameters) {
+            window.location.replace(CreateUrl);
+        }
+
+        function edit(parameters) {
+            debugger;
+            var result = CheckSelectedGrid();
+            if (result) {
+                window.location.replace(EditUrl + "/" + result);
+            }
+        }
+
+        function del(parameters) {
+            var result = CheckSelectedGrid();
+            if (result) {
+                wndRemove.center();
+                wndRemove.open();
+            }
+        }
+
+        function GetSelectedItemParameters() {
+            debugger;
+            var gview = $("#Grid").data("kendoGrid");
+            var SelectedItem = gview.dataItem(gview.select());
+            if (SelectedItem == null) {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlert', '@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlertTitle', { timeOut: 5000 })
+                return false;
+            }
+            else {
+                return SelectedItem;
+            }
+        }
+
+        function managementMenuItems() {
+            debugger;
+            var item = GetSelectedItemParameters();
+            if (item) {
+                //window.open("/Admin/Menu/Index/" + item.Id.ToString(), "_blank")
+                debugger;
+                window.location.href = "/Admin/Menu/Index/" + item.Id;
+            }
+            //Url.Action("Index", "Menu", new { id=item.Id },null)
+        }
+
+        $("#btnYes").click(function () {
+            var gview = $("#Grid").data("kendoGrid");
+            var selectedItem = gview.dataItem(gview.select());
+            var selectedId = selectedItem.Id;
+            $.ajax({
+                url: DeleteUrl,
+                type: "post",
+                dataType: "json",
+                cache: false,
+                data: { Id: selectedId },
+                success: function (result) {
+                    var gridm = $("#Grid").data("kendoGrid");
+                    if (gridm != undefined && result) {
+                        if (gridm.dataSource.transport.cache._store)
+                            gridm.dataSource.transport.cache._store = {};
+                        gridm.dataSource.fetch();
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.DeleteAlert', '@ParvazPardaz.Resource.General.Generals.DeleteAlertTitle', { timeOut: 5000 })
+                    }
+                    else {
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                    }
+                },
+                error: function (xhr) {
+                    toastr.options = { "positionClass": "toast-top-center" }
+                    toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                }
+            });
+            wndRemove.close();
+        })
+        $("#btnNo").click(function () {
+            wndRemove.close();
+        })
+    </script>
+}
+
+

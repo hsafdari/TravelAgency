@@ -1,0 +1,213 @@
+﻿@model CountryTabMagsViewModel
+@{
+    ViewBag.Title = ViewBag.PageTitle;
+    var counter = 0;
+    var counter2 = 0;
+}
+<link href="~/SiteClientTheme/custom/CountryTabMagStyles.css" rel="stylesheet" />
+<link href="@Url.Content("~/SiteClientTheme/custom/custom-footer.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Plugins/Rate-Yo-v2.2.0/jquery.rateyo.min.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Plugins/Rate-Yo-v2.2.0/jquery.rateyo.min.js")"></script>
+<div class="content-body">
+    <div class="container">
+        <aside>
+            <h2 class="title-section direction">@Model.CountryTitle</h2>
+            <div class="cws_divider mb-10 mt-5"></div>
+            <div class="pull-right mb-10" style="direction:ltr">
+                @Html.RateFor("TabMagRate", model => model.PostRateAvg).Rating(Model.PostRateAvg).StarWidth("25px").NumberStar(5).Precision(2).PostRateToURLAjax("/Home/UpdateLinkTbleRate", Model.LinkTblId)
+            </div>
+            <div class="rateTitle" itemscope itemtype="http://schema.org/Product">
+                <span class="hidden" itemprop="name">@Model.CountryTitle</span>
+                <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                    امتیاز <span itemprop="ratingValue">@Model.PostRateAvg.ToString("0.##")</span>/5 از <span itemprop="reviewCount">@Model.PostRateCount</span> نظر
+                </div>
+            </div>
+            <div class="element-section mb-100">
+                <div class="row">
+                    <div class="col-lg-12 mb-lg-40">
+                        <div class="tabs">
+                            <div class="block-tabs-btn clearfix">
+                                @if (Model.TabList != null && Model.TabList.Any())
+                                {
+
+                                    if (Model.TabList[0].ChildTabMag != null)
+                                    {
+                                        <div data-tabs-id="tabs@(Model.TabList[0].TabMagazine.Id)" class="tabs-btn btn-scroll">
+                                            <a id="BtnScroll" href="javascript:void();">@Model.TabList[0].ChildTabMag.ChildGroupTitle</a>
+                                            <!--href="#tours"-->
+                                        </div>
+                                    }
+                                    foreach (var tab in Model.TabList)
+                                    {
+                                        <div data-tabs-id="tabs@(tab.TabMagazine.Id)" class="tabs-btn @(Model.TabList.IndexOf(tab) == 0 ? "active" : "")">
+                                            <a id="@(tab.TabMagazine.Name)" href="#">@tab.TabMagazine.Title</a>
+                                        </div>
+                                    }
+                                }
+                                @*@if (Model.TabList[0].ChildTabMag != null)
+                                    {
+                                        <a id="BtnScroll" href="#tours" style="" class="btn btn-warning pull-left">
+                                            <i class="fa fa-soundcloud" aria-hidden="true"></i>
+                                            @Model.TabList[0].ChildTabMag.ChildGroupTitle
+                                        </a>
+                                    }*@
+                            </div>
+                            <div class="tabs-keeper col-xs-12 direction">
+                                @if (Model.TabList != null && Model.TabList.Any())
+                                {
+                                    foreach (var tab in Model.TabList)
+                                    {
+                                        <div id="DivResult@(tab.TabMagazine.Id)" data-tabs-id="cont-tabs@(tab.TabMagazine.Id)" class="container-tabs @(Model.TabList.IndexOf(tab) == 0 ? "active" : "")">
+                                            @if (tab.ChildTabMag != null)
+                                            {
+                                                <section>
+                                                    <h1 class="hidden">@tab.ChildTabMag.ChildGroupTitle</h1>
+                                                    <h3 id="tours">@tab.ChildTabMag.ChildGroupTitle</h3>
+                                                    <hr />
+                                                    @foreach (var item in tab.ChildTabMag.TabMagChildPostList)
+                                                    {
+                                                        <div class="col-md-4 col-sm-6 col-xs-12 mb-30">
+                                                            <div class="blog-item clearfix border boxed">
+                                                                <div class="blog-media">
+                                                                    <a href="@item.PostUrl" rel="@item.Rel" target="@item.Target">
+                                                                        <div class="pic"><img src="@item.ImageUrl.GetTabMagDefaultUrl("277x186")" alt="@item.Name"></div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="blog-item-body clearfix">
+                                                                    <a href="@item.PostUrl" rel="@item.Rel" target="@item.Target">
+                                                                        <h6 class="blog-title">@item.Name </h6>
+                                                                    </a>
+                                                                    <p class="postSummery">
+                                                                        @Html.Raw(item.PostSummery)
+                                                                    </p>
+                                                                    <br />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        counter2++;
+                                                        if (counter2 == 3)
+                                                        {
+                                                            <div class="hidden-xs" style="clear:both;"></div>
+                                                            counter2 = 0;
+                                                        }
+                                                    }
+                                                </section>
+                                                <div class="clearfix"></div>
+                                            }
+                                            <section>
+                                                <h1 class="hidden">@tab.TabMagazine.Title</h1>
+                                                <h3 id="tours">@tab.TabMagazine.Title</h3>
+                                                <hr />
+                                                @foreach (var item in tab.TabMagPostList)
+                                                {
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 mb-30">
+                                                        <div class="blog-item clearfix border boxed">
+                                                            <div class="blog-media">
+                                                                <a href="@item.PostUrl" rel="@item.Rel" target="@item.Target">
+                                                                    <div class="pic"><img src="@item.ImageUrl.GetTabMagDefaultUrl("277x186")" alt="@item.Name"></div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="blog-item-body clearfix">
+                                                                <a href="@item.PostUrl" rel="@item.Rel" target="@item.Target">
+                                                                    <h6 class="blog-title">@item.Name </h6>
+                                                                </a>
+                                                                <p class="postSummery">
+                                                                    @Html.Raw(item.PostSummery)
+                                                                </p>
+                                                                <br />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    counter++;
+                                                    if (counter == 3)
+                                                    {
+                                                        <div class="hidden-xs" style="clear:both;"></div>
+                                                        counter = 0;
+                                                    }
+                                                }
+                                            </section>
+
+                                        </div>
+                                                counter = 0;
+                                    }
+                                }
+                                <div class="hidden-xs" style="clear:both;"></div>
+                                <div class="seoText">
+                                    @Html.Raw(Model.SeoText)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+@section scripts{
+    <script src="@Url.Content("~/Plugins/ReadMore/readmore.min.js")"></script>
+    <script>
+        function activateTab() {
+            var currentUrl = window.location.href;
+            var splittedUrl = currentUrl.split("#");
+            if (splittedUrl.length > 1) {
+                //alert(splittedUrl[1]);
+                var tabSectionName = splittedUrl[1];
+                var tabAnchorId = "#" + tabSectionName;
+                $(tabAnchorId).trigger('click');
+            }
+            //alert(currentUrl);
+        }
+        $(document).ready(function () {
+
+            $("#BtnScroll").click(function (e) {
+                setTimeout(function () {
+                    e.preventDefault();
+                    var scrollTopValue = $($.attr(this, 'href')).offset().top - 150;
+                    $('html, body').animate({
+                        scrollTop: scrollTopValue
+                    }, 2000);
+                }, 2000);
+            });
+
+            //فعال نمودن تب ، اگر هشتگ در انتهای آدرس صفحه در نوار آدرس باشد
+            //activateTab();
+
+            $('.blog-item-body').readmore({
+                speed: 1000,
+                collapsedHeight: 150,
+                lessLink: '<a href="#" style="padding-left:20px; text-align:left;" class="color:#424d58">بستن</a>',
+                moreLink: '<a href="#" style="padding-left:20px; text-align:left;" class="color:#424d58">بیشتر . . .</a>',
+            });
+
+            $('.tabs-btn').on("click", function () {
+                $('.blog-item-body').readmore({
+                    speed: 1000,
+                    collapsedHeight: 150,
+                    lessLink: '<a href="#" style="padding-left:20px; text-align:left;" class="color:#424d58">بستن</a>',
+                    moreLink: '<a href="#" style="padding-left:20px; text-align:left;" class="color:#424d58">بیشتر . . .</a>',
+                });
+            });
+        });
+        function GetTabDetail(tabId) {
+            //debugger;
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "/TourMagazine/",
+                data: {
+                    tabId: tabId
+                },
+                success: function (result) {
+                    //debugger;
+                    var divId = "#DivResult" + tabId;
+                    $(divId).html(result);
+                },
+                error: function (textStatus, errorThrown) {
+                }
+            });
+
+
+        }
+    </script>
+}
+

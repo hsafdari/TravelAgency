@@ -1,0 +1,600 @@
+﻿
+.flight-clock {
+    width: 110%;
+}
+
+.flight-number {
+    width: 200%;
+    text-align: right !important;
+    white-space: nowrap;
+}
+@media only screen and (max-width: 767px) {
+    body > * {
+        overflow-x: visible !important;
+    }
+
+    body, html {
+        overflow-x: visible;
+    }
+
+    header {
+        height: auto;
+        width: 100%;
+        padding-bottom: 12px;
+        min-height: 70px;
+        float: left;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .form {
+        grid-gap: 8px;
+    }
+
+    header nav a {
+        font-size: 0 !important;
+    }
+
+    .search-bar input:nth-child(2) {
+        display: block;
+        width: 100%;
+        grid-column: 2 / span 2;
+    }
+
+    input[type="number"], input[type="email"], input[type="phone"], input[type="text"], input[type="password"], input[type="submit"], select {
+        height: 40px;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    select {
+        padding-right: 16px;
+    }
+
+    .main .row {
+        display: inline !important;
+    }
+
+    .main.search {
+        padding: 24px calc(50% - 490px);
+        height: auto;
+    }
+
+    .form.search-bar {
+        grid-template-columns: 1.1fr .9fr 2fr;
+    }
+
+    .search-bar [name="go-date"] {
+        grid-column: 1 / span 2;
+    }
+
+
+        .search-bar [name="go-date"] span:first-of-type {
+            font-size: 26px;
+            vertical-align: -5px;
+        }
+
+        .search-bar [name="go-date"]:before {
+            width: 50%;
+            text-align: right;
+            padding-right: 16px;
+            box-sizing: border-box;
+        }
+
+    .main {
+        width: 100% !important;
+        height: auto !important;
+        padding-left: 16px !important;
+        line-height: 35px;
+    }
+
+    .white .sectionTitle {
+        margin-bottom: -10px;
+        background: none;
+        padding-right: 10px;
+    }
+
+    .tour-hotel .sectionTitle {
+        margin-bottom: -20px
+    }
+
+    .main.tour-description {
+        height: 55px !important;
+    }
+
+    .main.tour-description {
+        height: 55px !important;
+    }
+
+        .main.tour-description.active {
+            height: auto !important;
+        }
+
+    .main.navigator {
+        width: calc(100% - 32px) !important;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    .main.tour-description {
+        width: calc(100% - 32px) !important;
+    }
+
+    .image-sq {
+        float: none;
+        display: block;
+        margin-bottom: 16px;
+        width: 160px;
+        height: 160px !important;
+    }
+
+    .main.tour-description > h2 {
+        margin-bottom: 16px;
+    }
+
+    .main.tour-description p {
+        width: 100%;
+        float: none;
+    }
+
+    .main.tour-description h1 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    article.main.tour-description.white {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    .main.tour-description .btn-2 {
+        left: 4px;
+        top: 13px;
+        font-size: 15px;
+    }
+
+    section.main.tour-rooms.white {
+        width: calc(100% - 32px) !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    .tour-rooms.white .sectionTitle {
+        margin-bottom: -16px;
+    }
+
+    .tour-rooms .form {
+        grid-template-columns: repeat(3, calc(33.333333% - 6px));
+        grid-gap: 8px;
+    }
+
+        .tour-rooms .form .label:first-child {
+            grid-column: 1/4;
+        }
+
+    .label-text {
+        font-size: 10px;
+        white-space: nowrap;
+    }
+
+    .tour-rooms .btn-7 {
+        grid-column: 1/4;
+        margin-top: 4px;
+    }
+
+    .updown {
+        width: 10%;
+    }
+
+    .tour-rooms input.number {
+        /*border-radius: 4px !important;
+        border-left: 1px solid #bdbdbd !important;*/
+        width: 90%;
+    }
+
+    .tour-rooms .form .label {
+        margin-top: 5px;
+    }
+
+    section.main.tour-flight.flight-go {
+        width: calc(100% - 10px) !important;
+        padding-bottom: 0;
+    }
+
+    section.main.tour-flight.flight-back.white.clearfix {
+        padding-bottom: 0;
+    }
+
+    section.main.tour-flight.flight-go .sectionTitle {
+        margin-bottom: -16px;
+    }
+
+
+    .main.tour-flight .form label {
+        display: grid;
+        grid-template-columns: 25px 20px 70px 35px 35px 1fr;
+        grid-template-rows: auto auto;
+        height: auto;
+        grid-column: span 3;
+        padding-bottom: 8px;
+        padding-top: 8px;
+    }
+
+    .main .form .airline-logo {
+        grid-column: 1 / 2;
+        grid-row: 3/4;
+        width: 20px !important;
+        height: 30px !important;
+    }
+
+    .main.tour-flight .radio-replace, .main.tour-flight .checkbox-replace {
+        grid-area: auto;
+        grid-column: 1 / 2 !important;
+        grid-row: 1/3 !important;
+    }
+
+    .main.tour-flight .form .flight-duration {
+        grid-column: span 1;
+        grid-column: 4 / 8;
+        grid-row: 3 /4;
+        align-self: center;
+        display: block;
+        width: 100%;
+        text-align: left;
+        font-size: 8px;
+    }
+
+    .main .form .flight-date {
+        grid-column: 2/4;
+        grid-row: 1/2;
+        text-indent: 0px;
+    }
+
+    .main.tour-flight .form .flight-clock {
+        grid-column: 5/7;
+        grid-row: 1 / 2;
+    }
+
+    .flight-clock b {
+        font-size: 13px;
+        color: #303030;
+        font-weight: 500;
+    }
+
+        .flight-clock b:last-child {
+            font-size: 13px;
+            color: #303030;
+        }
+
+    .main.tour-flight .form {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+        .main.tour-flight .form .flight-number {
+            grid-area: auto;
+            grid-column: 2/3;
+            grid-row: 3 /4;
+            color: #303030;
+        }
+
+        .main.tour-flight .form .flight-duration:before {
+            margin: 8px 2px;
+            width: 15px;
+            height: 15px;
+            float: none;
+            display: inline-block;
+            vertical-align: -14px;
+        }
+
+        .main.tour-flight .form .flight-class, .main.tour-flight .form .flight-number {
+            align-self: center;
+            color: #303030;
+        }
+
+    .main.tour-flight.flight-go .form .flight-class {
+        grid-column: 4/5;
+        grid-row: 3/4;
+        border-left: 0;
+        border-right: 1px solid #757575;
+    }
+
+    section.main.tour-flight.flight-custom {
+        width: calc(100% - 15px) !important;
+        padding-bottom: 0;
+    }
+
+    section.main.tour-flight.flight-back.white.clearfix {
+        padding-bottom: 0;
+    }
+
+    section.main.tour-flight.flight-custom .sectionTitle {
+        margin-bottom: -16px;
+    }
+
+    .main.tour-flight.flight-custom .form label {
+        display: grid;
+        grid-template-columns: 25px 20px 70px 35px 35px 1fr;
+        grid-template-rows: auto auto;
+        height: auto;
+        grid-column: span 3;
+        padding-bottom: 8px;
+        padding-top: 8px;
+    }
+
+    .main.tour-flight.flight-custom .form .airline-logo {
+        grid-column: 1 / 2;
+        grid-row: 3/4;
+        width: 20px !important;
+        height: 30px !important;
+    }
+
+    .main.tour-flight.flight-custom .form .flight-date {
+        grid-column: 1/4;
+        grid-row: 2/3;
+        text-indent: 0px;
+    }
+
+    .main.tour-flight.flight-custom .form .flight-clock {
+        grid-column: 4/8;
+        grid-row: 2 / 3;
+    }
+
+    .main.tour-flight.flight-custom .form label h3 {
+        grid-column: 1/7;
+        grid-row: 1/2;
+        color: #00A694;
+        font-weight: 500;
+    }
+
+    .main.tour-flight.flight-custom .form .flight-duration {
+        grid-column: 4 / 8;
+        grid-row: 3/4;
+        align-self: center;
+        display: block;
+        width: 100%;
+        text-align: left;
+        font-size: 8px;
+    }
+
+    .main.tour-flight.flight-custom .form .flight-clock b {
+        color: #303030;
+        font-weight: 500;
+    }
+
+    .main.tour-flight.flight-custom .form .flight-class {
+        grid-column: 4/5;
+        grid-row: 3/4;
+        text-indent: 10px;
+        font-size: 12px;
+        border-right: 1px solid #757575;
+        border-left: 0;
+    }
+
+    .main.tour-flight.flight-custom .form .flight-number {
+        grid-area: auto;
+        grid-column: 2/4;
+        grid-row: 3 /4;
+    }
+
+    .main .form .hotel-name, .main .form .flight-date {
+        font-size: 12px;
+    }
+
+    .btn-1 {
+        height: 40px;
+        line-height: 30px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    section.main.tour-hotel.white.clearfix {
+        width: calc(100% - 32px) !important;
+    }
+
+
+    .tour-hotel .form {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .sort-bar {
+        display: none;
+    }
+
+    .main.tour-hotel .form label {
+        grid-column: span 1;
+        grid-template-columns: 25px 30px 30px 40px 1fr 1fr;
+        grid-template-rows: 35px 35px 35px auto;
+        height: auto;
+        grid-template-areas: "radio          hotel-logo hotel-name hotel-name toggle" "radio          hotel-logo hotel-name hotel-name hotel-star" "hotel-facility hotel-facility hotel-price hotel-price hotel-price";
+    }
+
+    .radio-replace {
+        grid-area: radio;
+        grid-area: unset;
+        grid-column: 1/2;
+        grid-row: 1/3;
+    }
+
+    .main.tour-price button {
+        height: 55px;
+    }
+
+    .hotel-logo {
+        grid-area: hotel-logo;
+        grid-row-start: 1 !important;
+        grid-column-start: 2 !important;
+        grid-row-end: 3 !important;
+        grid-column-end: 4 !important;
+        align-self: center;
+    }
+
+    .hotel-name {
+        grid-area: hotel-name;
+        grid-column-start: 4 !important;
+        grid-column-end: 6 !important;
+        grid-row-start: 1 !important;
+        grid-row-end: 3 !important;
+        align-self: center;
+        font-size: 12px;
+    }
+
+    .hotel-facility {
+        grid-area: hotel-facility;
+        grid-area: unset !important;
+        /* grid-column:; */
+        grid-column-start: 1 !important;
+        grid-column-end: 5 !important;
+        grid-row-start: 3 !important;
+        grid-row-end: 4 !important;
+        align-self: center;
+        display: block;
+        width: 100% !important;
+    }
+
+        .hotel-facility:before {
+            content: "خدمات هتل";
+            font-size: 10px;
+            margin-left: 15px;
+            white-space: nowrap;
+        }
+
+    .hotel-price {
+        grid-area: hotel-price;
+        grid-area: unset !important;
+        /* grid-column:; */
+        grid-column-start: 5 !important;
+        grid-column-end: 7 !important;
+        grid-row-start: 3 !important;
+        grid-row-end: 4 !important;
+        width: 100%;
+        text-align: left;
+        font-size: 12px;
+        margin-left: 16px;
+        align-self: center;
+    }
+
+        .hotel-price:before {
+            content: "شروع قیمت از";
+            font-size: 11px;
+            margin-left: 20px;
+        }
+
+    .main .form .hotel-facility img {
+        float: none;
+        margin-left: 2px;
+        vertical-align: -5px;
+        color: #303030;
+    }
+
+    .main.tour-hotel span[name=toggle] {
+        grid-area: toggle;
+        grid-area: unset !important;
+        /* grid-column:; */
+        grid-column-start: 6 !important;
+        grid-column-end: 7 !important;
+        grid-row-start: 1 !important;
+        grid-row-end: 2 !important;
+        font-size: 13px;
+        text-align: left;
+    }
+
+    .hotel-star {
+        grid-area: hotel-star;
+        grid-area: unset !important;
+        /* grid-column:; */
+        grid-column-start: 6 !important;
+        grid-column-end: 7 !important;
+        grid-row-start: 2 !important;
+        grid-row-end: 3 !important;
+    }
+
+    .details.roll {
+        grid-column-start: 1 !important;
+        grid-column-end: 7 !important;
+        grid-row-start: 4 !important;
+        grid-row-end: 5 !important;
+    }
+
+    .main.tour-hotel span[name=toggle] {
+        grid-area: unset;
+    }
+
+    .main .form .hotel-facility, .main .form .hotel-price {
+        grid-column: auto;
+    }
+
+    .main.tour-hotel .details .slider li {
+        width: 90%;
+        margin: 0 2px;
+    }
+
+    .main.tour-hotel .details {
+        padding: 0 12px !important;
+    }
+
+        .main.tour-hotel .details .slider {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+    .details.roll b {
+        font-size: 12px;
+        min-width: 60px;
+    }
+
+        .details.roll b:before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 1px;
+        }
+
+    .main.tour-hotel .details p {
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        font-size: 12px !important;
+    }
+
+    .main.tour-price.stick {
+        left: 0;
+    }
+    header a
+    {
+        margin-right:0 !important;
+    }
+    .header-image {
+        height: 50px !important;
+    }
+        .header-image .offerEyd {
+            z-index: 1;
+            position: absolute;
+            width: 114px;
+            filter: none;
+            top: 0;
+            right:0;
+        }
+    /*.wrapper.details {
+        display: none !important;
+    }*/
+
+    /*.join {
+        display: none !important;
+    }*/
+    .main.tour-price {
+        grid-template-columns: none;
+    }
+
+    .dvmodalinternal .wrapper {
+        width: calc(100% - 30px);
+    }
+    .modalspan
+    {
+        padding:20px;
+    }
+    .alertcontentfooter img
+    {
+        width:150px;
+    }
+}

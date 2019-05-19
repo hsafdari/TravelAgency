@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>تور چارتران</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/font.css">
+  <link rel="stylesheet" href="css/xl.css">
+  <link rel="stylesheet" href="css/l.css">
+  <link rel="stylesheet" href="css/m.css">
+  <link rel="stylesheet" href="css/s.css">
+</head>
+<body class="clearfix">
+  <header>
+    <a href="home.html" id="logo"><img src="img/icons/logo.svg" alt="چارتران"></a>
+    <nav>
+      <a class="profile-dropdown-toggle" href="#"><img src="img/icons/icon-person-bl-61.svg"> حساب کاربری </a>
+      <a href="tel:+9821343456"><img src="img/icons/icon-headset-l-61.svg">پشتیبانی: ‌۳۴۳۴۵۶ ۰۲۱</a>
+    </nav>
+    <ul class="profile-dropdown">
+      <li><a href="profile-purchase-history.html">سفارش‌های من</a></li>
+      <li><a href="profile-passengers.html">لیست مسافران</a></li>
+      <li><a href="profile-transaction-history.html">تراکنش‌های مالی</a></li>
+      <li><a href="profile-account-settings.html">اطلاعات کاربری</a></li>
+      <li><a href="#">خروج از حساب کاربری</a></li>
+    </ul>
+  </header>
+  <section class="main navigator">
+    <a href="tour.html" class="sectionTitle">انتخاب ویژگی‌های تور</a>
+    <h2 class="sectionTitle">انتخاب اتاق و مسافران</h2>
+    <ul>
+      <li>تکمیل خرید</li>
+      <li>رزرو تور</li>
+    </ul>
+  </section>
+  <section class="main tour-selected border">
+    <a href="#" class="btn-4 edit">ویرایش جزئیات</a>
+    <h1 class="sectionTitle">تور استانبول ۷ روزه</h1>
+    <dl>
+      <dt>بلیط رفت</dt>
+      <dd>
+        <img src="img/airlines/iranair.svg" alt="">
+        <span>چهارشنبه ۲۵ فروردین ۵:۴۵</span>
+        <span>اکونومی</span>
+        <span>پرواز 789 زاگرس</span>
+      </dd>
+      <dt>بلیت برگشت</dt>
+      <dd>
+        <img src="img/airlines/iranair.svg" alt="" >
+        <span>چهارشنبه ۲۵ فروردین ۵:۴۵</span>
+        <span>اکونومی</span>
+        <span>پرواز 789 زاگرس</span>
+      </dd>
+      <dt>هتل</dt>
+      <dd>
+        <span>گراند میلان</span>
+        <span>5 ستاره</span>
+        <span>B.B</span>
+      </dd>
+      <dt>اتاق و مسافر</dt>
+      <dd>
+        <span>اتاق یک تخته 1X اتاق دوتخته ۱X</span>
+      </dd>
+    </dl>
+  </section>
+  <section class="main white tour-room-data">
+    <h2 class="sectionTitle">اطلاعات مسافران اتاق ۱</h2>
+    <form class="form">
+      <div role="group">
+        <legend>اطلاعات مسافر ۱</legend>
+        <label class="label">
+          <span class="label-text">جنسیت</span>
+          <select name="sex">
+            <option value="1">آقا</option>
+            <option value="2">خانم</option>
+          </select>
+        </label>
+        <label class="label">
+          <span class="label-text">کد ملی</span>
+          <input type="text" name="code" value="">
+        </label>
+        <label class="label">
+          <span class="label-text">تاریخ تولد میلادی</span>
+          <input type="number" name="brith-day" value="10">
+          <select name="brith-month">
+            <option value="1" >January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option  value="7" selected>July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+          <input type="number" name="brith-year" value="1988">
+        </label>
+        <label class="label">
+          <span class="label-text">کشور محل تولد</span>
+          <input type="text" name="country" value="ایران">
+        </label>
+        <label class="label">
+          <span class="label-text">شماره پاسپورت</span>
+          <input type="text" name="code" value="">
+        </label>
+        <label class="label">
+          <span class="label-text">تاریخ انقضای پاسپورت</span>
+          <input type="number" name="brith-day" value="28">
+          <select name="brith-month">
+            <option value="1" selected>January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option  value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+          <input type="number" name="brith-year" value="1988">
+        </label>
+        <label class="label">
+          <span class="label-text">نام فارسی</span>
+          <input type="text" name="name-fa" value="">
+          <i class="form-info">لطفا از نامی استفاده کنید که در شناسنامه مسافر ذکر شده است</i>
+        </label>
+        <label class="label">
+          <span class="label-text">نام خانوادگی فارسی</span>
+          <input class="error" type="text" name="lastname-fa" value="">
+          <i class="form-error">لطفا نام خانوادگی را به فارسی وارد کنید!</i>
+        </label>
+        <label class="label">
+          <span class="label-text">نام انگلیسی</span>
+          <input type="text" name="name-en" value="">
+          <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+        </label>
+        <label class="label">
+          <span class="label-text">نام خانوادگی انگلیسی</span>
+          <input type="text" name="lastname-en" value="">
+          <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+        </label>
+        <button href="#" name="op" class="btn-4 edit active" onclick="event.preventDefault(); otherPassengers(this);">از مسافر سابق</button>
+      </div>
+      <div role="group">
+        <legend>اطلاعات مسافر 2</legend>
+        <label class="label">
+          <span class="label-text">جنسیت</span>
+          <select name="sex">
+            <option value="1">آقا</option>
+            <option value="2">خانم</option>
+          </select>
+        </label>
+        <label class="label">
+          <span class="label-text">کد ملی</span>
+          <input type="text" name="code" value="">
+        </label>
+        <label class="label">
+          <span class="label-text">تاریخ تولد میلادی</span>
+          <input type="number" name="brith-day" value="10">
+          <select name="brith-month">
+            <option value="1" >January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option  value="7" selected>July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+          <input type="number" name="brith-year" value="1988">
+        </label>
+        <label class="label">
+          <span class="label-text">کشور محل تولد</span>
+          <input type="text" name="country" value="ایران">
+        </label>
+        <label class="label">
+          <span class="label-text">شماره پاسپورت</span>
+          <input type="text" name="code" value="">
+        </label>
+        <label class="label">
+          <span class="label-text">تاریخ انقضای پاسپورت</span>
+          <input type="number" name="brith-day" value="28">
+          <select name="brith-month">
+            <option value="1" selected>January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option  value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+          <input type="number" name="brith-year" value="1988">
+        </label>
+        <label class="label">
+          <span class="label-text">نام فارسی</span>
+          <input type="text" name="name-fa" value="">
+          <i class="form-info">لطفا از نامی استفاده کنید که در شناسنامه مسافر ذکر شده است</i>
+        </label>
+        <label class="label">
+          <span class="label-text">نام خانوادگی فارسی</span>
+          <input class="error" type="text" name="lastname-fa" value="">
+          <i class="form-error">لطفا نام خانوادگی را به فارسی وارد کنید!</i>
+        </label>
+        <label class="label">
+          <span class="label-text">نام انگلیسی</span>
+          <input type="text" name="name-en" value="">
+          <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+        </label>
+        <label class="label">
+          <span class="label-text">نام خانوادگی انگلیسی</span>
+          <input type="text" name="lastname-en" value="">
+          <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+        </label>
+        <button href="#" name="op" class="btn-4 edit active" onclick="event.preventDefault(); otherPassengers(this);">از مسافر سابق</button>
+      </div>
+    </form>
+  </section>
+  <section class="main white tour-agreement clearfix">
+    <form class="form">
+      <label class="label">
+        <input type="checkbox" name="agree">
+        <span class="checkbox-replace"></span>
+        <div>
+          <a href="#">قوانین وبسایت</a>
+          و
+          <a href="#">قوانین خرید تور</a>
+          را مطالعه کرده و قبول دارم.
+        </div>
+      </label>
+      <input class="btn-1 active " type="submit" name="submit" value="ادامه فرآیند خرید">
+    </form>
+  </section>
+  <footer>
+    <section class="join">
+      <div class="wrapper clearfix">
+        <form class="subscription">
+          <label>با عضویت در خبرنامه چارتران در جریان آخرین قیمت‌ها و تخفیف‌ها قرار بگیرید.</label>
+          <input type="text" name="" value="" placeholder="ایمیل خود را وارد کنید">
+          <input class="btn-1 active" type="submit" name="" value="مشترک می‌شوم">
+        </form>
+        <ul class="social">
+          <li><a href="#" target="_blank"><img src="img/icons/ic-social-telegram.svg"></a></li>
+          <li><a href="#" target="_blank"><img src="img/icons/ic-social-linkedin.svg"></a></li>
+          <li><a href="#" target="_blank"><img src="img/icons/ic-social-instagram.svg"></a></li>
+          <li><a href="#" target="_blank"><img src="img/icons/ic-social-facebook.svg"></a></li>
+        </ul>
+      </div>
+    </section>
+    <div class="wrapper clearfix">
+      <article class="info">
+        <h1>چارتران</h1>
+        <p>در سال 89 با هدف ارایه خدمات متفاوت و با کیفیت به شما عزیزان در صنعت گردشگری تاسیس شده است. سیاست اصلی سایت، ارایه اطلاعات کامل و صحیح و بون جهت‌گیری و جانب‌داری و بدون واسط می‌باشد؛ همچنین اشتراک‌گذاری تجارب مسافران.</p>
+      </article>
+      <nav class="sitemap">
+        <a href="#">درباره ما</a>
+        <a href="#">ارتباط با ما</a>
+        <a href="#">سوالات متداول</a>
+        <a href="#">راهنما</a>
+        <a href="#">پشتیبانی</a>
+        <a href="#">مجوز‌ها</a>
+        <a href="#">جدول نرخ استاندارد</a>
+        <a href="#">فرصت‌های شغلی</a>
+        <a href="#">قوانین و مقررات</a>
+        <a href="#">سیاست‌های حریم خصوصی</a>
+      </nav>
+      <ul class="authorizations">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <div class="wrapper copy">
+      کپی رایت 2018 چارتران. تمام حقوق محفوظ می باشد
+    </div>
+  </footer>
+  <script type="text/javascript" src="js/jq.js"></script>
+  <script type="text/javascript" src="js/custom.js"></script>
+  <script type="text/javascript">
+  function otherPassengers(e) {
+    var op = '<a>بهنام عزیزی</a><a>بهنام عزیزی</a><a>بهنام عزیزی</a>';  // fetch other passengers here.
+    $('.otherPassengers').remove()
+    $('body').append('<div style="left:' + $(e).offset().left + 'px; top:' + ($(e).offset().top + 30) + 'px;" class="otherPassengers">' + op + '</div>')
+  }
+  </script>
+</body>
+</html>

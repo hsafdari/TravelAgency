@@ -1,0 +1,284 @@
+﻿@model ParvazPardaz.ViewModel.Book.LocationTour.TourLocationViewModel
+@{
+    ViewBag.Title = ViewBag.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="canonical" href="@UrlCleanExtension.UrlTourCanonical(Request.Url.AbsoluteUri)" />
+
+@Styles.Render("~/bundles/TourCustomCss")
+<section class="header-image">
+    <img src="@(Model.ImageURL==null?"/ClientTheme/Blog/Tour/img/icons/bgmashhad.jpg":Model.ImageURL)" alt="@Model.Title" />
+    <h1 class="sectionTitle">@Model.Title</h1>
+</section>
+<section class="main white clearfix tourlocationpackage">
+    <div id="dvbgfilter" class="blackarea">
+        <div class="tourlocationRside">
+            <div class="filtermobilebody">
+                <input type="hidden" name="pageNumber" id="hdnpageNumber" value="0" />
+                <input type="hidden" name="FilterType" id="hdnFilterType" value="@Model.FilterType" />
+                <input type="hidden" name="enTitle" id="hdnenTitle" value="@Model.UrlName" />                
+                <div class="filterCitycontent">
+                    <div class="filtercontent">
+                        <div class="colfiltertitle">شــهر مبـدا</div>
+                        <div class="tourlocationLsidebody">
+                            @foreach (var item in Model.FromCities)
+            {
+                                <label class="label">
+                                    <input type="checkbox" name="fromcities" class="checkbox-custom" value="@item.Id">
+                                    <span class="checkbox-replace"></span>
+                                    <span class="radiotitle">@item.Title</span>
+                                </label>
+                            }
+                        </div>
+                    </div>
+                    @if (Model.FilterType != ParvazPardaz.Model.Enum.EnumTourPackageFilterType.city)
+                    {
+                        <h4 class="colfiltertitle">شهرهای مقصد</h4>
+                        <div class="tourlocationLsidebody">
+                            @foreach (var item in Model.ToCities)
+                            {
+                                <input type="hidden" name="hdntocities" value="@item.Id" />
+                                <label class="label">
+                                    <input type="checkbox" name="tocities" class="checkbox-custom tocities" value="@item.Id">                                  
+                                    <span class="checkbox-replace"></span>
+                                    <span class="radiotitle">@item.Title</span>
+                                </label>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.ToCities)
+                        {
+
+                            <input type="hidden" name="tocities" value="@item.Id" />
+                        }
+                    }
+                </div>
+                <div class="filterOtherContent">
+                    <div class="filtercontent">
+                        <h4 class="colfiltertitle">مـدت اقـامـت</h4>
+                        <div class="tourlocationLsidebody">
+                            @foreach (var item in Model.ToursDays)
+            {
+                                <label class="label">
+                                    <input type="checkbox" name="days" class="checkbox-custom" value="@item.Id">
+                                    <span class="checkbox-replace"></span>
+                                    <span class="radiotitle">@item.Title</span>
+                                </label>
+                            }
+                        </div>
+                    </div>
+                    <div class="filtercontent">
+                        <div class="colfiltertitle"> ایـرلایـن ها</div>
+                        <div class="tourlocationLsidebody">
+                            @foreach (var item in Model.CompayTransfers)
+            {
+                                <label class="label">
+                                    <input type="checkbox" name="airlines" class="checkbox-custom" value="@item.Id">
+                                    <span class="checkbox-replace"></span>
+                                    <span class="radiotitle">@item.Title</span>
+                                </label>
+                            }
+                        </div>
+                    </div>
+                    <div class="filtercontent">
+                        <div class="colfiltertitle">درجـه هتـل</div>
+                        <div class="tourlocationLsidebody">
+                            @foreach (var item in Model.HotelRates)
+            {
+                                <label class="label">
+                                    <input type="checkbox" name="hotelrates" class="checkbox-custom" value="@item.Id">
+                                    <span class="checkbox-replace"></span>
+                                    <span class="radiotitle"><img src="@item.Icon" alt="@item.Title"  /></span>
+                                    @*<span class="radiotitle">@item.Title</span>*@
+                                </label>
+                            }
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div id="btnfilterdo">
+                <button type="button" value="اعمال فیلتر" class="btn-1 active" onclick="filterdone()">فیلتر</button>
+            </div>
+        </div>
+    </div>
+    <div class="packagelist">
+        <div class="pagenav">
+            <button id="btnprvpg" type="button" class="nexnav" onclick="PreviousPage(this)" value="صفحه قبل">صفحه قبل</button>
+            <button id="btnnxtpg" type="button" class="nexnav active" onclick="NextPage(this)" value="صفحه بعد">صفحه بعد</button>
+        </div>
+        <section class="main search landing-page" style="display:none">
+            <form class="form search-bar" action="/TourSearch" method="Post">
+                @Html.DropDownList("DepartureCityId", ViewBag.FormCitiesDDL as IEnumerable<SelectListItem>, new { @class = "from select2", @placeholder = "مبدا حرکت خود را مشخص کنید" })
+                @Html.DropDownList("ArrivalCityId", ViewBag.DestCitiesDDL as IEnumerable<SelectListItem>, new { @class = "from select2", @placeholder = "مقصد حرکت خود را مشخص کنید" })
+                <label name="go-date">
+                    <span></span>
+                    <span></span>
+                    @Html.TextBox("FlightDateTemp", "", new { @id = "dFlightDateTemp", @class = "datepicker j", @placeholder = "تاریخ پرواز", required = "required" })
+                    <input type="hidden" name="FlightDate" value="@Model.TourSearchParams.FlightDate" />
+                    <input type="hidden" name="Calendertype" value="@Model.TourSearchParams.Calendertype" />
+                </label>
+                <button class="btn-1 active" type="submit" name="submit" value="جستجو ">جستجو</button>
+            </form>
+        </section>
+        <div id="filter">
+            <a onclick="filterdo()">@ParvazPardaz.Resource.CMS.CMS.Filter</a>
+        </div>
+        @if (Model.TourPackages.Count != 0)
+        {
+            <div id="prvPacklist">
+                @Html.Partial("_PrvLocationTourPackage", Model.TourPackages)
+            </div>
+            <div class="pagenav" style="text-align:left">
+                <input id="btnprvpg" type="button" class="nexnav" onclick="PreviousPage(this)" value="صفحه قبل" />
+                <input id="btnnxtpg" type="button" class="nexnav active" onclick="NextPage(this)" value="صفحه بعد" />
+            </div>
+        }
+        else
+        {
+            <section class="white clearfix" style="margin-top:24px;">
+                <p><strong>کاربر گرامی!</strong> جستجوی شما نتیجه ای دربر نداشت. لطفا دوباره تلاش نمایید . . . </p>
+            </section>
+        }
+        @Html.HiddenFor(model => model.FilterType, new { value = Model.FilterType })
+        <div id="dvnotfound" style="display:none;">
+            <section class="white clearfix" style="margin-top:24px;">
+                <p><strong>کاربر گرامی!</strong> جستجوی شما نتیجه ای دربر نداشت. لطفا دوباره تلاش نمایید . . . </p>
+            </section>
+        </div>
+        <div class="seocontent">
+            @Html.Raw(Model.SeoText)
+        </div>
+    </div>
+
+    <div class="tourlocationLside">
+        @{Html.RenderPartial("_PrvTourPackageOffer", Model.TourSuggestions); }
+    </div>
+</section>
+@section scripts{
+    <script>
+        $(".select2").select2({
+            dir: "rtl"
+        });
+        $(".tourlocationRside :input").change(function()
+        {           
+            $(".nexnav").removeClass("active");
+            $("#hdnpageNumber").val(0);
+            $("#btnnxtpg").addClass("active");
+            filterItems();
+
+        });
+        $("#dvbgfilter").click(function (evt) {
+            if (evt.target.className =="tourlocationRside") {
+
+            }
+            else if (evt.target.className =="blackarea")
+            {
+             $(this).css("display", "none");
+            $("body").css("overflow", "scroll");
+            }
+        });
+         function filterItems()
+         {           
+             var filterType=$("#hdnFilterType").val();
+             if (filterType == "country") {
+                 if (!$(".tocities").is(':checked'))
+                 {
+                     for (var i = 0; i < $('[name="hdntocities"]').length; i++) {
+                         var row = $('[name="hdntocities"]')[0].value;
+
+                     }
+                 }                 
+             }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetTourPackages", "Tour")",
+                data: $(".tourlocationRside :input").serialize(),
+                success: function (data) {
+                    if (data.trim() != '') {
+                        $("#prvPacklist").css("display", "block");
+                        $("#dvnotfound").css("display", "none");
+                        $("#prvPacklist").html(data);
+                        $(".nexnav").removeClass("active");
+                        $(".nexnav").addClass("active");
+                    }
+                    else
+                    {
+                        $("#prvPacklist").css("display", "none");
+                        $("#dvnotfound").css("display", "block");
+                        $(".nexnav").removeClass("active");
+                        $("#btnprvpg").addClass("active");
+                    }
+                },
+                error: function (data) {
+
+                }
+            });
+        }
+         function PreviousPage(element)
+         {
+             var currentRow = $("#hdnpageNumber").val();
+             if (currentRow != 0) {
+                 currentRow--;
+                 $("#hdnpageNumber").val(currentRow);
+                 filterItems();
+             }
+             if (currentRow==0) {
+                 $(element).removeClass("active");
+                 $("#btnnxtpg").addClass("active");
+             }
+         }
+         function NextPage(element)
+         {
+             if ($(element).hasClass("active")) {
+                 var currentRow = $("#hdnpageNumber").val();
+                 currentRow++;
+                 $("#hdnpageNumber").val(currentRow);
+                 if (currentRow > 0) {
+                     $(".nexnav").removeClass("active");
+                     $(".nexnav").addClass("active");
+                 }
+                 filterItems();
+             }
+
+         }
+         function filterdone()
+         {
+             $("#dvbgfilter").css("display", "none");
+             $("body").css("overflow", "scroll");
+         }
+         function filterdo()
+         {
+             $("#dvbgfilter").css("display", "block");
+             $("body").css("overflow", "hidden");
+         }       
+    </script>
+    @*<script src="~/Plugins/owlcarousel/owl.carousel.min.js"></script>*@
+    @*<script>
+             $(document).ready(function () {
+                 if (window.innerWidth < 767) {
+                     $('.owl-carousel').owlCarousel({
+                         rtl: true,
+                         loop: true,
+                         margin: 10,
+                         nav: true,
+                         responsive: {
+                             0: {
+                                 items: 1
+                             },
+                             600: {
+                                 items: 3
+                             },
+                             1000: {
+                                 items: 5
+                             }
+                         }
+                     });
+                 }
+             });
+        </script>*@
+}
+
+

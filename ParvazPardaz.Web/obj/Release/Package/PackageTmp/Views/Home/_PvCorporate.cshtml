@@ -1,0 +1,24 @@
+﻿@model List<CorporatesViewModel>
+
+<section class="thirdPartis">
+    <ul class="tab-bar">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <li class="@(i==0?"active":"")">@Model[i].Title</li>
+        }
+    </ul>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="tab roll @(i==0?"active":"")">
+            <ul class="cards">
+                @for (int j = 0; j < Model[i].Sliders.Count; j++)
+                {
+                    <li><a href="@Model[i].Sliders[j].NavigationUrl" target="_blank" rel="nofollow"><img src="@Model[i].Sliders[j].ImageURL" alt="@Model[i].Sliders[j].ImageTitle" /></a></li>
+                }
+            </ul>
+            <button class="btn-3" type="button" name="next" onclick="roll(1,this,4)"></button>
+            <button class="btn-3" type="button" name="prev" onclick="roll(-1,this,4)"></button>
+        </div>
+    }
+
+</section>

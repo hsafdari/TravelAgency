@@ -1,0 +1,851 @@
+/*general*/
+body, html {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+body:after, html:after{
+  content: "";
+  width: 100%;
+  clear: both;
+  display: block;
+}
+.clearfix:after{
+  content: "";
+  width: 100%;
+  clear: both;
+  display: block;
+}
+.hide{
+  display: none;
+}
+.hidden{
+  visibility: hidden;
+}
+.dimmer{
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.thumbnail {
+  background-color: gold !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+.active > .thumbnail {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+  opacity: 0 !important;
+  margin: 0  !important;
+}
+.active > .thumbnail.active {
+  opacity: 1 !important;
+}
+.btn{
+  cursor: pointer;
+}
+.slider .btn {
+  display: none;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  bottom:  0;
+  cursor: pointer;
+  font-size: 30px;
+  text-indent: 5%;
+  color: white;
+  z-index: 9999;
+  transition: .5s;
+}
+.slider .btn:hover {
+  text-indent: 0%;
+}
+.slider .btn.next {
+  right: 0;
+  text-align: right;
+}
+.slider .btn.prev {
+  left: 0;
+  text-align: left;
+  direction: ltr;
+}
+.slider .btn.collapse {
+  right: 0;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  top: 0;
+  bottom: auto;
+  text-indent: 0;
+  font-size: 35px;
+}
+.slider.active .btn {
+  display: block;
+}
+.section_title {
+  font-size: 16px;
+  font-weight: 300;
+  color: lightgray;
+  line-height: 50px;
+  min-height: 50px;
+  padding: 0 !important;
+  background-color: transparent !important;
+  margin-bottom: 0px !important;
+  color: gray;
+}
+.section_alert {
+  color: gray;
+  border-right: 2px solid darkgray;
+  border-radius: 0 !important;
+  background: whitesmoke;
+  padding: 10px  !important;
+  font-size: 14px;
+}
+.section_title i {
+  font-size: 20px;
+  line-height: 50px;
+  float: right;
+  margin-left: 5px;
+}
+.pannel_title {
+  display: block;
+  height:50px;
+  line-height: 30px;
+  color: darkgray;
+  font-weight: 900;
+  text-align: center;
+}
+.anim-pulse{
+  overflow: hidden;
+  position: relative;
+}
+.anim-pulse:before {
+  content: "";
+  height: 100%;
+  width: 0px;
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+  margin: auto;
+  background: #ffffff;
+  opacity: 0;
+  animation-name: pulse;
+  animation-duration: 3s;
+  animation-fill-mode:forwards;
+  animation-iteration-count: infinite;
+}
+@keyframes pulse {
+  0%{
+    opacity: 0;
+    width: 0px;
+  }
+  50%{
+    opacity: .5;
+    width: 100%;
+  }
+  100%{
+    opacity: 0;
+    width: 100%;
+  }
+}
+.anim-alert {
+  animation-name: alert;
+  animation-duration: 1s;
+  animation-fill-mode:forwards;
+  animation-iteration-count: 5;
+}
+@keyframes alert {
+  0%{
+    background: gold;
+    color: darkgoldenrod;
+    border-color: darkgoldenrod;
+  }
+  100%{
+    background: whitesmoke;
+    color: gray;
+    border-color: gray;
+  }
+
+}
+.fade_in{
+  opacity: 0;
+  transform: translateY(100px);
+  animation-name: fade_in;
+  animation-duration: 1s;
+  animation-fill-mode:forwards;
+  animation-iteration-count: 1;
+}
+@keyframes fade_in {
+  0%{
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.icon{
+  font-family: 'Material Icons' !important;
+}
+.icon.bullet{
+  float: right;
+  margin-left: 5px;
+}
+/*tour details*/
+#tour_details {
+  width: calc(100% - 40px);
+  max-width: 1200px;
+  display: block;
+  margin: 0 auto;
+  direction: rtl;
+  font-family: 'IRANSans' , sans-serif;
+  padding-top: 10px;
+  padding-bottom: 500px;
+  position: relative;
+  overflow: hidden;
+}
+#tour_details * {
+  transition: .5s;
+}
+#tour_details > * {
+  /*padding-top: 20px;*/
+  margin: 5px 0;
+
+}
+/*tour_title*/
+.tour_title {
+  width: calc(30% - 5px);
+  height: auto;
+  display: block;
+  overflow: hidden;
+  font-size: 30px;
+  line-height: 35px;
+  color: #333;
+  float: right;
+  border-bottom: 2px solid gold;
+  padding-bottom: 10px;
+}
+
+/*tour_duration*/
+.tour_duration {
+  line-height: 50px;
+  width: calc(30% - 5px);
+  color: gray;
+  font-size: 17px;
+  line-height: 20px;
+  float: right;
+}
+/*tour_images*/
+.tour_images {
+  width: calc(70% - 5px);
+  height: 500px;
+  background: gold;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  border-radius: 5px;
+  float: left;
+}
+.tour_images .btn{
+  font-size: 200px;
+  line-height: 500px;
+  opacity: 0;
+}
+.tour_images .btn:hover{
+  font-size: 250px;
+  opacity: 1;
+}
+/*tour_description*/
+.tour_description {
+  width: calc(30% - 5px);
+  height: auto;
+  color: #333;
+  display: block;
+  overflow: hidden;
+  padding-top: 30px;
+  line-height: 20px;
+  text-align: justify;
+  float: right;
+}
+/*tour selector*/
+.tour_selector{
+  width:calc(30% - 5px);
+  float: right;
+  position: relative;
+  display: block;
+  color:lightgray;
+  z-index: 999;
+  /*padding: 0 !important;*/
+  clear: both;
+}
+.tour_selector .section {
+  width: calc(100% - 20px);
+  min-height: 330px;
+  padding: 10px;
+  position: relative;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background: whitesmoke;
+}
+.packages .package {
+  display: block;
+  background: white;
+  width: calc(100% - 20px);
+  height: auto;
+  min-height: 60px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  color: darkgray;
+}
+.packages .package:last-child{
+  margin-bottom: 0;
+}
+.packages .package:hover,
+.packages .package.active{
+  background: gold;
+  box-shadow: 0 6px 15px goldenrod;
+  z-index: 999999;
+  color:white;
+}
+.packages .package *{
+  transition:  0s !important;
+}
+.package .price {
+  width: 100%;
+  height: 40px;
+  line-height: 30px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+}
+.package .price * {
+  margin-left: 5px;
+}
+.package .flights,
+.package .date {
+  width: 50%;
+  line-height: 20px;
+  text-align: right;
+  font-weight: 300;
+  font-size: 15px;
+  float: right;
+}
+.package .date {
+  float: left;
+  text-align: right;
+  line-height: 20px;
+  font-size: 13px;
+  width: 50%;
+}
+
+.package .date *{
+  margin-right: 5px;
+}
+.package .flights * {
+  display: block;
+  position: relative;
+}
+.package .flights *:before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-left: 10px;
+  border: 2px solid lightgray;
+}
+.package.active .flights *:before,
+.package:hover .flights *:before {
+  border: 2px solid white;
+}
+.package .flights *:after {
+  content: "";
+  height: 10px;
+  position: absolute;
+  right: 5px;
+  top: 12px;
+  border-left: 2px solid lightgray;
+}
+.package:hover .flights *:after,
+.package.active .flights *:after {
+  border-left: 2px solid white;
+}
+.package .flights *:last-child:after {
+  display: none;
+}
+/*contact*/
+.tour_selector .contact {
+  min-height: 30px !important;
+  line-height: 30px;
+  transition: 0s !important;
+  color: white;
+  background: #424d58;
+}
+
+.contact.sticky {
+  position: fixed;
+  top: 0;
+  transition: 0s !important;
+  border-radius: 0 0  ;
+  z-index: 999999999999;
+  background: #14232a;
+  color: white;
+  margin: 0 !important;
+}
+.tour_selector .contact i{
+  direction: ltr;
+  float: left;
+  text-indent: 10px;
+  font-size: 17px;
+}
+/*navigator*/
+.tour_navigator {
+  float: left;
+  width: calc(70% - 25px);
+  height: 30px;
+  padding: 10px !important ;
+  background: whitesmoke;
+  background: #424d58;
+  border-radius: 5px;
+  z-index: 99999999999;
+  transition: 0s !important;
+}
+.tour_navigator.sticky {
+  position: fixed;
+  top: 0;
+  transition: 0s !important;
+  border-radius: 0 0 5px 5px;
+  background: #14232a;
+  color: white;
+  margin: 0 !important;
+}
+
+.tour_navigator > * {
+  float: right;
+  line-height: 30px;
+  width: calc(25% - 1px);
+  text-align: center;
+  border-left: 1px solid #14232a;
+  color: white;
+  font-weight: 800;
+}
+.tour_navigator >*.btn.active,
+.tour_navigator> *.btn:hover{
+  background: gold;
+  color: #14232a;
+}
+.tour_navigator > *:first-child {
+  border-radius: 0 5px 5px 0;
+}
+.tour_navigator > *:last-child {
+  border: 0;
+  border-radius: 5px 0 0 5px;
+}
+
+/*package details*/
+.tour_package_details {
+  width: calc(70% - 30px);
+  float: left;
+  margin-top: 10px;
+  padding: 0 !important;
+  padding-right: 25px !important;
+}
+.tour_package_details > * {
+  background: whitesmoke;
+  border-radius: 5px;
+  padding: 10px;
+  position: relative;
+  padding-right: 35px;
+  margin-bottom: 10px;
+}
+.tour_package_details > *.active,
+.tour_package_details > *:hover{
+  background: gold;
+}
+.tour_package_details .icon.bullet,
+.hotel_stars,
+.flight_time i{
+  color: goldenrod !important;
+}
+.checker {
+  width: 47px;
+  height: 47px;
+  border-radius: 50px;
+  border: 3px solid whitesmoke;
+  position: absolute;
+  top: calc(50% - 25px);
+  right: -25px;
+  background: white;
+  font-size: 26px;
+  text-align: center;
+  line-height: 47px;
+  color: lightgray;
+}
+.tour_package_details > *:hover .checker,
+.tour_package_details > *.active .checker,
+.checker:hover {
+  border: 3px solid gold;
+  color: gold;
+}
+.tour_package_details .flight,
+.tour_package_details .hotel,
+.tour_package_details .month,
+.tour_package_details .itinerary {
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  /*border: 1px solid lightgray;*/
+  min-height: 80px;
+  position: relative;
+}
+.tour_package_details .flight:last-child,
+.tour_package_details .month:last-child,
+.tour_package_details .hotel:last-child,
+.tour_package_details .itinerary:last-child {
+  margin-bottom: 0;
+}
+.flight_logo,
+.hotel_logo {
+  width: 80px;
+  height: 80px;
+  background-color: white !important;
+  float: right;
+  margin-left: 10px;
+  border-radius: 5px;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.flight_name,
+.hotel_name,
+.itinerary_name {
+  float: right;
+  height: 40px;
+  line-height: 40px;
+  width: calc(100% - 90px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 500;
+  color: black;
+}
+.hotel.btn:before {
+  content: "مشاهده جزییات بیشتر";
+  width: 150px;
+  height: 40px;
+  display: block;
+  position: absolute;
+  left: 10px;
+  top: 30px;
+  line-height: 40px;
+  text-align: center;
+  color: darkgray;
+  font-size: 14px;
+}
+.hotel.btn:hover:before {
+  color: gold;
+
+}
+.hotel.active{
+  height: auto;
+  overflow: hidden;
+}
+.active > .hotel_logo {
+  width: 0;
+  margin: 0;
+}
+.active .hotel_name,
+.active .hotel_location,
+.active .hotel_stars{
+  width: 50%;
+}
+.active > .hotel_stars {
+  font-size: 25px;
+  line-height: 40px;
+}
+.hotel_service, .hotel_facilities, .hotel_description, .hotel_images {
+  display: none;
+}
+.active > .hotel_service, .active > .hotel_facilities, .active > .hotel_description, .active > .hotel_images {
+  display: block;
+}
+.hotel_service {
+  float: left;
+  width: 50%;
+  font-size: 14px;
+}
+.hotel_facilities {
+  float: left;
+  width: 50%;
+  font-size: 13px;
+  margin-top: 15px;
+}
+.hotel_description {
+  float: right;
+  width: calc(50% - 10px);
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 15px;
+}
+.hotel_description a {
+  display: inline-block;
+}
+.hotel_images {
+  width: 100%;
+  float: left;
+  height: initial;
+  padding-bottom: 46%;
+  background: gold;
+  border-radius: 5px;
+  margin-top: 15px;
+  position: relative;
+  overflow: hidden;
+}
+.hotel_images .btn {
+  font-size: 50px;
+  line-height: 50px;
+  height: 50px;
+}
+.hotel_name .collapse {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  float: right;
+  text-align: center;
+  line-height: 40px;
+  font-size: 30px;
+}
+.itinerary_name {
+  width: 100%;
+}
+.itinerary_slides {
+  width: 100%;
+  float: left;
+  background: gold;
+  height: auto;
+  padding-bottom: 46%;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+.itinerary_slide {
+  visibility: hidden;
+  background: yellowgreen;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.itinerary_slide.active{
+  visibility: visible;
+
+}
+.itinerary_image {
+  display: block;
+  float: left;
+  width: 60%;
+  height: 100%;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-color: gold;
+}
+.itinerary_description {
+  display: block;
+  float: right;
+  width: calc(40% - 20px);
+  height: 100%;
+  background: white;
+  padding: 0 10px;
+  line-height: 20px;
+  font-size: 13px;
+  border-radius: 0 5px 5px 0;
+}
+.itinerary_slides .btn {
+  width: 30%;
+  height: 50px;
+  font-size: 50px !important;
+}
+.itinerary_slides .btn.next {
+  right: auto;
+  left: 30%;
+}
+.flight_time,
+.hotel_stars,
+.hotel_location,
+.flight_airline {
+  width: calc(100% - 90px);
+  float: right;
+  font-size: 14px;
+  color: gray;
+  line-height: 20px;
+}
+.flight_time * {
+  float: right;
+  margin-left: 10px;
+}
+
+
+
+.itinerary_images {
+  display: block;
+  float: left;
+  width: 100%;
+  height: 50px;
+  margin: 10px 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+  position: relative;
+}
+.itinerary_images.active {
+  height: 300px;
+  background: gold;
+}
+.itinerary_images .next,
+.itinerary_images .prev {
+  height: 50px;
+}
+.itinerary_images .thumbnail {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+.hotel_prices {
+  float: left;
+  width: 100%;
+  font-size: 14px;
+  color: gray;
+  line-height: 25px;
+}
+.hotel_prices .price {
+  width: calc(25% - 12px);
+  background: white;
+  /*border-radius: 5px;*/
+  padding: 5px;
+  float: right;
+  margin-right: 2px;
+}
+.hotel_prices .price:first-child {
+  border-radius: 0 5px 5px 0;
+}
+.hotel_prices .price:last-child {
+  border-radius: 5px 0 0 5px;
+}
+.hotel_prices .price span:first-of-type {
+  float: right;
+  width: calc(100% - 20px);
+  font-size: 13px;
+}
+.hotel_prices .price span:last-of-type {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+.hotel_facilities span {
+  display: block;
+  line-height: 20px;
+}
+.hotel_facilities span i{
+  visibility: hidden;
+}
+.hotel_facilities span:first-child i{
+  visibility: visible;
+}
+.month_name {
+  height: 50px;
+  line-height: 30px;
+  text-indent: 10px;
+  font-weight: 900;
+  color: gray;
+}
+.day {
+  float: right;
+  width: calc(100% / 7);
+  line-height: 50px;
+  text-align: center;
+  height: 50px;
+  color: darkgray;
+}
+.day.active {
+  background: whitesmoke;
+  border-radius: 5px;
+}
+.day.selected {
+  line-height: 30px;
+  background: gold;
+  color: white;
+  box-shadow: 0 6px 15px goldenrod;
+  z-index: 999999;
+  border-radius: 5px;
+  color: darkgoldenrod;
+
+}
+.day.selected:after {
+  content: "رزرو";
+  display: block;
+  line-height: 10px;
+}
+.firstday-1{margin-right:calc((100% / 7) * 1); }
+.firstday-2{margin-right:calc((100% / 7) * 2); }
+.firstday-3{margin-right:calc((100% / 7) * 3); }
+.firstday-4{margin-right:calc((100% / 7) * 4); }
+.firstday-5{margin-right:calc((100% / 7) * 5); }
+.firstday-6{margin-right:calc((100% / 7) * 6); }
+
+.calc_lowestPrice {
+  float: right;
+  width: calc(30% - 25px);
+  height: 100px;
+  background: whitesmoke;
+  padding: 10px;
+  color: gray;
+  text-align: center;
+  /*display: none;*/
+  margin: 0 !important;
+}
+.calc_lowestPrice.sticky {
+  position: fixed;
+  top: 51px;
+  transition: 0s !important;
+  border-radius: 0 0 5px 5px;
+  z-index: 999999999999;
+  background: #14232a;
+  color: white;
+  display: block;
+}
+.calc_lowestPrice .price {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  display: block;
+}
+.calc_lowestPrice .book {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background: gold;
+  display: block;
+  border-radius: 5px;
+  color: darkgoldenrod;
+  font-size: 22px;
+  font-weight: 500;
+}

@@ -1,0 +1,27 @@
+﻿@model ConfirmViewModel
+@if (Model.VoucherReceiverItem != null)
+{
+    <tr class="voucherReceiversItem">
+        <td>
+            @Model.VoucherReceiverItem.FullName
+            @Html.HiddenFor(x => x.VoucherReceivers[Model.VoucherReceiverItem.SectionIndex.Value].FullName, new { Value = Model.VoucherReceiverItem.FullName, @class = "VoucherFullName" })
+            @Html.ValidationMessageFor(model => model.VoucherReceivers[Model.VoucherReceiverItem.SectionIndex.Value].FullName, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Model.VoucherReceiverItem.Email
+            @Html.HiddenFor(x => x.VoucherReceivers[Model.VoucherReceiverItem.SectionIndex.Value].Email, new { Value = Model.VoucherReceiverItem.Email, @class = "VoucherEmail" })
+            @Html.ValidationMessageFor(model => model.VoucherReceivers[Model.VoucherReceiverItem.SectionIndex.Value].Email, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Model.VoucherReceiverItem.Mobile
+            @Html.HiddenFor(x => x.VoucherReceivers[Model.VoucherReceiverItem.SectionIndex.Value].Mobile, new { Value = Model.VoucherReceiverItem.Mobile, @class = "VoucherMobile" })
+            @Html.ValidationMessageFor(model => model.VoucherReceivers[Model.VoucherReceiverItem.SectionIndex.Value].Mobile, "", new { @class = "text-danger" })
+        </td>
+        @if (Model.VoucherReceiverItem.SectionIndex.Value > 0)
+        {
+            <td class="textCenter"><a href="javascript:void(0)" class="" type="button" onclick="$(this).closest('tr').remove();">✖</a></td>
+        }
+    </tr>
+    <tr id="VoucherReceiversSection"></tr>
+}
+

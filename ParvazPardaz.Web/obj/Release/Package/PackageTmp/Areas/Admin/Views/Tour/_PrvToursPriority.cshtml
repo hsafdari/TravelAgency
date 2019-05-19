@@ -1,0 +1,60 @@
+﻿@model TourPriorityViewModel
+@if (Model.Tours != null && Model.Tours.Any())
+{
+    using (Ajax.BeginForm("UpdateTourPriority", "Tour", null, new AjaxOptions() { OnSuccess = "SuccessResult", OnFailure = "FailureResult", LoadingElementId = "Preloader2" }))
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="sample-table-1">
+                <thead>
+                    <tr>
+                        <th class="center" style="width:50px">
+                            ترتیب
+                        </th>
+                        <th>عنوان تور</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Tours.Count(); i++)
+                    {
+                        <tr>
+                            <td class="center">
+                                @Html.HiddenFor(x => x.Tours[i].Id)
+                                @Html.TextBoxFor(x => x.Tours[i].Priority)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(x => x.Tours[i].Title)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value="@ParvazPardaz.Resource.General.Generals.Update" class="btn btn-custom green" />
+                <img id="Preloader2" class="Preloader" src="~/Content/Preloader/preloader.gif" />
+            </div>
+        </div>
+    }
+}
+else
+{
+    @Html.Partial("_PrvTourPriorityStatus", false)
+}
+
+<script>
+    function SuccessResult(result) {
+        if (result.status) {
+            $("#ResultDiv").load("/Admin/Tour/GetTourPriorityStatus");
+        } else {
+            toastr.options = { "positionClass": "toast-top-center" }
+            toastr.info('@ParvazPardaz.Resource.General.Generals.NotChangeMessage', '@ParvazPardaz.Resource.General.Generals.Update', { timeOut: 5000 })
+        }
+    }
+    function FailureResult() {
+        toastr.options = { "positionClass": "toast-top-center" }
+        toastr.error('@ParvazPardaz.Resource.General.Generals.TryAginMessage', '@ParvazPardaz.Resource.General.Generals.ErrorTitle', { timeOut: 5000 })
+    }
+</script>
+

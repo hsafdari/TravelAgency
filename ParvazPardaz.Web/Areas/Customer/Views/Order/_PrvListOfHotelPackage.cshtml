@@ -1,0 +1,184 @@
+﻿@model ParvazPardaz.ViewModel.GridOrderViewModel
+@{
+    Layout = null;
+}
+@if (Model != null && Model.TourReserve != null)
+{
+    <table class="data-table" id="DetailDataSection">
+        <thead>
+            <tr>
+                <th colspan="7">
+                    مشخصات پرواز
+                </th>
+            </tr>
+            <tr>
+                <th>
+                   ردیف
+                </th>
+                <th>
+                    مبدا
+                </th>
+                <th>
+                    مقصد
+                </th>
+                <th>
+                    ایرالاین
+                </th>
+                <th>
+                    شماره پرواز
+                </th>
+                <th>
+                    تاریخ و زمان پرواز
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.TourReserve.SelectedFlights)
+            {
+                <tr>
+                    <td>
+                        @(Model.TourReserve.SelectedFlights.IndexOf(item) + 1)
+                    </td>
+                    <td>@item.FromAirport</td>
+                    <td>@item.ToAirport</td>
+                    <td><img src="@item.airlineIcon" title="@item.airline" /> @item.airline</td>
+                    <td>@item.FlightNumber</td>
+                    <td>@String.Format("{0:yyyy/MM/dd}", item.FlightDate)</td>
+                    <td>@item.FlightDirection.GetDisplayValue()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class="data-table" id="DetailDataSection">
+        <thead>
+            <tr>
+                <th colspan="7">
+                    مشخصات هتل
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    ردیف
+                </th>
+                <th>
+                    هتل
+                </th>
+                <th>
+                    رتبه
+                </th>
+                <th>
+                    سرویس
+                </th>
+                <th>
+                    شهر
+                </th>
+                <th>
+                    موقعیت
+                </th>
+
+                <th>
+                    تلفن
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.TourReserve.HotelInfos)
+            {
+                <tr>
+                    <td>
+                        @(Model.TourReserve.HotelInfos.IndexOf(item) + 1)
+                    </td>
+                    <td>@item.hotel</td>
+                    <td>@item.stars</td>
+                    <td>@item.ServiceTooltip</td>
+                    <td>@item.City</td>
+                    <td>@item.location</td>
+                    <td>@item.Tel</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class="data-table" id="DetailDataSection">
+        <thead>
+            <tr>
+                <th colspan="9">
+                    مشخصات اتاق
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    ردیف
+                </th>
+                <th>
+                    عنوان اتاق
+                </th>
+                @*<th>
+                    قیمت ارز به ريال
+                </th>*@
+                <th>
+                    تعداد بزرگسال
+                </th>
+                @*<th>
+                    قیمت ریالی بزرگسال
+                </th>
+                <th>
+                    قیمت ارزی بزرگسال
+                </th>*@
+                <th>تعداد کودک</th>
+                @*<th>
+                    قیمت ریالی کودک
+                </th>
+                <th>
+                    قیمت ارزی کودک
+                </th>*@
+                <th>تعداد خردسال</th>
+                @*<th>
+                    قیمت ریالی خردسال
+                </th>
+                <th>
+                    قیمت ارزی خردسال
+                </th>*@
+                <th>
+                    مجموع مبلغ
+                </th>
+                <th>
+                    مالیات ارزش افزوده
+                </th>
+                <th>
+                    مبلغ پرداختی
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.TourReserve.HotelRoomInfos)
+            {
+                <tr>
+                    <td>
+                        @(Model.TourReserve.HotelRoomInfos.IndexOf(item) + 1)
+                    </td>
+                    <td>@item.Title</td>
+                    @*<td>@(item.BaseRialPrice > 0 ? item.BaseRialPrice.ToString("#,0") : "--")</td>*@
+                    <td>@item.AdultCount</td>
+                    @*<td>@item.AdultRialPrice.ToString("#,0")</td>
+                    <td>@(item.AdultOtherCurrencyPrice > 0 ? string.Format("{0} {1}", item.AdultOtherCurrencyPrice.ToString("#,0"), item.OtherCurrencyTitle) : "--")</td>*@
+                    <td>@item.ChildCount</td>
+                    @*<td>@item.ChildRialPrice.ToString("#,0")</td>
+                    <td>@(item.ChildOtherCurrencyPrice > 0 ? string.Format("{0} {1}", item.ChildOtherCurrencyPrice.ToString("#,0"), item.OtherCurrencyTitle) : "--")</td>*@
+                    <td>@item.InfantCount</td>
+                    @*<td>@item.InfantRialPrice.ToString("#,0")</td>
+                    <td>@(item.InfantOtherCurrencyPrice > 0 ? string.Format("{0} {1}", item.InfantOtherCurrencyPrice.ToString("#,0"), item.OtherCurrencyTitle) : "--")</td>*@
+                    <td>@item.TotalPassengerPrice.ToString("#,0")</td>
+                    <td>@item.VATPrice.ToString("#,0")</td>
+                    <td>@item.TotalPayedPrice.ToString("#,0")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="action">
+        <button class="btn-1 active" type="button" name="print" onclick="window.location.href='/Customer/Order/Voucher?trackingCode=@(ViewBag.TrackingCode)'">مشاهده و صدور ووچر</button>
+    </div>
+}
+    

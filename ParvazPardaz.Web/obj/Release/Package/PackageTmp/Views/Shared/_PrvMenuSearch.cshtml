@@ -1,0 +1,22 @@
+﻿@model SearchViewModel
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script> <!-- Server.UrlDecode(Request.Url.AbsolutePath) -->
+@using (Ajax.BeginForm("Index", "SearchValidate", null, new AjaxOptions() { OnSuccess = "SearchAjaxSuccess", OnFailure = "SearchFailureAjax" }, new { @class = "navbar-form blogMarginTop searchform", style = "display:none", role = "search" }))
+{
+    <div class="input-group stylish-input-group mobileInputGroup">
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "مقصد مورد نظرتان را جست و جو کنید . . ." })
+        @Html.HiddenFor(model => model.currentUrl, new { @id = "currentUrl" })
+        <span class="input-group-addon">
+            <button type="submit">
+                <span class="fa fa-search"></span>
+            </button>
+        </span>
+    </div>
+}
+
+<script>
+    $(function () {
+        var currentUrl = decodeURIComponent(window.location.pathname);
+        document.getElementById("currentUrl").value = currentUrl;
+    });
+</script>

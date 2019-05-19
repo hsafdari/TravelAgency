@@ -1,0 +1,132 @@
+.slider-box-right .col-md-6:nth-child(2n+2)
+{
+	padding-left:0 !important;
+	padding-right:15px !important;
+}
+.top-header .top-social, .add-block, .header.header2 .top-menu
+{
+	text-align:left !important;
+}
+.category-post-section .box-content,.box-content,.footer-bottom p,.footer-section
+{
+	text-align:right;
+}
+.search-follow
+{
+	left:15px !important;
+	right:auto !important;
+}
+.widget-sidebar .widget_latest_post .col-md-5
+{
+	padding-left:12px !important;
+	padding-right:0 !important;
+	
+}
+
+.postContent,.tags {
+    text-align:right;
+    direction:rtl !important;
+}
+.blog-content .tags a
+{
+    background-color:#f5d800 !important;
+}
+.commentlist .comment
+{
+    padding-right:142px !important;
+    padding-left:0 !important;
+}
+.commentlist .children
+{
+    padding-right:110px !important;
+    padding-left:0 !important;
+}
+.commentlist .comment .comment-image
+{
+    float:right !important;
+    margin-right:-140px;
+    margin-left:0 !important;
+}
+.comment
+{
+    text-align:right;
+}
+.commentlist .comment .comment-info span
+{
+    float:left !important;
+}
+/*.page-breadcrumb .breadcrumb li:last-of-type::before {
+    content:"\f104" !important;
+}*/
+.page-breadcrumb
+{
+    text-align:right;
+    direction:rtl;
+}
+.breadcrumb > li + li::before
+{
+    content:none !important;
+}
+.breadcrumb > li
+{
+    /*float:right;*/
+    margin-right:10px;
+}
+.postG
+{
+    float:right;
+    text-align:right;
+    direction:rtl;
+}
+.widget-sidebar .widget {
+    text-align:right;
+}
+.postContent p{
+    direction:rtl !important;
+}
+#popupsignupform
+{
+   direction:rtl !important;
+}
+
+/*  menu  */
+.rtl
+{
+	direction:rtl !important;
+}
+.nav-container .mega-menu .links li::before
+{
+	content: "\f104" !important;
+position: absolute;
+font-family: "FontAwesome";
+color: #BEC4C8;
+margin-right: -10px;
+}
+.menu-text
+{
+	text-align:right !important;
+}
+ul.style-1 li::before
+{
+	left:auto !important;
+	right:0 !important;
+	
+}
+.style-1 li
+{
+	padding-right:15px !important;
+	padding-left:auto !important;
+}
+.right-align {
+    text-align: right !important;
+}
+
+/*    menu rtl     */
+.nav, .dropdown-menu li a
+{
+    text-align:right !important;
+}
+ .post-content p
+ {
+     direction:rtl !important;
+ }

@@ -1,0 +1,59 @@
+﻿@model ParvazPardaz.ViewModel.EditFAQViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.Tour.Tours.FAQManagement </h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.TourId, new { @class = "control-label col-md-1" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.TourId, Model.TourList, new { @class = "form-control search-select select" })
+                @Html.ValidationMessageFor(model => model.TourId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-1" })
+            <div class="col-md-3 chkbox">
+                @Html.CheckBoxFor(model => model.IsActive, new { @class = "flat-red", style = "margin-right:50px; margin-left:50px;" })
+                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Question, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Question, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Question, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Answer, new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Answer, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+            </div>
+        </div>
+          
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $('.select').select2();
+    </script>
+}

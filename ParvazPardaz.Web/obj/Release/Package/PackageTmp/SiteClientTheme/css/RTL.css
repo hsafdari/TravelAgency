@@ -1,0 +1,183 @@
+/*
+company: parvazpardaz
+author:Niloofar taban
+1395/12/11
+Last change: 1395/12/15
+author:Niloofar taban
+version 1.0
+
+*/
+.direction {
+    direction: rtl;
+}
+
+.site-top-panel .top-right-wrap {
+    text-align: left !important;
+}
+
+.top-left-wrap {
+    text-align: right !important;
+}
+
+.info-text {
+    text-align: right !important;
+}
+
+.main-title {
+    text-align: right !important;
+}
+
+.slider-info-wrap .slider-info-content .slider-info-item .info-item-content .main-title .title {
+    padding-right: 20px !important;
+    padding-left: 0 !important;
+}
+
+.slider-info-wrap .slider-info-content .slider-info-item .info-item-content .main-title .button {
+    right: auto !important;
+    left: 15px !important;
+}
+
+.title-icon {
+    text-align: left !important;
+}
+
+.section-title {
+    text-align: right !important;
+}
+
+@media(min-width:530px) {
+    .tabs .block-tabs-btn .tabs-btn {
+        float: right !important;
+    }
+
+        .tabs .block-tabs-btn .tabs-btn::after {
+            left: -7px !important;
+            right: auto !important;
+            transform: skew(16deg) !important;
+        }
+
+        .tabs .block-tabs-btn .tabs-btn::before {
+            transform: skew(16deg) !important;
+            right: -7px !important;
+            left: auto !important;
+        }
+}
+
+.recom-item .recom-item-body .recom-price span {
+    font-size: 16px !important;
+}
+
+.currency {
+    float: left !important;
+}
+
+.features-info-bot {
+    text-align: right;
+}
+
+.features-tours-full-width .features-tours-wrap .features-tours-item .features-media .features-info-bot .button {
+    left: 0 !important;
+    right: auto !important;
+}
+
+.blog-item-body {
+    text-align: right !important;
+}
+
+.call-out-box.with-icon .call-out-wrap .call-out-icon {
+    right: -40px !important;
+    left: auto !important;
+}
+
+.contact-item {
+    text-align: right !important;
+}
+
+.right-align {
+    text-align: right !important;
+}
+
+ul.icon li i {
+    left: auto !important;
+    right: -22px !important;
+}
+
+.sign-footer-logo {
+    float: left !important;
+    margin-top: 5px !important;
+}
+
+.cws-social {
+    font-family: FontAwesome !important;
+}
+
+.from-top {
+    margin-top: 30px !important;
+}
+
+.tour-desc {
+    font-size: 12px !important;
+}
+
+.recom-item-body {
+    text-align: right;
+}
+
+.cws_divider {
+    float: right !important;
+}
+
+.skw-menu {
+    background-color: #ffc107;
+    float: left !important;
+    height: 100%;
+    position: absolute;
+    left: -13px;
+    right: auto !important;
+    top: 0;
+    /*width: 9%;*/
+    transform: skew(15deg) !important;
+}
+
+.contact-item {
+    margin-right: 17px;
+}
+
+.footer-logo-img {
+    float: right;
+}
+/*.site-top-panel .top-left-wrap a i
+{
+	margin-left:10px;
+	margin-right:0 !important;
+}*/
+/*.tel-top a i
+{
+	float:right !important;	
+}*/
+.rtl {
+    direction: rtl !important;
+}
+
+.nav-container .mega-menu .links li::before {
+    content: "\f104" !important;
+    position: absolute;
+    font-family: "FontAwesome";
+    color: #BEC4C8;
+    margin-right: -10px;
+}
+
+.menu-text {
+    text-align: right !important;
+}
+
+ul.style-1 li::before {
+    left: auto !important;
+    right: 0 !important;
+}
+
+.style-1 li {
+    padding-right: 15px !important;
+    padding-left: auto !important;
+}
+

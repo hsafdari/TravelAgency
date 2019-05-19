@@ -1,0 +1,127 @@
+﻿
+.DeleteAdmin {
+    font-size: 24px;
+    color: #ff4000;
+    margin-right: 4px;
+}
+
+.EditAdmin {
+    font-size: 24px;
+    color: #3D9400;
+    margin-right: 5px;
+}
+
+.ResetAdmin{
+     font-size: 22px;
+    color: #ff4000;
+    margin-right: 4px;
+}
+
+.DetailsAdmin {
+    font-size: 24px;
+    color: #386aa1;
+    transform: rotate(180deg);
+    margin-right: 5px;
+    padding-bottom: 2px;
+}
+
+.CreateAdmin {
+    font-size: 18px;
+    color: #ff4000;
+    margin-right: 5px;
+}
+
+.EditGallery {
+    font-size: 20px;
+    color: #3D9400;
+}
+
+.EditProperties{
+    font-size: 20px;
+    color: #3D9400;
+}
+
+.CopyToClipboard {
+    font-size: 21px;
+    color: #386aa1;
+    margin-right: 5px;
+}
+
+.ClientPreview {
+    font-size: 24px;
+    color: #386aa1;
+    margin-right: 5px;
+}
+
+
+/*******************/
+
+.dl-horizontal dt {
+    float: right !important; 
+}
+
+.TooltipIcon {    
+    color: #e6674a;
+}
+.number input {
+    width:100% !important;
+}
+
+/*hotel faci;ity in hotel create */
+
+.facility ul li {
+    float:left;
+    list-style:none;
+    padding:20px;
+}
+
+.facility ul li span {
+    padding-right:5px;
+}
+.left-column
+{
+    text-align:center;
+    margin-top:2%;
+}
+.center-culomn .table tbody tr td
+{
+    border:none;
+}
+.right-culomn
+{
+    text-align:center;
+    margin-top:2%;
+}
+.center-culomn {
+    border-right:1px solid #ccc;
+    border-left:1px solid #ccc;
+}
+.nomargin
+ {
+    margin:0 !important;
+ }
+.center-culomn .table {
+    margin-bottom:0;
+}
+
+/*.easy-autocomplete.eac-square input
+{
+    min-width:150px !important;
+    padding:0 !important;
+    font-size:14px !important;
+   font-weight:normal !important;
+}*/
+#divDestinationCity div,#divFromCity div
+{
+    width:150px !important;
+}
+/*.easy-autocomplete.eac-square ul li, .easy-autocomplete.eac-square ul .eac-category
+{
+    font-size:12px !important; 
+    text-align:left !important; 
+}*/
+#progress
+{
+    margin-top:20px !important;
+}
+

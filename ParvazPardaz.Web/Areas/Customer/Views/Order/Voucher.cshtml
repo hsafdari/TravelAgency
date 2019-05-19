@@ -1,0 +1,34 @@
+﻿@model VoucherViewModel
+@using ParvazPardaz.Common.Extension
+@{
+    ViewBag.Title = "واچر";
+}
+<main id="purchase-history" class="profile">
+    <aside class="profile-nav">
+        <a href="/Customer/Order/Index" class="active">سفارش‌های من</a>
+        <a href="/Customer/Passenger/Index">لیست مسافران</a>
+        <a href="javascript:void(0)">تراکنش‌های مالی</a>
+        <a href="/Customer/MyAccount/MyProfile#user-info">اطلاعات کاربری</a>
+    </aside>
+    <section class="main white tour-ticket">
+        <h2 class="sectionTitle">اطلاعات تور و بلیط</h2>
+        <div class="voucherprint">
+            <div class="htmlprint">
+                <div class="bodyprint">
+                    <h1>@Model.TourTitle</h1>
+                    @Html.Partial("_PrvPrintPassengerPdf", Model.PassengerList)
+                    @Html.Partial("_PrvPrintFlightPdf", Model.SelectedFlights)
+                    @Html.Partial("_PrvPrintHotelPdf", Model.HotelInfos)
+                    <footer>
+                        <img src="/ClientTheme/Blog/Tour/img/icons/logo.png" alt="کی سفر">
+                        <p>پاسداران مقابل باشگاه بانک مرکزی</p>
+                    </footer>
+                    @Html.Partial("_PrvPrintCss")
+                </div>
+            </div>
+        </div>
+        <button class="btn-4 active " onclick="pdfIt('.htmlprint')" type="button" name="button">چاپ اطلاعات تور</button>
+    </section>
+</main>
+<script type="text/javascript" src="/ClientTheme/Blog/Tour/js/jspdf.min.js"></script>
+<script type="text/javascript" src="/ClientTheme/Blog/Tour/js/html2canvas.min.js"></script>

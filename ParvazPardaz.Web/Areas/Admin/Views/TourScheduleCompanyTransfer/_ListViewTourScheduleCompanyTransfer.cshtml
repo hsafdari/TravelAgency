@@ -1,0 +1,81 @@
+﻿@model  ListViewTourScheduleCompanyTransferViewModel
+@Html.HiddenFor(model => model.TourScheduleId)
+<div class="well nopadding " id="@Model.SectionId">
+    <div class="row nomargin">
+        <div class="col-md-11">
+            <div class="col-md-2 nopadding left-column" style="margin-top:7%">
+                @*@Html.Label(ParvazPardaz.Resource.Tour.Tours.TourTitle + " : ")
+                    @Html.DisplayFor(model => model.TourTitle)*@
+            </div>
+            <div class="col-md-7 nopadding center-culomn" style="text-align:left">
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.General.Generals.From + " : ")
+                                @Html.DisplayFor(model => model.StartDateTime)
+                            </td>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.General.Generals.To + " : ")
+                                @Html.DisplayFor(model => model.EndDateTime)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.DurationTime + " : ")
+                                @Html.DisplayFor(model => model.DurationTime)
+                            </td>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.CompanyTransfer + " : ")
+                                @Html.DisplayFor(model => model.CompanyTransferTitle)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.FromCity + " : ")
+                                @Html.DisplayFor(model => model.FromCityTitle)
+                            </td>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.DestinationCity + " : ")
+                                @Html.DisplayFor(model => model.DestinationCityTitle)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.Capacity + " : ")
+                                @{
+                                    if (Model.NonLimit)
+                                    {
+                                        @Html.Label(ParvazPardaz.Resource.Tour.Tours.NonLimit)
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(model => model.Capacity)
+                                    }
+                                }
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-2 right-culomn" style="margin-top:7%">
+                @Ajax.ActionLink("Edit", "Edit", "TourScheduleCompanyTransfer", new { id = Model.Id }, new AjaxOptions()
+                        {
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "GET",
+                            UpdateTargetId = "AddEditTourScheduleCompanyTransfer"
+                        }, new { @class = "btn btn-sm btn-blue" })
+
+                @Ajax.ActionLink("Remove", "Delete", "TourScheduleCompanyTransfer", new { id = Model.Id, sectionId = Model.SectionId, tourScheduleId = Model.TourScheduleId },
+                                        new AjaxOptions()
+                                   {
+                                       OnSuccess = "SuccessRemoveForTourScheduleCompanyTransfer",
+                                       HttpMethod = "POST",
+                                   }, new { @class = "btn btn-sm btn-red" })
+            </div>
+
+
+        </div>
+    </div>
+</div>

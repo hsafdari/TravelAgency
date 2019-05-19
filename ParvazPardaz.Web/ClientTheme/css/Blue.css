@@ -1,0 +1,110 @@
+
+
+.top-header
+{
+	background-color:#006cb8 !important;
+}
+.menu-block
+{
+	background-color:#f5d800 !important;
+}
+.menu-block .navbar-default .navbar-nav > .active > a, .menu-block .navbar-default .navbar-nav > .active > a:focus, .menu-block .navbar-default .navbar-nav > .active > a:hover, .menu-block .navbar-default .navbar-nav > li > a:focus, .menu-block .navbar-default .navbar-nav > li > a:hover, .menu-block .follow, .latest-update h3
+{
+	/*background-color:#caa75d;*/
+    background-color:#fecb04;
+}
+/*.top-menu .navbar-nav > li > a, .menu-block .navbar li a, .menu-block .navbar-default .navbar-nav > .active > a, .menu-block .navbar-default .navbar-nav > .active > a:focus, .menu-block .navbar-default .navbar-nav > .active > a:hover, .menu-block .navbar-default .navbar-nav > li > a:focus, .menu-block .navbar-default .navbar-nav > li > a:hover, .menu-block .follow, .latest-update h3, .add-sign-big, .add-sign-big, .box-read-more, .box-read-more:hover, .footer-bottom p, .footer-bottom ul li a, .header.header2 .latest-post-list a, .add-sign-big i, .blog-content .tags a, .footer-bottom .navbar-nav > li > a,.sb-icon-search
+{
+	color:#006cb8 !important;
+}*/
+.menu-block .navbar-default .navbar-nav > .active > a,.menu-block .navbar-default .navbar-nav > li > a:hover,.top-header .navbar-default .navbar-nav > li > a:hover,.top-menu .navbar-nav > li > a,.latest-update h3,.box-read-more, .box-read-more:hover,.menu-block .follow
+{
+	color:#14232a !important;
+}
+a.dropdown-toggle:hover
+{
+	color:#fff !important;
+}
+.footer-bottom
+{
+	background-color:#14232a !important;
+}
+.footer-bottom p,.footer-bottom .navbar-nav > li > a
+{
+
+}
+/*.top-menu .navbar-nav > li > a, .menu-block .navbar li a, .menu-block .navbar-default .navbar-nav > .active > a, .menu-block .navbar-default .navbar-nav > .active > a:focus, .menu-block .navbar-default .navbar-nav > .active > a:hover, .menu-block .navbar-default .navbar-nav > li > a:focus, .menu-block .navbar-default .navbar-nav > li > a:hover, .menu-block .follow, .latest-update h3, .add-sign-big, .add-sign-big, .box-read-more, .box-read-more:hover, .footer-bottom p, .footer-bottom ul li a, .header.header2 .latest-post-list a, .add-sign-big i, .blog-content .tags a, .footer-bottom .navbar-nav > li > a
+{
+	color:#fff;
+}*/
+.color-Yellow
+{
+    background-color:#fecb04 !important
+}
+.page-breadcrumb
+{
+    background-color:#ccc;
+    
+}
+.page-breadcrumb h6,.page-breadcrumb ol li a,.page-breadcrumb ol li,.page-breadcrumb .breadcrumb li:last-of-type::after
+{
+    color:#000 !important;
+}
+.error-page-404 .fa,.error-page span
+{
+    color:#926f25;
+}
+.error-page-404 h4
+{
+    border-bottom:5px solid #006cb8;
+    border-top:5px solid #006cb8;
+}
+.widget-sidebar .widget-title,.blog-social .read-more:hover
+{
+    background-color:#fecb04;
+    color:#14232a;
+}
+
+.blog-content .tags a
+{
+    color:#14232a !important;
+}
+
+
+/* top menu */
+.top-header
+{
+    background-color:#97742a !important;
+}
+.logo-add-block
+{
+    background-color:#14232a !important;
+    border-top:5px solid #97742a !important ;
+}
+.menu-block .follow,.latest-update h3
+{
+    background-color:#fecb04 !important;
+}
+.menu-block
+{
+    background-color:#97742a !important;
+}
+.add-block a
+{
+    float:right;
+}
+.navbar-default .navbar-toggle {
+    border-color: #ddd;
+}
+.navbar-toggle {
+    position: relative;
+    float: left;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-left: 15px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}

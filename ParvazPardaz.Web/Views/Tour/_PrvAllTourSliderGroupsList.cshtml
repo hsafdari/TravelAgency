@@ -1,0 +1,33 @@
+﻿@model List<ParvazPardaz.ViewModel.TourSliderGroupViewModel>
+@foreach (var item in Model)
+{
+    <section class="home-rolls section">
+        <section class="details">
+            <h2 class="sectionTitle">@item.Title</h2>
+            <p>@item.Description</p>
+        </section>
+        <section class="roll">
+            <ul class="cards">
+                @foreach (var slideitem in item.Sliders)
+                {
+                    <li class="active clearfix">
+                        <a href="@slideitem.NavigationUrl">
+                            <div style="background: whitesmoke url('@slideitem.ImageURL')"></div>
+                            <h2>@slideitem.ImageTitle</h2>
+                            <h3>@slideitem.NavDescription</h3>
+                            <p>
+                                @slideitem.footerLine1
+                                <br />
+                                @slideitem.footerLine2
+                            </p>  
+                            <em>@String.Format("{0:n0}", slideitem.Price)</em>
+                            <i>@slideitem.HeaderDays</i>
+                        </a>
+                    </li>
+                }
+            </ul>
+            <button type="button" name="next" onclick="roll(1,this,4)"></button>
+            <button type="button" name="prev" onclick="roll(-1,this,4)"></button>
+        </section>
+    </section>
+}

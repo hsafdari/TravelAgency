@@ -1,0 +1,48 @@
+﻿body .main {
+    margin: 24px auto;
+    position: relative;
+}
+
+.textCenter {
+    text-align: center !important;
+}
+
+.main.tour-receipt-receiver .form {
+    margin-top: 10px;
+    grid-template-columns: 1fr 1fr 1fr 86px;
+}
+
+.receipt-receiver {
+    text-align: right !important;
+}
+
+.padding0 {
+    padding: 0px !important;
+}
+
+.ValidationMessage {
+    margin-top: 0px !important;
+    color: red;
+}
+
+.BtnVoucherSection {
+    border-radius: 5px;
+    width: calc(100% - 16px);
+    font-size: 15px;
+    font-weight: normal;
+    border: 1px solid #bdbdbd;
+    line-height: 24px;
+    height: 24px;
+    padding: 8px;
+    box-sizing: inherit;
+    outline: 0;
+}
+
+.text-danger {
+    color: red;
+    font-size: 11px;
+}
+
+#frm-applycoupon, .text-danger {
+    grid-column: span 7;
+}

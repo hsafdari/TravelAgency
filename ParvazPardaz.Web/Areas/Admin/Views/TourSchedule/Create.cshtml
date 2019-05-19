@@ -1,0 +1,212 @@
+﻿@model TourScheduleViewModel
+@{
+    ViewBag.Title = "Create";
+}
+@section css{
+    <link href="~/Content/admin/View/Tour.css" rel="stylesheet" />
+    <link href="~/content/kendo/2014.3.1314/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/content/kendo/2014.3.1314/kendo.default.min.css" rel="stylesheet" />
+}
+
+<div id="AddEditTourSchedule">
+    <h3> زمان بندی سفر</h3>
+    @Html.Partial("_AddTourSchedule", new TourScheduleViewModel()
+{
+    TourId = Model.TourId,
+    CRUDMode = CRUDMode.Create,
+    FromDate = DateTime.Now,
+    ToDate = DateTime.Now,
+    ExpireDate = DateTime.Now
+})
+</div>
+
+<div class="well nopadding " id="msgNotValidate" style="display:none;">
+    <p style="color:red;"> @Html.Raw("لطفا در ورود تاریخ و بازه های زمانی دقت نمایید")</p>
+</div>
+
+<div id="ListViewTourSchedule">
+    @{
+        if (Model != null && Model.ListView != null && Model.ListView.Any())
+        {
+            foreach (var listView in Model.ListView)
+            {
+                @Html.Partial("_ListViewTourSchedule", listView)
+            }
+        }
+    }
+</div>
+
+@*<div id="TourScheduleCompanyTransferModal" style="text-align: center; visibility: hidden;">
+</div>
+<div id="TourScheduleAdditionalServiceModal" style="text-align: center; visibility: hidden;">
+</div>
+<div id="TourScheduleHotelModal" style="text-align: center; visibility: hidden;">
+</div>*@
+
+@section scripts{
+
+    @*<script src="~/Scripts/kendo.mvc/kendo.web.min.js"></script>
+    <script src="~/Scripts/kendo.mvc/kendo.aspnetmvc.min.js"></script>*@
+@*<script type="text/javascript" src="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.fa.min.js"></script>*@
+    @*<script type="text/javascript">
+        //var $ = jQuery.noConflict();
+        $(document).ready(function () {
+            $(".datepicker").kendoDatePicker();
+        });
+    </script>*@
+
+    <script>
+        @*var autocompleteUrl = "@Url.Action("GetCities", "City")"*@
+        @*var loadPartialUrlForTourSchedule = "@Url.Action("RefreshPartialView", "TourSchedule")"*@
+
+
+        @*var loadPartialUrlForTourScheduleCompanyTransfer = "@Url.Action("RefreshPartialView", "TourScheduleCompanyTransfer")"*@
+        @*var fetchCompanyTransferUrl = "@Url.Action("GetCompanyTransfers", "CompanyTransfer")"*@
+
+        @*var loadPartialUrlForTourScheduleAdditionalService = "@Url.Action("RefreshPartialView", "TourScheduleAdditionalService")"*@
+
+        @*var loadPartialUrlForTourScheduleHotel = "@Url.Action("RefreshPartialView", "TourScheduleHotel")"*@
+    </script>
+
+
+    <script>
+        //function SuccessRemove(data) {
+        //    if (data.Success) {
+        //        var sectionId = "#" + data.SectionId;
+        //        $(sectionId).fadeOut(1200, function () { $(this).remove() });
+        //        LoadPartialForTourSchedule(data.TourPackageId)
+        //    }
+        //}
+
+        //function Faild() {
+        //    $("#msgNotValidate").toggle("blind");
+        //    //$("#msgNotValidate").fadeOut(10000, function () { $(this).css("display", "none"); });
+        //    window.setTimeout(function () {
+        //        $("#msgNotValidate").fadeOut(1500, 0).slideUp(500, function () {
+        //            $(this).css("display", "none");
+        //        });
+        //    }, 5000);
+        //}
+
+
+        //function LoadPartialForTourSchedule(TourPackageId) {
+        //    debugger;
+        //    $.ajax({
+        //        url: loadPartialUrlForTourSchedule,
+        //        type: 'GET',
+        //        cache: false,
+        //        data: { TourPackageId: TourPackageId },
+        //    }).done(function (result) {
+        //        $('#AddEditTourSchedule').html(result);
+        //    });
+        //}
+
+
+        //function ChangeCurrency(data) {
+        //    var currencyTitle = $("#currency-tour-schedule option:selected").text();
+        //    var currencyVal = $("#currency-tour-schedule").val();
+        //    $("#frmTourSchedule #price-tour-schedule .input-group-addon.bootstrap-touchspin-prefix").html(currencyTitle)
+        //}
+
+        //function checkNonLimit(checkbox) {
+        //    if (checkbox.checked) {
+        //        $("#inputCapacity").attr("disabled", "disabled");
+        //        $("#inputCapacity").val(0);
+        //    }
+        //    else {
+        //        $("#inputCapacity").removeAttr('disabled');
+        //    }
+        //}
+    </script>
+
+
+
+    <script>
+        //var wndTourScheduleCompanyTransferModal = $("#TourScheduleCompanyTransferModal").kendoWindow({
+        //    title: "",
+        //    modal: true,
+        //    visible: false,
+        //    resizable: false,
+        //    width: 1000,
+        //    height: 500
+        //}).data("kendoWindow");
+
+
+        //function ShowModalTourScheduleCompanyTransfer() {
+        //    wndTourScheduleCompanyTransferModal.center();
+        //    wndTourScheduleCompanyTransferModal.open();
+        //}
+
+        //function Submit() {
+        //    wndTourScheduleCompanyTransferModal.close();
+        //}
+
+        //function checkNonLimitTourScheduleCompanyTransfer(checkbox) {
+        //    if (checkbox.checked) {
+        //        $("#inputCapacityTourScheduleCompanyTransfer").attr("disabled", "disabled");
+        //        $("#inputCapacityTourScheduleCompanyTransfer").val(0);
+        //    }
+        //    else {
+        //        $("#inputCapacityTourScheduleCompanyTransfer").removeAttr('disabled');
+        //    }
+        //}
+
+
+        @*function FetchCompanyTransfer() {
+            var items = "";
+            var vehicleTypeId = $("#DDVehicleType").val();
+            if (vehicleTypeId == "") {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectVehicleType' + "</option>";
+                $("#DDCompanyTransfer").html(items);
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+            }
+            else {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+                var x = $.getJSON(fetchCompanyTransferUrl + "/" + vehicleTypeId, null, function (data) {
+                    $.each(data, function (i, item) {
+                        items += "<option value=\"" + item.Id + "\">" + item.Title + "</option>";
+                    });
+                    $("#DDCompanyTransfer").html(items);
+                });
+            }
+        }
+        $("#DDCompanyTransfer").trigger("change");*@
+
+
+
+        //function SuccessRemoveForTourScheduleCompanyTransfer(data) {
+        //    if (data.Success) {
+        //        var sectionId = "#" + data.SectionId;
+        //        $(sectionId).fadeOut(1200, function () { $(this).remove() });
+        //        LoadPartialForTourScheduleCompanyTransfer(data.TourScheduleId)
+        //    }
+        //}
+
+
+        //function LoadPartialForTourScheduleCompanyTransfer(tourScheduleId) {
+        //    $.ajax({
+        //        url: loadPartialUrlForTourScheduleCompanyTransfer,
+        //        type: 'GET',
+        //        cache: false,
+        //        data: { tourScheduleId: tourScheduleId },
+        //    }).done(function (result) {
+        //        $('#AddEditTourScheduleCompanyTransfer').html(result);
+        //    });
+        //}
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

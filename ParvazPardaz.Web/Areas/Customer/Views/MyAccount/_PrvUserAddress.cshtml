@@ -1,0 +1,62 @@
+﻿@model ParvazPardaz.ViewModel.MyProfileViewModel
+@using ParvazPardaz.Common.HtmlHelpers;
+@{
+    var i = Model.index;
+}
+<div class="partialSection UserAddressItem">
+    <div class="btn-remove-section"><a class="btn btn-xs btn-remove" onclick="var $ = jQuery.noConflict(); $(this).closest('.partialSection').remove();">حذف</a></div>
+
+    <label class="label">
+        @Html.LabelFor(model => model.UserAddresses[i].AddressName, new { @class = "label-text" })
+        @Html.EnumDropDownListFor(model => model.UserAddresses[i].AddressName, new { @class = "DDLAddressName" })
+        @Html.ValidationMessageFor(model => model.UserAddresses[i].AddressName, "", new { @class = "form-error" })
+    </label>
+
+    <label class="label">
+        @Html.LabelFor(model => model.UserAddresses[i].CityId, new { @class = "label-text" })
+        @Html.DropDownListFor(model => model.UserAddresses[i].CityId,Model.CityDDL, new { @class = "DDLCityId" })
+        @Html.ValidationMessageFor(model => model.UserAddresses[i].CityId, "", new { @class = "form-error" })
+    </label>
+
+    <label class="label">
+        @Html.LabelFor(model => model.UserAddresses[i].Street1, new { @class = "label-text" })
+        @Html.TextBoxFor(model => model.UserAddresses[i].Street1, new { @class = "TxtStreet1" })
+        @Html.ValidationMessageFor(model => model.UserAddresses[i].Street1, "", new { @class = "form-error" })
+    </label>
+
+    <label class="label">
+        @Html.LabelFor(model => model.UserAddresses[i].Street2, new { @class = "label-text" })
+        @Html.TextBoxFor(model => model.UserAddresses[i].Street2, new { @class = "TxtStreet2" })
+        @Html.ValidationMessageFor(model => model.UserAddresses[i].Street2, "", new { @class = "form-error" })
+    </label>
+
+    <label class="label">
+        @Html.LabelFor(model => model.UserAddresses[i].Telephone, new { @class = "label-text" })
+        @Html.TextBoxFor(model => model.UserAddresses[i].Telephone, new { @class = "TxtTelephone", @style = "direction:ltr" })
+        @Html.ValidationMessageFor(model => model.UserAddresses[i].Telephone, "", new { @class = "form-error" })
+    </label>
+
+    <label class="label">
+        @Html.LabelFor(model => model.UserAddresses[i].Fax, new { @class = "label-text" })
+        @Html.TextBoxFor(model => model.UserAddresses[i].Fax, new { @class = "TxtFax", @style = "direction:ltr" })
+        @Html.ValidationMessageFor(model => model.UserAddresses[i].Fax, "", new { @class = "form-error" })
+    </label>
+
+    <label class="label">
+        @Html.LabelFor(model => model.UserAddresses[i].ZipCode, new { @class = "label-text" })
+        @Html.TextBoxFor(model => model.UserAddresses[i].ZipCode, new { @class = "TxtZipCode", @style = "direction:ltr" })
+        @Html.ValidationMessageFor(model => model.UserAddresses[i].ZipCode, "", new { @class = "form-error" })
+    </label>
+
+    <label class="label">
+        @Html.LabelFor(model => model.UserAddresses[i].IsDefault, new { @class = "label-text" })
+        @Html.CheckBoxFor(model => model.UserAddresses[i].IsDefault, new { @class = "ChkIsDefault" })
+        @Html.ValidationMessageFor(model => model.UserAddresses[i].IsDefault, "", new { @class = "form-error" })
+    </label>
+
+    <label class="label">
+        @Html.LabelFor(model => model.UserAddresses[i].Address, new { @class = "label-text" })
+        @Html.TextAreaFor(model => model.UserAddresses[i].Address, 2, 40, new { @class = "TxtAddress" })
+        @Html.ValidationMessageFor(model => model.UserAddresses[i].Address, "", new { @class = "form-error" })
+    </label>
+</div>

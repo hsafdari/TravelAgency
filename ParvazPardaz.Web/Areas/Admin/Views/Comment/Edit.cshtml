@@ -1,0 +1,96 @@
+﻿@model ParvazPardaz.ViewModel.EditCommentViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.CommentType)
+    @Html.HiddenFor(x => x.Rate)
+    @Html.HiddenFor(x => x.RateCount)
+    @Html.HiddenFor(x => x.Like)
+    @Html.HiddenFor(x => x.DisLike)
+    
+    
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.EShop.EShopResource.ManagementComments </h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsApproved, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.CheckBoxFor(model => model.IsApproved, new { @class = "flat-red", style = "margin-right:50px; margin-left:50px;" })
+                @Html.ValidationMessageFor(model => model.IsApproved, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Subject, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CommentText, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CommentText, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CommentText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rate, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DisplayFor(model => model.Rate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RateCount, new { @class = "control-label col-md-2" })
+            <div class="col-md-3 number">
+                @Html.DisplayFor(model => model.RateCount, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RateCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.OwnTitle, new { @class = "control-label col-md-2" })
+                <div class="col-md-3 number">
+                    @Html.EditorFor(model => model.OwnTitle, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.OwnTitle,"", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+}
+

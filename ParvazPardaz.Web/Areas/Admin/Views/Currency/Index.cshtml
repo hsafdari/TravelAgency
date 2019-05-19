@@ -1,0 +1,179 @@
+﻿
+
+@model ParvazPardaz.ViewModel.GridCurrencyViewModel
+
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+@if (ParvazPardaz.Resource.General.Generals.Direction == "RTL")
+{
+    if (ParvazPardaz.Resource.General.Generals.Regional == "AR")
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+    @Scripts.Render("~/Scripts/kendo/ar-IQ/js");
+    }
+    else
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+    @Scripts.Render("~/Scripts/kendo/fa-IR/js");
+    }
+}
+else
+{
+    @Styles.Render("~/content/kendo/LTR/css");
+    @Scripts.Render("/Scripts/kendo/en-US/js");
+}
+
+<h3>@ParvazPardaz.Resource.Tour.Tours.CurrencyManagement </h3>
+
+<hr />
+
+<p>
+    @if (Infrastructure.HasPermission.CanAccess("Create", "/Admin/Currency/Create"))
+    {
+        <a href="@Url.Action("Create")" class="btn btn-green">
+            <i class="fa fa-plus"></i>
+            @ParvazPardaz.Resource.General.Generals.Create
+        </a>
+    }
+    @if (Infrastructure.HasPermission.CanAccess("Edit", "/Admin/Currency/Edit"))
+    {
+        <a onclick="edit()" class="btn btn-blue">
+            <i class="fa fa-edit"></i>
+            @ParvazPardaz.Resource.General.Generals.Edit
+        </a>
+    }
+    @if (Infrastructure.HasPermission.CanAccess("Delete", "/Admin/Currency/Delete"))
+    {
+        <a onclick="del()" class="btn btn-red">
+            <i class="fa fa-trash-o"></i>
+            @ParvazPardaz.Resource.General.Generals.Delete
+        </a>
+    }
+</p>
+<div class="k-rtl">
+    @(Html.Kendo().Grid<ParvazPardaz.ViewModel.GridCurrencyViewModel>()
+        .Name("Grid")           
+        .Columns(columns =>
+            {
+                columns.Bound(model => model.Title).Width(150);                
+                columns.Bound(model => model.BaseRialPrice).Format("{0:#,0}").Width(150);
+                columns.Bound(model => model.CurrenySign).Width(150);
+                columns.Bound(model => model.CreatorUserName).Width(150);
+                columns.Bound(model => model.CreatorDateTime).Groupable(false).ClientTemplate("#=(CreatorDateTime != null ? moment(CreatorDateTime).format('jYYYY/jMM/jDD HH:mm') : '')#").Width(150);
+                columns.Bound(model => model.LastModifierUserName).Groupable(false).Width(150);
+                columns.Bound(model => model.LastModifierDate).Groupable(false).ClientTemplate("#=(LastModifierDate != null ? moment(LastModifierDate).format('jYYYY/jMM/jDD HH:mm') : '')#").Width(150);
+		    })	    
+		    .Groupable()
+            .Pageable()
+            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single)
+            .Type(GridSelectionType.Row))
+            .Navigatable()
+            .Sortable()
+            .Scrollable(scr => scr.Height(400))
+            .Filterable()
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Sort(st =>
+                        {
+                            st.Add(s => s.CreatorDateTime).Descending();
+                            st.Add(s => s.Id).Descending();
+                        })
+	
+                .Model(model => model.Id(item => item.Id))
+                .Read(read => read.Action("GetCurrency", "Currency", null)).PageSize(50)
+            )                         
+	)
+	@Html.Partial("_Toastr")
+</div>
+
+@Html.Partial("_ConfirmationMessage")
+
+@section scripts{
+    <script>
+        var CreateUrl = "@Url.Action("Create", "Currency")";
+        var EditUrl = "@Url.Action("Edit", "Currency")";
+        var DeleteUrl = "@Url.Action("Delete", "Currency")";
+    </script>
+
+    <script>
+        function CheckSelectedGrid() {
+            var gview = $("#Grid").data("kendoGrid");
+            var selectedItem = gview.dataItem(gview.select());
+            if (selectedItem == null) {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlert', '@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlertTitle', { timeOut: 5000 })
+                return false;
+            }
+            else {
+                var selectedId = selectedItem.Id;
+                return selectedId;
+            }
+        }
+        var wndRemove = $("#ConfirmationMessage").kendoWindow({
+            title: "",
+            modal: true,
+            visible: false,
+            resizable: false,
+            width: 400,
+        }).data("kendoWindow");
+
+        function create(parameters) {
+            window.location.replace(CreateUrl);
+        }
+
+        function edit(parameters) {
+            var result = CheckSelectedGrid();
+            if (result) {
+                window.location.replace(EditUrl + "/" + result);
+            }
+        }
+
+        function del(parameters) {
+            var result = CheckSelectedGrid();
+            if (result) {
+                wndRemove.center();
+                wndRemove.open();
+            }
+        }
+        $("#btnYes").click(function () {
+            var gview = $("#Grid").data("kendoGrid");
+            var selectedItem = gview.dataItem(gview.select());
+            var selectedId = selectedItem.Id;
+            $.ajax({
+                url: DeleteUrl,
+                type: "post",
+                dataType: "json",
+                cache: false,
+                data: { Id: selectedId },
+                success: function (result) {
+                    var gridm = $("#Grid").data("kendoGrid");
+                    if (gridm != undefined && result) {
+                        if (gridm.dataSource.transport.cache._store)
+                            gridm.dataSource.transport.cache._store = {};
+                        gridm.dataSource.fetch();
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.DeleteAlert', '@ParvazPardaz.Resource.General.Generals.DeleteAlertTitle', { timeOut: 5000 })
+                    }
+                    else {
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                    }
+                },
+                error: function (xhr) {
+                    toastr.options = { "positionClass": "toast-top-center" }
+                    toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                }
+            });
+            wndRemove.close();
+        })
+        $("#btnNo").click(function () {
+            wndRemove.close();
+        })
+    </script>
+}
+
+

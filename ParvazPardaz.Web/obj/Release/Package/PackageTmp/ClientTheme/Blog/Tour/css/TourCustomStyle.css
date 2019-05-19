@@ -1,0 +1,217 @@
+﻿/*#region صفحه نتایج جستجوی تور*/
+header a {
+    margin-right: 30px;
+}
+
+.text-danger {
+    color: red;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.SearchAgain {
+    grid-template-columns: 1fr 1fr 0fr 1fr !important;
+}
+
+ol li {
+    margin-bottom: 10px;
+}
+
+.select2 {
+    padding: inherit !important;
+    width: 100% !important;
+}
+
+.select2-container .select2-selection--single {
+    height: auto !important;
+}
+
+.select2-selection__rendered {
+    height: 40px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 40px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 40px !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #01cdce !important;
+}
+
+body .main {
+    margin: 0 auto;
+    position: relative;
+}
+
+/*.fullframe {
+    position: fixed !important;
+}*/
+
+.main .airline-logo, .main .hotel-logo {
+    max-width: 60px !important;
+    height: 60px !important;
+}
+
+style, script {
+    display: none !important;
+}
+
+.main .row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    margin-bottom: 10px;
+}
+
+.main.tour-rooms label span {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #757575;
+}
+
+.main input[name="add-room"] {
+    line-height: 24px;
+    grid-column: span 4;
+    padding: 8px;
+    width: 100%;
+    border: 1px dashed #00b8c1;
+    border-radius: 0;
+    background: white;
+    color: #00b8c1;
+    font-size: 12px;
+    font-weight: normal;
+    cursor: pointer;
+    outline: 0;
+}
+
+.partialSection {
+    grid-template-columns: repeat(5, 1fr) !important;
+}
+
+    .partialSection label .btn-4 {
+        margin-top: 28px !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+
+div[role="group"] {
+    display: grid;
+    grid-column: span 4 !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-gap: 20px;
+    border: 1px solid #bdbdbd;
+    padding: 24px;
+}
+
+    div[role="group"] legend {
+        grid-column: span 4 !important;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    div[role="group"] > * {
+        grid-column: span 1;
+    }
+
+div[role=group] {
+    display: grid;
+    grid-column: span 4 !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-gap: 20px;
+    border: 1px solid #bdbdbd;
+    padding: 24px;
+}
+
+.btn-4.edit {
+    position: absolute;
+    left: 24px;
+    top: 24px;
+}
+
+div[role=group] > * {
+    grid-column: span 1;
+}
+
+    div[role=group] > *:nth-child(n + 8) {
+        grid-column: span 2;
+    }
+
+div[role=group] legend {
+    grid-column: span 4 !important;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.label {
+    position: relative;
+}
+
+.main.tour-agreement div.form > :nth-child(1) :not(input) {
+    grid-column: span 1;
+    line-height: 20px;
+}
+
+.main.tour-agreement div.form > :nth-child(1) {
+    background: white;
+    padding: 24px;
+    grid-column: span 4;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: normal;
+    display: grid;
+    grid-template-columns: 20px auto;
+    grid-template-rows: 20px;
+    grid-column-gap: 10px;
+    align-content: center;
+    justify-content: center;
+}
+
+.main.tour-agreement div.form :nth-child(2) {
+    grid-column: span 4;
+}
+
+.otherPassengerSection {
+    width: 150px;
+    background: white;
+    position: absolute;
+    border-radius: 5px;
+    box-shadow: 0 5px 6px -3px rgba(0, 0, 0, 0.2), 0 3px 16px 2px rgba(0, 0, 0, 0.12), 0 9px 12px 1px rgba(0, 0, 0, 0.14);
+    padding: 16px;
+    left: 0px;
+    top: -5px;
+    display: none;
+}
+
+    .otherPassengerSection * {
+        display: block;
+        font-size: 12px;
+        font-weight: normal;
+        line-height: 24px;
+    }
+
+    .otherPassengerSection :hover {
+        background: whitesmoke;
+        cursor: pointer;
+    }
+
+.main.tour-price {
+    grid-gap: 15px !important;
+}
+
+.dateFields span.form-error {
+    text-align: left;
+    top: 5px;
+}
+
+.calculatingPrice {
+    font-size: 15px !important;
+}
+/*#endregion*/

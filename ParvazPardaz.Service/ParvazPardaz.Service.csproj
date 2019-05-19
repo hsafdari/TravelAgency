@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D566509-A8FB-4BEE-8D06-725304BEB601}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ParvazPardaz.Service</RootNamespace>
+    <AssemblyName>ParvazPardaz.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.Extended">
+      <HintPath>..\packages\EntityFramework.Extended.6.1.0.168\lib\net45\EntityFramework.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PersianDateTime, Version=1.1.5082.36395, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PersianDateTime.1.1.5082.36395\lib\net40\PersianDateTime.dll</HintPath>
+    </Reference>
+    <Reference Include="RefactorThis.GraphDiff">
+      <HintPath>..\packages\RefactorThis.GraphDiff.2.0.1\lib\RefactorThis.GraphDiff.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Z.EntityFramework.Plus.EF6, Version=1.8.3.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.EntityFramework.Plus.EF6.1.8.3\lib\net45\Z.EntityFramework.Plus.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contract\AccessLevel\IPermissionService.cs" />
+    <Compile Include="Contract\Book\IAgencySettingService.cs" />
+    <Compile Include="Contract\Book\ICreditService.cs" />
+    <Compile Include="Contract\Coupon\ICouponService.cs" />
+    <Compile Include="Contract\Book\IHotelRuleService.cs" />
+    <Compile Include="Contract\Book\IOrderInformationService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Contract\Book\IOrderService.cs" />
+    <Compile Include="Contract\Book\IOrderTaskService.cs" />
+    <Compile Include="Contract\Book\IOrderTypeService.cs" />
+    <Compile Include="Contract\Book\IPassengerService.cs" />
+    <Compile Include="Contract\Book\IPaymentLogService.cs" />
+    <Compile Include="Contract\Book\IRoomTypeHotelRoomService.cs" />
+    <Compile Include="Contract\Book\IRoomTypeService.cs" />
+    <Compile Include="Contract\Book\ISelectedAddServService.cs" />
+    <Compile Include="Contract\Book\ISelectedFlightService.cs" />
+    <Compile Include="Contract\Book\ISelectedHotelPackageService.cs" />
+    <Compile Include="Contract\Book\ISelectedHotelService.cs" />
+    <Compile Include="Contract\Book\ISelectedRoomService.cs" />
+    <Compile Include="Contract\Book\ITaskService.cs" />
+    <Compile Include="Contract\Comment\ICommentService.cs" />
+    <Compile Include="Contract\Comment\IReviewService.cs" />
+    <Compile Include="Contract\Common\IBaseService.cs" />
+    <Compile Include="Contract\Content\IContentGroupService.cs" />
+    <Compile Include="Contract\Content\IContentService.cs" />
+    <Compile Include="Contract\Core\ICacheService.cs" />
+    <Compile Include="Contract\Core\IContactUsService.cs" />
+    <Compile Include="Contract\Core\IDepartmentService.cs" />
+    <Compile Include="Contract\Core\IFooterService.cs" />
+    <Compile Include="Contract\Core\IMenuGroupService.cs" />
+    <Compile Include="Contract\Core\INewsLetterService.cs" />
+    <Compile Include="Contract\Core\ISliderGroupService.cs" />
+    <Compile Include="Contract\Core\ISliderService.cs" />
+    <Compile Include="Contract\Core\ISupportService.cs" />
+    <Compile Include="Contract\Country\ICityService.cs" />
+    <Compile Include="Contract\Country\ICountryService.cs" />
+    <Compile Include="Contract\Country\IStateService.cs" />
+    <Compile Include="Contract\Hotel\IHotelBoardService.cs" />
+    <Compile Include="Contract\Hotel\IHotelFacilityService.cs" />
+    <Compile Include="Contract\Hotel\IHotelGalleryService.cs" />
+    <Compile Include="Contract\Hotel\IHotelPackageService.cs" />
+    <Compile Include="Contract\Hotel\IHotelRankService.cs" />
+    <Compile Include="Contract\Hotel\IHotelRoomService.cs" />
+    <Compile Include="Contract\Hotel\IHotelService.cs" />
+    <Compile Include="Contract\LinkRedirection\ILinkRedirectionService.cs" />
+    <Compile Include="Contract\Link\ILinkService.cs" />
+    <Compile Include="Contract\Location\ILocationService.cs" />
+    <Compile Include="Contract\Magazine\ITourSuggestionService.cs" />
+    <Compile Include="Contract\NotFoundLink\INotFoundLinkService.cs" />
+    <Compile Include="Contract\Post\IPostGroupService.cs" />
+    <Compile Include="Contract\Post\IPostService.cs" />
+    <Compile Include="Contract\Post\IPostImageService.cs" />
+    <Compile Include="Contract\Rule\ITermsandConditionService.cs" />
+    <Compile Include="Contract\SocialLog\ISearchLogService.cs" />
+    <Compile Include="Contract\SocialLog\ISocialLogService.cs" />
+    <Compile Include="Contract\Tour\IRequiredDocumentService.cs" />
+    <Compile Include="Contract\Tags\ITagService.cs" />
+    <Compile Include="Contract\Tour\IActivityService.cs" />
+    <Compile Include="Contract\Tour\IAdditionalServiceService.cs" />
+    <Compile Include="Contract\Tour\IAirportService.cs" />
+    <Compile Include="Contract\Tour\IAllowedBannedService.cs" />
+    <Compile Include="Contract\Tour\ICompanyTransferService.cs" />
+    <Compile Include="Contract\Tour\ICompanyTransferVehicleTypeService.cs" />
+    <Compile Include="Contract\Tour\ICurrencyService.cs" />
+    <Compile Include="Contract\Tour\IFAQService.cs" />
+    <Compile Include="Contract\Tour\ILeaderService.cs" />
+    <Compile Include="Contract\Tour\ITourCategoryService.cs" />
+    <Compile Include="Contract\Tour\ITourLandingPageUrlService.cs" />
+    <Compile Include="Contract\Tour\ITourLevelService.cs" />
+    <Compile Include="Contract\Tour\ITourPackageDayService.cs" />
+    <Compile Include="Contract\Tour\ITourPackageService.cs" />
+    <Compile Include="Contract\Tour\ITourProgramActivityService.cs" />
+    <Compile Include="Contract\Tour\ITourProgramDetailService.cs" />
+    <Compile Include="Contract\Tour\ITourProgramService.cs" />
+    <Compile Include="Contract\Tour\ITourScheduleAdditionalServService.cs" />
+    <Compile Include="Contract\Tour\ITourScheduleCompanyTransferService.cs" />
+    <Compile Include="Contract\Tour\ITourScheduleHotelService.cs" />
+    <Compile Include="Contract\Tour\ITourScheduleService.cs" />
+    <Compile Include="Contract\Tour\ITourService.cs" />
+    <Compile Include="Contract\Tour\ITourSliderService.cs" />
+    <Compile Include="Contract\Tour\ITourTypeService.cs" />
+    <Compile Include="Contract\Tour\IVehicleTypeClassService.cs" />
+    <Compile Include="Contract\Tour\IVehicleTypeService.cs" />
+    <Compile Include="Contract\Users\IApplicationRoleManager.cs" />
+    <Compile Include="Contract\Users\IApplicationSignInManager.cs" />
+    <Compile Include="Contract\Users\IApplicationUserManager.cs" />
+    <Compile Include="Contract\Users\IUserCommissionService.cs" />
+    <Compile Include="Contract\Users\IUserGroupService.cs" />
+    <Compile Include="DataAccessService\AccessLevel\PermissionService.cs" />
+    <Compile Include="DataAccessService\Book\AgencySettingService.cs" />
+    <Compile Include="DataAccessService\Book\CreditService.cs" />
+    <Compile Include="DataAccessService\Coupon\CouponService.cs" />
+    <Compile Include="DataAccessService\Book\HotelRuleService.cs" />
+    <Compile Include="DataAccessService\Book\OrderInformationService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataAccessService\Book\OrderService.cs" />
+    <Compile Include="DataAccessService\Book\OrderTaskService.cs" />
+    <Compile Include="DataAccessService\Book\OrderTypeService.cs" />
+    <Compile Include="DataAccessService\Book\PassengerService.cs" />
+    <Compile Include="DataAccessService\Book\PaymentLogService.cs" />
+    <Compile Include="DataAccessService\Book\RoomTypeHotelRoomService.cs" />
+    <Compile Include="DataAccessService\Book\RoomTypeService.cs" />
+    <Compile Include="DataAccessService\Book\SelectedAddServService.cs" />
+    <Compile Include="DataAccessService\Book\SelectedFlightService.cs" />
+    <Compile Include="DataAccessService\Book\SelectedHotelPackageService.cs" />
+    <Compile Include="DataAccessService\Book\SelectedHotelService.cs" />
+    <Compile Include="DataAccessService\Book\SelectedRoomService.cs" />
+    <Compile Include="DataAccessService\Book\TaskService.cs" />
+    <Compile Include="DataAccessService\Comment\CommentService.cs" />
+    <Compile Include="DataAccessService\Comment\ReviewService.cs" />
+    <Compile Include="DataAccessService\Common\BaseService.cs" />
+    <Compile Include="DataAccessService\Content\ContentGroupService.cs" />
+    <Compile Include="DataAccessService\Content\ContentService.cs" />
+    <Compile Include="DataAccessService\Core\CacheService.cs" />
+    <Compile Include="DataAccessService\Core\ContactUsService.cs" />
+    <Compile Include="DataAccessService\Core\DepartmentService.cs" />
+    <Compile Include="DataAccessService\Core\FooterService.cs" />
+    <Compile Include="DataAccessService\Core\MenuGroupService.cs" />
+    <Compile Include="DataAccessService\Core\NewsLetterService.cs" />
+    <Compile Include="DataAccessService\Core\SliderGroupService.cs" />
+    <Compile Include="DataAccessService\Core\SliderService.cs" />
+    <Compile Include="DataAccessService\Core\SupportService.cs" />
+    <Compile Include="DataAccessService\Country\CityService.cs" />
+    <Compile Include="DataAccessService\Country\CountryService.cs" />
+    <Compile Include="DataAccessService\Country\StateService.cs" />
+    <Compile Include="DataAccessService\Hotel\HotelBoardService.cs" />
+    <Compile Include="DataAccessService\Hotel\HotelFacilityService.cs" />
+    <Compile Include="DataAccessService\Hotel\HotelGalleryService.cs" />
+    <Compile Include="DataAccessService\Hotel\HotelPackageService.cs" />
+    <Compile Include="DataAccessService\Hotel\HotelRankService.cs" />
+    <Compile Include="DataAccessService\Hotel\HotelRoomService.cs" />
+    <Compile Include="DataAccessService\Hotel\HotelService.cs" />
+    <Compile Include="DataAccessService\LinkRedirection\LinkRedirectionService.cs" />
+    <Compile Include="DataAccessService\Link\LinkService.cs" />
+    <Compile Include="Contract\Magazine\ITabMagazineService.cs" />
+    <Compile Include="DataAccessService\Location\LocationService.cs" />
+    <Compile Include="DataAccessService\Magazine\TabMagazineService.cs" />
+    <Compile Include="DataAccessService\Magazine\TourSuggestionService.cs" />
+    <Compile Include="DataAccessService\NotFoundLink\NotFoundLinkService.cs" />
+    <Compile Include="DataAccessService\Post\PostGroupService.cs" />
+    <Compile Include="DataAccessService\Post\PostService.cs" />
+    <Compile Include="DataAccessService\Post\PostImageService.cs" />
+    <Compile Include="DataAccessService\Rule\TermsandConditionService.cs" />
+    <Compile Include="DataAccessService\SocialLog\SearchLogService.cs" />
+    <Compile Include="DataAccessService\SocialLog\SocialLogService.cs" />
+    <Compile Include="DataAccessService\Tour\CurrencyService.cs" />
+    <Compile Include="DataAccessService\Tour\RequiredDocumentService.cs" />
+    <Compile Include="DataAccessService\Tags\TagService.cs" />
+    <Compile Include="DataAccessService\Tour\ActivityService.cs" />
+    <Compile Include="DataAccessService\Tour\AdditionalServiceService.cs" />
+    <Compile Include="DataAccessService\Tour\AirportService.cs" />
+    <Compile Include="DataAccessService\Tour\AllowedBannedService.cs" />
+    <Compile Include="DataAccessService\Tour\CompanyTransferService.cs" />
+    <Compile Include="DataAccessService\Tour\CompanyTransferVehicleTypeService.cs" />
+    <Compile Include="DataAccessService\Tour\FAQService.cs" />
+    <Compile Include="DataAccessService\Tour\LeaderService.cs" />
+    <Compile Include="DataAccessService\Tour\TourCategoryService.cs" />
+    <Compile Include="DataAccessService\Tour\TourLandingPageUrlService.cs" />
+    <Compile Include="DataAccessService\Tour\TourLevelService.cs" />
+    <Compile Include="DataAccessService\Tour\TourPackageDayService.cs" />
+    <Compile Include="DataAccessService\Tour\TourPackageService.cs" />
+    <Compile Include="DataAccessService\Tour\TourProgramActivityService.cs" />
+    <Compile Include="DataAccessService\Tour\TourProgramDetailService.cs" />
+    <Compile Include="DataAccessService\Tour\TourProgramService.cs" />
+    <Compile Include="DataAccessService\Tour\TourScheduleAdditionalServService.cs" />
+    <Compile Include="DataAccessService\Tour\TourScheduleCompanyTransferService.cs" />
+    <Compile Include="DataAccessService\Tour\TourScheduleHotelService.cs" />
+    <Compile Include="DataAccessService\Tour\TourScheduleService.cs" />
+    <Compile Include="DataAccessService\Tour\TourService.cs" />
+    <Compile Include="DataAccessService\Tour\TourSliderService.cs" />
+    <Compile Include="DataAccessService\Tour\TourTypeService.cs" />
+    <Compile Include="DataAccessService\Tour\VehicleTypeClassService.cs" />
+    <Compile Include="DataAccessService\Tour\VehicleTypeService.cs" />
+    <Compile Include="DataAccessService\Users\ApplicationRoleManager.cs" />
+    <Compile Include="DataAccessService\Users\ApplicationSignInManager.cs" />
+    <Compile Include="DataAccessService\Users\ApplicationUserManager.cs" />
+    <Compile Include="DataAccessService\Users\UserCommissionService.cs" />
+    <Compile Include="DataAccessService\Users\UserGroupService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\StandardRoles.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ParvazPardaz.Common\ParvazPardaz.Common.csproj">
+      <Project>{42f4215f-f999-474a-8ede-2b6be2b2f9c3}</Project>
+      <Name>ParvazPardaz.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParvazPardaz.DataAccess\ParvazPardaz.DataAccess.csproj">
+      <Project>{ba541047-d7bb-4d49-b0c5-47f66393c9a5}</Project>
+      <Name>ParvazPardaz.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParvazPardaz.Model\ParvazPardaz.Model.csproj">
+      <Project>{3bc859b7-44b6-45ec-930a-312f2f2baf0b}</Project>
+      <Name>ParvazPardaz.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParvazPardaz.Resource\ParvazPardaz.Resource.csproj">
+      <Project>{727137d5-626a-4b5b-bc23-4481e1e074c4}</Project>
+      <Name>ParvazPardaz.Resource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParvazPardaz.ViewModel\ParvazPardaz.ViewModel.csproj">
+      <Project>{40465939-8058-4d77-946b-6345e93c6c47}</Project>
+      <Name>ParvazPardaz.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="@ViewBag.description">
+    <meta name="keywords" content="@ViewBag.keywords">
+    <meta name="author" content="parvazpardaz.com">
+    <meta http-equiv="Content-Language" content="fa">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta property="og:site_name" content="کی سفر" />
+    <meta property="og:image" content="/Content/charteran/assets/img/logo.png" />
+    <meta property="og:image:width" content="143" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.description" />
+    <meta property="og:type" content="article" />
+    <meta property="og:type" content="article:published_time-@ViewBag.PublishDatetime" />
+    <meta property="og:type" content="@ViewBag.keywords" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/ClientTheme/images/Logo/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/ClientTheme/images/Logo/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/ClientTheme/images/Logo/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/ClientTheme/images/Logo/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/ClientTheme/images/Logo/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/ClientTheme/images/Logo/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/ClientTheme/images/Logo/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/ClientTheme/images/Logo/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/ClientTheme/images/Logo/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/ClientTheme/images/Logo/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/ClientTheme/images/Logo/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/ClientTheme/images/Logo/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/ClientTheme/images/Logo/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/ClientTheme/images/Logo/favicon/manifest.json">
+    <meta name="msapplication-TileImage" content="/ClientTheme/images/Logo/favicon/ms-icon-144x144.png">
+    @Styles.Render("~/bundles/TourClientCss")
+    @Scripts.Render("~/bundles/TourClientJs")
+    @Html.Raw(ViewBag.CustomMetaTags)
+</head>
+<body style="direction:rtl">
+    @Html.Action("GetMenus", "Home", new { @Area = "" })
+    @RenderBody()
+    <footer>
+        <div class="before">
+            <section class="join">
+                <div class="wrapper clearfix">
+                    @Html.Action("GetNewsLetter", "Home", new { @Area = "" })
+                    @Html.Action("GetSocial", "Home", new { @Area = "" })
+                </div>
+            </section>
+        </div>
+        @Html.Action("GetFooter", "Home", new { @Area = "" })
+    </footer>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

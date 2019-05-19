@@ -1,0 +1,10 @@
+﻿@model IEnumerable<PostGroupViewModel>
+<aside class="widget widget_tag_cloud">
+    <h3 class="widget-title">گروه های مرتبط</h3>
+    <div class="tagcloud widget-inner">
+        @foreach (var item in Model)
+        {
+            <a href="#" title="@item.Title" rel="@item.Rel" onclick="GetPosts('@item.URL','@item.Title')">@item.Name</a>
+        }
+    </div>
+</aside>

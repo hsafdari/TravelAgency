@@ -1,0 +1,179 @@
+﻿@model ParvazPardaz.ViewModel.TourPackageViewModel
+
+<link rel="stylesheet" href="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" />
+
+@using (Ajax.BeginForm(Model.CRUDMode == CRUDMode.Create ? "Create" : "Edit", "TourPackage", null, new AjaxOptions()
+{
+    OnComplete = "",
+    InsertionMode = Model.CRUDMode == CRUDMode.Create ? InsertionMode.InsertBefore : InsertionMode.ReplaceWith,
+    UpdateTargetId = Model.CRUDMode == CRUDMode.Create ? "ListViewTourPackage" : "TourPackage" + Model.SectionId,
+    HttpMethod = "POST",
+    OnSuccess = "LoadPartialForTourPackage(" + Model.TourId + ")",
+    OnFailure = "Faild"
+}, new { id = "frmTourPackage" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.TourId)
+    <div class="well">
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="@(Model.CRUDMode == CRUDMode.Create ? "fa fa-plus" : "fa fa-edit ")"></i>@(Model.CRUDMode == CRUDMode.Create ? ParvazPardaz.Resource.Tour.Tours.AddTourPackage : ParvazPardaz.Resource.Tour.Tours.UpdateTourPackage)
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="text-right col-md-3">
+                            @Html.LabelFor(model => model.DateTitle, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-6">
+                            @Html.TextBoxFor(model => model.DateTitle, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DateTitle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.FromPrice, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-8">
+                            @Html.TextBoxFor(model => model.FromPrice, new { @class = " form-control" })
+                            @Html.ValidationMessageFor(model => model.FromPrice, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.Code, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-8">
+                            @Html.TextBoxFor(model => model.Code, new { @class = " form-control" })
+                            @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @*<div class="col-md-4">
+                        <div class="form-group">
+                            <div class="editor-label text-right col-md-3">
+                                @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+                            </div>
+                            <div class="editor-field col-md-6">
+                                @Html.SpinFor(model => model.Title, new { @class = "form-control", id = "inputCapacity" }).Limit(1, 500).Postfix(ParvazPardaz.Resource.Tour.Tours.Person).CallConfigWithId(true)
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="editor-label text-right col-md-7">
+                                        @Html.LabelFor(model => model.NonLimit, new { @class = "control-label" })
+                                    </div>
+                                    <div class="editor-field col-md-2">
+                                        @Html.CheckBoxFor(model => model.NonLimit, new { @class = "", onchange = "checkNonLimit(this)", id = "chkNonLimit" })
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>*@
+                <div class="col-md-4">
+                    <div class="form-group" id="price-tour-schedule">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-8">
+                            @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.OfferPrice, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-8">
+                           @Html.TextBoxFor(model => model.OfferPrice, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.Priority, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-8">
+                            @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.TourPackgeDayId, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-8">
+                            @Html.DropDownListFor(d => d.TourPackgeDayId, Model.DDLTourPackgeDaysList, ParvazPardaz.Resource.General.Generals.DDLSelect, new { @class = "form-control search-select select" }) <!-- , onchange = "FetchState()" -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group" id="price-tour-schedule">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-8">
+                            @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+           
+        </div>
+    </div>
+}
+<script src="~/Plugins/bootstrap-datepicker/calendar.js"></script>
+<script type="text/javascript" src="~/Plugins/bootstrap-datepicker/jquery-ui-sliderAccess.js"></script>
+<script type="text/javascript" src="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="~/Plugins/bootstrap-datepicker/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //$("#frmTourPackage").removeData("validator");
+        //$("#frmTourPackage").removeData("unobtrusiveValidation");
+        //$.validator.unobtrusive.parse("#frmTourPackage");
+
+        $(".datepicker").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+            regional: 'en',
+            dateFormat: "yy/mm/dd"
+        });
+
+
+        if ($("#chkNonLimit").prop('checked')) {
+            $("#inputCapacity").attr("disabled", "disabled");
+            $("#inputCapacity").val(0);
+        }
+        else {
+            $("#inputCapacity").removeAttr('disabled');
+        }
+
+
+
+    });
+</script>

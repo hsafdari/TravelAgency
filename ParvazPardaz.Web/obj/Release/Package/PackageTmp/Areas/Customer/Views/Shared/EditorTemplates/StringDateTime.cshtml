@@ -1,0 +1,41 @@
+﻿@model string
+
+@*<link rel="stylesheet" href="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" />
+
+@Html.TextBoxFor(model => model, "{0:yyyy/MM/dd}", new { @class = "datepicker" })
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Plugins/bootstrap-datepicker/calendar.js"></script>
+    <script type="text/javascript" src="~/Plugins/bootstrap-datepicker/jquery-ui-sliderAccess.js"></script>
+    <script type="text/javascript" src="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.fa.min.js"></script>
+
+
+    <script type="text/javascript" src="~/Plugins/bootstrap-datepicker/jquery-ui-timepicker-addon.js"></script>
+    <script src="~/Plugins/bootstrap-datepicker/BootstrapDateTimePicker.js"></script>*@
+
+
+
+<link rel="stylesheet" href="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" />
+
+<script src="~/Plugins/bootstrap-datepicker/calendar.js"></script>
+<script type="text/javascript" src="~/Plugins/bootstrap-datepicker/jquery-ui-sliderAccess.js"></script>
+<script type="text/javascript" src="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+    @Html.TextBoxFor(model => model, "{0:yyyy/MM/dd}", new { @class = "datepicker" })
+
+<script type="text/javascript" src="~/Plugins/bootstrap-datepicker/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript">
+    //var dt = jQuery.noConflict();
+    $(document).ready(function () {
+        $(".datepicker").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+            regional: 'en',
+            dateFormat: "yy/mm/dd"
+        });
+    });
+</script>
+

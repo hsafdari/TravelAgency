@@ -1,0 +1,42 @@
+﻿@model TourScheduleCompanyTransferViewModel
+
+<div id="AddEditTourScheduleCompanyTransfer">
+    @Html.Partial("~/Areas/Admin/Views/TourScheduleCompanyTransfer/_AddTourScheduleCompanyTransfer.cshtml", new TourScheduleCompanyTransferViewModel()
+{
+    TourScheduleId = Model.TourScheduleId,
+    CRUDMode = CRUDMode.Create,
+    DepartureDate = DateTime.Now,
+    ArrivalDate = DateTime.Now,
+})
+</div>
+<div id="ListViewTourScheduleCompanyTransfer">
+    @{
+        if (Model != null && Model.ListView != null && Model.ListView.Any())
+        {
+            foreach (var listView in Model.ListView)
+            {
+                @Html.Partial("~/Areas/Admin/Views/TourScheduleCompanyTransfer/_ListViewTourScheduleCompanyTransfer.cshtml", listView)
+            }
+        }
+    }
+</div>
+
+<div class="form-group">
+    <div class="col-md-1" style="margin-bottom:20px;">
+        <a href="#" onclick="frmTourScheduleCompanyTransferSubmitSucceeded()" class="btn btn-custom green">@ParvazPardaz.Resource.General.Generals.Submit</a>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

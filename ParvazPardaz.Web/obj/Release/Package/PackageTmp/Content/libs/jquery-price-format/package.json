@@ -1,0 +1,82 @@
+{
+  "_args": [
+    [
+      "jquery-price-format",
+      "/var/www/animal-id"
+    ]
+  ],
+  "_from": "jquery-price-format@latest",
+  "_id": "jquery-price-format@0.0.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/jquery-price-format",
+  "_nodeVersion": "4.4.5",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/jquery-price-format-0.0.1.tgz_1485023748013_0.37756607215851545"
+  },
+  "_npmUser": {
+    "email": "gustavo.bissolli@gmail.com",
+    "name": "gustavobissolli"
+  },
+  "_npmVersion": "3.10.8",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "jquery-price-format",
+    "raw": "jquery-price-format",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-price-format/-/jquery-price-format-0.0.1.tgz",
+  "_shasum": "a452fd18445d3058c51c36113353cfb4f49322e7",
+  "_shrinkwrap": null,
+  "_spec": "jquery-price-format",
+  "_where": "/var/www/animal-id",
+  "author": {
+    "email": "gustavo.bissolli@gmail.com",
+    "name": "Gustavo Bissolli"
+  },
+  "bugs": {
+    "url": "https://github.com/gustavobissolli/jquery-price-format/issues"
+  },
+  "dependencies": {},
+  "description": "jQuery based price formatter",
+  "devDependencies": {
+    "browser-sync": "^2.18.6",
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-minify": "0.0.12",
+    "gulp-size": "^2.1.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "a452fd18445d3058c51c36113353cfb4f49322e7",
+    "tarball": "https://registry.npmjs.org/jquery-price-format/-/jquery-price-format-0.0.1.tgz"
+  },
+  "gitHead": "e2a9cf809241de8fc71e50ff231083824f47b398",
+  "homepage": "https://github.com/gustavobissolli/jquery-price-format#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "jquery.priceformat.js",
+  "maintainers": [
+    {
+      "name": "gustavobissolli",
+      "email": "gustavo.bissolli@gmail.com"
+    }
+  ],
+  "name": "jquery-price-format",
+  "optionalDependencies": {},
+  "private": false,
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustavobissolli/jquery-price-format.git"
+  },
+  "scripts": {},
+  "version": "0.0.1"
+}

@@ -1,0 +1,59 @@
+﻿@model TourPackageBatchUpdatePriceViewModel
+<style>
+    .Preloader {
+        width: 40px !important;
+        display: none;
+    }
+</style>
+<div class="form-group">
+    @Html.LabelFor(model => model.TourPacageFromPrice, new { @class = "control-label col-md-2" })
+    <div class="col-md-6">
+        @Html.TextBoxFor(model => model.TourPacageFromPrice, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.TourPacageFromPrice, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.EnumUpdatePriceType, new { @class = "control-label col-md-2" })
+    <div class="col-md-2">
+        @Html.EnumDropDownListFor(model => model.EnumUpdatePriceType, new { @class = "form-control select-2 select" })
+        @Html.ValidationMessageFor(model => model.EnumUpdatePriceType, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.IranUpdatePriceVal, new { @class = "control-label col-md-2" })
+    <div class="col-md-2">
+        @Html.SpinFor(model => model.IranUpdatePriceVal, new { @class = "form-control", @style = "direction:ltr" }).Limit(Int32.MinValue, Int32.MaxValue)
+        @Html.ValidationMessageFor(model => model.IranUpdatePriceVal, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.IsUpdateCurrencyPrice, new { @class = "control-label col-md-2" })
+    <div class="col-md-1">
+        @Html.CheckBoxFor(model => model.IsUpdateCurrencyPrice)
+        @Html.ValidationMessageFor(model => model.IsUpdateCurrencyPrice, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div id="CurrencyPrice" class="form-group" style="display:none">
+    @Html.LabelFor(model => model.CurrencyUpdatePriceVal, new { @class = "control-label col-md-2" })
+    <div class="col-md-2">
+        @Html.SpinFor(model => model.CurrencyUpdatePriceVal, new { @class = "form-control", @style = "direction:ltr" }).Limit(Int32.MinValue, Int32.MaxValue)
+        @Html.ValidationMessageFor(model => model.CurrencyUpdatePriceVal, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="@ParvazPardaz.Resource.General.Generals.Update" class="btn btn-custom green" />
+        <img id="Preloader" class="Preloader" src="~/Content/Preloader/preloader.gif" />
+    </div>
+</div>
+
+<script>
+    $("#IsUpdateCurrencyPrice").on("change", function () {
+        $("#CurrencyPrice").toggle();
+    });
+</script>

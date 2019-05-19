@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllowablePINTriesExceededPickUp" xml:space="preserve">
+    <value>رمز کارت 3 مرتبه اشتباه وارد شده است و در نتیجه کارت غیر فعال خواهد شد</value>
+  </data>
+  <data name="CanceledByUser" xml:space="preserve">
+    <value>کاربر انصراف داده است</value>
+  </data>
+  <data name="ExceedsWithdrawalAmountLimit" xml:space="preserve">
+    <value>مبلغ بیش از سقف برداشت می باشد</value>
+  </data>
+  <data name="ExpiredCardPickUp" xml:space="preserve">
+    <value>از تاریخ انقضای کارت گذشته است و کارت دیگر معتبر نیست</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>پرداخت انجام نشد</value>
+  </data>
+  <data name="IncorrectPIN" xml:space="preserve">
+    <value>خریدار رمز کارت را اشتباه وارد کرده است</value>
+  </data>
+  <data name="InvalidAmount" xml:space="preserve">
+    <value>مبلغ سند برگشتی، از مبلغ تراکنش اصلی بیشتر است</value>
+  </data>
+  <data name="InvalidCardNumber" xml:space="preserve">
+    <value>شماره کارت اشتباه است</value>
+  </data>
+  <data name="InvalidParameters" xml:space="preserve">
+    <value>پارامترهای ارسالی نامعتبر است</value>
+  </data>
+  <data name="InvalidTransaction" xml:space="preserve">
+    <value>درخواست برگشت یک تراکنش رسیده است ، درحالی که تراکنش اصلی پیدا نمی شود</value>
+  </data>
+  <data name="IssuerDownSlm" xml:space="preserve">
+    <value>سیستم بانک صادر کننده کارت خریدار، در وضعیت عملیاتی نیست</value>
+  </data>
+  <data name="MultiStateTxn" xml:space="preserve">
+    <value>در موارد چند تراکنشی، اطلاعات موفقیت از طریق سرویس دیگری ارسال می شود(مخصوص پذیرنده های خاص(</value>
+  </data>
+  <data name="NoSuchIssuer" xml:space="preserve">
+    <value>چنین صادر کننده کارتی وجود ندارد</value>
+  </data>
+  <data name="NoSufficientFunds" xml:space="preserve">
+    <value>موجودی حساب خریدار، کافی نیست</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>پرداخت با موفقیت انجام شد</value>
+  </data>
+  <data name="PaymentCanceled" xml:space="preserve">
+    <value>پرداخت کنسل شده</value>
+  </data>
+  <data name="ResponseReceivedTooLate" xml:space="preserve">
+    <value>تراکنش در شبکه بانکی Timeout خورده است</value>
+  </data>
+  <data name="SBNegative1" xml:space="preserve">
+    <value>خطای در پردازش اطلاعات ارسالی (مشکل در یکی از ورودیها و ناموفق بودن فراخوانی متد برگشت تراکنش)</value>
+  </data>
+  <data name="SBNegative10" xml:space="preserve">
+    <value>رسید دیجیتالی به صورت Base64 نیست (حاوی کارکترهای غیرمجاز است)</value>
+  </data>
+  <data name="SBNegative100" xml:space="preserve">
+    <value>پرداخت کنسل شده</value>
+  </data>
+  <data name="SBNegative11" xml:space="preserve">
+    <value>طول ورودی ها کمتر از حد مجاز است</value>
+  </data>
+  <data name="SBNegative12" xml:space="preserve">
+    <value>مبلغ برگشتی منفی است</value>
+  </data>
+  <data name="SBNegative13" xml:space="preserve">
+    <value>مبلغ برگشتی برای برگشت جزیی بیش از مبلغ برگشت نخورده ی رسید دیجیتالی است</value>
+  </data>
+  <data name="SBNegative14" xml:space="preserve">
+    <value>چنین تراکنشی تعریف نشده است</value>
+  </data>
+  <data name="SBNegative15" xml:space="preserve">
+    <value>مبلغ برگشتی به صورت اعشاری داده شده است</value>
+  </data>
+  <data name="SBNegative16" xml:space="preserve">
+    <value>خطای داخلی سیستم</value>
+  </data>
+  <data name="SBNegative17" xml:space="preserve">
+    <value>برگشت زدن جزیی تراکنش مجاز نمی باشد</value>
+  </data>
+  <data name="SBNegative18" xml:space="preserve">
+    <value>IP Address فروشنده نامعتبر است</value>
+  </data>
+  <data name="SBNegative3" xml:space="preserve">
+    <value>ورودی ها حاوی کارکترهای غیرمجاز میباشند</value>
+  </data>
+  <data name="SBNegative4" xml:space="preserve">
+    <value>Merchant Authentication Failed ، کلمه عبور یا کد فروشنده اشتباه است</value>
+  </data>
+  <data name="SBNegative6" xml:space="preserve">
+    <value>تراکنش قبلا برگشت داده شده است</value>
+  </data>
+  <data name="SBNegative7" xml:space="preserve">
+    <value>رسید دیجیتالی تهی است</value>
+  </data>
+  <data name="SBNegative8" xml:space="preserve">
+    <value>طول ورودی ها بیشتر از حد مجاز است</value>
+  </data>
+  <data name="SBNegative9" xml:space="preserve">
+    <value>وجود کاراکترهای غیرمجاز در مبلغ برگشتی</value>
+  </data>
+  <data name="SessionIsNull" xml:space="preserve">
+    <value>کاربر در بازه زمانی تعیین شده پاسخی ارسال نکرده است</value>
+  </data>
+  <data name="SuspectedFraudPickUp" xml:space="preserve">
+    <value>خریدار یا فیلد CVV2 و یا فیلد ExpDate را اشتباه وارد کرده است (یا اصلا وارد نکرده است)</value>
+  </data>
+  <data name="TMEError" xml:space="preserve">
+    <value>کلیه خطاهای دیگر بانک باعث ایجاد چنین خطایی می گردد</value>
+  </data>
+  <data name="TotalFailed" xml:space="preserve">
+    <value>در موارد چند تراکنشی، تمام تراکنش ها پرداخت ناموفق داشتند</value>
+  </data>
+  <data name="TransactionCannotBeCompleted" xml:space="preserve">
+    <value>تراکنش Authorize شده است (شماره PIN و PAN درست هست) ولی امکان سند خوردن وجود ندارد</value>
+  </data>
+</root>

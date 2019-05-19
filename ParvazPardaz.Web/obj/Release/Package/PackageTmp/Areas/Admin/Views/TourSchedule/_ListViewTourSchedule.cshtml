@@ -1,0 +1,157 @@
+﻿@model  ListViewTourScheduleViewModel
+@Html.HiddenFor(model => model.TourId)
+
+<div class="well nopadding " id="TourSchedule@(Model.SectionId)">
+    <div class="row nomargin">
+
+        <div class="">
+            <div class="col-md-2 nopadding left-column">
+                @Html.Label(ParvazPardaz.Resource.Tour.Tours.TourPackageTitle + " : ")
+                @Html.DisplayFor(model => model.TourPackageTitle)
+            </div>
+
+            <div class="col-md-8 nopadding center-culomn">
+
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.General.Generals.From + " : ")
+                                @Html.DisplayFor(model => model.FromDate)
+                            </td>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.General.Generals.To + " : ")
+                                @Html.DisplayFor(model => model.ToDate)
+                            </td>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.General.Generals.ExpireDate + " : ")
+                                @Html.DisplayFor(model => model.ExpireDate)
+                            </td>
+                        </tr>
+                        <tr>
+                            @*<td>
+                                    @Html.Label(ParvazPardaz.Resource.Tour.Tours.Price + " : ")
+                                    @Html.DisplayFor(model => model.Price)
+                                </td>*@
+                            @*<td>
+                                    @Html.Label(ParvazPardaz.Resource.Tour.Tours.Currency + " : ")
+                                    @Html.DisplayFor(model => model.Currency)
+                                </td>*@
+
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.Capacity + " : ")
+                                @{
+                                    if (Model.NonLimit)
+                                    {
+                                        @Html.Label(ParvazPardaz.Resource.Tour.Tours.NonLimit)
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(model => model.Capacity)
+                                    }
+                                }
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                @foreach (var item in Model.CompanyTransfers)
+                {
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.Label("زمان حرکت :")
+                                    @Html.DisplayFor(model => item.StartDateTime)
+                                </td>
+                                <td>
+                                    @Html.Label("زمان رسیدن :")
+                                    @Html.DisplayFor(model => item.EndDateTime)
+                                </td>
+                            </tr>
+                            <tr>
+                                @*<td>
+                                        @Html.Label(ParvazPardaz.Resource.Tour.Tours.DurationTime + " : ")
+                                        @Html.DisplayFor(model => item.DurationTime)
+                                    </td>*@
+                                <td>
+                                    @Html.Label(ParvazPardaz.Resource.Tour.Tours.CompanyTransfer + " : ")
+                                    @Html.DisplayFor(model => item.CompanyTransferTitle)
+                                </td>
+                                <td>
+                                    @Html.Label("میزان بار مجاز" + " : ")
+                                    @Html.DisplayFor(model => item.BaggageAmount)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.Label("از فرودگاه" + " : ")
+                                    @Html.DisplayFor(model => item.FromAirportTitle)
+                                </td>
+                                <td>
+                                    @Html.Label("به فرودگاه" + " : ")
+                                    @Html.DisplayFor(model => item.DestinationAirportTitle)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.Label("کلاس پروازی :")
+                                    @*@Html.DisplayFor(model => item.FlightClass)*@
+                                    @Html.DisplayFor(model => item.VehicleTypeClassTitle)
+                                </td>
+                                <td>
+                                    @Html.Label("شماره پرواز :")
+                                    @Html.DisplayFor(model => item.FlightNumber)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.Label("توضیحات :")
+                                    @Html.DisplayFor(model => item.Description)
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+
+            <div class="col-md-1 right-culomn">
+                @Ajax.ActionLink("ویرایش", "Edit", "TourSchedule", new { id = Model.Id }, new AjaxOptions()
+                        {
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "GET",
+                            UpdateTargetId = "AddEditTourSchedule"
+                        }, new { @class = "btn btn-sm btn-blue" })
+
+                @Ajax.ActionLink("حذف", "Delete", "TourSchedule", new { id = Model.Id, sectionId = Model.SectionId, tourId = Model.TourId },
+                                        new AjaxOptions()
+                                   {
+                                       OnSuccess = "SuccessRemoveTourSchedule",
+                                       HttpMethod = "POST",
+                                   }, new { @class = "btn btn-sm btn-red" })
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        @*<div class="bottom-column">
+                <div class="col-md-4 ">
+                    <div class="col-md-3">
+
+                        <a class="btn btn-sm btn-default" href="/Admin/TourScheduleCompanyTransfer/Create?tourScheduleId=@Model.Id" data-ajax-update="#TourScheduleCompanyTransferModal" data-ajax-success="ShowModalTourScheduleCompanyTransfer" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true"><i class="fa fa-plane fa-lg  " style="color: blue; "></i> @ParvazPardaz.Resource.Tour.Tours.AddFlight </a>
+                    </div>
+                    <div class="col-md-5">
+
+                        <a class="btn btn-sm btn-default" href="/Admin/TourScheduleAdditionalService/Create?tourScheduleId=@Model.Id" data-ajax-update="#TourScheduleAdditionalServiceModal" data-ajax-success="ShowModalTourScheduleAdditionalService" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true"><i class="fa fa-plus-square fa-lg" style="color: blue; "></i> @ParvazPardaz.Resource.Tour.Tours.AddAdditionalService </a>
+                    </div>
+                    <div class="col-md-4">
+
+
+                        <a class="btn btn-sm btn-default " href="/Admin/TourScheduleHotel/Create?tourScheduleId=@Model.Id" data-ajax-update="#TourScheduleHotelModal" data-ajax-success="ShowModalTourScheduleHotel" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true"><i class="fa fa-h-square fa-lg  " style="color: blue; "></i> @ParvazPardaz.Resource.Tour.Tours.AddHotel </a>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+</div>

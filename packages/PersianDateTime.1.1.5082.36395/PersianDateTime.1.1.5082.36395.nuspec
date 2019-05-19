@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>PersianDateTime</id>
+    <version>1.1.5082.36395</version>
+    <title>PersianDateTime</title>
+    <authors>Rahmat Rezaei</authors>
+    <owners>Rahmat Rezaei</owners>
+    <licenseUrl>http://persiandatetime.codeplex.com/license</licenseUrl>
+    <projectUrl>http://persiandatetime.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This dll contains a class named PersianDateTime which persian developers can use instead of System.DateTime structure. This class also contains most of the methods and properties of the conventional DateTime structure such as DateTime.Now and DateTime.TimeOfDay.</description>
+    <summary />
+    <releaseNotes />
+    <copyright>Copyright Rahmat.Rezaei@yahoo.com 2013</copyright>
+    <tags>Persian DateTime Date TimeZone</tags>
+  </metadata>
+</package>

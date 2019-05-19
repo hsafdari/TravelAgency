@@ -1,0 +1,175 @@
+
+.transparent-menu-top
+{
+	background:#006cb8 none repeat scroll 0 0;
+}
+.navbar-contact a i
+{
+	color:#f5d800;
+}
+.transparent-menu
+{
+	background:#f5d800 none repeat scroll 0 0;
+}
+.transparent-menu .navbar-nav > li > a
+{
+	color:#006cb8;
+}
+.transparent-menu .navbar-nav > li > a:hover
+{
+	color:#000;
+}
+.transparent-menu .dropdown-menu
+{
+	background:#006cb8 none repeat scroll 0 0 !important;
+}
+.nav-container .mega-menu .desc h4
+{
+	color:#f5d800;
+}
+.nav-container .mega-menu .links h5
+{
+	color:#f5d800;
+}
+.transparent-menu .dropdown-menu >li >a:hover
+{
+	color:#f5d800 !important;
+}
+.search-section .nav-tabs .active::after
+{
+	background:#f5d800;
+}
+.search-section .nav-tabs > li.active > a, .search-section .nav-tabs > li.active > a:focus, .search-section .nav-tabs > li.active > a:hover
+{
+	background:#f5d800;
+	color:#006cb8;
+}
+.search-section .nav-tabs >li > a:hover
+{
+	background:#f5d800;
+}
+.search-section .product-search-title
+{
+	color:#f5d800;
+}
+.search-button
+{
+	background:#f5d800;
+	color:#006cb8;
+}
+.search-button:hover
+{
+	background:#006cb8;
+	color:#f5d800;
+}
+
+.pricing-info a
+{
+	background-color:#f5d800;
+	color:#006cb8;
+}
+.pricing-info a:hover
+{
+	background:transparent;
+	color:#006cb8;
+	border:2px solid #006cb8;
+}
+.room-grid-view .room-info .room-book a
+{
+	background-color:#f5d800;
+	color:#006cb8;
+}
+.room-grid-view:hover .room-info .room-book a
+{
+	background-color:#006cb8;
+	color:#f5d800;
+}
+.main-footer-sub button
+{
+	background-color:#f5d800;
+	color:#006cb8;
+}
+.main-footer-sub button:hover
+{
+	background-color:#006cb8;
+	color:#f5d800;
+}
+.main-footer-sub .social-media li a
+{
+	background-color:#f5d800;
+	color:#006cb8;
+}
+.main-footer-sub .social-media li a:hover
+{
+	background-color:#006cb8;
+	color:#f5d800;
+}
+.main-footer .about-box h3,.main-footer .links h4, .main-footer .contact-box h4, .we-accept h4
+{
+	color:#f5d800;
+}
+.main-footer .about-box a
+{
+	border:1px solid #f5d800;
+	color:#f5d800;
+}
+.main-footer .contact-box p i
+{
+	color:#f5d800;
+}
+.left-news
+{
+	background-color:#07253f;
+}
+.right-news
+{
+	
+}
+.news-description
+{
+	color:#fff;
+}
+.news-title a
+{
+	color:#f5d800;
+}
+.choose-us-item
+{
+	background:#006cb8 none repeat scroll 0 0;
+}
+.choose-us-item
+{
+	color:#fff;
+}
+.choose-icon
+{
+	background:#f5d800 none repeat scroll 0 0;
+	color:#000;
+}
+.choose-us-item a
+{
+	background:#f5d800 none repeat scroll 0 0;
+	color:#006cb8;
+}
+.choose-us-item a:hover
+{
+	background:transparent;
+	color:#f5d800;
+	border:2px solid #f5d800;
+}
+.mega-menu .links a:hover,.navbar-contact a:hover,.main-footer .links ul li a:hover,.main-footer .links ul li a:hover,.main-footer-nav ul li a:hover
+{
+	color:#f5d800;
+}
+.footerLogo
+{
+	background-color:#fff;
+}
+.sign
+{
+	color:#006cb8;
+}
+.navbar-contact a
+{
+	color:#fff;
+}

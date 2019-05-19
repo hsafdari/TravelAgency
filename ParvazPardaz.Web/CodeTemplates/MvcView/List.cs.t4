@@ -1,0 +1,278 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+@model <#= ViewDataTypeName #>
+
+<#    
+    var controllerName = ViewDataTypeName.Split('.').Last();
+    if(controllerName.StartsWith("Grid") && controllerName.EndsWith("ViewModel"))
+    {
+        controllerName = controllerName.Substring(4, controllerName.Length - 13);
+    }
+#>
+<#
+// The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
+if(IsPartialView) {
+#>
+
+<#
+} else if(IsLayoutPageSelected) {
+#>
+
+@{
+    ViewBag.Title = "<#= ViewName#>";
+<#
+if (!String.IsNullOrEmpty(LayoutPageFile)) {
+#>
+    Layout = "<#= LayoutPageFile#>";
+<#
+}
+#>
+
+}
+<#
+} else {
+#>
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+<#
+    PushIndent("    ");
+}
+#>
+
+
+
+@if (ParvazPardaz.Resource.General.Generals.Direction == "RTL")
+{
+    if (ParvazPardaz.Resource.General.Generals.Regional == "AR")
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+        @Scripts.Render("~/Scripts/kendo/ar-IQ/js");
+    }
+    else
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+        @Scripts.Render("~/Scripts/kendo/fa-IR/js");
+    }
+}
+else
+{
+    @Styles.Render("~/content/kendo/LTR/css");
+    @Scripts.Render("/Scripts/kendo/en-US/js");
+}
+
+<h3>@ParvazPardaz.Resource </h3>
+
+<hr />
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-green">
+        <i class="fa fa-plus"></i>
+        @ParvazPardaz.Resource.General.Generals.Create
+    </a>
+    <a onclick="edit()" class="btn btn-blue">
+        <i class="fa fa-edit"></i>
+        @ParvazPardaz.Resource.General.Generals.Edit
+    </a>
+    <a onclick="del()" class="btn btn-red">
+        <i class="fa fa-trash-o"></i>
+        @ParvazPardaz.Resource.General.Generals.Delete
+    </a>
+</p>
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid<<#=ViewDataTypeName #>>()
+        .Name("Grid")           
+        .Columns(columns =>
+            {
+<#
+IEnumerable<PropertyMetadata> properties = ModelMetadata.Properties;
+foreach (PropertyMetadata property in properties) {
+    if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {#>
+<# if (property.IsAssociation && GetRelatedModelMetadata(property) == null) { continue; }#>  <#
+    }
+}
+#>
+<#
+foreach (PropertyMetadata property in properties) {
+    
+    if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
+#>
+<#
+        // This is a temporary work around until core scaffolding provides support for independent associations.
+        if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
+            continue;
+        }
+        if(property.TypeName.ToString().Equals("System.Nullable<System.DateTime>") || property.TypeName.ToString().Equals("System.DateTime")){
+#>
+                columns.Bound(model => model.<#= GetValueExpression(property) #>).ClientTemplate("#=(<#= GetValueExpression(property) #> != null ? moment(<#= GetValueExpression(property) #>).format('jYYYY/jMM/jDD HH:mm') : '')#").Width(150);
+<#                
+        }else{
+#>
+                columns.Bound(model => model.<#= GetValueExpression(property) #>).Width(150);
+<#
+        }
+    }
+}
+string pkName = GetPrimaryKeyName();
+if (pkName != null) {
+#>
+<#
+} else {
+#>       
+<#
+}
+#>
+		    })	    
+		    .Groupable()
+            .Pageable()
+            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single)
+            .Type(GridSelectionType.Row))
+            .Navigatable()
+            .Sortable()
+            .Scrollable(scr => scr.Height(400))
+            .Filterable()
+            .Resizable(x => x.Columns(true))
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Sort(st =>
+                        {
+                            st.Add(s => s.CreatorDateTime).Descending();
+                            st.Add(s => s.<#= pkName #>).Descending();
+                        })
+<#  if (pkName != null) {#>	
+                .Model(model => model.Id(item => item.<#= pkName #>))
+<#}#>
+                .Read(read => read.Action("Get<#= controllerName #>", "<#= controllerName #>", null)).PageSize(50)
+            )                         
+	)
+	@Html.Partial("_Toastr")
+</div>
+
+@Html.Partial("_ConfirmationMessage")
+
+@section scripts{
+    <script>
+        var CreateUrl = "@Url.Action("Create", "<#= controllerName #>")";
+        var EditUrl = "@Url.Action("Edit", "<#= controllerName #>")";
+        var DeleteUrl = "@Url.Action("Delete", "<#= controllerName #>")";
+    </script>
+
+    <script>
+        function GetSelectedItemParameters() {
+            
+            var gview = $("#Grid").data("kendoGrid");
+            var SelectedItem = gview.dataItem(gview.select());
+            if (SelectedItem == null) {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlert', '@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlertTitle', { timeOut: 5000 })
+                return false;
+            }
+            else {
+                return SelectedItem;
+            }
+        }
+
+        function CheckSelectedGrid() {
+            var gview = $("#Grid").data("kendoGrid");
+            var selectedItem = gview.dataItem(gview.select());
+            if (selectedItem == null) {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlert', '@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlertTitle', { timeOut: 5000 })
+                return false;
+            }
+            else {
+                var selectedId = selectedItem.<#= pkName #>;
+                return selectedId;
+            }
+        }
+        var wndRemove = $("#ConfirmationMessage").kendoWindow({
+            title: "",
+            modal: true,
+            visible: false,
+            resizable: false,
+            width: 400,
+        }).data("kendoWindow");
+
+        function create(parameters) {
+            window.location.replace(CreateUrl);
+        }
+
+        function edit(parameters) {
+            
+            var result = CheckSelectedGrid();
+            if (result) {
+                window.location.replace(EditUrl + "/" + result);
+            }
+        }
+
+        function del(parameters) {
+            var result = CheckSelectedGrid();
+            if (result) {
+                wndRemove.center();
+                wndRemove.open();
+            }
+        }
+        $("#btnYes").click(function () {
+            var gview = $("#Grid").data("kendoGrid");
+            var selectedItem = gview.dataItem(gview.select());
+            var selectedId = selectedItem.<#= pkName #>;
+            $.ajax({
+                url: DeleteUrl,
+                type: "post",
+                dataType: "json",
+                cache: false,
+                data: { Id: selectedId },
+                success: function (result) {
+                    var gridm = $("#Grid").data("kendoGrid");
+                    if (gridm != undefined && result) {
+                        if (gridm.dataSource.transport.cache._store)
+                            gridm.dataSource.transport.cache._store = {};
+                        gridm.dataSource.fetch();
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.DeleteAlert', '@ParvazPardaz.Resource.General.Generals.DeleteAlertTitle', { timeOut: 5000 })
+                    }
+                    else {
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                    }
+                },
+                error: function (xhr) {
+                    toastr.options = { "positionClass": "toast-top-center" }
+                    toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                }
+            });
+            wndRemove.close();
+        })
+        $("#btnNo").click(function () {
+            wndRemove.close();
+        })
+    </script>
+}
+
+<#
+// The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
+#>
+<#
+if(!IsPartialView && !IsLayoutPageSelected) {
+    ClearIndent();
+#>
+</body>
+</html>
+
+<#
+}
+#>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

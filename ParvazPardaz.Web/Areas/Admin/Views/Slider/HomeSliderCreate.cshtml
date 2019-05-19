@@ -1,0 +1,136 @@
+﻿@model ParvazPardaz.ViewModel.AddTourHomeSliderViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("HomeSliderCreate", "Slider", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.CMS.CMS.ManagementSliderHome</h3>
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SliderGroupID, new { @class = "control-label col-md-1" })
+            <div class="col-md-3 number">
+                @Html.DropDownListFor(model => model.SliderGroupID, ViewBag.SliderGroupDDL as SelectList, new { @class = "form-control search-select select" })
+                @Html.ValidationMessageFor(model => model.SliderGroupID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageTitle, new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.ImageTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ImageTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NavigationUrl, new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.NavigationUrl, new { @class = "form-control", style = "direction:ltr" })
+                @Html.ValidationMessageFor(model => model.NavigationUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group checkbox">
+            @Html.LabelFor(model => model.ImageIsActive, new { @class = "control-label col-md-1" })
+            <div class="col-md-3 ">
+                @Html.CheckBoxFor(model => model.ImageIsActive, new { @class = "flat-red form-control" })
+                @Html.ValidationMessageFor(model => model.ImageIsActive, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Priority, new { @class = "control-label col-md-1" })
+            <div class="col-md-3 number">
+                @Html.SpinFor(model => model.Priority, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.HeaderDays, new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.HeaderDays, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.HeaderDays, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NavDescription, new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.NavDescription, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.NavDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @*@Html.TextBoxFor(model => model.Price, new { @class = "form-control" })*@
+                @Html.SpinFor(model => model.Price).Limit(0, Int32.MaxValue).Postfix("تومان")
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.footerLine1, new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.footerLine1, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.footerLine1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.footerLine2, new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.footerLine2, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.footerLine2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.File, new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @Html.FileUploaderFor(model => model.File).AddMore(false).IsMultiple(false).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(false)
+                <div class="alert alert-info">
+                    <i class="fa fa-info-circle"></i>
+                    <strong>توجه!</strong> 
+                    <p>@ParvazPardaz.Resource.CMS.CMS.PicSizeBlogFisrtPageSlider</p>
+                    @*<p>برای گروه Magazine2 : تصویر با عرض 268 و ارتفاع 520 پیکسل وارد کنید</p>
+                    <p>برای گروه Magazine3 : تصویر با عرض 365 و ارتفاع 365 پیکسل وارد کنید</p>*@
+                    @*<p>@ParvazPardaz.Resource.CMS.CMS.PicSizeFisrtPageSlider</p>
+                    <p>@ParvazPardaz.Resource.CMS.CMS.PicSizeFisrtPageCountryBox</p>
+                    <p>@ParvazPardaz.Resource.CMS.CMS.PicSizeFisrtPageNowruzBoxSlide</p>
+                    <p>@ParvazPardaz.Resource.CMS.CMS.PicSizeFisrtPageTourSlider</p>*@
+                </div>
+                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-12">
+                @*<p class="text-danger">@ParvazPardaz.Resource.CMS.CMS.PicSizeFisrtPageCountryBox</p>
+                <p class="text-danger">@ParvazPardaz.Resource.CMS.CMS.PicSizeFisrtPageSlider</p>*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageDescription, new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.ImageDescription, 5, 40, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ImageDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Create class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "HomeSliderIndex", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $('.select').select2({ dir: "RTL" });
+    </script>
+}
+
+

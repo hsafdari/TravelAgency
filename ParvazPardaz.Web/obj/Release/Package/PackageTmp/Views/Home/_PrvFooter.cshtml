@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ParvazPardaz.ViewModel.FooterUIViewModel>
+@*<div id="callus">
+    <a href="tel:0212779">
+        <img alt="تلفن تماس کی سفر" src="/ClientTheme/Blog/Magazine/img/icons/callus1.png" />
+        <div class="call-animation">
+            @*<img class="callme img-circle" src="/ClientTheme/Blog/Magazine/img/icons/call.png" alt="" />
+        </div>
+    </a>
+
+</div>*@
+<div class="banner">
+    <div>
+        <div>
+            <a href="tel:+98212779" style="display:block;">
+                <i class="Phone is-animating"></i> <div class="textPhone">021-2779</div>
+                <br/>
+                <div class="text">پاسخگوی سوالاتتان هستیم</div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="wrapper details">
+    @foreach (var item in Model)
+    {
+        @Html.Raw(item.Content)
+    }
+</div>
+<div class="wrapper copy">
+    کپی رایت @DateTime.Now.Year کی سفر. تمام حقوق محفوظ می باشد
+</div>

@@ -1,0 +1,151 @@
+.PR{position: relative !important;}
+
+.MT0{margin-top: 0px !important;}
+.MT5{margin-top: 5px !important;}
+.MT10{margin-top: 10px !important;}
+.MT15{margin-top: 15px !important;}
+.MT20{margin-top: 20px !important;}
+.MT25{margin-top: 25px !important;}
+.MT30{margin-top: 30px !important;}
+.ML0{margin-left: 0px !important;}
+.ML5{margin-left: 5px !important;}
+.ML2{margin-left: 2px !important;}
+.ML10{margin-left: 10px !important;}
+.ML15{margin-left: 15px !important;}
+.ML20{margin-left: 20px !important;}
+.ML25{margin-left: 25px !important;}
+.ML30{margin-left: 30px !important;}
+.MB0{margin-bottom: 0px !important;}
+.MB5{margin-bottom: 5px !important;}
+.MB10{margin-bottom: 10px !important;}
+.MB15{margin-bottom: 15px !important;}
+.MB20{margin-bottom: 20px !important;}
+.MB25{margin-bottom: 25px !important;}
+.MB30{margin-bottom: 30px !important;}
+.MR0{margin-right: 0px !important;}
+.MR5{margin-right: 5px !important;}
+.MR2{margin-right: 2px !important;}
+.MR10{margin-right: 10px !important;}
+.MR15{margin-right: 15px !important;}
+.MR20{margin-right: 20px !important;}
+.MR25{margin-right: 25px !important;}
+.MR30{margin-right: 30px !important;}
+.MA{margin: auto !important;}
+.MRLA{margin-right: auto !important;margin-left:auto !important;}
+
+.PT0{padding-top: 0px !important;}
+.PT5{padding-top: 5px !important;}
+.PT10{padding-top: 10px !important;}
+.PT15{padding-top: 15px !important;}
+.PT20{padding-top: 20px !important;}
+.PT25{padding-top: 25px !important;}
+.PT30{padding-top: 30px !important;}
+.PL0{padding-left: 0px !important;}
+.PL5{padding-left: 5px !important;}
+.PL2{padding-left: 2px !important;}
+.PL10{padding-left: 10px !important;}
+.PL15{padding-left: 15px !important;}
+.PL20{padding-left: 20px !important;}
+.PL25{padding-left: 25px !important;}
+.PL30{padding-left: 30px !important;}
+.PB0{padding-bottom: 0px !important;}
+.PB5{padding-bottom: 5px !important;}
+.PB10{padding-bottom: 10px !important;}
+.PB15{padding-bottom: 15px !important;}
+.PB20{padding-bottom: 20px !important;}
+.PB25{padding-bottom: 25px !important;}
+.PB30{padding-bottom: 30px !important;}
+.PR0{padding-right: 0px !important;}
+.PR5{padding-right: 5px !important;}
+.PR2{padding-right: 2px !important;}
+.PR10{padding-right: 10px !important;}
+.PR15{padding-right: 15px !important;}
+.PR20{padding-right: 20px !important;}
+.PR25{padding-right: 25px !important;}
+.PR30{padding-right: 30px !important;}
+
+.BR0{border-radius: 0 !important}
+.FWB{font-weight: bold !important;}
+.TC{ text-align: center; }
+.TJC{ text-align: justify; text-align-last: center}
+@media screen and (max-width: 767px){
+  .xs-PR5{
+    padding-right: 5px !important;
+  }
+  .xs-PL5{
+    padding-left: 5px !important;
+  }
+}
+
+.HOLDER{ &:after,&:before{ content: ''; clear: both; display: table; } }
+.WFULL{width: 100% !important;}
+
+
+
+.owl-nav-vcenter{
+  @media screen and (max-width: 767px){
+      overflow: hidden;
+  }
+  .owl-nav{
+    position: absolute;
+    top: 0;
+    height:0;
+    top: 50%;
+    width: 100%;
+    display: block;
+
+    .owl-prev , .owl-next{
+      top: 50%;
+      transform: translate(0,-50%);
+      position: absolute;
+      opacity: 0;
+      transition: .5s;
+      i{
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        font-size: 18px;
+        text-align: center;
+        position: relative;
+        &:before{
+          top: 50%;
+          position: absolute;
+          transform: translate(-50%,-50%);
+          left: 50%;
+          transition: .5s;
+        }
+        &:hover{
+          color: #fff !important;
+          background: rgba(50,50,50,.7) !important;
+          transition: .5s;
+        }
+      }
+    }
+    .owl-prev{
+      right:-30px;
+      @media screen and (max-width: 767px){
+          right: 0px;
+          opacity: 1;
+      }
+    }
+    .owl-next{
+      left: -30px;
+      @media screen and (max-width: 767px){
+          left: 0px;
+          opacity: 1;
+      }
+    }
+  }
+  &:hover{
+    .owl-prev , .owl-next{
+      transition: .5s;
+      opacity: 1;
+    }
+    .owl-prev{
+      right: -5px;
+    }
+    .owl-next{
+      left: -5px;
+    }
+  }
+}

@@ -1,0 +1,481 @@
+﻿@model ParvazPardaz.ViewModel.AddPostViewModel
+@using ParvazPardaz.Common.HtmlHelpers;
+@{
+    ViewBag.Title = "Create";
+}
+@section css{
+    <link href="~/Plugins/KendoDateTimePicker/Kendo.default.min.css" rel="stylesheet" />
+    <link href="~/Plugins/KendoDateTimePicker/Kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2014.3.1314/kendo.common-material.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2014.3.1314/kendo.material.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2014.3.1314/kendo.material.mobile.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2014.3.1314/kendo.rtl.min.css" rel="stylesheet" />
+    <style>
+        .k-checkbox, .k-radio {
+            display: inline;
+            opacity: 1 !important;
+            width: 6px !important;
+            margin: 6px !important;
+        }
+    </style>
+}
+
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+<style>
+    html, body {
+        overflow-x: hidden;
+    }
+</style>
+@using (Html.BeginForm("Create", "Post", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal col-md-9">
+        <h3>@ParvazPardaz.Resource.EShop.EShopResource.PostManagement</h3>
+        <hr />
+        <div class="row">
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LinkTableTitle, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.LinkTableTitle, new { @class = "form-control", style = "direction:ltr" })
+                <div class="alert alert-info" style="margin-top:10px">
+                    <i class="fa fa-info-circle"></i>
+                    <strong>توجه!</strong>
+                    <p>@ParvazPardaz.Resource.Link.LinkResource.UseThisLinkTableTitlePattern</p>
+                    <p style="direction:ltr">@ParvazPardaz.Resource.Link.LinkResource.LinkTableTitlePattern</p>
+                </div>
+                @Html.ValidationMessageFor(model => model.LinkTableTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostSummery, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.PostSummery, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PostSummery, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostContent, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PostContent, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PostContent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MetaKeywords, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.MetaKeywords, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MetaKeywords, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MetaDescription, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.MetaDescription, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MetaDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PublishDatetime, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.PublishDatetime, new { @class = "form-control datepicker" })
+                @Html.ValidationMessageFor(model => model.PublishDatetime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpireDatetime, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.ExpireDatetime, new { @class = "form-control datepicker" })
+                @Html.ValidationMessageFor(model => model.ExpireDatetime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostSort, new { @class = "control-label col-md-2" })
+            <div class="col-md-3 number">
+                @Html.EditorFor(model => model.PostSort, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PostSort, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.HiddenFor(model => model.IsActive)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActiveComments, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+
+                @Html.CheckBoxFor(model => model.IsActiveComments, new { @class = "flat-red", style = "margin-right:50px; margin-left:50px;" })
+
+                @Html.ValidationMessageFor(model => model.IsActiveComments, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.AccessLevel, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EnumDropDownListFor(model => model.AccessLevel, new { @class = "form-control search-select select" })
+                @Html.ValidationMessageFor(model => model.AccessLevel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="form-group">
+                @Html.Label(ParvazPardaz.Resource.General.Generals.Upload, new { @class = "control-label col-md-1" })
+                <div class="col-md-10">
+                    @Html.FileUploaderFor(model => model.File).Captions(ParvazPardaz.Resource.Tour.Tours.SelectPic).AddMore(false).IsMultiple(false).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(false)
+                    @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <!-- کلیدواژه های کالا -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-external-link-square"></i>
+                @ParvazPardaz.Resource.EShop.EShopResource.Tags
+                <div class="panel-tools">
+                    <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TagTitles, new { @class = "control-label col-md-2" })
+                    <div class="col-md-9">
+                        @Html.ListBoxFor(model => model.TagTitles, Model.KeywordsDDL, new { @class = "form-control  TagTitles" })
+                        @Html.ValidationMessageFor(model => model.TagTitles, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                @*@Html.ActionLink(ParvazPardaz.Resource.EShop.EShopResource.postImage, "Create", "PostImage", new { postId = Model.Id }, new { @class = "btn btn-custom green" })*@
+                <input type="submit" value="@ParvazPardaz.Resource.EShop.EShopResource.postImage" class="btn btn-custom green btn-submit" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+                @*<a href="@Request.UrlReferrer" class="btn btn-custom red">@ParvazPardaz.Resource.General.Generals.Back</a>*@
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <div class="editor-label col-md-12">
+                @ParvazPardaz.Resource.EShop.EShopResource.PostGroup
+
+            </div>
+            <div class="editor-field col-md-12">
+                @Html.ValidationMessageFor(model => model._selectedPostGroups, "", new { @class = "text-danger" })
+                @* menu group *@
+                <div>
+                    @(Html.Kendo()
+                .TreeView()
+                .DragAndDrop(true)
+.Name("treeview")
+.Checkboxes(checkboxes => checkboxes
+                .Name("checkedFiles")
+                .CheckChildren(true)
+            )
+.Events(events => events
+                .Check("onCheck")
+            )
+
+                .HtmlAttributes(new { @class = "tree-section" })
+                .DataTextField("NodeText")
+        .TemplateId("treeview-template")
+        //.Events(ev => ev.Select("onSelectedNode"))
+
+                .DataSource(ds =>
+                {
+                    ds.Read(read => read.Action(actionName: "GetMenuItems", controllerName: "Post").Data("Parameterfn"));
+                    ds.Model(model => model
+                        .Id("Id")
+                        .HasChildren("Haschildren")
+                         );
+                }))
+                    @*<div style="padding-top: 2em;">
+                            <h4>Status</h4>
+                            <p id="result">No nodes checked.</p>
+                        </div>*@
+                    <div id="hidden-rs">
+                        <select data-val="true" data-val-required="حداقل یک گروه را انتخاب نمایید" multiple="multiple" name="_selectedPostGroups" style="display:none"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_Toastr")
+}
+@section scripts{
+    <script src="~/Scripts/kendo.date/JalaliDate.js"></script>
+    <script src="~/Scripts/kendo.date/kendo.web.js"></script>
+    <script src="~/Scripts/kendo.date/fa-IR.js"></script>
+
+    <script type="text/javascript">
+        var $ = jQuery.noConflict();
+        $(document).ready(function () {
+            $(".datepicker").kendoDatePicker();
+        });
+
+        //بطور پیش فرض فیلدهای مخفی اعتبارسنجی نمی شود
+        //می گوییم اعتبارسنجی برای همه اعمال شود
+        $.validator.setDefaults({ ignore: null });
+    </script>
+
+    <script type="text/javascript">
+        $('.select').select2({
+            dir: "RTL"
+        });
+
+        $(document).ready(function () {
+            var $selectMulti = $(".TagTitles").select2({
+                tags: true,
+                multiple: true,
+                tokenSeparators: [',', '+'],
+                dir: "RTL",
+                placeholder: "کلیدواژه ها را انتخاب نمایید",
+
+            })
+
+            //
+            var isFirstLoad = $("#isfirst").val();
+            if (isFirstLoad == "true") {
+                $selectMulti.val(null).trigger("change");
+            }
+        })
+
+        //$(".btn-submit").on("click", function (e) {
+
+        //    debugger;
+        //    var tagList = [];
+        //    $('#TagTitles :selected').each(function (i, selected) {
+        //        tagList[i] = $(selected).text();
+        //    });
+
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "/Admin/Post/SaveTags",
+        //        data: {
+        //            tags: tagList
+        //        },
+        //        success: function (data) {
+        //            return true;
+        //        },
+        //        error: function (textStatus, errorThrown) {
+        //            return false;
+        //        }
+        //    });
+
+        //})
+    </script>
+    <script>
+        var checked = [];
+        var checkedNodes = [];
+
+        // function that gathers IDs of checked nodes
+        function checkedNodeIds(nodes, checkedNodes) {
+
+            for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].checked) {
+                    if (jQuery.inArray(nodes[i].id, checkedNodes) == -1) {
+                        checkedNodes.push(nodes[i].id);
+                    }
+                }
+
+                if (nodes[i].hasChildren) {
+                    checkedNodeIds(nodes[i].children.view(), checkedNodes);
+                }
+            }
+        }
+
+
+        // show checked node IDs on datasource change
+        function onCheck(events) {
+
+            var treeView = $("#treeview").data("kendoTreeView"),
+                message;
+
+            //گرفتن شناسه نود انتخاب شده و پدر و اجداد آن
+            var treeNodes = $("#treeview").data('kendoTreeView');
+            var checkedNode = treeNodes.dataItem(events.node);
+            if (checkedNode.checked) {
+                //افزودن به آرایه
+                checkedNodes.push(checkedNode.Id)
+            } else {
+                //مقداردهی null در آرایه checkedNodes
+                var index = checkedNodes.indexOf(checkedNode.Id);
+
+                if (index !== -1) {
+                    checkedNodes[index] = null;
+                }
+            }
+
+            var currentParent = this.parent(events.node);
+            while (currentParent != null) {
+                var data = treeNodes.dataItem(currentParent);
+                if (data != null) {
+                    if (checkedNode.checked) {
+                        if (jQuery.inArray(data.Id, checkedNodes) == -1) {
+                            //افزودن به آرایه
+                            checkedNodes.push(data.Id)
+                        }
+                    } else {
+                        //اگر برادر این ند در لیست checkedNodes
+                        //نبود ، آن وقت اجازه حذف اجداد را داشته باشد
+                        var children = data.children.view();
+                        var isBrotherChecked = false;
+                        for (var i = 0; i < children.length; i++) {
+                            var isBrotherInList = jQuery.inArray(children[i].Id, checkedNodes);
+                            if (children[i].Id != data.Id && isBrotherInList > -1) {
+                                isBrotherChecked = true;
+                                break;
+                            } else {
+                                isBrotherChecked = false;
+                            }
+                        }
+                        //debugger;
+                        if (!isBrotherChecked) {
+                            //مقداردهی null در آرایه checkedNodes
+                            var index = checkedNodes.indexOf(data.Id);
+
+                            if (index !== -1) {
+                                checkedNodes[index] = null;
+                            }
+                        }
+                    }
+
+                    var p = this.parent(currentParent);
+                    if (p != null) {
+                        currentParent = p;
+                    } else {
+                        currentParent = null;
+                    }
+                } else {
+                    currentParent = null;
+                }
+            }
+
+
+
+            //var checkedNodes = [],
+            //    treeView = $("#treeview").data("kendoTreeView"),
+            //    message;
+
+
+
+            checkedNodeIds(treeView.dataSource.view(), checkedNodes);
+
+            if (checkedNodes.length > 0) {
+                message = "IDs of checked nodes: " + checkedNodes.join(",");
+            } else {
+                message = "No nodes checked.";
+            }
+
+            $("#result").html(message);
+
+            //for (var i = 0; i < checkedNodes.length; i++) { checked[i] = parseInt(checkedNodes[i], 10); }
+            //$('.selectedPostGroup').val('sss');
+
+            //remove hidden node
+            var myNode = document.getElementById("hidden-rs");
+            //debugger;
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
+            }
+
+            //debugger;
+            if (checkedNodes.length == 0) {
+                $("#hidden-rs").html("<select data-val=\"true\" data-val-required=\"حداقل یک گروه را انتخاب نمایید\" multiple=\"multiple\" name=\"_selectedPostGroups\" style=\"display:none\"></select>");
+                $.validator.setDefaults({ ignore: null });
+            }
+
+            //add hidden node
+            for (var i = 0; i < checkedNodes.length; i++) {
+                if (checkedNodes[i] != null) {
+                    var input = document.createElement("input");
+
+                    input.setAttribute("type", "hidden");
+
+                    input.setAttribute("name", "_selectedPostGroups[" + i + "]");
+
+                    input.setAttribute("value", parseInt(checkedNodes[i], 10));
+
+                    //append to form element that you want .
+                    document.getElementById("hidden-rs").appendChild(input);
+                }
+            }
+        }
+    </script>
+
+
+    <script>
+        function Parameterfn(e) {
+            return {
+                Id: e.Id,
+                //MenugroupId:@(ViewBag.GroupId)
+            };
+        }
+    </script>
+    <script type="text/javascript">
+        var treeview;
+        //var $ = jQuery.noConflict();
+        function onSelectedNode(e) {
+            $("#chkroot").prop("checked", false);
+            var nodeId = treeview.dataItem(e.node).Id;
+            $("#hdnGroupId").val(nodeId);
+            //Hiding menu type element
+            document.getElementById('MenuTypeDiv').style.display = 'none';
+            var a = document.getElementById("MenuType");
+            a.value = "Type_0";
+        }
+        $(document).ready(function () {
+            treeview = $("#tree").data("kendoTreeView");
+            $("#chkroot").change(function () {
+                if ($(this).prop('checked') == true) {
+                    $("#hdnGroupId").val(null);
+                    //display menu type element
+                    document.getElementById('MenuTypeDiv').style.display = 'block';
+                }
+            });
+        });
+        //function IsRootCheck() {
+        //    if (document.getElementById('MenuType').checked) {
+        //        //display menu type element
+        //        document.getElementById('MenuTypeDiv').style.display = 'block';
+        //    }
+        //    else{
+        //        //hiding menu type element
+        //        document.getElementById('MenuTypeDiv').style.display = 'none';
+        //        var a = document.getElementById("MenuType");
+        //        a.value = "Type_0";
+        //    }
+        //}
+    </script>
+
+    <script type="text/javascript">
+        //var kd = jQuery.noConflict();
+        $(document).ready(function () {
+            $('#PostSummery').jqEasyCounter({
+                'maxChars': 400,
+                'maxCharsWarning': 500
+            });
+        });
+    </script>
+}
+
+
+
+
+
+

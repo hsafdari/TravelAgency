@@ -1,0 +1,43 @@
+﻿
+
+@model ParvazPardaz.ViewModel.EditLinkRedirectionViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.CMS.CMS.ManagementLinkRedirection </h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OldLink, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.OldLink, new { @class = "form-control", style = "text-align: left;" })
+                @Html.ValidationMessageFor(model => model.OldLink,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewLink, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.NewLink, new { @class = "form-control", style = "text-align: left;" })
+                @Html.ValidationMessageFor(model => model.NewLink,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+}
+

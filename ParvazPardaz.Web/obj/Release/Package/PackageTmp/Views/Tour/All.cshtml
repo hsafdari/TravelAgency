@@ -1,0 +1,195 @@
+﻿@model ParvazPardaz.ViewModel.TourAllViewModel
+@Styles.Render("~/bundles/TourCustomCss")
+<style>
+    h2 {
+        direction: rtl !important;
+    }
+</style>
+<section class="home-display">
+    <ul class=" slider">
+        @if (Model.TopSliders != null && Model.TopSliders.Any())
+        {
+            foreach (var item in Model.TopSliders)
+            {
+                <li class="@(Model.TopSliders.IndexOf(item) == 0 ? "active" : "")">
+                    <img src="@item.ImageURL">
+                </li>
+            }
+        }
+    </ul>
+    <div class="jumbo-details">
+        <h2>تور خودتان را بسازید</h2>
+        <p>شهر مورد نظر خود را جستجو کنید و خودتان پرواز، اتاق، هتل و امکانات تور را انتخاب کنید.</p>
+    </div>
+    <ul class="slider-details">
+        @foreach (var item in Model.TopSliders.ToList())
+        {
+            <li></li>
+        }
+    </ul>
+    <section class="search">
+        <div class="tabs">
+            <a href="#search-flight" class="btn-6">پرواز</a>
+            <a href="#search-tour-domestic" class="btn-6 active">تور داخلی</a>
+            <a href="#search-tour" class="btn-6">تور خارجی</a>
+        </div>
+        <form id="search-flight" class="form tab-cont"></form>
+        @Html.Action("GetTourSearch", "Home", new { @Area = "" })
+    </section>
+</section>
+@if (Model.SliderGroups != null && Model.SliderGroups.Any())
+{
+    foreach (var sliderGroup in Model.SliderGroups)
+    {
+        <section class="home-rolls section" style="background: @(sliderGroup.ColorCode)">
+            <section class="details">
+                <h2 class="sectionTitle">@sliderGroup.Title</h2>
+                <p>@Html.Raw(sliderGroup.Description)</p>
+            </section>
+            <section class="roll">
+                <ul class="cards">
+                    @foreach (var slide in sliderGroup.Sliders)
+                    {
+                        <li class="active clearfix">
+                            <a href="@slide.NavigationUrl">
+                                <div style="background: whitesmoke url('@(slide.ImageURL)')"></div>
+                                <h2>@slide.ImageTitle</h2>
+                                <h3>@Html.Raw(slide.NavDescription)</h3>
+                                <p>@Html.Raw(string.Format("{0}<br/>{1}", slide.footerLine1, slide.footerLine2))</p>
+                                <em>@(slide.Price != null ? slide.Price.Value.ToString("#,0") : "")</em>
+                                <i>@slide.HeaderDays</i>
+                            </a>
+                        </li>
+                    }
+                </ul>
+                <button type="button" name="next" onclick="roll(1,this,4)"></button>
+                <button type="button" name="prev" onclick="roll(-1,this,4)"></button>
+            </section>
+        </section>
+    }
+}
+@if (Model.SliderCountries != null && Model.SliderCountries.Any())
+{
+    foreach (var item in Model.SliderCountries)
+    {
+        <section class="home-rolls section background-image" style="background: url('@(item.ImageUrl)');">
+            <section class="details">
+                <h2 id="@item.Name" class="sectionTitle">@item.Title</h2>
+                <h3>کجا می‌روید؟</h3>
+                <ul class="buttons-bar">
+                    <li><a class="btn-1 cityTitle cityTitleAll active" onclick="ShowAllCities(this)" href="javascript:void(0)">هر شهری</a></li>
+                    @if (item.TourCities != null && item.TourCities.Any())
+                    {
+                        foreach (var city in item.TourCities)
+                        {
+                            <li><a class="btn-1 cityTitle cityTitle_@(city.Id)" onclick="ChangeCity(this,@(city.Id))" href="javascript:void(0)">@city.Title</a></li>
+                        }
+                    }
+                </ul>
+                <h3>چند روز؟</h3>
+                <ul class="buttons-bar">
+                    <li><a class="btn-1 dayTitle dayTitleAll active" onclick="ShowAllDay(this)" href="javascript:void(0)">هر چند روز</a></li>
+                    @if (item.TourDays != null && item.TourDays.Any())
+                    {
+                        foreach (var day in item.TourDays)
+                        {
+                            <li><a class="btn-1 dayTitle dayTitle_@(day.Id)" onclick="ChangeDay(this,@(day.Id))" href="javascript:void(0)">@day.Title</a></li>
+                        }
+                    }
+                </ul>
+            </section>
+            <section class="roll">
+                <ul class="cards">
+                    @if (item.TourSliders != null && item.TourSliders.Any())
+                    {
+                        foreach (var tour in item.TourSliders)
+                        {
+                            <li class="day day_@(tour.dayId) city_@(tour.cityId) @(item.TourSliders.IndexOf(tour) < 3 ? "":"hidden") clearfix">
+                                <a href="@tour.NavigationUrl">
+                                    <div style="background: whitesmoke url('@(tour.ImageURL)')"></div>
+                                    <h2>@tour.ImageTitle</h2>
+                                    <h3>@Html.Raw(tour.NavDescription)</h3>
+                                    <p>@tour.footerLine1</p>
+                                    <em>@tour.footerLine2</em>
+                                    <i>@tour.HeaderDays</i>
+                                </a>
+                            </li>
+                        }
+                    }
+                    <li class="clearfix look-more">
+                        <a href="/">
+                            <h2>تور مورد نظر خود را پیدا نکردید؟</h2>
+                            <h3>این لیست تمام تورهای ما نیست!</h3>
+                            <b class="btn-4 active">جستجو کنید و تور خود را بسازید</b>
+                        </a>
+                    </li>
+                </ul>
+                <button type="button" name="next" onclick="roll(1,this,4)"></button>
+                <button type="button" name="prev" onclick="roll(-1,this,4)"></button>
+            </section>
+        </section>
+    }
+}
+<section class="main search landing-page">
+    <h2>تور مورد نظر خود را پیدا نکردید؟</h2>
+    <p>فقط کافیست شهر و روزی که می‌روید را جستجو کنید!</p>
+    <form class="form search-bar" action="/TourSearch" method="Post">
+        @Html.DropDownList("DepartureCityId", ViewBag.FormCitiesDDL as IEnumerable<SelectListItem>, new { @class = "from select2", @placeholder = "مبدا حرکت خود را مشخص کنید" })
+        @Html.DropDownList("ArrivalCityId", ViewBag.DestCitiesDDL as IEnumerable<SelectListItem>, new { @class = "from select2", @placeholder = "مقصد حرکت خود را مشخص کنید" })
+        <label name="go-date">
+            <span></span>
+            <span></span>
+            @Html.TextBox("FlightDateTemp", "", new { @id = "dFlightDateTemp2", @class = "datepicker j", @placeholder = "تاریخ پرواز", required = "required" })
+            <input type="hidden" name="FlightDate" value="@DateTime.Now.ToString("yyyy/MM/dd")" />
+            <input type="hidden" name="Calendertype" value="persian" />
+        </label>
+        <input class="btn-1 active" type="submit" name="submit" value="جستجوی مجدد">
+    </form>
+</section>
+<script>
+      $(".select2").select2({
+          dir: "rtl"
+      });
+
+      function ChangeDay(thisElement, className) {
+          $(thisElement).closest(".home-rolls").find('.day:not(.day_' + className + ')').addClass('hidden');//.removeClass('active');
+          $(thisElement).closest(".home-rolls").find('.day.day_' + className + '').removeClass('hidden');//.addClass('active');
+
+          $(thisElement).closest(".home-rolls").find('.dayTitle.dayTitle_' + className + '').addClass('active');
+          $(thisElement).closest(".home-rolls").find('.dayTitle:not(.dayTitle_' + className + ')').removeClass('active');
+      }
+
+      function ShowAllDay(thisElement) {
+          $(thisElement).addClass('active');
+          $(thisElement).closest(".home-rolls").find('.day').removeClass('hidden');//.addClass('active');
+          $(thisElement).closest(".home-rolls").find('.dayTitle:not(.dayTitleAll)').removeClass('active');
+      }
+
+      function ChangeCity(thisElement, className) {
+          //غیرفعال نمودن مواردی که در این شهر نیستند
+          $(thisElement).closest(".home-rolls").find('.day:not(.city_' + className + ')').addClass('hidden');//.removeClass('active');
+          //فعال نمودن مواردی که در این شهر هستند
+          $(thisElement).closest(".home-rolls").find('.day.city_' + className + '').removeClass('hidden');//.addClass('active');
+          //فعال کردن دکمه هر چند روز
+          $(thisElement).closest(".home-rolls").find('.dayTitle.dayTitleAll').addClass('active');
+          //غیر فعال کردن دکمه های روز دیگه
+          $(thisElement).closest(".home-rolls").find('.dayTitle:not(.dayTitleAll)').removeClass('active');
+          //فعال نمودن دکمه شهر انتخاب شده
+          $(thisElement).closest(".home-rolls").find('.cityTitle.cityTitle_' + className + '').addClass('active');
+          //غیرفعال کردن دکمه شهرهای دیگه
+          $(thisElement).closest(".home-rolls").find('.cityTitle:not(.cityTitle_' + className + ')').removeClass('active');
+      }
+
+      function ShowAllCities(thisElement) {
+          //فعال کردن دکمه هر شهری
+          $(thisElement).addClass('active');
+          //غیرفعال کردن دکمه شهرهای دیگه
+          $(thisElement).closest(".home-rolls").find('.cityTitle:not(.cityTitleAll)').removeClass('active');
+          //فعال کردن دکمه هر چند روز
+          $(thisElement).closest(".home-rolls").find('.dayTitle.dayTitleAll').addClass('active');
+          //غیر فعال کردن دکمه های روز دیگه
+          $(thisElement).closest(".home-rolls").find('.dayTitle:not(.dayTitleAll)').removeClass('active');
+          //نمایش همه موارد اسلایدر
+          $(thisElement).closest(".home-rolls").find('.day').removeClass('hidden');//.addClass('active');
+      }
+</script>

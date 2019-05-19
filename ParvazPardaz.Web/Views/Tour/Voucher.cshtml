@@ -1,0 +1,87 @@
+﻿@model VoucherViewModel
+@using ParvazPardaz.Common.Extension
+@{
+    ViewBag.Title = "واچر";
+    Layout = null;// "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/bundles/TourClientCss")
+<style>
+    strong, b {
+        font-weight: 600 !important;
+    }
+
+    p, li {
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        text-align: justify !important;
+        line-height: 25px !important;
+        color: #010101 !important;
+    }
+</style>
+@Html.Action("GetMenus", "Home", new { @Area = "" })
+<section class="main navigator">
+    @*<a href="" class="sectionTitle">انتخاب ویژگی‌های تور</a>
+        <a href="" class="sectionTitle">انتخاب اتاق و مسافران</a>
+        <a href="" class="sectionTitle">تکمیل خرید</a>*@
+    <h2 class="sectionTitle">رزرو تور</h2>
+</section>
+<section class="main white tour-reserve">
+    <h2 class="sectionTitle">رزرو تور</h2>
+    <ul>
+        <li class="done">
+            <span>تراکنش شما با موفقیت انجام شد:</span>
+            <span>@((Model.TotalPayPrice / 10).ToString("#,0 تومان"))</span>
+        </li>
+        <li class="done">
+            <span>سفارش شما در سیستم کی سفر ثبت شد:</span>
+        </li>
+        <li class="done">
+            <span>ارسال اطلاعات تور به ایمیل و شماره تلفن دریافت کنندگان</span>
+        </li>
+    </ul>
+</section>
+<section class="main white tour-ticket">
+    <h2 class="sectionTitle">اطلاعات تور و بلیط</h2>
+    <div class="voucherprint">
+        <div class="htmlprint">
+            <div class="bodyprint">
+                <h1>@Model.TourTitle</h1>
+                @Html.Partial("_PrvPrintPassengerPdf", Model.PassengerList)
+                @Html.Partial("_PrvPrintFlightPdf", Model.SelectedFlights)
+                @Html.Partial("_PrvPrintHotelPdf", Model.HotelInfos)
+                <footer>
+                    <img src="/ClientTheme/Blog/Tour/img/icons/logo.png" alt="کی سفر">
+                    <p>پاسداران مقابل باشگاه بانک مرکزی</p>
+                </footer>
+                @Html.Partial("_PrvPrintCss")
+            </div>
+        </div>
+    </div>
+    <button class="btn-4 active " onclick="pdfIt('.htmlprint')" type="button" name="button">چاپ اطلاعات تور</button>
+</section>
+@foreach (var item in Model.Footer)
+{
+    <article class="main transparent tour-tips">
+        <h1 class="sectionTitle">@item.Title</h1>
+        @Html.Raw(item.Content)
+        @if (Model.Footer.LastIndexOf(item) == Model.Footer.Count - 1)
+        {
+            <a class="btn-1 active" href="/">بازگشت به خانه</a>
+        }
+    </article>
+}
+<footer>
+    <div class="before">
+        <section class="join">
+            <div class="wrapper clearfix">
+                @Html.Action("GetNewsLetter", "Home", new { @Area = "" })
+                @Html.Action("GetSocial", "Home", new { @Area = "" })
+            </div>
+        </section>
+    </div>
+    @Html.Action("GetFooter", "Home", new { @Area = "" })
+</footer>
+@Scripts.Render("~/bundles/TourClientJs")
+<script type="text/javascript" src="/ClientTheme/Blog/Tour/js/jspdf.min.js"></script>
+<script type="text/javascript" src="/ClientTheme/Blog/Tour/js/html2canvas.min.js"></script>

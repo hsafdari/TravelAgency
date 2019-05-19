@@ -1,0 +1,49 @@
+﻿@model ParvazPardaz.ViewModel.ChangeThumbViewModel
+@{
+    ViewBag.Title = ParvazPardaz.Resource.EShop.EShopResource.ManagementProductDefaultThumbImage + "";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal">
+        <h3>@ViewBag.Title</h3>
+        <hr />
+        <div class="row container">
+            @foreach (var thumbRadioButton in Model.ThumbImageURLRadioButtons)
+            {
+                <div style="width: 200px; display:inline-block; margin:5px">
+                    <div class=" thumbnail">
+                        <img style="height: 200px; width: 200px; display: block;" src="@thumbRadioButton.ImageUrl" data-holder-rendered="true">
+                        <div class="caption">
+                            @if (thumbRadioButton.ImageId == Model.defaultImgId)
+                            {
+                                @Html.RadioButtonFor(model => model.ThumbImageURLRadioButtonIds, thumbRadioButton.ImageId, new { @checked = "checked" })
+                                @*<input type="radio" name="ThumbImageURLRadioButtons.ImageId" value="@thumbRadioButton.ImageId" checked="checked" />*@
+                            }
+                            else
+                            {
+                                @Html.RadioButtonFor(model => model.ThumbImageURLRadioButtonIds, thumbRadioButton.ImageId)
+                                @*<input type="radio" name="ThumbImageURLRadioButtons.ImageId" value="@thumbRadioButton.ImageId" />*@
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+}
+
+
+
+

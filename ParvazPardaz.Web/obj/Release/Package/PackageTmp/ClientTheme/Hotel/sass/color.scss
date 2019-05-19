@@ -1,0 +1,50 @@
+$colors: (
+    peacock-blue: #00247a,
+    red: #ff0000,
+    white-one:#ffffff,
+    my-green: #00a99d,
+    golden-yellow: #f2b514,
+    white-three: #dbdbdb,
+    brownish-grey-two:#666,
+    greyish-brown-two:#555,
+    gray:#9e9e9e,
+    white-four:#dfdfdf,
+);
+
+
+$peacock-blue: map-get( $colors , peacock-blue );
+$red: map-get( $colors , red );
+$white-one: map-get( $colors , white-one );
+$my-green: map-get( $colors , my-green );
+$golden-yellow: map-get( $colors , golden-yellow );
+$white-three: map-get( $colors , white-three );
+$brownish-grey-two: map-get( $colors , brownish-grey-two );
+$greyish-brown-two: map-get( $colors , greyish-brown-two );
+$gray: map-get( $colors , gray );
+$white-four: map-get( $colors , white-four );
+
+
+@each $label, $color in $colors {
+
+    .#{$label} { color: $color !important }
+    .#{$label}-H:hover { color: $color !important }
+
+    .BG-#{$label} { background-color: $color !important }
+    .BG-#{$label}-H:hover { background-color: $color !important }
+
+    .B-#{$label} { border:solid 1px $color !important }
+    .BL-#{$label} { border-left:solid 1px $color !important }
+    .BR-#{$label} { border-right:solid 1px $color !important }
+    .BT-#{$label} { border-top:solid 1px $color !important }
+    .BB-#{$label} { border-bottom:solid 1px $color !important }
+    
+    .B-#{$label}-H:hover { border:solid 1px $color !important }
+    .BL-#{$label}-H:hover { border-left:solid 1px $color !important }
+    .BR-#{$label}-H:hover { border-right:solid 1px $color !important }
+    .BT-#{$label}-H:hover { border-top:solid 1px $color !important }
+    .BB-#{$label}-H:hover { border-bottom:solid 1px $color !important }
+
+    svg.#{$label} { fill: $color !important }
+    svg.#{$label}-H:hover { fill: $color !important }
+
+}

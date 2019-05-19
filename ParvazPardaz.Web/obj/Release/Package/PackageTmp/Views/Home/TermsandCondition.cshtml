@@ -1,0 +1,43 @@
+﻿@model List<ParvazPardaz.ViewModel.GridTermsandConditionViewModel>
+@{
+    ViewBag.Title = "قوانین و مقررات";   
+}
+<link href="~/ClientTheme/Blog/Tour/css/about.css" rel="stylesheet" />
+<link rel="canonical" href="@Request.Url.AbsoluteUri.Replace("/tour/","/")" />
+<section class="top-img">
+    <div>
+        <img  alt="قوانین و مقررات" src="~/ClientTheme/images/Termsandcondition.jpg" />
+    </div>
+</section>
+<section class="section-about">
+    <div class="container">
+        <h1 class="title">
+            قوانین و مقررات
+        </h1>
+        <section>
+            <ul class="tab-bar">
+                @foreach (var item in Model)
+                {
+                    <li> <a href="#tab@(Model.IndexOf(item))">@item.Title</a> </li>
+                }              
+            </ul>
+            @foreach (var item in Model)
+            {
+                <div class="content">
+                    <h2>@item.Title</h2>
+                    <div>
+                        @Html.Raw(item.Content)
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</section>
+
+@section scripts{
+    <script src="~/ClientTheme/Blog/Tour/js/tabs.js"></script>
+}
+
+
+
+

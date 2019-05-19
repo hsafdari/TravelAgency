@@ -1,0 +1,37 @@
+﻿
+
+
+/*#region مودال لاگین */
+.modal-dialog {
+    padding-top: 10% !important;
+}
+
+.modal-backdrop {
+    z-index: 0 !important;
+}
+
+.modal-body {
+    height: 150px !important;
+    margin-bottom: 30px;
+}
+
+.destination-list__content .destinations-item .item-media .item-cat ul li a {
+    background-color: red !important;
+}
+
+.btn-is-disabled {
+    pointer-events: none;
+    background-color: #b9b6b6 !important;
+    color: #ffffff;
+}
+
+.modal-dialog {
+    right: 0px !important;
+}
+/*#endregion */
+
+/*#region قالب Gofar */
+section {
+    z-index: 0 !important;
+}
+/*#endregion */

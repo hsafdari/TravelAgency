@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{42F4215F-F999-474A-8EDE-2B6BE2B2F9C3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ParvazPardaz.Common</RootNamespace>
+    <AssemblyName>ParvazPardaz.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PersianDateTime">
+      <HintPath>..\ParvazPardazPublicResource\PersianDateTime.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attribute\Permission.cs" />
+    <Compile Include="Constant\ControllerConstant.cs" />
+    <Compile Include="Controller\BaseController.cs" />
+    <Compile Include="Controller\PersianCulture.cs" />
+    <Compile Include="Extension\AutoIgnore.cs" />
+    <Compile Include="Extension\CommonHelper.cs" />
+    <Compile Include="Extension\Convert.cs" />
+    <Compile Include="Extension\CurrencyExtension.cs" />
+    <Compile Include="Extension\DateTimeExtention.cs" />
+    <Compile Include="Extension\DbDateHelper.cs" />
+    <Compile Include="Extension\DecimalFormatExtension.cs" />
+    <Compile Include="Extension\EnumExtension.cs" />
+    <Compile Include="Extension\FileManager.cs" />
+    <Compile Include="Extension\FriendlyUrlHelper.cs" />
+    <Compile Include="Extension\HttpExtention.cs" />
+    <Compile Include="Extension\ImageExtention.cs" />
+    <Compile Include="Extension\ImageManage.cs" />
+    <Compile Include="Extension\MyExtensionsMethods.cs" />
+    <Compile Include="Extension\NormalizationInfo.cs" />
+    <Compile Include="Extension\NumberExtension.cs" />
+    <Compile Include="Extension\PersianExtension.cs" />
+    <Compile Include="Extension\RemainingDateTime.cs" />
+    <Compile Include="Extension\RoundToUpNumber.cs" />
+    <Compile Include="Extension\ScriptExtension.cs" />
+    <Compile Include="Extension\ScriptExtensions.cs" />
+    <Compile Include="Extension\UrlCleanExtension.cs" />
+    <Compile Include="Extension\Yeke.cs" />
+    <Compile Include="Filters\EmailRemote.cs" />
+    <Compile Include="Filters\EnforceTrueAttribute.cs" />
+    <Compile Include="Filters\FieldsTogetherAttribute.cs" />
+    <Compile Include="Filters\LocalizedDescriptionAttribute.cs" />
+    <Compile Include="Filters\MultipleButtonAttribute.cs" />
+    <Compile Include="Filters\Mvc5AuthorizeAttribute.cs" />
+    <Compile Include="Utility\CaptchaResponse.cs" />
+    <Compile Include="Utility\CodeGenerator.cs" />
+    <Compile Include="Utility\DataCookie.cs" />
+    <Compile Include="Utility\GenerateRandomKey.cs" />
+    <Compile Include="Utility\GetEnumDisplayName.cs" />
+    <Compile Include="HtmlHelpers\AlertHelper.cs" />
+    <Compile Include="HtmlHelpers\GetResource.cs" />
+    <Compile Include="Utility\ParvazPardazMail.cs" />
+    <Compile Include="Utility\ReCaptcha.cs" />
+    <Compile Include="Utility\UserInfo.cs" />
+    <Compile Include="Utility\UserTransactions.cs" />
+    <Compile Include="HtmlHelpers\AutocompleteHelpers.cs" />
+    <Compile Include="HtmlHelpers\BaseComponent.cs" />
+    <Compile Include="HtmlHelpers\BootstrapDataTable\Column.cs" />
+    <Compile Include="HtmlHelpers\BootstrapDataTable\GridColumn.cs" />
+    <Compile Include="HtmlHelpers\BootstrapDataTable\GridHelper.cs" />
+    <Compile Include="HtmlHelpers\EnumDropDownListHelper.cs" />
+    <Compile Include="HtmlHelpers\FileUploaderHelper.cs" />
+    <Compile Include="HtmlHelpers\Models\EditModeFileUpload.cs" />
+    <Compile Include="HtmlHelpers\RateHelper.cs" />
+    <Compile Include="HtmlHelpers\SpinHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\BitmapManipulator.cs" />
+    <Compile Include="Utility\MakeThumbnail.cs" />
+    <Compile Include="Utility\RenderScriptHelper.cs" />
+    <Compile Include="Utility\ScriptManagerHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ParvazPardaz.Resource\ParvazPardaz.Resource.csproj">
+      <Project>{727137d5-626a-4b5b-bc23-4481e1e074c4}</Project>
+      <Name>ParvazPardaz.Resource</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

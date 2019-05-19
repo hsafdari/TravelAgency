@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Active" xml:space="preserve">
+    <value>فعال</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>افزودن</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>مدیر سامانه</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>آیا از حذف این مورد اطمینان دارید؟</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>بازگشت</value>
+  </data>
+  <data name="BasicInformation" xml:space="preserve">
+    <value>اطلاعات پایه</value>
+  </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>تقویم</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>تغییر</value>
+  </data>
+  <data name="ClientSee" xml:space="preserve">
+    <value>مشاهده سمت کاربر</value>
+  </data>
+  <data name="Commands" xml:space="preserve">
+    <value>دستورات</value>
+  </data>
+  <data name="CompanyTransferManagement" xml:space="preserve">
+    <value>مدیریت شرکت های حمل و نقل</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>مطمئنید؟</value>
+  </data>
+  <data name="CopyLink" xml:space="preserve">
+    <value>کپی لینک</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>افزودن</value>
+  </data>
+  <data name="CreateAlert" xml:space="preserve">
+    <value>اطلاعات با موفقیت ثبت گردید</value>
+  </data>
+  <data name="CreateAlertTitle" xml:space="preserve">
+    <value>افزودن</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>برش</value>
+  </data>
+  <data name="CropResult" xml:space="preserve">
+    <value>نتیجه برش تصویر</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>داشبورد</value>
+  </data>
+  <data name="DDLSelect" xml:space="preserve">
+    <value>-- انتخاب --</value>
+  </data>
+  <data name="DeActive" xml:space="preserve">
+    <value>غیرفعال</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="DeleteAlert" xml:space="preserve">
+    <value>اطلاعات با موفقیت حذف گردید</value>
+  </data>
+  <data name="DeleteAlertTitle" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>جزییات</value>
+  </data>
+  <data name="Direction" xml:space="preserve">
+    <value>RTL</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="EditAlert" xml:space="preserve">
+    <value>اطلاعات با موفقیت ویرایش گردید</value>
+  </data>
+  <data name="EditAlertTitle" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="ErrorAlert" xml:space="preserve">
+    <value>عدم موفقیت در انجام عملیات</value>
+  </data>
+  <data name="ErrorAlertTitle" xml:space="preserve">
+    <value>لطفا دوباره  تلاش نمایید</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>خروج</value>
+  </data>
+  <data name="ExpireDate" xml:space="preserve">
+    <value>تاریخ انقضا</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>پایان</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>از</value>
+  </data>
+  <data name="HotelGalleryManagement" xml:space="preserve">
+    <value>مدیریت گالری هتل</value>
+  </data>
+  <data name="InValidEmail" xml:space="preserve">
+    <value>لطفا ایمیل را با فرمت صحیح وارد نمایید</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>فعال؟</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>پیام ها</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>بعدی</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>خیر</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>عدد</value>
+  </data>
+  <data name="Recomended" xml:space="preserve">
+    <value>پیشنهاد؟</value>
+  </data>
+  <data name="Regional" xml:space="preserve">
+    <value>FA</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>جستجو</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>انتخاب</value>
+  </data>
+  <data name="SelectedGridRowAlert" xml:space="preserve">
+    <value>لطفا یک ردیف را انتخاب کنید</value>
+  </data>
+  <data name="SelectedGridRowAlertTitle" xml:space="preserve">
+    <value>انتخاب ردیف</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>ارسال</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>به</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>مجموع</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>به روز رسانی</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>بارگذاری</value>
+  </data>
+  <data name="WebSiteManagement" xml:space="preserve">
+    <value>مدیریت وبسایت</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>بلی</value>
+  </data>
+  <data name="Man" xml:space="preserve">
+    <value>مرد</value>
+  </data>
+  <data name="Woman" xml:space="preserve">
+    <value>زن</value>
+  </data>
+  <data name="CreatorDateTime" xml:space="preserve">
+    <value>تاریخ درج</value>
+  </data>
+  <data name="LastModifierDate" xml:space="preserve">
+    <value>تاریخ آخرین ویرایش</value>
+  </data>
+  <data name="CreatorUserName" xml:space="preserve">
+    <value>درج کننده</value>
+  </data>
+  <data name="LastModifierUserName" xml:space="preserve">
+    <value>آخرین ویرایش کننده</value>
+  </data>
+  <data name="captionsButton" xml:space="preserve">
+    <value>انتخاب فایل(ها)</value>
+  </data>
+  <data name="captionsDrop" xml:space="preserve">
+    <value>فایل مورد نظرتان را در اینجا بیاندازید</value>
+  </data>
+  <data name="captionsErFilesLimit" xml:space="preserve">
+    <value>تا سقف {{fi-limit}} فایل، مجاز به بارگذاری هستید.</value>
+  </data>
+  <data name="captionsErFilesSize" xml:space="preserve">
+    <value>{{fi-name}} بیش از حد حجیم است! لطفا تا حجم {{fi-fileMaxSize}}MB ، بارگذاری نمایید</value>
+  </data>
+  <data name="captionsErFilesSizeAll" xml:space="preserve">
+    <value>فایل(هایی) که انتخاب کرده اید ، بیش از حد حجیم هستند! لطفا تا حجم {{fi-maxSize}} MB بارگذاری نمایید.</value>
+  </data>
+  <data name="captionsErFilesType" xml:space="preserve">
+    <value>تنها مجاز به آپلود فایل تصویری هستید.</value>
+  </data>
+  <data name="captionsErFolderUpload" xml:space="preserve">
+    <value>شما مجاز به بارگذاری فولدر(ها) نیستید.</value>
+  </data>
+  <data name="captionsFeedback" xml:space="preserve">
+    <value>فایل(ها) را برای بارگذاری انتخاب کنید</value>
+  </data>
+  <data name="captionsFeedback2" xml:space="preserve">
+    <value>فایل انتخاب شد</value>
+  </data>
+  <data name="captionsRemoveConfirmation" xml:space="preserve">
+    <value>آیا تمایل به حذف این فایل دارید؟</value>
+  </data>
+  <data name="SelectImage" xml:space="preserve">
+    <value>انتخاب تصویر</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>مقدار</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>خانه</value>
+  </data>
+  <data name="CreateAndNext" xml:space="preserve">
+    <value>افزودن و بعدی</value>
+  </data>
+  <data name="CreateAndRepeat" xml:space="preserve">
+    <value>افزودن و تکرار</value>
+  </data>
+  <data name="CallCountryPrefixFormat" xml:space="preserve">
+    <value>لطفا برای "کد کشور" فقط عدد ، و حداکثر تا تعداد ارقام 4 تا وارد نمایید</value>
+  </data>
+  <data name="CallNumberFormat" xml:space="preserve">
+    <value>لطفا برای "{0}" فقط عدد وارد نمایید</value>
+  </data>
+  <data name="PersianMobileFormat" xml:space="preserve">
+    <value>تلفن همراه خود را به درستی وارد نمایید</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>انگلیسی</value>
+  </data>
+  <data name="Persian" xml:space="preserve">
+    <value>فارسی</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>ایمیل</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>وبسایت</value>
+  </data>
+  <data name="NotHaveImage" xml:space="preserve">
+    <value>بدون تصویر</value>
+  </data>
+  <data name="UserSideManagement" xml:space="preserve">
+    <value>مدیریت سمت کاربر</value>
+  </data>
+  <data name="ConfirmIt" xml:space="preserve">
+    <value>تایید</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>خطا</value>
+  </data>
+  <data name="ConfirmAlert" xml:space="preserve">
+    <value>اطلاعات مورد نظر با موفقیت تایید گردید</value>
+  </data>
+  <data name="ConfirmTitle" xml:space="preserve">
+    <value>تاییدیه</value>
+  </data>
+  <data name="MustBeDecimal" xml:space="preserve">
+    <value>لطفا {0} را به درستی وارد نمایید</value>
+  </data>
+  <data name="Office" xml:space="preserve">
+    <value>محل کار</value>
+  </data>
+  <data name="PersianPhoneFormat" xml:space="preserve">
+    <value>تلفن خود را به درستی وارد نمایید</value>
+  </data>
+  <data name="MustBeNumber" xml:space="preserve">
+    <value>لطفا عدد وارد نمایید</value>
+  </data>
+  <data name="DuplicateAlert" xml:space="preserve">
+    <value>امکان درج آیتم تکراری وجود ندارد</value>
+  </data>
+  <data name="DuplicateTitle" xml:space="preserve">
+    <value>خطای تکرار</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>تماس با ما</value>
+  </data>
+  <data name="PermissionAlert" xml:space="preserve">
+    <value>شما سطح دسترسی به این بخش را ندارید</value>
+  </data>
+  <data name="Hotel" xml:space="preserve">
+    <value>هتل</value>
+  </data>
+  <data name="Tour" xml:space="preserve">
+    <value>تور</value>
+  </data>
+  <data name="DisLike" xml:space="preserve">
+    <value>پسند -</value>
+  </data>
+  <data name="Like" xml:space="preserve">
+    <value>پسند +</value>
+  </data>
+  <data name="Post" xml:space="preserve">
+    <value>پست</value>
+  </data>
+  <data name="SortByAlphabet" xml:space="preserve">
+    <value>حروف الفبا</value>
+  </data>
+  <data name="SortByMostHotelRank" xml:space="preserve">
+    <value>بیشترین درجه هتل</value>
+  </data>
+  <data name="SortByMostRate" xml:space="preserve">
+    <value>بیشترین امتیاز کاربران</value>
+  </data>
+  <data name="SortByMostLike" xml:space="preserve">
+    <value>محبوبیت</value>
+  </data>
+  <data name="SortByReviewCount" xml:space="preserve">
+    <value>تعداد نقد و بررسی</value>
+  </data>
+  <data name="SortingBy" xml:space="preserve">
+    <value>مرتب سازی بر اساس</value>
+  </data>
+  <data name="SearchContentRequiredAlert" xml:space="preserve">
+    <value>متن جستجو را وارد نمایید</value>
+  </data>
+  <data name="WebSiteUserPanel" xml:space="preserve">
+    <value>سامانه کاربری کی سفر</value>
+  </data>
+  <data name="TryAginMessage" xml:space="preserve">
+    <value>لطفا دوباره تلاش نمایید</value>
+  </data>
+  <data name="NotChangeMessage" xml:space="preserve">
+    <value>برای ذخیره سازی ، تغییری در مقادیر مشاهده نگردید</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>گزارش</value>
+  </data>
+  <data name="Iranian" xml:space="preserve">
+    <value>ایرانی</value>
+  </data>
+  <data name="NonIranian" xml:space="preserve">
+    <value>اتباع خارجی</value>
+  </data>
+  <data name="ExportExcel" xml:space="preserve">
+    <value>خروجی اکسل</value>
+  </data>
+  <data name="couldNotCascadeDelete" xml:space="preserve">
+    <value>امکان حذف وجود ندارد</value>
+  </data>
+  <data name="WrongOldPassword" xml:space="preserve">
+    <value>کلمه عبور قبلی خود را به درستی وارد نمایید</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>ورود</value>
+  </data>
+  <data name="PleaseLogIn" xml:space="preserve">
+    <value>لطفا به سیستم وارد شوید</value>
+  </data>
+  <data name="Reserve" xml:space="preserve">
+    <value>رزرو</value>
+  </data>
+  <data name="RequiredCheckBox" xml:space="preserve">
+    <value>لطفا قوانین و مقررات را انتخاب نمایید</value>
+  </data>
+  <data name="TermsAndConditions" xml:space="preserve">
+    <value>قوانین و مقررات</value>
+  </data>
+  <data name="PleaseSelect" xml:space="preserve">
+    <value>انتخاب کنید</value>
+  </data>
+  <data name="LackOfCredit" xml:space="preserve">
+    <value>عدم ثبت سفارش! شما کمبود اعتبار دارید</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>بازیابی رمز عبور</value>
+  </data>
+  <data name="YourPasswordReseted" xml:space="preserve">
+    <value>کلمه عبور شما با موفقیت بازیابی شد</value>
+  </data>
+  <data name="PageName" xml:space="preserve">
+    <value>نام صفحه</value>
+  </data>
+  <data name="PageUrl" xml:space="preserve">
+    <value>آدرس صفحه</value>
+  </data>
+  <data name="Permission" xml:space="preserve">
+    <value>سطح دسترسی</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>نقش ها</value>
+  </data>
+  <data name="ManagementPermission" xml:space="preserve">
+    <value>مدیریت دسترسی ها</value>
+  </data>
+  <data name="SearchParameters" xml:space="preserve">
+    <value />
+  </data>
+  <data name="recoverAccess" xml:space="preserve">
+    <value>واکشی دسترسی ها</value>
+  </data>
+</root>

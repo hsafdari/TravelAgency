@@ -1,0 +1,49 @@
+{
+  "name": "components-font-awesome",
+  "description": "Font Awesome, the iconic font designed for use with Twitter Bootstrap.",
+  "version": "4.6.3",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/components/font-awesome.git"
+  },
+  "main": "css/font-awesome.css",
+  "license": [
+    "MIT",
+    "OFL-1.1"
+  ],
+  "gitHead": "daa3ef598620217085dcb13ad11149e89a20a925",
+  "bugs": {
+    "url": "https://github.com/components/font-awesome/issues"
+  },
+  "homepage": "https://github.com/components/font-awesome#readme",
+  "_id": "components-font-awesome@4.6.3",
+  "scripts": {},
+  "_shasum": "52435b352a529e5781293641f00a3facf1f67e63",
+  "_from": "components-font-awesome@",
+  "_npmVersion": "3.8.6",
+  "_nodeVersion": "5.11.1",
+  "_npmUser": {
+    "name": "robloach",
+    "email": "robloach@gmail.com"
+  },
+  "dist": {
+    "shasum": "52435b352a529e5781293641f00a3facf1f67e63",
+    "tarball": "https://registry.npmjs.org/components-font-awesome/-/components-font-awesome-4.6.3.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "ducin",
+      "email": "tomasz.ducin@gmail.com"
+    },
+    {
+      "name": "robloach",
+      "email": "robloach@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/components-font-awesome-4.6.3.tgz_1498230100723_0.17541486024856567"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/components-font-awesome/-/components-font-awesome-4.6.3.tgz"
+}

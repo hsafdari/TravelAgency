@@ -1,0 +1,109 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParvazPardaz.Model", "ParvazPardaz.Model\ParvazPardaz.Model.csproj", "{3BC859B7-44B6-45EC-930A-312F2F2BAF0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParvazPardaz.Common", "ParvazPardaz.Common\ParvazPardaz.Common.csproj", "{42F4215F-F999-474A-8EDE-2B6BE2B2F9C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParvazPardaz.DataAccess", "ParvazPardaz.DataAccess\ParvazPardaz.DataAccess.csproj", "{BA541047-D7BB-4D49-B0C5-47F66393C9A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParvazPardaz.Service", "ParvazPardaz.Service\ParvazPardaz.Service.csproj", "{1D566509-A8FB-4BEE-8D06-725304BEB601}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParvazPardaz.ViewModel", "ParvazPardaz.ViewModel\ParvazPardaz.ViewModel.csproj", "{40465939-8058-4D77-946B-6345E93C6C47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParvazPardaz.Resource", "ParvazPardaz.Resource\ParvazPardaz.Resource.csproj", "{727137D5-626A-4B5B-BC23-4481E1E074C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A118326C-08C1-4D7F-9938-98F998759992}"
+	ProjectSection(SolutionItems) = preProject
+		ParvazPardazPublicResource\Kendo.Mvc.dll = ParvazPardazPublicResource\Kendo.Mvc.dll
+		ParvazPardazPublicResource\PersianDateTime.dll = ParvazPardazPublicResource\PersianDateTime.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParvazPardaz.Web", "ParvazPardaz.Web\ParvazPardaz.Web.csproj", "{E7A5572E-F7EA-48E4-9ABE-FAAA0C90DC74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParvazPardaz.Payment", "ParvazPardaz.Payment\ParvazPardaz.Payment.csproj", "{C3019D6C-990F-4F3F-92E8-85D2870C4E29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParvazPardaz.Payamak", "ParvazPardaz.Payamak\ParvazPardaz.Payamak.csproj", "{D5A2A652-DF8A-47BB-BBA2-B9C3E0B1C9A6}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://192.168.1.200:8080/tfs/travelagency
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ParvazPardaz.Resource\\ParvazPardaz.Resource.csproj
+		SccProjectName1 = ParvazPardaz.Resource
+		SccLocalPath1 = ParvazPardaz.Resource
+		SccProjectUniqueName2 = ParvazPardaz.Common\\ParvazPardaz.Common.csproj
+		SccProjectName2 = ParvazPardaz.Common
+		SccLocalPath2 = ParvazPardaz.Common
+		SccProjectUniqueName3 = ParvazPardaz.Model\\ParvazPardaz.Model.csproj
+		SccProjectName3 = ParvazPardaz.Model
+		SccLocalPath3 = ParvazPardaz.Model
+		SccProjectUniqueName4 = ParvazPardaz.ViewModel\\ParvazPardaz.ViewModel.csproj
+		SccProjectName4 = ParvazPardaz.ViewModel
+		SccLocalPath4 = ParvazPardaz.ViewModel
+		SccProjectUniqueName5 = ParvazPardaz.DataAccess\\ParvazPardaz.DataAccess.csproj
+		SccProjectName5 = ParvazPardaz.DataAccess
+		SccLocalPath5 = ParvazPardaz.DataAccess
+		SccProjectUniqueName6 = ParvazPardaz.Service\\ParvazPardaz.Service.csproj
+		SccProjectName6 = ParvazPardaz.Service
+		SccLocalPath6 = ParvazPardaz.Service
+		SccProjectUniqueName7 = ParvazPardaz.Web\\ParvazPardaz.Web.csproj
+		SccProjectName7 = ParvazPardaz.Web
+		SccLocalPath7 = ParvazPardaz.Web
+		SccProjectUniqueName8 = ParvazPardaz.Payment\\ParvazPardaz.Payment.csproj
+		SccProjectName8 = ParvazPardaz.Payment
+		SccLocalPath8 = ParvazPardaz.Payment
+		SccProjectUniqueName9 = ParvazPardaz.Payamak\\ParvazPardaz.Payamak.csproj
+		SccProjectName9 = ParvazPardaz.Payamak
+		SccLocalPath9 = ParvazPardaz.Payamak
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BC859B7-44B6-45EC-930A-312F2F2BAF0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BC859B7-44B6-45EC-930A-312F2F2BAF0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BC859B7-44B6-45EC-930A-312F2F2BAF0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BC859B7-44B6-45EC-930A-312F2F2BAF0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42F4215F-F999-474A-8EDE-2B6BE2B2F9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F4215F-F999-474A-8EDE-2B6BE2B2F9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42F4215F-F999-474A-8EDE-2B6BE2B2F9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42F4215F-F999-474A-8EDE-2B6BE2B2F9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA541047-D7BB-4D49-B0C5-47F66393C9A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA541047-D7BB-4D49-B0C5-47F66393C9A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA541047-D7BB-4D49-B0C5-47F66393C9A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA541047-D7BB-4D49-B0C5-47F66393C9A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D566509-A8FB-4BEE-8D06-725304BEB601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D566509-A8FB-4BEE-8D06-725304BEB601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D566509-A8FB-4BEE-8D06-725304BEB601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D566509-A8FB-4BEE-8D06-725304BEB601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40465939-8058-4D77-946B-6345E93C6C47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40465939-8058-4D77-946B-6345E93C6C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40465939-8058-4D77-946B-6345E93C6C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40465939-8058-4D77-946B-6345E93C6C47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{727137D5-626A-4B5B-BC23-4481E1E074C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{727137D5-626A-4B5B-BC23-4481E1E074C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{727137D5-626A-4B5B-BC23-4481E1E074C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{727137D5-626A-4B5B-BC23-4481E1E074C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A5572E-F7EA-48E4-9ABE-FAAA0C90DC74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A5572E-F7EA-48E4-9ABE-FAAA0C90DC74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A5572E-F7EA-48E4-9ABE-FAAA0C90DC74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A5572E-F7EA-48E4-9ABE-FAAA0C90DC74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3019D6C-990F-4F3F-92E8-85D2870C4E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3019D6C-990F-4F3F-92E8-85D2870C4E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3019D6C-990F-4F3F-92E8-85D2870C4E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3019D6C-990F-4F3F-92E8-85D2870C4E29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A2A652-DF8A-47BB-BBA2-B9C3E0B1C9A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A2A652-DF8A-47BB-BBA2-B9C3E0B1C9A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A2A652-DF8A-47BB-BBA2-B9C3E0B1C9A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A2A652-DF8A-47BB-BBA2-B9C3E0B1C9A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

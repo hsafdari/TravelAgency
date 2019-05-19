@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{727137D5-626A-4B5B-BC23-4481E1E074C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ParvazPardaz.Resource</RootNamespace>
+    <AssemblyName>ParvazPardaz.Resource</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Book\Book.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Book.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Book\Book.fa-IR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Book.fa-IR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CMS\CMS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CMS.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CMS\CMS.fa-IR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CMS.fa-IR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Commercial\Commercials.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Commercials.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Commercial\Commercials.fa-IR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Commercials.fa-IR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="EShop\EShopResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EShopResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="EShop\EShopResource.fa-IR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EShopResource.fa-IR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="General\Generals.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Generals.resx</DependentUpon>
+    </Compile>
+    <Compile Include="General\Generals.fa-IR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Generals.fa-IR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Link\LinkResource.fa-IR.Designer.cs">
+      <DependentUpon>LinkResource.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Link\LinkResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LinkResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tour\Tours.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tours.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tour\Tours.fa-IR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tours.fa-IR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Users.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Users.resx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Users.fa-IR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Users.fa-IR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Validation\ValidationMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidationMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Validation\ValidationMessages.fa-IR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidationMessages.fa-IR.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Book\Book.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Book.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Book\Book.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Book.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMS\CMS.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CMS.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMS\CMS.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CMS.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Commercial\Commercials.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Commercials.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Commercial\Commercials.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Commercials.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EShop\EShopResource.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EShopResource.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EShop\EShopResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EShopResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="General\Generals.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Generals.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="General\Generals.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Generals.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Link\LinkResource.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LinkResource.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Link\LinkResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LinkResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tour\Tours.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Tours.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tour\Tours.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Tours.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Users.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Users.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Users.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Users.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Validation\ValidationMessages.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationMessages.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Validation\ValidationMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

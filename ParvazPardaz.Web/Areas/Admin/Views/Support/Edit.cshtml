@@ -1,0 +1,100 @@
+﻿
+
+@model ParvazPardaz.ViewModel.EditSupportViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<link href="~/Plugins/KendoDateTimePicker/Kendo.default.min.css" rel="stylesheet" />
+<link href="~/Plugins/KendoDateTimePicker/Kendo.common.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2014.3.1314/kendo.common-material.min.css" rel="stylesheet" />
+
+<link href="~/Content/kendo/2014.3.1314/kendo.material.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2014.3.1314/kendo.material.mobile.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2014.3.1314/kendo.rtl.min.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Edit", "Support", FormMethod.Post, new { id = "frm" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.CMS.CMS.ManagementSupport </h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+        
+                @Html.CheckBoxFor(model => model.IsActive, new { @class = "flat-red", style = "margin-right:50px; margin-left:50px;" })
+                @Html.ValidationMessageFor(model => model.IsActive,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdateDescription, new { @class = "control-label col-md-2" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.UpdateDescription, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UpdateDescription,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdateAdminDescription, new { @class = "control-label col-md-2" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.UpdateAdminDescription, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UpdateAdminDescription,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Author, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Author, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Author,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SupportDateTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.SupportDateTime, "{0: yyyy/MM/dd}", new { @class = "form-control datepicker" })
+                @Html.ValidationMessageFor(model => model.SupportDateTime,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script src="~/Scripts/kendo.date/JalaliDate.js"></script>
+    <script src="~/Scripts/kendo.date/kendo.web.js"></script>
+    <script src="~/Scripts/kendo.date/fa-IR.js"></script>
+
+    <script type="text/javascript">
+        var $ = jQuery.noConflict();
+        $(document).ready(function () {
+            $(".datepicker").kendoDatePicker();
+        });
+
+        //بطور پیش فرض فیلدهای مخفی اعتبارسنجی نمی شود
+        //می گوییم اعتبارسنجی برای همه اعمال شود
+        $.validator.setDefaults({ ignore: null });
+
+        //قبل پست صفحه، اطلاعات وارد شده در ادیتور در فیلد مخفی توضیحات بایند شود
+        //تا اعتبارسنجی بدون خطا شده و امکان پست صفحه مهیا گردد
+        $("#frm").submit(function () {
+            tinymce.triggerSave();
+            return true;
+        });
+    </script>
+}

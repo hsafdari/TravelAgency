@@ -1,0 +1,29 @@
+﻿@model List<LastSecondTourViewModel>
+
+<aside class="widget widget_latest_post">
+    <h3 class="widget-title">دیگر تورهای لحظه آخری </h3>
+    <div class="widget-inner">
+        @if (Model != null && Model.Any())
+        {
+            <ul class="post">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <div class="col-md-5 col-sm-5 col-xs-4">
+                            <a href="@item.NavigationUrl" title="@item.Title" rel="canonical">
+                                <img src="@item.ImageUrl.GetThumbUrl()" width="98px" height="98px" alt="@item.Title" />
+                            </a>
+                        </div>
+                        <div class="col-md-7 col-sm-7 col-xs-8">
+                            <a title="@item.Title" rel="canonical" href="@item.NavigationUrl" class="post-title">@item.Title</a>
+                            <p>
+                                <span><i class="fa fa-clock-o"></i> @item.ContentDateTime.Value.ToString("yyyy/MM/dd")</span>
+                                @*<a href="#"><i class="fa fa-heart"></i> @item.LikeCount</a>*@
+                            </p>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</aside>

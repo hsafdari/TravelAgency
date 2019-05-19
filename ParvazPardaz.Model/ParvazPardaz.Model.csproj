@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3BC859B7-44B6-45EC-930A-312F2F2BAF0B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ParvazPardaz.Model</RootNamespace>
+    <AssemblyName>ParvazPardaz.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\AccessLevel\ControllersListConfig.cs" />
+    <Compile Include="Configuration\AccessLevel\PermissionConfig.cs" />
+    <Compile Include="Configuration\AccessLevel\RolePermissionControllerConfig.cs" />
+    <Compile Include="Configuration\Book\AgencySettingConfig.cs" />
+    <Compile Include="Configuration\Book\BankConfig.cs" />
+    <Compile Include="Configuration\Book\CreditConfig.cs" />
+    <Compile Include="Configuration\Book\OrderConfig.cs" />
+    <Compile Include="Configuration\Book\OrderInformationConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Book\OrderTaskConfig.cs" />
+    <Compile Include="Configuration\Book\OrderTypeConfig.cs" />
+    <Compile Include="Configuration\Book\PassengerConfig.cs" />
+    <Compile Include="Configuration\Book\PaymentLogConfig.cs" />
+    <Compile Include="Configuration\Book\PaymentUniqueNumberConfig.cs" />
+    <Compile Include="Configuration\Book\RoomTypeConfig.cs" />
+    <Compile Include="Configuration\Book\RoomTypeHotelRoomConfig.cs" />
+    <Compile Include="Configuration\Book\SelectedAddServConfig.cs" />
+    <Compile Include="Configuration\Book\SelectedFlightConfig.cs" />
+    <Compile Include="Configuration\Book\SelectedHotelConfig.cs" />
+    <Compile Include="Configuration\Book\SelectedHotelPackageConfig.cs" />
+    <Compile Include="Configuration\Book\SelectedRoomConfig.cs" />
+    <Compile Include="Configuration\Book\TaskConfig.cs" />
+    <Compile Include="Configuration\Book\VoucherReceiverConfig.cs" />
+    <Compile Include="Configuration\Comment\CommentConfig.cs" />
+    <Compile Include="Configuration\Comment\CommentReviewConfig.cs" />
+    <Compile Include="Configuration\Content\ContentConfig.cs" />
+    <Compile Include="Configuration\Content\ContentGroupConfig.cs" />
+    <Compile Include="Configuration\Core\UserCommissionConfig.cs" />
+    <Compile Include="Configuration\Coupon\CouponConfig.cs" />
+    <Compile Include="Configuration\Hotel\HotelBoardConfig.cs" />
+    <Compile Include="Configuration\Hotel\HotelPackageHotelConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Hotel\HotelRuleConfig.cs" />
+    <Compile Include="Configuration\Link\DefaultPageConfig.cs" />
+    <Compile Include="Configuration\Magazine\LocationConfig.cs" />
+    <Compile Include="Configuration\Magazine\TourSuggestionConfig.cs" />
+    <Compile Include="Configuration\Rule\TermsandConditionConfig.cs" />
+    <Compile Include="Configuration\SocialLog\SearchLogConfig.cs" />
+    <Compile Include="Configuration\Tour\TourLandingPageUrlConfig.cs" />
+    <Compile Include="Configuration\Tour\TourPackageDayConfig.cs" />
+    <Compile Include="Configuration\Tour\VehicleTypeClassConfig.cs" />
+    <Compile Include="Configuration\Users\UserAddressConfig.cs" />
+    <Compile Include="Configuration\Users\UserGroupConfig.cs" />
+    <Compile Include="Configuration\Users\UserProfileConfig.cs" />
+    <Compile Include="Entity\AccessLevel\ControllersList.cs" />
+    <Compile Include="Entity\AccessLevel\Permission.cs" />
+    <Compile Include="Entity\AccessLevel\RolePermissionController.cs" />
+    <Compile Include="Entity\Book\AgencySetting.cs" />
+    <Compile Include="Entity\Book\Bank.cs" />
+    <Compile Include="Entity\Book\Credit.cs" />
+    <Compile Include="Entity\Book\Order.cs" />
+    <Compile Include="Entity\Book\OrderInformation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\Book\OrderTask.cs" />
+    <Compile Include="Entity\Book\OrderType.cs" />
+    <Compile Include="Entity\Book\Passenger.cs" />
+    <Compile Include="Entity\Book\PaymentLog.cs" />
+    <Compile Include="Entity\Book\PaymentUniqueNumber.cs" />
+    <Compile Include="Entity\Book\RoomType.cs" />
+    <Compile Include="Entity\Book\RoomTypeHotelRoom.cs" />
+    <Compile Include="Entity\Book\SelectedAddServ.cs" />
+    <Compile Include="Entity\Book\SelectedFlight.cs" />
+    <Compile Include="Entity\Book\SelectedHotel.cs" />
+    <Compile Include="Entity\Book\SelectedHotelPackage.cs" />
+    <Compile Include="Entity\Book\SelectedRoom.cs" />
+    <Compile Include="Entity\Book\Task.cs" />
+    <Compile Include="Entity\Book\VoucherReceiver.cs" />
+    <Compile Include="Entity\Comment\CommentReview.cs" />
+    <Compile Include="Configuration\Comment\ReviewConfig.cs" />
+    <Compile Include="Configuration\Core\ContactUsConfig.cs" />
+    <Compile Include="Configuration\Core\DepartmentConfig.cs" />
+    <Compile Include="Configuration\Core\FooterConfig.cs" />
+    <Compile Include="Configuration\Core\MenuConfig.cs" />
+    <Compile Include="Configuration\Core\MenuGroupConfig.cs" />
+    <Compile Include="Configuration\Core\NewsLetterConfig.cs" />
+    <Compile Include="Configuration\Core\SliderConfig.cs" />
+    <Compile Include="Configuration\Core\SliderGroupConfig.cs" />
+    <Compile Include="Configuration\Core\SupportConfig.cs" />
+    <Compile Include="Configuration\Country\CityConfig.cs" />
+    <Compile Include="Configuration\Country\CountryConfig.cs" />
+    <Compile Include="Configuration\Country\StateConfig.cs" />
+    <Compile Include="Configuration\Hotel\HotelConfig.cs" />
+    <Compile Include="Configuration\Hotel\HotelFacilityConfig.cs" />
+    <Compile Include="Configuration\Hotel\HotelGalleryConfig.cs" />
+    <Compile Include="Configuration\Hotel\HotelPackageHotelRoomsConfig.cs" />
+    <Compile Include="Configuration\Hotel\HotelRankConfig.cs" />
+    <Compile Include="Configuration\Hotel\HotelRoomConfig.cs" />
+    <Compile Include="Configuration\Link\LinkRedirectionConfig.cs" />
+    <Compile Include="Configuration\Link\LinkTableConfig.cs" />
+    <Compile Include="Configuration\Link\NotFoundLinkConfig.cs" />
+    <Compile Include="Configuration\Magazine\TabMagazineConfig.cs" />
+    <Compile Include="Configuration\Post\PostConfig.cs" />
+    <Compile Include="Configuration\Post\PostGroupConfig.cs" />
+    <Compile Include="Configuration\Post\TagConfig.cs" />
+    <Compile Include="Configuration\Post\PostImagesConfig.cs" />
+    <Compile Include="Configuration\Product\ProductTagConfig.cs" />
+    <Compile Include="Configuration\Product\ProductTagProductConfig.cs" />
+    <Compile Include="Configuration\SocialLog\SocialLogConfig.cs" />
+    <Compile Include="Configuration\SocialLog\UserLogConfig.cs" />
+    <Compile Include="Configuration\SocialLog\UserUnSuccessLogConfig.cs" />
+    <Compile Include="Configuration\Tour\ActivityConfig.cs" />
+    <Compile Include="Configuration\Tour\AdditionalServiceConfig.cs" />
+    <Compile Include="Configuration\Tour\AirportConfig.cs" />
+    <Compile Include="Configuration\Tour\AllowedBannedConfig.cs" />
+    <Compile Include="Configuration\Tour\CompanyTransferConfig.cs" />
+    <Compile Include="Configuration\Tour\CompanyTransferVehicleTypeConfig.cs" />
+    <Compile Include="Configuration\Tour\CurrencyConfig.cs" />
+    <Compile Include="Configuration\Tour\FAQAnswerConfig.cs" />
+    <Compile Include="Configuration\Tour\FAQConfig.cs" />
+    <Compile Include="Configuration\Tour\FAQQuestionConfig.cs" />
+    <Compile Include="Configuration\Hotel\HotelPackageConfig.cs" />
+    <Compile Include="Configuration\Tour\LeaderConfig.cs" />
+    <Compile Include="Configuration\Tour\RequiredDocumentConfig.cs" />
+    <Compile Include="Configuration\Tour\TourAllowBannedConfig.cs" />
+    <Compile Include="Configuration\Tour\TourCategoryConfig.cs" />
+    <Compile Include="Configuration\Tour\TourConfig.cs" />
+    <Compile Include="Configuration\Tour\TourLevelConfig.cs" />
+    <Compile Include="Configuration\Tour\TourPackageConfig.cs" />
+    <Compile Include="Configuration\Tour\TourProgramActivityConfig.cs" />
+    <Compile Include="Configuration\Tour\TourProgramConfig.cs" />
+    <Compile Include="Configuration\Tour\TourProgramDetailConfig.cs" />
+    <Compile Include="Configuration\Tour\TourScheduleAdditionalServiceConfig.cs" />
+    <Compile Include="Configuration\Tour\TourScheduleCompanyTransferConfig.cs" />
+    <Compile Include="Configuration\Tour\TourScheduleConfig.cs" />
+    <Compile Include="Configuration\Tour\TourScheduleHotelConfig.cs" />
+    <Compile Include="Configuration\Tour\TourScheduleHotelRoomConfig.cs" />
+    <Compile Include="Configuration\Tour\TourSliderConfig.cs" />
+    <Compile Include="Configuration\Tour\TourTypeConfig.cs" />
+    <Compile Include="Configuration\Tour\VehicleTypeConfig.cs" />
+    <Compile Include="Configuration\Users\RoleConfig.cs" />
+    <Compile Include="Configuration\Users\UserClaimConfig.cs" />
+    <Compile Include="Configuration\Users\UserConfig.cs" />
+    <Compile Include="Configuration\Users\UserLoginConfig.cs" />
+    <Compile Include="Configuration\Users\UserRoleConfig.cs" />
+    <Compile Include="Entity\Comment\Comment.cs" />
+    <Compile Include="Entity\Comment\Review.cs" />
+    <Compile Include="Entity\Common\BaseBigEntity.cs" />
+    <Compile Include="Entity\Content\Content.cs" />
+    <Compile Include="Entity\Content\ContentGroup.cs" />
+    <Compile Include="Entity\Core\ContactUs.cs" />
+    <Compile Include="Entity\Core\Department.cs" />
+    <Compile Include="Entity\Core\Support.cs" />
+    <Compile Include="Entity\Country\City.cs" />
+    <Compile Include="Entity\Country\Country.cs" />
+    <Compile Include="Entity\Country\State.cs" />
+    <Compile Include="Entity\Coupon\Coupon.cs" />
+    <Compile Include="Entity\Hotel\Hotel.cs" />
+    <Compile Include="Entity\Hotel\HotelBoard.cs" />
+    <Compile Include="Entity\Hotel\HotelFacility.cs" />
+    <Compile Include="Entity\Hotel\HotelGallery.cs" />
+    <Compile Include="Entity\Hotel\HotelPackageHotel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\Hotel\HotelRank.cs" />
+    <Compile Include="Entity\Hotel\HotelRoom.cs" />
+    <Compile Include="Entity\Hotel\HotelRule.cs" />
+    <Compile Include="Entity\Link\DefaultPage.cs" />
+    <Compile Include="Entity\Link\LinkRedirection.cs" />
+    <Compile Include="Entity\Link\LinkTable.cs" />
+    <Compile Include="Entity\Link\NotFoundLink.cs" />
+    <Compile Include="Entity\Magazine\Location.cs" />
+    <Compile Include="Entity\Magazine\TabMagazine.cs" />
+    <Compile Include="Entity\Magazine\TourSuggestion.cs" />
+    <Compile Include="Entity\Post\Post.cs" />
+    <Compile Include="Entity\Post\PostGroups.cs" />
+    <Compile Include="Entity\Post\Tag.cs" />
+    <Compile Include="Entity\Post\PostImage.cs" />
+    <Compile Include="Entity\Product\ProductTag.cs" />
+    <Compile Include="Entity\Product\ProductTagProduct.cs" />
+    <Compile Include="Entity\Rule\TermsandCondition.cs" />
+    <Compile Include="Entity\SocialLog\SearchLog.cs" />
+    <Compile Include="Entity\SocialLog\SocialLog.cs" />
+    <Compile Include="Entity\SocialLog\UserLog.cs" />
+    <Compile Include="Entity\SocialLog\UserUnSuccessLog.cs" />
+    <Compile Include="Entity\Tour\Activity.cs" />
+    <Compile Include="Entity\Tour\AdditionalService.cs" />
+    <Compile Include="Entity\Tour\Airport.cs" />
+    <Compile Include="Entity\Tour\AllowedBanned.cs" />
+    <Compile Include="Entity\Tour\CompanyTransfer.cs" />
+    <Compile Include="Entity\Tour\CompanyTransferVehicleType.cs" />
+    <Compile Include="Entity\Tour\Currency.cs" />
+    <Compile Include="Entity\Tour\FAQ.cs" />
+    <Compile Include="Entity\Tour\FAQAnswer.cs" />
+    <Compile Include="Entity\Tour\FAQQuestion.cs" />
+    <Compile Include="Entity\Hotel\HotelPackage.cs" />
+    <Compile Include="Entity\Hotel\HotelPackageHotelRoom.cs" />
+    <Compile Include="Entity\Tour\Leader.cs" />
+    <Compile Include="Entity\Tour\RequiredDocument.cs" />
+    <Compile Include="Entity\Tour\Tour.cs" />
+    <Compile Include="Entity\Tour\TourAllowBanned.cs" />
+    <Compile Include="Entity\Tour\TourCategory.cs" />
+    <Compile Include="Entity\Tour\TourLandingPageUrl.cs" />
+    <Compile Include="Entity\Tour\TourLevel.cs" />
+    <Compile Include="Entity\Tour\TourPackage.cs" />
+    <Compile Include="Entity\Tour\TourPackageDay.cs" />
+    <Compile Include="Entity\Tour\TourProgram.cs" />
+    <Compile Include="Entity\Tour\TourProgramActivity.cs" />
+    <Compile Include="Entity\Tour\TourProgramDetail.cs" />
+    <Compile Include="Entity\Tour\TourSchedule.cs" />
+    <Compile Include="Entity\Tour\TourScheduleAdditionalService.cs" />
+    <Compile Include="Entity\Tour\TourScheduleCompanyTransfer.cs" />
+    <Compile Include="Entity\Tour\TourScheduleHotel.cs" />
+    <Compile Include="Entity\Tour\TourScheduleHotelRoom.cs" />
+    <Compile Include="Entity\Tour\TourSlider.cs" />
+    <Compile Include="Entity\Tour\TourType.cs" />
+    <Compile Include="Entity\Tour\VehicleType.cs" />
+    <Compile Include="Entity\Tour\VehicleTypeClass.cs" />
+    <Compile Include="Entity\Users\UserAddress.cs" />
+    <Compile Include="Entity\Users\UserCommission.cs" />
+    <Compile Include="Entity\Users\UserGroup.cs" />
+    <Compile Include="Entity\Users\UserProfile.cs" />
+    <Compile Include="Enum\AccessLevel.cs" />
+    <Compile Include="Enum\ActiveStatus.cs" />
+    <Compile Include="Enum\AddressType.cs" />
+    <Compile Include="Enum\AgeRange.cs" />
+    <Compile Include="Enum\BannerGroup.cs" />
+    <Compile Include="Enum\BusinessPersonality.cs" />
+    <Compile Include="Entity\Common\BaseEntity.cs" />
+    <Compile Include="Entity\Common\Entity.cs" />
+    <Compile Include="Entity\Core\Footer.cs" />
+    <Compile Include="Entity\Core\Menu.cs" />
+    <Compile Include="Entity\Core\MenuGroup.cs" />
+    <Compile Include="Entity\Core\Newsletter.cs" />
+    <Compile Include="Entity\Core\Slider.cs" />
+    <Compile Include="Entity\Core\SliderGroup.cs" />
+    <Compile Include="Entity\Users\Role.cs" />
+    <Compile Include="Entity\Users\User.cs" />
+    <Compile Include="Entity\Users\UserClaim.cs" />
+    <Compile Include="Entity\Users\UserLogin.cs" />
+    <Compile Include="Entity\Users\UserRole.cs" />
+    <Compile Include="Enum\CabinType.cs" />
+    <Compile Include="Enum\Calendertype.cs" />
+    <Compile Include="Enum\CommentType.cs" />
+    <Compile Include="Enum\EnumChangeFreq.cs" />
+    <Compile Include="Enum\EnumCreditType.cs" />
+    <Compile Include="Enum\EnumFlightDirectionType.cs" />
+    <Compile Include="Enum\EnumFooterType.cs" />
+    <Compile Include="Enum\EnumLandingPageUrlType.cs" />
+    <Compile Include="Enum\EnumLanguage.cs" />
+    <Compile Include="Enum\EnumNationality.cs" />
+    <Compile Include="Enum\EnumOrderStep.cs" />
+    <Compile Include="Enum\EnumPostType.cs" />
+    <Compile Include="Enum\EnumTourPackageFilterType.cs" />
+    <Compile Include="Enum\EnumUpdatePriceType.cs" />
+    <Compile Include="Enum\FlightType.cs" />
+    <Compile Include="Enum\Gender.cs" />
+    <Compile Include="Enum\LetterSatus.cs" />
+    <Compile Include="Enum\LetterType.cs" />
+    <Compile Include="Enum\LinkType.cs" />
+    <Compile Include="Enum\MenuType.cs" />
+    <Compile Include="Enum\OrderBy.cs" />
+    <Compile Include="Enum\OrderState.cs" />
+    <Compile Include="Enum\PaymentType.cs" />
+    <Compile Include="Enum\ReviewType.cs" />
+    <Compile Include="Enum\ShippingType.cs" />
+    <Compile Include="Enum\SocialType.cs" />
+    <Compile Include="Enum\Status.cs" />
+    <Compile Include="Enum\StatusUser.cs" />
+    <Compile Include="Enum\Stock.cs" />
+    <Compile Include="Enum\UserProfileType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ParvazPardaz.Common\ParvazPardaz.Common.csproj">
+      <Project>{42f4215f-f999-474a-8ede-2b6be2b2f9c3}</Project>
+      <Name>ParvazPardaz.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParvazPardaz.Resource\ParvazPardaz.Resource.csproj">
+      <Project>{727137d5-626a-4b5b-bc23-4481e1e074c4}</Project>
+      <Name>ParvazPardaz.Resource</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

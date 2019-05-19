@@ -1,0 +1,61 @@
+﻿@model List<TourPacakgeFlightsViewModel>
+@{
+    ViewContext.HttpContext.Items["CheckingDate"] = Model.Select(x => x.FlightDateTitle).FirstOrDefault();
+    ViewContext.HttpContext.Items["CheckingDateEn"]=Model.Select(x=>x.FlightDateEn).FirstOrDefault();
+    ViewContext.HttpContext.Items["CheckoutDate"] = Model.Select(x => x.FlightDateTitle).LastOrDefault();
+    ViewContext.HttpContext.Items["CheckoutDateEn"]= Model.Select(x => x.FlightDateEn).LastOrDefault();
+}
+@foreach (var item in Model)
+{
+
+    <ul class="flight @(Model.IndexOf(item)%2==0? "go":"back") list">
+        <li>
+            <span>شرکت هواپیمایی:</span>
+            <span>@item.airline</span>
+            <span>@item.airlineEn</span>
+            <span>Airline:</span>
+        </li>
+        <li>
+            <span>مبدا:</span>
+            <span>@item.FromCity</span>
+            <span>@item.FromCityEn</span>
+            <span>From:</span>
+        </li>
+        <li>
+            <span>مقصد:</span>
+            <span>@item.ToCity</span>
+            <span>To:</span>
+            <span>@item.ToCityEn</span>
+        </li>
+        <li>
+            <span>زمان پرواز:</span>
+            <span>@item.FlightDate</span>
+            <span>@item.FlightDate</span>
+            <span>Flight Date:</span>
+        </li>
+        <li>
+            <span>کلاس کابین:</span>
+            <span>@item.FLightClassTitle</span>
+            <span>@item.FLightClassTitleEn</span>
+            <span>Cabin Class:</span>
+        </li>
+        <li>
+            <span>شماره پرواز:</span>
+            <span>@item.FlightNumber</span>
+            <span>@item.FlightNumber</span>
+            <span>Flight Number:</span>
+        </li>
+        <li>
+            <span>بار مجاز:</span>
+            <span>@item.BaggageAmount</span>
+            <span>@item.BaggageAmount</span>
+            <span>Allowed Loggage:</span>
+        </li>
+        @*<li>
+                <span>شماره مرجع:</span>
+                <span>CT3TR</span>
+                <span>CT3TR</span>
+                <span>PNR:</span>
+            </li>*@
+    </ul>
+}

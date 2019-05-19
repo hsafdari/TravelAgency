@@ -1,0 +1,25 @@
+﻿
+
+
+.transparent-menu {
+    background:#14232a !important;
+}
+.transparent-menu .dropdown-menu
+{
+    background-color:#fecb04 !important;
+}
+.nav-container .mega-menu .links h5,.nav-container .mega-menu .links a,.mega-menu .links a:hover,.nav-container .mega-menu .links li::before
+{
+    color:#14232a !important;
+}
+.transparent-menu {
+    border-top:5px solid #fecb04;
+}
+.transparent-menu .navbar-nav > li > a:hover
+{
+    color:#fff !important;
+}
+.logofarsi
+{
+    float:right;
+}

@@ -1,0 +1,58 @@
+﻿@model HomeViewModel
+<link rel="canonical" href="@Request.Url.AbsoluteUri)" />
+@Styles.Render("~/bundles/HomeCustomCss")
+<section class="home-display">
+    @Html.Partial("_PrvTopHomeSlider", Model.TopHomeSlider)
+    <section class="search">
+        <div class="tabs">
+            <a href="#search-flight" class="btn-6">پرواز داخلی</a>
+            <a href="#search-flight" class="btn-6">پرواز خارجی</a>
+            <a href="#search-package" class="btn-6 active">پکیج تور</a>
+            <a href="#search-tour-domestic" class="btn-6">تور داخلی</a>
+            <a href="#search-tour" class="btn-6">تور خارجی</a>
+        </div>
+        <form id="search-flight" class="form tab-cont"></form>
+        @Html.Action("GetTourSearch", "Home", new { @Area = "" })
+    </section>  
+</section>
+<section class="home-rolls">
+    @Html.Partial("_PrvSlider", Model.Slider1)
+    @Html.Partial("_PrvSlider2", Model.Slider2)
+    @*<a class="btn-4" href="/Tours/">مشاهده همه تورها</a>*@  
+</section>
+    <section class="home-about">
+        <section class="info">
+            <h2>چرا باید با کی سفر همراه شد؟</h2>
+            <em>کی سفر، همسفر کسانی است که به کیفیت زندگیشان اهمیت می‌دهند!</em>
+            <ul class="keyValues">
+                <li>
+                    <img src="~/ClientTheme/Blog/Tour/img/icons/icon-money-w.svg">
+                    <h3>حذف واسطه‌ها</h3>
+                    <p>با حذف واسطه‌های متعدد و خرید از مرجع ارائه‌دهنده‌ی خدمات گردشگری، سفری با کیفیت و ارزان‌ را تجربه کنید.</p>
+                </li>
+                <li>
+                    <img src="~/ClientTheme/Blog/Tour/img/icons/icon-star-w.svg">
+                    <h3>آسایش</h3>
+                    <p>از هرکجا، و در هر زمانی به راحتی می‌توانید خدمات گردشگری را با خیال آسوده از ما دریافت کنید؛ تنها کافی‌ست اراده کنید!</p>
+                </li>
+                <li>
+                    <img src="~/ClientTheme/Blog/Tour/img/icons/icon-umbrella-w.svg">
+                    <h3>امنیت</h3>
+                    <p>نام کی سفر، اعتباری به قدر سال‌ها تجربه دارد. با حذف واسطه‌ها، با افتخار گامی به سوی خریدار برداشته‌ایم. به هر قیمتی و با خیال راحت سفر کنید.</p>
+                </li>
+            </ul>
+            @Html.Partial("_PvCorporate", Model.CorporateLists)
+        </section>
+        <section class="image">
+            <img src="@Model.BigPhotoUrl">
+        </section>
+    </section>
+    @Html.Partial("_PrvBelowSlider", Model.sliderbellow)
+    @Html.Partial("_Toastr")
+    @section scripts{
+        <script type="text/javascript">
+            $(".select2").select2({
+                dir: "rtl"
+            });
+        </script>
+    }

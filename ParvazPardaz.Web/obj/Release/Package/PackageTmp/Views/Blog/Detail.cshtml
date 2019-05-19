@@ -1,0 +1,263 @@
+﻿@model PostDetailViewModel
+@using ParvazPardaz.Common.Extension
+@{
+    //ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+    var commentCount = Model.CommentList != null ? Model.CommentList.Count() : 0;
+    var postSummery = (Model.PostSummery != null && Model.PostSummery.Length > 110) ? Model.PostSummery.Substring(0, 110) : Model.PostSummery;
+}
+<link href="~/ClientTheme/css/like.css" rel="stylesheet" />
+<link href="~/Plugins/Rate-Yo-v2.2.0/jquery.rateyo.min.css" rel="stylesheet" />
+<link href="@Url.Content("~/Plugins/cool-share/plugin.css")" rel="stylesheet" />
+
+<!--page-breadcrumb -->
+<div class="page-breadcrumb">
+    <div class="container">
+        @*<h1><a href="@Model.URL">@Model.Name</a></h1>*@
+        <h1>@Model.Name</h1>
+        <ol class="breadcrumb pull-left">
+            <li><a href="/tourism/">صفحه اصلی</a></li>
+            @if (Model.breadCrumbItems != null && Model.breadCrumbItems.Any())
+            {
+                for (int i = (Model.breadCrumbItems.Count - 1); i >= 0; i--)
+                {
+                    <li><a href="@Model.breadCrumbItems[i].URL">@Model.breadCrumbItems[i].Title</a></li>
+                }
+            }
+        </ol>
+    </div>
+</div>
+<!-- page-breadcrumb /- -->
+<!-- Single Post -->
+<a href="#menu-toggle" class="btn btn-default hidden-lg hidden-md hidden-sm btn-sidebar" id="menu-toggle"><i class="fa fa-arrow-left"></i>دیگر مطالب مرتبط</a>
+<div id="single-post" class="single-post wrapper">
+    <!-- Container -->
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper" class="widget-sidebar">
+                <!-- Latest Post -->
+                @{Html.RenderPartial("_PrvSideBar", Model.RelatedPosts);}
+                <!-- Latest Post /- -->
+                @Html.Partial("_PrvTags", Model.PostTags)
+            </div>
+            <div id="page-content-wrapper" class="col-xs-12" style="position:relative;">
+                <!-- col-md-8 -->
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <article>
+                        <!-- blog-box -->
+                        <div class="blog-box">
+                            <div class="entry-cover">
+                                <a href="#"><img src="@Model.ImageUrl" alt="@Model.Title" /></a>
+                                @*<a id="add_sign_count-1" class="add-sign-big color-pink-red"><i class="fa fa-angle-down"></i></a>*@
+                            </div>
+
+                            <div class="blog-content">
+                                <div>
+                                    <div class="col-sm-12 col-xs-12 marginBottom20px">
+                                        <div class="col-md-6 col-sm-5 col-xs-12" style="display:inline-block; padding-right:0px;">
+                                            @*  class="rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" *@
+                                            @Html.RateFor("rateYo", model => model.PostRateAvg).NumberStar(5).Precision(2).Rating(Model.CookiePostRate > 0 ? Model.CookiePostRate : Model.PostRateAvg).PostRateToURLAjax("/Blog/UpdatePostRate", Model.Id)
+                                            @*<div class="rateTitle" itemscope itemtype="http://schema.org/Article">
+                                                    <span itemprop="name">@Model.Title</span>
+                                                    <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                                        امتیاز <span itemprop="ratingValue">@Model.PostRateAvg.ToString("0.##")</span>/5 از <span itemprop="reviewCount">@Model.PostRateCount</span> نظر
+                                                    </div>
+                                                </div>*@
+                                            <div class="rateTitle" itemscope itemtype="https://schema.org/Article">
+                                                <input itemprop="name" type="hidden" value="@Model.Title" />
+                                                <input itemprop="author" type="hidden" value="Keysafar" />
+                                                <span class="hidden" itemprop="headline">@postSummery</span>
+                                                <span class="hidden" itemprop="datePublished" content="@String.Format("{0}-{1}-{2} {3:HH:mm:ss}", Model.PublishDatetime.Year, Model.PublishDatetime.Month, Model.PublishDatetime.Day, Model.PublishDatetime)">@String.Format("{0}-{1}-{2} {3:HH:mm:ss}", Model.PublishDatetime.Year, Model.PublishDatetime.Month, Model.PublishDatetime.Day, Model.PublishDatetime)</span>
+                                                <span class="hidden" itemprop="dateModified" content="@String.Format("{0}-{1}-{2} {3:HH:mm:ss}", Model.ModifierDateTime.Year, Model.ModifierDateTime.Month, Model.ModifierDateTime.Day, Model.ModifierDateTime)">@String.Format("{0}-{1}-{2} {3:HH:mm:ss}", Model.ModifierDateTime.Year, Model.ModifierDateTime.Month, Model.ModifierDateTime.Day, Model.ModifierDateTime)</span>
+                                                <link itemprop="mainEntityOfPage" rel="alternate" href="@Request.Url" />
+                                                <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
+                                                    <div itemprop="interactionService" itemscope itemid="https://www.keysafar.com" itemtype="https://schema.org/Website">
+                                                        <meta itemprop="name" content="keysafar" />
+                                                    </div>
+                                                    <meta itemprop="interactionType" content="https://schema.org/ShareAction" />
+                                                    <meta itemprop="userInteractionCount" content="@Model.VisitCount" />
+                                                </div>
+                                                <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
+                                                    <meta itemprop="interactionType" content="https://schema.org/CommentAction" />
+                                                    <meta itemprop="userInteractionCount" content="@(commentCount)" />
+                                                </div>
+                                                <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                                    امتیاز <span itemprop="ratingValue">@Model.PostRateAvg.ToString("0.##")</span>/5 از <span itemprop="reviewCount">@Model.PostRateCount</span> نظر
+                                                </div>
+                                                <div class="hidden" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                                                    <img itemprop="image" class="post_preview hide-for-small" alt="@Model.Title" src="@String.Format("{0}://{1}{2}",Request.Url.Scheme,Request.Url.Host,Model.ImageUrl)"/>
+                                                    <meta itemprop="url" content="@String.Format("{0}://{1}{2}",Request.Url.Scheme,Request.Url.Host,Model.ImageUrl)">
+                                                    <meta itemprop="width" content="800">
+                                                    <meta itemprop="height" content="800">
+                                                </div>
+                                                <div class="hidden" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                                                    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                                                        <img src="@String.Format("{0}://{1}/ClientTheme/images/Logo/keysafarlogo.png",Request.Url.Scheme,Request.Url.Host)" />
+                                                        <meta itemprop="url" content="@String.Format("{0}://{1}/ClientTheme/images/Logo/keysafarlogo.png",Request.Url.Scheme,Request.Url.Host)">
+                                                        <meta itemprop="width" content="400">
+                                                        <meta itemprop="height" content="60">
+                                                    </div>
+                                                    <meta itemprop="name" content="keysafar">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-2 socialDiv">
+                                                <span class="socialShare"> <!-- The share buttons will be inserted here --> </span>
+                                            </div>
+                                            <div class="col-md-2 likeDiv">
+                                                @{var id = "like" + Model.Id;
+                                                var likecount = "likeCount" + Model.Id;
+                                                }
+                                                <div class="heart @(ViewBag.like == "liked" ? "heartAnimation" : "")" id="@id" rel="@(ViewBag.like == "liked" ? "unlike" : "like")"></div> <div class="likeCount" id="@likecount">@(Model.LikeCount == null ? 0 : Model.LikeCount)</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 dateMarginTop">
+                                            @*<h2 class="entry-title">@Model.Title </h2>*@
+                                            <p class="time"><i class="fa fa-clock-o"></i>@Model.PublishDatetime.ToString("yyyy/MM/dd")</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="postContent col-xs-12">
+                                    @Html.Raw(Model.PostContent)
+                                </div>
+
+                                @if (@Model.PostGroups != null)
+                                {<a href="#" class="postG">دسته ها: </a>
+                                    <div class="tags col-xs-12">
+                                        @foreach (var group in Model.PostGroups)
+                                        {
+                                            <a href="@group.URL" target="@group.Target" rel="@group.Rel">@group.Name</a>
+                                        }
+                                    </div>
+                                }
+                                <div class="blog-content tags">
+                                    <a href="@Request.UrlReferrer">@ParvazPardaz.Resource.General.Generals.Back</a>  
+                                </div>                               
+                                @*<div class="blog-social blog-content-inner">
+                                    <aside class="widget widget_social_icons">
+                                        <h4 class="pull-right">به اشتراک بگذارید</h4>
+                                        <ul class="pull-left">
+                                            <li><a href="#" target="_blank" class="fb"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#" target="_blank" class="tw"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#" target="_blank" class="gp"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="#" target="_blank" class="lin"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a href="#" target="_blank" class="dr"><i class="fa fa-dribbble"></i></a></li>
+                                        </ul>
+                                    </aside>
+                                </div>*@
+                            </div>
+                        </div><!-- blog-box /- -->
+                    </article>
+                </div><!-- col-md-8 /- -->
+                <!-- col-md-4 -->
+                <div class="col-md-4 col-sm-6 widget-sidebar hidden-xs">
+                    <!-- Latest Post -->
+                    @{Html.RenderPartial("_PrvSideBar", Model.RelatedPosts);}
+                    <!-- Latest Post /- -->
+                    @Html.Partial("_PrvTags", Model.PostTags)
+                    <!-- Latest Tweets -->
+                </div><!-- col-md-4 /- -->
+            </div>
+        </div>
+    </div><!-- container /- -->
+</div>
+<!-- Single Post /- -->
+@section scripts
+{
+<script src="@Url.Content("~/Plugins/Rate-Yo-v2.2.0/jquery.rateyo.min.js")"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('body').on("click", '.heart', function () {
+                var thisitem = $(this);
+                var A = $(this).attr("id");
+                var B = A.split("like"); //splitting like1 to 1
+                var messageID = B[1];
+                $(this).css("background-position", "")
+                var D = $(this).attr("rel");
+                //$(this).addClass("heartAnimation").attr("rel", "unlike");
+                if (D == 'like') {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Blog/like",
+                        data: {
+                            id: messageID
+                        },
+                        cache: false,
+                        success: function (data) {
+                            if (data.report == "success") {
+                                $("#likeCount" + messageID).html(data.LikeCount);
+                                $(thisitem).addClass("heartAnimation").attr("rel", "unlike"); //applying animation class
+                            }
+                            //else {
+                            //    $(this).removeClass("heartAnimation").attr("rel", "like");
+                            //    $(this).css("background-position", "left");
+                            //}
+                        }
+                    }); //ajax end
+                }
+            });//heart click end
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tbl").addClass("table table-hover table-bordered");
+            $(".blog-box img").addClass("img-responsive");
+        });
+    </script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#single-post").toggleClass("toggled");
+            if ($("#single-post").hasClass("toggled")) {
+                $("#menu-toggle").html("بازگشت به مطلب اصلی <i class='fa fa-arrow-right'></i>");
+            }
+            else {
+                $("#menu-toggle").html("<i class='fa fa-arrow-left'></i>دیگر مطالب مرتبط");
+            }
+            //$("#page-content-wrapper").css("position", "absolute");
+        });
+    </script>
+<script src="~/Plugins/LikeDisLike/js/like-dislike.min.js"></script>
+<script>
+        $('.rating').likeDislike({
+            reverseMode: false,
+            disabledClass: 'disable',
+            click: function (value, l, d, event) {
+                var likes = $(this.element).find('.likes');
+                var dislikes = $(this.element).find('.dislikes');
+
+                likes.text(parseInt(likes.text()) + l);
+                dislikes.text(parseInt(dislikes.text()) + d);
+            }
+        });
+
+        function IsBeSubmit(element) {
+            //debugger;
+            if ($(element).hasClass('banned') == false) {
+                return true;
+            } else {
+                $(element).preventDefault();
+                return false;
+            }
+        }
+        function LikeDislikeSuccess(result) {
+            //debugger;
+            var secId = '#rating_' + result;
+            var likeId = '#like_' + result;
+            var dislike = '#dislike_' + result;
+
+            $(secId).likeDislike({
+                readOnly: true,
+                disabledClass: 'disable'
+            });
+
+            $(likeId).addClass("banned");
+            $(dislike).addClass("banned");
+        }
+</script>
+}
+}

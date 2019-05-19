@@ -1,0 +1,65 @@
+﻿@model IEnumerable<GridOrderViewModel>
+@{
+    ViewBag.Title = "سفارش های من";
+}
+<main id="purchase-history" class="profile">
+    @Html.Partial("_PrvCustomerSidebarMenu")    
+    <section>
+        <ul class="buttons-bar">
+            <li><a class="btn-1 active" href="#">همه سفارش ‌ها</a></li>
+            <li><a class="btn-1" href="#">بلیط هواپیما</a></li>
+            <li><a class="btn-1" href="#">تور مسافرتی</a></li>
+            <li><a class="btn-1" href="#">استرداد شده</a></li>
+        </ul>
+        <ul class="sort-bar">
+            <li>نوع سفارش</li>
+            <li>شماره سفارش</li>
+            <li>تاریخ سفارش</li>
+            <li>مبلغ سفارش</li>
+            <li>وضعیت سفارش</li>
+        </ul>
+        <dl class="foldingCards">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <dt>
+                        <span>تور مسافرتی</span>
+                        <span>@item.TrackingCode</span>
+                        <span>@item.CreatorDateTime.Value.ToString("dddd dd MMMM yyyy - HH:mm")</span>
+                        <span>@item.TotalPayPrice.ToString("#,0 ریال")</span>
+                        <span>@item.OrderStep.GetDisplayValue()</span>
+                        <button class="btn-5" type="button" name="button"></button>
+                        <input type="hidden" class="OrderId" value="@item.OrderId" />
+                    </dt>
+                    <dd id="DetailDataSection">
+                        <p style="text-align:center; padding:20px">
+                            <img src="~/SiteClientTheme/img/Preloader/loadingAnimation.gif"/>
+                        </p>
+                    </dd>
+                }
+            }
+        </dl>
+    </section>
+</main>
+@section scripts{
+    <script>
+        $(document).on('click',' .foldingCards dt',function(e){
+            var isActive = $(this).hasClass("active");
+            if (isActive) {
+                var orderId = $(this).find("input:hidden.OrderId").val();
+                var dd = $(this).next("dd");
+                $.ajax({
+                    url: '/Customer/Order/GetHotelPackages',
+                    data: {
+                        Id: orderId
+                    },
+                    dataType: 'html',
+                    success: function (result) {
+                        dd.html(result);
+                    }
+                });
+            }
+        })
+    </script>
+}

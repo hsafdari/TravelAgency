@@ -1,0 +1,19 @@
+﻿@model ParvazPardaz.ViewModel.LoginCustomerViewModel
+@using (Ajax.BeginForm("Login", "Account", new { returnUrl = Request.Url.AbsolutePath }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "SuccessLogin" }, new { id = "frm-login", @class = "form signin" }))
+{
+    @Html.AntiForgeryToken()
+    <h2>ورود به حساب کاربری</h2>
+    <p>برای ادامه فرآیند خرید به حساب کاربری خود وارد شوید</p>
+    <label>
+        @Html.LabelFor(x => x.Email, new { @class = "label-text" })
+        @Html.TextBoxFor(model => model.Email, new {@id="lEmail", style = "direction:ltr" })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "form-error" })
+    </label>
+    <label>
+        @Html.LabelFor(x => x.Password, new { @class = "label-text" })
+        @Html.TextBoxFor(model => model.Password, new { @id = "lPassword", type = "password", style = "direction:ltr" })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "form-error" })
+        @Html.CheckBoxFor(model => model.RememberMe, new { @Checked="" })
+    </label>
+    <input class="btn-1 active" type="submit" name="" value="ورود">
+}

@@ -1,0 +1,121 @@
+﻿@model TourScheduleAdditionalServiceViewModel
+
+@using (Ajax.BeginForm(Model.CRUDMode == CRUDMode.Create ? "Create" : "Edit", "TourScheduleAdditionalService", new AjaxOptions()
+{
+    OnComplete = "",
+    InsertionMode = Model.CRUDMode == CRUDMode.Create ? InsertionMode.InsertBefore : InsertionMode.Replace,
+    UpdateTargetId = Model.CRUDMode == CRUDMode.Create ? "ListViewTourScheduleAdditionalService" : Model.SectionId,
+    HttpMethod = "POST",
+    OnSuccess = "LoadPartialForTourScheduleAdditionalService(" + Model.TourScheduleId + ")"
+}, new { id = "frmTourScheduleAdditionalService" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.TourScheduleId)
+
+
+    <div class="well">
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="@(Model.CRUDMode== CRUDMode.Create ? "fa fa-plus" : "fa fa-edit ")"></i>@(Model.CRUDMode == CRUDMode.Create ? ParvazPardaz.Resource.General.Generals.Add : ParvazPardaz.Resource.General.Generals.Update)
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.AdditionalServiceId, new { @class = "control-label col-md-3" })
+                        </div>
+                        <div class="editor-field col-md-6">
+                            @Html.DropDownListFor(model => model.AdditionalServiceId, Model.AdditionalServiceDDL, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AdditionalServiceId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.Price, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-6">
+                            @*@Html.SpinFor(model => model.Price, new { @class = "form-control", id = "PriceTourSchAddServ" }).Limit(0, 99999999).PreFix("€").CallConfigWithId(true)*@
+                            @Html.SpinFor(model => model.Price, new { @class = "form-control", id = "PriceTourSchAddServ" }).Limit(0, 99999999).CallConfigWithId(true)
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-2">
+                            @Html.LabelFor(model => model.Capacity, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-5">
+                            @Html.SpinFor(model => model.Capacity, new { @class = "form-control", id = "inputCapacityTourScheduleAdditionalService" }).Limit(1, 500).Postfix("نفر").CallConfigWithId(true)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.NonLimit, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-1">
+                            @Html.CheckBoxFor(model => model.NonLimit, new { @class = " form-control checkbox checkbox-primary", onchange = "checkNonLimitTourScheduleAdditionalService(this)", id = "chkNonLimitTourScheduleAdditionalService" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-2">
+                            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-3" })
+                        </div>
+                        <div class=" col-md-8">
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" , id="tour-schedule-additional-service" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#frmTourScheduleAdditionalService").removeData("validator");
+        $("#frmTourScheduleAdditionalService").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmTourScheduleAdditionalService");
+
+        $('.select').select2();
+
+        if ($("#chkNonLimitTourScheduleAdditionalService").prop('checked')) {
+            $("#inputCapacityTourScheduleAdditionalService").attr("disabled", "disabled");
+            $("#inputCapacityTourScheduleAdditionalService").val(0);
+        }
+        else {
+            $("#inputCapacityTourScheduleAdditionalService").removeAttr('disabled');
+        }
+
+        $('#tour-schedule-additional-service').jqEasyCounter({
+            'maxChars': 327,
+            'maxCharsWarning': 320
+        });
+    });
+
+
+
+   
+</script>

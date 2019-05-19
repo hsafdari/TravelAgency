@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ParvazPardaz.ViewModel.FooterUIViewModel>
+@*<div id="callus">
+    <a href="tel:0212779">
+        <img alt="تلفن تماس کی سفر" src="/ClientTheme/Blog/Magazine/img/icons/callus1.png" />
+        <div class="call-animation">
+            @*<img class="callme img-circle" src="/ClientTheme/Blog/Magazine/img/icons/call.png" alt="" />
+        </div>
+    </a>
+
+</div>*@
+<div class="banner">
+    <div>
+        <div>
+            <a href="tel:+98212779" style="display:block;">
+                <i class="Phone is-animating"></i> <div class="textPhone">021-2779</div>
+                <br/>
+                <div class="text">پاسخگوی سوالاتتان هستیم</div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="wrapper details">
+    @foreach (var item in Model)
+    {
+        @Html.Raw(item.Content)
+    }
+</div>
+<ul class="authorizations">
+    <li><img src="https://trustseal.enamad.ir/logo.aspx?id=115850&amp;p=gwGFnNr4oE3ovcvZ" height="95" width="101" alt="" onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=115850&amp;p=gwGFnNr4oE3ovcvZ&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=101, height=95, top=30&quot;)" style="cursor: pointer; background-color: #ffffff;" id="gwGFnNr4oE3ovcvZ" /></li>
+    <li><a href="https://www.cao.ir/web/suggestions" target="_blank"><img src="http://keysafar.com/wp-content/uploads/2019/04/paxrights.png" height="95" width="101" style="background-color: #ffffff;" alt="حقوق مسافر" /></a></li>
+    <li><a href="http://aira.ir/" target="_blank"><img src="http://keysafar.com/wp-content/uploads/2019/04/aira.jpg" height="95" width="101" alt="انجمن شرکت های هواپیمایی" /></a></li>
+    <li><a href="https://ecunion.ir/" target="_blank"><img src="http://keysafar.com/wp-content/uploads/2019/04/ecunion.png" height="95" width="101" style="background-color: #ffffff;" alt="کسب و کارهای مجازی" /></a></li>
+    <li><a href="https://www.ichto.ir/" target="_blank"><img src="http://keysafar.com/wp-content/uploads/2019/04/iran.jpg" height="95" width="101" alt="سازمان میراث فرهنگی" /></a></li>
+    <li><a><img src="http://keysafar.com/wp-content/uploads/2019/04/Untitled.png" height="95" width="101" alt="نشان ملی ثبت" /></a></li>
+</ul>
+<div class="wrapper copy">
+    کپی رایت @DateTime.Now.Year کی سفر. تمام حقوق محفوظ می باشد
+</div>

@@ -1,0 +1,67 @@
+﻿@model List<ParvazPardaz.ViewModel.Book.LocationTour.TourPackageLocationViewModel>
+@{
+    ViewBag.Title = "_PrvLocationTourPackage";
+}
+
+@foreach (var item in Model)
+{
+    <div class="packagelist item" id="tourpackage(@item.Id)">
+        <div class="flightside">
+            <h2>@item.Title</h2>
+            @if (!String.IsNullOrEmpty(item.OfferPrice))
+            {
+                <img class="imgOffer" src="/ClientTheme/images/sale-5050.png" />
+            }
+            <div class="tour-package-row">
+                <div class="packagelist tourtype">
+                    <label>نوع تور:</label>
+                    <label>@item.TourType</label>
+                </div>
+                <div class="pricezone">
+                    <div class="tourpackageprice">
+                        @if (!String.IsNullOrEmpty(item.OfferPrice))
+                        {
+                            <span style="color:#9e0b0f">@item.OfferPrice</span>
+                            <span style="text-decoration: line-through;">@item.PackageStartPrice</span>
+                        }
+                        else
+                        {
+                            <span>@item.PackageStartPrice</span>
+                        }
+                    </div>
+                    <img src="~/ClientTheme/Blog/Tour/img/icons/coins.png" />
+                </div>
+            </div>
+            <div class="tour-package-row">
+                <div class="flight_airline">
+                    @if (item.TransferTypeTitle == "قطار")
+                    {
+                        <img class="tour-package-aircraft-icon" src="~/ClientTheme/Blog/Tour/img/icons/train.png" />
+                    }
+                    else if (item.TransferTypeTitle == "هواپیما")
+                    {
+                        <img class="tour-package-aircraft-icon" src="~/ClientTheme/Blog/Tour/img/icons/plane.png" />
+                    }
+                    
+                    <label>@item.CompanyTransferTitle</label>
+                    <img class="icon" src="@item.CompnayTransferLogo" alt="@item.CompanyTransferTitle" />
+                </div>
+                <div class="tour-package-day">
+                    <img class="tour-package-calender" src="~/ClientTheme/Blog/Tour/img/icons/Calender.png" />
+                    <span class="packageDay">@item.PackgeDayTitle</span>
+                    <span class="packageDate">@item.FromDate.ToString("yyyy/MM/dd")</span>
+                </div>
+            </div>
+        </div>
+        <div class="priceside">
+            <img src=@(item.ImageURL!=null?item.ImageURL: "/ClientTheme/Blog/Tour/img/icons/Layer10.png") />
+            <a class="btn-1 active" href="@item.PackageUrl">@ParvazPardaz.Resource.Book.Book.BookNowTour</a>           
+        </div>
+        <div class="callmobile">
+            <a class="callmobilebg" href="tel:+98212779" dideo-checked="true">
+                021-2779
+            </a>
+        </div>
+        
+    </div>
+}

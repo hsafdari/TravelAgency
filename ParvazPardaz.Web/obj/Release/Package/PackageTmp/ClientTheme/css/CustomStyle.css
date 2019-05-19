@@ -1,0 +1,339 @@
+.logo-add-block {
+    padding: 0 !important;
+}
+
+.boxSliderHeight {
+    height: 184px;
+}
+
+.post-box:hover .post-box-inner {
+    width: 100%;
+}
+
+.postG:hover {
+    cursor: auto;
+    text-decoration: none;
+}
+
+.showPostG, .showPostGroups a {
+    display: inline !important;
+}
+
+.error-message-box {
+    margin-top: 0 !important;
+}
+
+.error-page-404 h4 {
+    font-size: 40px;
+}
+
+.single-post .blog-content p {
+    opacity: 1 !important;
+}
+
+#popupsignupform {
+    margin-top: 20% !important;
+}
+/*.postGroups a
+{
+    display:inline;
+}*/
+.header {
+    margin-bottom: 30px;
+}
+
+header {
+    z-index: 99 !important;
+    position: fixed !important;
+    top: 0 !important;
+    width: 100% !important;
+}
+
+.navbar-brand {
+    padding: 0 !important;
+}
+
+    .navbar-brand img {
+        height: 60px;
+    }
+
+.latest-update h3 {
+    text-align: right;
+}
+
+.fa {
+    font: normal normal normal 14px/1 FontAwesome !important;
+}
+
+.breadCrumbNav:after {
+    color: #000;
+    content: "\f104";
+    padding: 0 5px;
+    font-size: 17px;
+    font-family: 'FontAwesome';
+}
+
+@media only screen and (min-width: 319px) and (max-width: 767px) {
+    .breadcrumb > li {
+        font-size: 10px !important;
+        margin-right: 0 !important;
+    }
+
+        .breadcrumb > li a {
+            font-size: 10px !important;
+            margin-right: 0 !important;
+        }
+
+    .breadCrumbNav::after {
+        font-size: 13px;
+    }
+}
+
+/*marquee*/
+.marquee a {
+    float: right !important;
+    direction: rtl !important;
+}
+
+
+.searchListPage {
+    background-color: #fecb04;
+    color: #14232a;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    direction: rtl;
+}
+
+.nopadding {
+    padding: 0 !important;
+}
+
+.btn-search {
+    background-color: #14232a !important;
+    color: #fff !important;
+}
+
+.mgt-10 {
+    margin-top: 10px !important;
+}
+
+.blog-section article .box-content .entry-title {
+    height: 50px;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+.blog-section article .box-content .time {
+    margin-top: 10px !important;
+    margin-bottom: 0 !important;
+    font-size: 12px !important;
+}
+
+.blog-social {
+    padding: 10px 10px !important;
+}
+
+    .blog-social .read-more {
+        padding: 10px 15px;
+    }
+
+.box-content {
+    padding: 38px 8px 0px 8px !important;
+}
+
+.widget-sidebar .widget_latest_post .widget-inner li p span {
+    float: none !important;
+}
+
+.box-content .fa-eye {
+    color: #4226a5 !important;
+}
+
+.tbl tr:first-child {
+    background-color: #fecb04 !important;
+}
+
+.single-post .blog-content .time, .single-post .blog-content p {
+    font-size: 14px !important;
+    font-weight: normal !important;
+}
+
+.single-post .blog-content .time, .single-post .blog-content {
+    color : #8f8f8f !important;
+}
+
+@media(max-width:768px) {
+    .single-post {
+        padding-top: 5px !important;
+    }
+}
+
+.box-content a.block-title {
+    direction: rtl !important;
+}
+
+.rankText {
+    color: #000 !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+}
+
+#scroll-top {
+    position: fixed;
+    z-index: 1000;
+    bottom: 25px;
+    right: 25px;
+    background: #ccc;
+    width: 46px;
+    height: 46px;
+    opacity: 0.9;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+}
+
+    #scroll-top:hover i {
+        color: #ffc107;
+    }
+
+    #scroll-top i {
+        line-height: 46px;
+        font-size: 32px !important;
+        color: #ffffff;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+/***********/
+.dropdown-menu > li > section > a {
+    color: #000;
+    text-decoration: none;
+}
+
+.nav, .dropdown-menu li section a {
+    text-align: right !important;
+    text-decoration: none;
+}
+
+.dropdown-menu > li > section > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+
+.navbar-inverse .navbar-nav > .active > section > a, .navbar-inverse .navbar-nav > .open > section > a, .navbar-inverse .navbar-nav > .open > section > a:hover, .navbar-inverse .navbar-nav > .open > section > a:focus {
+    color: #fff !important;
+}
+
+    .navbar-inverse .navbar-nav > .active > section > a, .navbar-inverse .navbar-nav > .open > section > a, .navbar-inverse .navbar-nav > .open > section > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > section > a, .navbar-inverse .navbar-nav > .open > section > a:hover, .navbar-inverse .navbar-nav > .open > section > a:focus {
+        background-color: #14232a;
+    }
+
+.navbar-nav > li > section > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #fff !important;
+}
+
+.nav > li > section > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+    .nav > li > section > a:hover {
+        color: #fff !important;
+        text-decoration: none;
+    }
+
+#phonearea img {
+    margin-left: 4% !important;
+}
+
+#btnMenuTel {
+    background: url("/ClientTheme/images/phone.png") no-repeat -56px -8px !important;
+    width: 85px !important;
+    height: 50px !important;
+}
+
+.navbar-header img {
+    max-width: 125px !important;
+}
+
+.mobileLogo {
+    position: absolute !important;
+    right: 0 !important;
+}
+
+
+.navbar-nav {
+    margin-right: 10px !important;
+}
+
+.top-logo {
+    width: 70px !important;
+    float: right;
+}
+
+.postContent h1, h2, h3, h4, h5, h6 {
+    color:#000 !important;
+}
+
+.page-breadcrumb {
+    margin-top:1% !important;
+}
+
+#single-post {
+    padding-top: 1% !important;
+}
+
+#slider-section {
+    margin-top:1% !important;
+}
+
+.menu-block .follow, .latest-update h3 {
+    background-color: #00A694 !important;
+    color: white !important;
+}
+
+.widget-sidebar .widget-title, .blog-social .read-more:hover {
+    background-color: #00A694 !important;
+    color: white !important;
+}
+
+.blog-content .tags a {
+    background-color: #00A694 !important;
+    color: white !important;
+}
+
+.btn-sortby {
+    background-color: #00A694 !important;
+    border-color: #00A694 !important;
+}
+
+.widget_tag_cloud a:hover {
+    background-color: #223871 !important;
+}
+
+.color-Yellow {
+    background-color: #00A694 !important;
+}
+
+#menu {
+    background-color: #00A694 !important;
+    border-top: 5px solid #223871 !important;
+}
+
+.post-box .box-read-more {
+    background-color: #223871 !important;
+}

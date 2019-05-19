@@ -1,0 +1,76 @@
+﻿@model SearchResultViewModel
+@{
+    var counter2 = 0;
+}
+
+@if (Model.MagItemList != null && Model.MagItemList.Any())
+{
+    foreach (var item in Model.MagItemList)
+    {
+        <div class="col-md-4 col-sm-6 col-xs-12 mb-30">
+            <div class="blog-item clearfix border boxed">
+                <div class="blog-media">
+                    <a href="@item.PostUrl" rel="@item.Rel" target="@item.Target">
+                        <div class="pic"><img src="@item.ImageUrl" alt="@item.Name"></div>
+                    </a>
+                </div>
+                <div class="blog-item-body clearfix">
+                    <a href="@item.PostUrl" rel="@item.Rel" target="@item.Target">
+                        <h6 class="blog-title">@item.Name </h6>
+                    </a>
+                    @Html.Raw(item.PostSummery)
+                    <br />
+                </div>
+            </div>
+        </div>
+        counter2++;
+        if (counter2 == 3)
+        {
+            <div class="hidden-xs" style="clear:both;"></div>
+            counter2 = 0;
+        }
+    }
+    <div class="hidden-xs" style="clear:both;"></div>
+    if (!Model.IsBeHiddenBtnMore)
+    {
+        <div id="DivResult" style="text-align:center">
+            <article class="col-md-12 btnMore" style="padding:0; margin-bottom:0;">
+                @Html.HiddenFor(model => model.PageIndex, new { @id = "PageIndex" })
+
+                @Ajax.ActionLink("بیشتر", "Search", null, new { q = Model.q, PageIndex = "_morePageIndex_", PageSize = Model.PageSize }, new AjaxOptions()
+               {
+                   InsertionMode = InsertionMode.ReplaceWith,
+                   UpdateTargetId = "DivResult",
+                   OnSuccess = "AjaxBtnMoreSuccess",
+                   OnFailure = "AjaxBtnMoreFailure",
+                   LoadingElementId = "preloader"
+               }, new { @class = "btn btn-block", style = "color:white; background-color:#101010", @id = "btnMore" })
+
+            </article>
+            <img id="preloader" alt="لطفا صبر کنید" style="display:none;" src="~/SiteClientTheme/img/Preloader/loadingAnimation.gif" />
+        </div>
+
+        <script type="text/javascript">
+            function AjaxBtnMoreSuccess(result) {
+                //alert("موفق");
+                //var index = document.getElementById("PageIndex").value;
+                //document.getElementById("PageIndex").value = parseInt(index) + 1;
+            }
+            function AjaxBtnMoreFailure() {
+                //alert("خطا");
+            }
+            $(document).ready(function () {
+                debugger;
+                var index = document.getElementById("PageIndex").value;
+                var i = parseInt(index) + 1;
+                var href = $("#btnMore").attr('href').replace("_morePageIndex_", i);
+                $("#btnMore").attr("href", href);
+
+                $("#btnMore").on("click", function (e) {
+                    e.preventDefault();
+                });
+            });
+        </script>
+    }
+}
+

@@ -1,0 +1,77 @@
+﻿.blog-item {
+    min-height: 405px;
+}
+
+.h3 {
+    color: white !important;
+    font-size: 15px !important;
+}
+
+.tabs-btn.btn-scroll {
+    background-color: #f0ad4e !important;
+    color: white !important;
+}
+
+.btn-scroll.active {
+    background-color: #424d58 !important;
+    color: white !important;
+}
+
+.cws_divider, hr {
+    border-bottom: 2px solid #00A694 !important;
+}
+
+.tabs .block-tabs-btn .tabs-btn.active, .tabs .block-tabs-btn .tabs-btn.active::before, .tabs .block-tabs-btn .tabs-btn.active::after {
+    background: #00A694 !important;
+    border-color: #00A694 !important;
+}
+
+.tabs .block-tabs-btn .tabs-btn.active {
+    color: white !important;
+}
+
+.blog-item-body {
+    text-align: center !important;
+}
+
+.postSummery {
+    color: #00A694 !important;
+    /*margin-top: 20px;*/
+}
+
+.tabs-btn.btn-scroll {
+    background-color: transparent !important;
+    color: black !important;
+}
+
+.tabs .block-tabs-btn .tabs-btn:first-child {
+    border-bottom: solid 3px #223871 !important;
+}
+
+.tabs .block-tabs-btn .tabs-btn::before, .tabs .block-tabs-btn .tabs-btn::after {
+    content:  initial !important;
+    position: inherit !important;
+}
+
+.tabs .block-tabs-btn .tabs-btn.active {
+    color: black !important;
+     border-bottom: solid 3px #00A694 !important;
+}
+.tabs .block-tabs-btn .tabs-btn.active, .tabs .block-tabs-btn .tabs-btn.active::before, .tabs .block-tabs-btn .tabs-btn.active::after {
+    background: transparent !important;
+    /*border: none !important;*/
+}
+
+.tabs .block-tabs-btn .tabs-btn {
+    border:none !important;
+}
+
+
+.tabs .block-tabs-btn {
+    box-shadow: 5px 10px #888888;
+    background-color: #EAEAEA !important;
+}
+
+.tabs .block-tabs-btn .tabs-btn {
+    background: transparent !important;
+}

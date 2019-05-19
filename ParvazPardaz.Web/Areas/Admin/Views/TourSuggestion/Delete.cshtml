@@ -1,0 +1,180 @@
+﻿
+
+@model ParvazPardaz.Model.Entity.Magazine.TourSuggestion
+
+@{
+    ViewBag.Title = "Delete";
+    //Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+
+@*<h2>@ParvazPardaz.Model.ParvazPardazResource.action.ActionResource.Delete</h2>
+<h3>@ParvazPardaz.Model.ParvazPardazResource.action.ActionResource.AreYouSure</h3>*@
+
+<div>
+    <h3>@ParvazPardaz.Resource </h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatorUser.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatorUser.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Locations.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Locations.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifierUser.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifierUser.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TourTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TourTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TourDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TourDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AirlineTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirlineTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TourDuration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TourDuration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TourPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TourPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NavigationUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NavigationUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageIsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageIsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeletedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeletedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatorDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatorDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatorUserIpAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatorUserIpAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifierDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifierDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifierUserIpAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifierUserIpAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+		<div class="col-md-offset-2 form-actions no-color">
+			<input type="submit" value="@ParvazPardaz.Resource.General.Generals.Delete" class="btn btn-danger" />
+			@Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-primary" })
+		</div>
+    }
+</div>
+@Html.Partial("toastr")
+

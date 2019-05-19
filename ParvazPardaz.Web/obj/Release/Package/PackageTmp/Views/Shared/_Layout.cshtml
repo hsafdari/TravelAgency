@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="@ViewBag.description">
+    <meta name="keywords" content="@ViewBag.keywords">
+    <meta name="author" content="parvazpardaz.com">
+    <meta http-equiv="Content-Language" content="fa">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta property="og:site_name" content="کی سفر" />
+    <meta property="og:image:width" content="143" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.description" />
+    <meta property="og:type" content="article" />
+    <meta property="og:type" content="article:published_time-@ViewBag.PublishDatetime" />
+    <meta property="og:type" content="@ViewBag.keywords" />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+    <link rel="apple-touch-icon" sizes="180x180" href="/ClientTheme/images/Logo/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/ClientTheme/images/Logo/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/ClientTheme/images/Logo/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/ClientTheme/images/Logo/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/ClientTheme/images/Logo/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    @Styles.Render("~/bundles/TourClientCss")
+    @Html.Raw(ViewBag.CustomMetaTags)
+    @RenderSection("styles", required: false)
+    @Scripts.Render("~/bundles/TourClientJs")
+</head>
+<body style="direction:rtl">
+    @Html.Action("GetMenus", "Home", new { @Area = "" })
+    @RenderBody()
+    <footer>
+        <div class="before">
+            <section class="join">
+                <div class="wrapper clearfix">
+                    @Html.Action("GetNewsLetter", "Home", new { @Area = "" })
+                    @Html.Action("GetSocial", "Home", new { @Area = "" })
+                </div>
+            </section>
+        </div>
+        @Html.Action("GetFooter", "Home", new { @Area = "" })
+    </footer>
+    @Html.Action("GetAuthorizePartial", "Account")
+    @RenderSection("scripts", required: false)
+    <script>
+        !function (t, e, n) {
+            t.yektanetAnalyticsObject = n, t[n] = t[n] || function () {
+                t[n].q.push(arguments)
+            }, t[n].q = t[n].q || [];
+            var a = new Date, r = a.getFullYear().toString() + "0" + a.getMonth() + "0" + a.getDate() + "0" + a.getHours(),
+                c = e.getElementsByTagName("script")[0], s = e.createElement("script");
+            s.async = 1, s.type = "text/javascript", s.src = "https://cdn.yektanet.com/rg_woebegone/scripts/5759/rg.complete.js?v=" + r, c.parentNode.insertBefore(s, c)
+        }(window, document, "yektanet");
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135317507-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-135317507-1');
+    </script>    
+    <script type="text/javascript">
+        window._mfq = window._mfq || [];
+        (function () {
+            var mf = document.createElement("script");
+            mf.type = "text/javascript"; mf.async = true;
+            mf.src = "//cdn.mouseflow.com/projects/5d387bca-7cb7-4548-94fa-322a10889ad2.js";
+            document.getElementsByTagName("head")[0].appendChild(mf);
+        })();
+    </script>
+    <script type="text/javascript">
+        window.heap = window.heap || [], heap.load = function (e, t) { window.heap.appid = e, window.heap.config = t = t || {}; var r = t.forceSSL || "https:" === document.location.protocol, a = document.createElement("script"); a.type = "text/javascript", a.async = !0, a.src = (r ? "https:" : "http:") + "//cdn.heapanalytics.com/js/heap-" + e + ".js"; var n = document.getElementsByTagName("script")[0]; n.parentNode.insertBefore(a, n); for (var o = function (e) { return function () { heap.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }, p = ["addEventProperties", "addUserProperties", "clearEventProperties", "identify", "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"], c = 0; c < p.length; c++)heap[p[c]] = o(p[c]) };
+        heap.load("444139494");
+    </script>
+    <!-- Start Alexa Certify Javascript -->
+    <script type="text/javascript">
+        _atrk_opts = { atrk_acct: "X48Ns1ah9W20em", domain: "keysafar.com", dynamic: true };
+        (function () { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://certify-js.alexametrics.com/atrk.js"; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(as, s); })();
+    </script>
+    <noscript><img src="https://certify.alexametrics.com/atrk.gif?account=X48Ns1ah9W20em" style="display:none" height="1" width="1" alt="" /></noscript>
+    <!-- End Alexa Certify Javascript -->
+</body>
+</html>

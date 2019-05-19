@@ -1,0 +1,126 @@
+.navbar-inverse { background-color: #14232a}
+.navbar-inverse .navbar-nav>.active>a:hover,.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus { background-color: #14232a}
+.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus { background-color: #14232a}
+.dropdown-menu { background:#fecb04 none repeat scroll 0 0}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { background:#fecb04 none repeat scroll 0 0}
+.navbar-inverse { background-image: none; }
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { background-image: none; }
+.navbar-inverse { border-top: 5px solid #fecb04}
+.navbar-inverse .navbar-brand { color: #999999}
+.navbar-inverse .navbar-brand:hover { color: #FFFFFF}
+.navbar-inverse .navbar-nav>li>a { color: #ffffff}
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus { color: #ffffff !important}
+.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus { color: #ffffff}
+.navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus { color: #ffffff}
+.dropdown-menu>li>a { color: #000000}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { color: #000000}
+.navbar-inverse .navbar-nav>.dropdown>a .caret { border-top-color: #fecb04 }
+.navbar-inverse .navbar-nav>.dropdown>a:hover .caret { border-top-color: #fecb04 }
+.navbar-inverse .navbar-nav>.dropdown>a .caret { border-bottom-color: #fecb04 }
+.navbar-inverse .navbar-nav>.dropdown>a:hover .caret { border-bottom-color: #fecb04 }
+
+.dropdown-menu
+{
+	border-bottom:2px solid #ffc107;
+}
+
+a.dropdown-toggle:hover
+{
+    color:#000 !important;
+}
+
+
+/*multi level menu */
+    .dropdown-submenu {
+        position: relative;        
+    }
+
+        .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            Right: 100%;
+            margin-top: -6px;
+            margin-Right: -1px;
+            -webkit-border-radius: 0 6px 6px 6px;
+            -moz-border-radius: 0 6px 6px 6px;
+            border-radius: 0 6px 6px 6px;
+        }
+
+        /*.dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }*/
+
+        .dropdown-submenu > a:after {
+            display: block;
+            content: " ";
+            float: left;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 5px 5px 5px 0;
+            border-right-color: #000000;
+            margin-top: 5px;
+            margin-left: -10px;         
+        }
+
+        .dropdown-submenu:hover > a:after {
+            border-left-color: #ffffff;
+        }
+
+        .dropdown-submenu.pull-Right {
+            float: none;
+        }
+
+            .dropdown-submenu.pull-Right > .dropdown-menu {
+                Right: -100%;
+                margin-Right: 10px;
+                -webkit-border-radius: 6px 0 6px 6px;
+                -moz-border-radius: 6px 0 6px 6px;
+                border-radius: 6px 0 6px 6px;
+            }
+
+
+
+
+
+.from-top
+{
+    margin-top:10px;
+}
+.touch .container.no-hover .details {
+	display: none !important;	
+}
+
+@media only screen and (max-width: 767px) {
+
+ .dropdown-submenu > a:after {
+         
+            border-right-color: #fecb04 !important;
+                
+        }
+ a.dropdown-toggle:hover
+{
+    color:#fff !important;
+}
+}
+/*@media (min-width: 979px) {
+              ul.nav li.dropdown:hover > ul.dropdown-menu {
+                    display: block;
+                    margin-top:0px;
+}
+}*/
+
+@media only screen and (min-width: 980px) {
+    .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
+}
+.touchHover
+{
+     display: block !important;
+}
+@media (max-width: 767px) {
+  .navbar-nav .open .dropdown-menu {
+    padding-right:15px !important;
+    }
+    }

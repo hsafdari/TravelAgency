@@ -1,0 +1,622 @@
+﻿@model TourPackageViewModel
+@{
+    ViewBag.Title = "Create";
+}
+@section css{
+
+    <link href="~/Content/admin/View/Tour.css" rel="stylesheet" />
+    <link href="~/content/kendo/2014.3.1314/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/content/kendo/2014.3.1314/kendo.default.min.css" rel="stylesheet" />
+}
+<ul id="progress">
+    <li>
+        <a style="color:#fff" href="/Admin/Tour/Edit/@Model.TourId">تور</a>
+    </li>
+    <li>
+        <a style="color:#fff" href="/Admin/TourSlider/Create?tourId=@Model.TourId">گالری تور</a>
+    </li>
+    <li>
+        <a style="color:#fff" href="/Admin/TourProgram/Create?tourId=@Model.TourId">برنامه سفر</a>
+    </li>
+    <li class="active">پکیج تور</li>
+    @*<li>Schedule</li>*@
+</ul>
+@*<a href="@ViewBag.TourURL" target="_blank" class="btn btn-success" style="display:inline-block; float:left;">مشاهده تور سمت کاربر</a>*@
+<br />
+<br />
+<hr />
+<div id="AddEditTourPackage">
+@Html.Partial("_AddTourPackage", new TourPackageViewModel()
+{
+    TourId = Model.TourId,
+    CRUDMode = CRUDMode.Create,
+    DDLTourPackgeDaysList=Model.DDLTourPackgeDaysList
+})
+</div>
+<div id="ListViewTourPackage">
+    @{
+        if (Model != null && Model.ListView != null && Model.ListView.Any())
+        {
+            foreach (var listView in Model.ListView)
+            {
+                @Html.Partial("_ListViewTourPackage", listView)
+            }
+        }
+    }
+</div>
+<div class="form-group">
+    <div class="col-md-11">
+        @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Create", "TourProgram", new { tourId = Model.TourId }, new { @class = "btn btn-custom red", })
+        @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Finish, "Index", "Tour", null, new { @class = "btn btn-custom green" })
+    </div>
+</div>
+<div id="TourScheduleCompanyTransferModal" style="text-align: center; visibility: hidden;">
+</div>
+<div id="TourScheduleAdditionalServiceModal" style="text-align: center; visibility: hidden;">
+</div>
+<div id="TourScheduleHotelModal" style="text-align: center; visibility: hidden;">
+</div>
+<input type="hidden" id="currentPackageId" value="0" />
+@section scripts{
+    <script src="~/Scripts/kendo.mvc/kendo.web.min.js"></script>
+    <script src="~/Scripts/kendo.mvc/kendo.aspnetmvc.min.js"></script>
+    <script>
+        var autocompleteUrl = "@Url.Action("GetCities", "City")"
+        var loadPartialUrlForTourPackage = "@Url.Action("RefreshPartialView", "TourPackage")"
+        var loadPartialUrlForTourSchedule = "@Url.Action("RefreshPartialView", "TourSchedule")"
+
+        var loadPartialUrlForTourScheduleCompanyTransfer = "@Url.Action("RefreshPartialView", "TourScheduleCompanyTransfer")"
+        var fetchCompanyTransferUrl = "@Url.Action("GetCompanyTransfers", "CompanyTransfer")"
+        var fetchVehicleTypeClassUrl = "@Url.Action("GetVehicleTypeClass", "CompanyTransfer")"
+        var fetchAirportUrl = "@Url.Action("GetAirports", "Airport")"
+
+
+        var loadPartialUrlForTourScheduleAdditionalService = "@Url.Action("RefreshPartialView", "TourScheduleAdditionalService")"
+
+        var loadPartialUrlForTourScheduleHotel = "@Url.Action("RefreshPartialView", "HotelPackage")"
+    </script>
+    <script>
+        function SuccessRemove(data) {
+            if (data.Success) {
+                var sectionId = "#TourPackage" + data.SectionId;
+                $(sectionId).fadeOut(1200, function () { $(this).remove() });
+                //LoadPartialForTourPackage(data.TourId)
+            }
+        }
+        function SuccessRemoveTourSchedule(data) {
+            if (data.Success) {
+                var sectionId = "#TourSchedule" + data.SectionId;
+                $(sectionId).fadeOut(1200, function () { $(this).remove() });
+                //LoadPartialForTourPackage(data.TourId)
+            }
+        }
+        function SuccessRemoveTourPackage(data) {
+            if (data.Success) {
+                var sectionId = "#TourPackage" + data.SectionId;
+                $(sectionId).fadeOut(1200, function () { $(this).remove() });
+                //LoadPartialForTourPackage(data.TourId)
+            }
+        }
+        function Faild() {
+            //var $ = jQuery.noConflict();
+
+            $("#msgNotValidate").toggle("blind");
+            //$("#msgNotValidate").fadeOut(10000, function () { $(this).css("display", "none"); });
+            window.setTimeout(function () {
+                $("#msgNotValidate").fadeOut(1500, 0).slideUp(500, function () {
+                    $(this).css("display", "none");
+                });
+            }, 5000);
+
+        }
+
+
+        function LoadPartialForTourPackage(tourId) {
+            //debugger;
+            $.ajax({
+                url: loadPartialUrlForTourPackage,
+                type: 'GET',
+                cache: false,
+                data: { tourId: tourId },
+            }).done(function (result) {
+                $('#AddEditTourPackage').html(result);
+            });
+        }
+
+
+        function LoadPartialForTourSchedule(tourPackageId) {
+            //debugger;
+            //var $ = jQuery.noConflict();
+            var currentPackageId = $("#currentPackageId").val();
+            $.ajax({
+                url: loadPartialUrlForTourSchedule,
+                type: 'GET',
+                cache: false,
+                data: { TourPackageId: currentPackageId },
+            }).done(function (result) {
+                $('#AddEditTourSchedule').html(result);
+            });
+        }
+        function setCurrentPackageId(currentPId) {
+            $("#currentPackageId").val(currentPId);
+        }
+
+        function ChangeCurrency(data) {
+            var currencyTitle = $("#currency-tour-schedule option:selected").text();
+            var currencyVal = $("#currency-tour-schedule").val();
+            $("#frmTourSchedule #price-tour-schedule .input-group-addon.bootstrap-touchspin-prefix").html(currencyTitle)
+        }
+
+        function checkNonLimit(checkbox) {
+            if (checkbox.checked) {
+                $("#inputCapacity").attr("disabled", "disabled");
+                $("#inputCapacity").val(0);
+            }
+            else {
+                $("#inputCapacity").removeAttr('disabled');
+            }
+        }
+    </script>
+    <script>
+        var wndTourScheduleCompanyTransferModal = $("#TourScheduleCompanyTransferModal").kendoWindow({
+            title: "",
+            modal: true,
+            visible: false,
+            resizable: false,
+            width: 1500,
+            height: 700
+
+        }).data("kendoWindow");
+
+        function ShowModalTourScheduleCompanyTransfer() {
+            wndTourScheduleCompanyTransferModal.center();
+            wndTourScheduleCompanyTransferModal.open();
+        }
+
+        function Submit() {
+            wndTourScheduleCompanyTransferModal.close();
+        }
+
+        function checkNonLimitTourScheduleCompanyTransfer(checkbox) {
+            if (checkbox.checked) {
+                $("#inputCapacityTourScheduleCompanyTransfer").attr("disabled", "disabled");
+                $("#inputCapacityTourScheduleCompanyTransfer").val(0);
+            }
+            else {
+                $("#inputCapacityTourScheduleCompanyTransfer").removeAttr('disabled');
+            }
+        }
+
+        @*function FetchCompanyTransfer() {
+            var items = "";
+            var vehicleTypeId = $("#DDVehicleType").val();
+            if (vehicleTypeId == "") {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectVehicleType' + "</option>";
+                $("#DDCompanyTransfer").html(items);
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+            }
+            else {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+                var x = $.getJSON(fetchCompanyTransferUrl + "/" + vehicleTypeId, null, function (data) {
+                    $.each(data, function (i, item) {
+                        items += "<option value=\"" + item.Id + "\">" + item.Title + "</option>";
+                    });
+                    $("#DDCompanyTransfer").html(items);
+                });
+            }
+        }
+        $("#DDCompanyTransfer").trigger("change");*@
+
+
+        function FetchVehicleTypeClass(element) {
+            var selectedVehicleTypeId = element.options[element.selectedIndex].value;
+            var items = "";
+            if (selectedVehicleTypeId == "") {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectVehicleType' + "</option>";
+                $(element).closest(".CoTransferItem").find(".VehicleTypeClassId").html(items);
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+            }
+            else {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+                $.getJSON(fetchVehicleTypeClassUrl + "/" + selectedVehicleTypeId, null, function (data) {
+                    $.each(data, function (i, item) {
+                        items += "<option value=\"" + item.Id + "\">" + item.Title + "</option>";
+                    });
+                    $(element).closest(".CoTransferItem").find(".VehicleTypeClassId").html(items);
+                });
+            }
+           
+        }
+
+        function FetchCompanyTransfer(index) {
+            ////var $ = jQuery.noConflict();
+
+            var coId = "#DDCompanyTransfer" + index;
+            var vId = "#DDVehicleType" + index;
+
+            var items = "";
+            var vehicleTypeId = $(vId).val();
+
+            if (vehicleTypeId == "") {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectVehicleType' + "</option>";
+                $(coId).html(items);
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+            }
+            else {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+                var x = $.getJSON(fetchCompanyTransferUrl + "/" + vehicleTypeId, null, function (data) {
+                    $.each(data, function (i, item) {
+                        items += "<option value=\"" + item.Id + "\">" + item.Title + "</option>";
+                    });
+                    $(coId).html(items);
+                });
+            }
+
+            $(coId).trigger("change");
+        }
+
+        function FetchFromAirport(index) {
+            ////var $ = jQuery.noConflict();
+            var AirportId = "#DDFromAirport" + index;
+            var cityId = "#DDFromCity" + index;
+
+            var items = "";
+            var city = $(cityId).val();
+
+            if (city == "") {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectVehicleType' + "</option>";
+                $(AirportId).html(items);
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+            }
+            else {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+                var x = $.getJSON(fetchAirportUrl + "/" + city, null, function (data) {
+                    $.each(data, function (i, item) {
+                        items += "<option value=\"" + item.Id + "\">" + item.Title + "</option>";
+                    });
+                    $(AirportId).html(items);
+                });
+            }
+            $(AirportId).trigger("change");
+        }
+
+
+
+        function FetchDestinationAirport(index) {
+            ////var $ = jQuery.noConflict();
+            var AirportId = "#DDDestinationAirport" + index;
+            var cityId = "#DDDestinationCity" + index;
+
+            var items = "";
+            var city = $(cityId).val();
+
+            if (city == "") {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectVehicleType' + "</option>";
+                $(AirportId).html(items);
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+            }
+            else {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+                var x = $.getJSON(fetchAirportUrl + "/" + city, null, function (data) {
+                    $.each(data, function (i, item) {
+                        items += "<option value=\"" + item.Id + "\">" + item.Title + "</option>";
+                    });
+                    $(AirportId).html(items);
+                });
+            }
+            $(AirportId).trigger("change");
+
+        }
+
+
+
+
+
+        function SuccessRemoveForTourScheduleCompanyTransfer(data) {
+            if (data.Success) {
+                var sectionId = "#" + data.SectionId;
+                $(sectionId).fadeOut(1200, function () { $(this).remove() });
+                LoadPartialForTourScheduleCompanyTransfer(data.TourScheduleId)
+            }
+        }
+
+
+        function LoadPartialForTourScheduleCompanyTransfer(tourScheduleId) {
+            $.ajax({
+                url: loadPartialUrlForTourScheduleCompanyTransfer,
+                type: 'GET',
+                cache: false,
+                data: { tourScheduleId: tourScheduleId },
+            }).done(function (result) {
+                $('#AddEditTourScheduleCompanyTransfer').html(result);
+            });
+        }
+
+    </script>
+    <script>
+        var wndTourScheduleAdditionalServiceModal = $("#TourScheduleAdditionalServiceModal").kendoWindow({
+            title: "",
+            modal: true,
+            visible: false,
+            resizable: false,
+            width: 1000,
+            height: 500
+        }).data("kendoWindow");
+
+
+        function ShowModalTourScheduleAdditionalService() {
+            wndTourScheduleAdditionalServiceModal.center();
+            wndTourScheduleAdditionalServiceModal.open();
+        }
+
+        function Submit() {
+            wndTourScheduleAdditionalServiceModal.close();
+        }
+
+
+
+        function checkNonLimitTourScheduleAdditionalService(checkbox) {
+            if (checkbox.checked) {
+                $("#inputCapacityTourScheduleAdditionalService").attr("disabled", "disabled");
+                $("#inputCapacityTourScheduleAdditionalService").val(0);
+            }
+            else {
+                $("#inputCapacityTourScheduleAdditionalService").removeAttr('disabled');
+            }
+        }
+
+
+
+        function SuccessRemoveForTourScheduleAdditionalService(data) {
+            if (data.Success) {
+                var sectionId = "#" + data.SectionId;
+                $(sectionId).fadeOut(600, function () { $(this).remove() });
+                LoadPartialForTourScheduleAdditionalService(data.TourScheduleId)
+            }
+        }
+
+
+        function LoadPartialForTourScheduleAdditionalService(tourScheduleId) {
+            $.ajax({
+                url: loadPartialUrlForTourScheduleAdditionalService,
+                type: 'GET',
+                cache: false,
+                data: { tourScheduleId: tourScheduleId },
+            }).done(function (result) {
+                $('#AddEditTourScheduleAdditionalService').html(result);
+            });
+        }
+
+    </script>
+    <script>
+        var wndTourScheduleHotelModal = $("#TourScheduleHotelModal").kendoWindow({
+            title: "افزودن پکیج هتل",
+            modal: true,
+            visible: false,
+            resizable: false,
+            width: 1300,
+            height: 700
+        }).data("kendoWindow");
+
+
+        function ShowModalTourScheduleHotel() {
+            wndTourScheduleHotelModal.center();
+            wndTourScheduleHotelModal.open();
+        }
+
+        function Submit() {
+            wndTourScheduleHotelModal.close();
+        }
+
+        function SuccessRemoveForTourScheduleHotel(data) {
+            if (data.Success) {
+                var sectionId = "#HotelPackage" + data.SectionId;
+                ////var $ = jQuery.noConflict();
+                $(sectionId).fadeOut(600, function () { $(this).remove() });
+                //LoadPartialForTourScheduleHotel(data.TourPackageId, data.TourId)
+            }
+        }
+
+
+        function LoadPartialForTourScheduleHotel(TourPackageId, tourId) {
+            //var $ = jQuery.noConflict();
+            $.ajax({
+                url: loadPartialUrlForTourScheduleHotel,
+                type: 'GET',
+                cache: false,
+                data: { TourPackageId: TourPackageId },
+            }).done(function (result) {
+                //debugger;
+                $('#AddEditTourScheduleHotel').html(result);
+            });
+        }
+
+    </script>
+    <script>
+        function frmTourScheduleCompanyTransferSubmitSucceeded() {
+            wndTourScheduleCompanyTransferModal.close();
+        }
+
+        function frmTourScheduleAdditionalServiceSubmitSucceeded() {
+            wndTourScheduleAdditionalServiceModal.close();
+        }
+
+        function frmTourScheduleHotelRoomSubmitSucceeded(data) {
+            wndTourScheduleHotelModal.close();
+        }
+    </script>
+    <script>
+        function addTourSchCoTransfer() {
+
+            //var $ = jQuery.noConflict();
+
+            //debugger;
+            var i = parseInt(document.getElementById("CoTransferIndex").value) + 1;
+            document.getElementById("CoTransferIndex").value = i;
+
+
+            $.ajax({
+                url: "/Admin/TourSchedule/GetCoTransferPartial",
+                type: "Get",
+                contentType: "application/html; charset=utf-8",
+                dataType: "html",
+                data: {
+                    index: i
+                }
+            }).success(function (result) {
+                $("#CoTransferList").append(result);
+                BindElementJs();
+                $(".easy-autocomplete .eac-square").css("width", "100px !important");
+            });
+
+        }
+    </script>
+    <script>
+        function BindElementJs() {
+            // datepicker
+            $(".datepicker").mask('9999/99/99', { placeholder: "yyyy/MM/dd" })
+
+            // time
+            $(".DepartureTime").mask('99:99')
+            $(".ArrivalTime").mask("99:99");
+
+            //Select2
+            $('.select').select2({ dir: "RTL" });
+
+            $('#frmTourSchedule').removeData('validator');
+            $('#frmTourSchedule').removeData('unobtrusiveValidation');
+            $("#frmTourSchedule").each(function () { $.data($(this)[0], 'validator', false); }); //enable to display the error messages
+            $.validator.unobtrusive.parse("#frmTourSchedule");
+
+            //autocomplete
+            //$('.autocomplete').each(function (i) {
+
+            //    var options = {
+
+            //        url: function (phrase) {
+            //            return "/admin/city/getcities/?term=" + phrase;
+            //        },
+
+            //        getValue: function (element) {
+            //            return element.Title;
+            //        },
+
+            //        //template: {
+            //        //    type: "description",
+            //        //    fields: {
+            //        //        description: "Title"
+            //        //    }
+            //        //},
+
+            //        ajaxSettings: {
+            //            dataType: "json",
+            //            method: "Get",
+            //            data: {
+            //                dataType: "json"
+            //            }
+            //        },
+
+            //        list: {
+            //            onSelectItemEvent: function () {
+            //                // debugger;
+            //                var selectedItemValue = $(this).find('#FromCityTitle').getSelectedItemData().Id;
+            //                $(this).find("#FromCityId").val(selectedItemValue).trigger("change");
+            //            },
+            //            //onHideListEvent: function () {
+            //            //    $("#FromCityId").val("").trigger("change");
+            //            //}
+            //        },
+
+            //        preparePostData: function (data) {
+            //            data.phrase = $(this).find("#FromCityTitle").val();
+            //            return data;
+            //        },
+
+            //        requestDelay: 400,
+            //        theme: "square"
+            //    };
+            //    $(this).find("#FromCityTitle").easyAutocomplete(options);
+
+            //    var options = {
+
+            //        url: function (phrase) {
+            //            return "/admin/city/getcities/?term=" + phrase;
+            //        },
+
+            //        getValue: function (element) {
+            //            return element.Title;
+            //        },
+
+            //        //template: {
+            //        //    type: "description",
+            //        //    fields: {
+            //        //        description: "Title"
+            //        //    }
+            //        //},
+
+            //        ajaxSettings: {
+            //            dataType: "json",
+            //            method: "Get",
+            //            data: {
+            //                dataType: "json"
+            //            }
+            //        },
+
+            //        list: {
+            //            onSelectItemEvent: function () {
+            //                var selectedItemValue = $(this).find("#DestinationCityTitle").getSelectedItemData().Id;
+            //                $(this).find("#DestinationCityId").val(selectedItemValue).trigger("change");
+            //            },
+            //            //onHideListEvent: function () {
+            //            //    $("#DestinationCityId").val("").trigger("change");
+            //            //}
+            //        },
+
+            //        preparePostData: function (data) {
+            //            data.phrase = $(this).find("#DestinationCityTitle").val();
+            //            return data;
+            //        },
+
+            //        requestDelay: 400,
+            //        theme: "square"
+            //    };
+            //    $(this).find("#DestinationCityTitle").easyAutocomplete(options);
+
+            //});
+
+        }
+
+         @*$("#SelectedTourId").change(function FetchState() {
+             debugger;
+             var items = "";
+             var selectedId = $("#SelectedTourId").val();
+             if (selectedId == "") {
+                 items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+                 $("#SelectedTourPackageId").html(items);
+             }
+             else {
+                 items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+                 var x = $.getJSON("/Admin/TourPackage/FindTourPackageByTourId/" + selectedId, function (data) {
+                     debugger;
+                     $.each(data, function (i, item) {
+                         debugger;
+                         items += "<option value=\"" + item.Value + "\" " + ((item.Selected == true) ? "Selected" : "") + " >" + item.Text + "</option>";
+                     });
+                     $("#SelectedTourPackageId").html(items);
+                 });
+             }
+         });*@
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+

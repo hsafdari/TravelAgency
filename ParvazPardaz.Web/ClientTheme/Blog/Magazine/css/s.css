@@ -1,0 +1,320 @@
+@media screen and  (max-width: 719px) {
+  .sectionTitle {
+    font-size: 25px;
+    margin-bottom: 0px;
+  }
+  .dots {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+  }
+  .dots li {
+    margin: 0;
+    display: block;
+  }
+  header {
+    height: 100px;
+    width: calc(100% - 20px);
+    padding: 10px;
+    overflow: visible;
+    z-index: 999999;
+  }
+  header #logo {
+    width: 150px;
+    height: 100px;
+    float: left;
+  }
+  header #logo *{
+    object-position: left;
+  }
+  header nav {
+    position: fixed;
+    top: 95px;
+    right: -150%;
+    padding-right: 30px;
+    width: 300px;
+    background: white;
+    z-index: 999999;
+    transition: .3s cubic-bezier(0, 0.87, 0.42, 1.18);
+    box-shadow: 0 0 5px 0 #00000080;
+  }
+  header nav.active {
+    right: -30px;
+  }
+  header nav.active a {
+    width: 90%;
+  }
+  header button,
+  header input[type="submit"]{
+    width: 60px;
+    height: 60px;
+    background: whitesmoke;
+    background-size: 80% !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    margin: 20px 0;
+    margin-left: 10px;
+    float: right;
+    border:0;
+    outline: 0;
+  }
+  header button[name="hamburger"]{
+    background: url('../img/icons/icon-hamburger.svg')
+  }
+  header button[name="hamburger"].active,
+  header button[name="closeSearch"]{
+    background: url('../img/icons/icon-close.svg')
+  }
+  header button[name="search"],
+  header input[type="submit"]{
+    background: url('../img/icons/icon-magnifier.svg')
+  }
+  .searchModule {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: white;
+    height: 60px;
+    width: calc(100% - 60px);
+    padding: 30px;
+    display: none;
+  }
+  .searchModule *{
+    margin: 0 !important;
+  }
+  .searchModule.active {
+    display: block;
+  }
+  .searchModule form {
+    width: calc(100% - 60px);
+    height: 60px;
+    float: left;
+  }
+  .searchModule form * {
+    height: 60px;
+    background: white;
+    border: 0;
+    outline: 0;
+    display: inline-block;
+    float: right;
+  }
+  .searchModule form input[type="text"] {
+    width: calc(100% - 80px);
+    margin: 0 10px !important;
+    padding: 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .main.slider {
+    padding-top: 100%;
+    margin-bottom: 30px;
+  }
+  .main.slider > button{
+    display: none;
+  }
+  .main.slider .slide .slide-card {
+    width: calc(100% - 40px);
+    left: 10px;
+    padding: 10px;
+    padding-bottom: 20px;
+    bottom: -20px;
+    text-align: center;
+  }
+  .main.slider .slide .slide-card h2 {
+    padding-bottom: 5px;
+    font-size: 16px;
+    font-weight: normal;
+    height: auto;
+    line-height: 22px;
+  }
+  .main.slider .slide .slide-card p {
+    display: none;
+  }
+  .main.slider .slide .slide-card a {
+    float: none;
+    margin: 10px 0;
+    display: inline-block;
+  }
+  .main.roll .cards {
+    width: calc(100% + (100% / 3));
+    margin-right: calc((100% / 6)* -1);
+  }
+  .main.roll a{
+    width: calc((100% / 3) - 10px) ;
+    padding-top: calc((100% / 1.5) / 100 * 56.25);
+  }
+  .main.roll a h2 {
+    top: 20px;
+    width: calc(100% - 10px);
+    left: 5px;
+    height: auto;
+    line-height: 17px;
+  }
+  .main.roll a:after {
+    left: 5px;
+    bottom: 5px;
+    width: calc(100% - 10px);
+  }
+  .main.search form {
+    padding: 10px;
+    font-size: 0;
+  }
+  .main.search form input[type=text] {
+    margin-left: 10px;
+    width: calc(100% - 100px);
+  }
+  .main.search form input.btn-1 {
+    width: 90px;
+  }
+  .masonery {
+    grid-template-columns: 1fr !important;
+    width: calc(100% - 20px);
+    max-width: 1300px;
+    margin: 30px auto;
+  }
+  .masonery.gallery .small h3,
+  .masonery.gallery .big h3,
+  .masonery.gallery .tall h3 {
+    font-size: 20px;
+  }
+  .masonery .small,
+  .masonery .big,
+  .masonery .tall {
+    grid-column: auto / span 1 !important;
+    grid-row: auto / span 1 !important;
+    padding-bottom: calc( 100% / (var(--grid-aspect-ratio))) !important;
+  }
+  .masonery.articles .small,
+  .masonery.articles .big,
+  .masonery.articles .tall {
+    padding-bottom: calc( 200% / (var(--grid-aspect-ratio))) !important;
+  }
+
+  .main.article > *,
+  .main.similar,
+  .main.comments,
+  .main.article > img:first-of-type {
+    width: calc(100% - 20px);
+    max-width: inherit;
+  }
+  .main.article img {
+    width: auto;
+    max-width: calc(100% - 20px);
+  }
+  .main.article .author {
+    padding: 20px;
+    width: calc(100% - 60px);
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns:  1fr;
+    grid-template-rows: 80px auto;
+    grid-gap: 20px;
+  }
+  .main.article .author img {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+  }
+  .main.article .author p {
+    line-height: 20px;
+    font-weight: 300;
+    grid-area: unset;
+  }
+  .main.article h1 {
+    font-size: 25px;
+    margin: 25px auto;
+  }
+  .main.article h2 {
+    margin-top: 10px;
+  }
+  .main.article hr {
+    margin: 30px auto;
+  }
+  .main.article p,
+  .main.article li {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 29px;
+  }
+  .main.article strong,
+  .main.article b {
+    font-weight: 500;
+  }
+
+
+
+
+
+
+
+  footer .wrapper {
+    width: calc(100% - 20px);
+  }
+  footer .join {
+    height: auto;
+    padding: 20px 0;
+  }
+  footer .subscription {
+    float: none;
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows: auto 50px 50px;
+    height: auto;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+  footer .subscription >* {
+    grid-column: span 1;
+    grid-row: span 1;
+    width: calc(100% - 10px);
+    height: auto;
+    min-height: 40px;
+    padding: 5px !important;
+  }
+  footer .social {
+    float: none;
+    width: 300px;
+    margin: 0 auto;
+    justify-content: space-around;
+  }
+  footer .social li {
+    margin-right: 0;
+  }
+  footer > .wrapper.details {
+    display: grid;
+    grid-auto-columns: unset;
+    grid-template-columns: 1fr 1fr;
+    /* grid-template-rows: auto repeat(2, 1fr); */
+    grid-auto-flow: row;
+    grid-gap:  20px 0;
+    justify-content: space-between;
+  }
+  footer .info {
+    grid-column: 1/-1;
+    padding: 0;
+    padding-top: 20px;
+  }
+  footer .sitemap {
+    grid-column: span 2;
+    padding: 0;
+  }
+  footer .sitemap a {
+    width: auto;
+    display: block;
+    text-align: center;
+  }
+  footer .authorizations {
+    grid-column: span 2;
+    height: 150px;
+    padding: 0;
+    padding-bottom: 20px;
+  }
+
+
+
+
+
+
+
+}

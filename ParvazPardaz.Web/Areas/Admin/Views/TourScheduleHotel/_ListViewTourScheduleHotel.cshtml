@@ -1,0 +1,47 @@
+﻿@model  ListViewTourScheduleHotelViewModel
+
+
+@Html.HiddenFor(model => model.TourScheduleId)
+<div class="well nopadding " id="@Model.SectionId">
+    <div class="row nomargin">
+        <div class="col-md-11">
+            <div class="col-md-2 nopadding left-column" style="margin-top:0.5%">
+                @*@Html.Label(ParvazPardaz.Resource.Tour.Tours.DayOrder + " : ")
+            @Html.DisplayFor(model => model.DayOrder)*@
+            </div>
+            <div class="col-md-6 nopadding center-culomn text-left">
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.Label(ParvazPardaz.Resource.Tour.Tours.HotelTitle + " : ")
+                                @Html.DisplayFor(model => model.HotelTitle)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-2 right-culomn" style="margin-top:0.5%">
+                @Ajax.ActionLink("Edit", "Edit", "TourScheduleHotel", new { id = Model.Id }, new AjaxOptions()
+                           {
+                               InsertionMode = InsertionMode.Replace,
+                               HttpMethod = "GET",
+                               UpdateTargetId = "AddEditTourScheduleHotel"
+                           }, new { @class = "btn btn-sm btn-blue" })
+
+                @Ajax.ActionLink("Remove", "Delete", "TourScheduleHotel", new { id = Model.Id, sectionId = Model.SectionId, tourScheduleId = Model.TourScheduleId, tourId = Model.TourId },
+                new AjaxOptions()
+                         {
+                             OnSuccess = "SuccessRemoveForTourScheduleHotel",
+                             HttpMethod = "POST",
+                         }, new { @class = "btn btn-sm btn-red" })
+             </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+

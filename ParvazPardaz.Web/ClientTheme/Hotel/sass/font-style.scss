@@ -1,0 +1,21 @@
+@import "font/iransans.scss";
+// @import "font/samim.scss";
+// @import "font/iranyekan.scss";
+
+
+$class-font: FS !default;
+
+@for $i from 0 to 40 {
+    .#{$class-font}-#{$i}{ font-size: #{$i / 16}rem !important}
+  }
+
+
+  @mixin font-size($sizeValue: 16) {
+    font-size: ($sizeValue / 16 ) + rem ;
+  }
+
+
+
+  .test{
+    @include font-size(16);
+  }

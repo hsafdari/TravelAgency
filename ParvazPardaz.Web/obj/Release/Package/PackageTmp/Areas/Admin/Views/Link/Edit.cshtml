@@ -1,0 +1,212 @@
+﻿@model ParvazPardaz.ViewModel.EditLinkViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+<style>
+    #URLspan {
+        direction: ltr !important;
+        text-align: left !important;
+    }
+</style>
+@*@using (Html.BeginForm())
+    {*@
+@using (Ajax.BeginForm("Edit", "Link", null, new AjaxOptions() { HttpMethod = "POST", OnBegin = "checkForm", OnSuccess = "SuccessSave" }, new { id = "frm-link" }))
+{
+    @*@using (Ajax.BeginForm("Edit", "Link", null, new AjaxOptions() { HttpMethod = "POST" }, new { id = "frm-link" }))*@
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.Link.LinkResource.LinkManagement </h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.typeId)
+        @Html.HiddenFor(model => model.linkType)
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.typeId, new { @class = "control-label col-md-2" })
+                <div class="col-md-3 number">
+                    @Html.EditorFor(model => model.typeId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.typeId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.URL, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div id="URLspan" class="text-left">@Model.URL</div>
+                @Html.HiddenFor(x => x.URL)
+                @*@Html.TextBoxFor(model => model.URL, new { @class = "form-control"})*@
+                @*<input type="text" disabled />*@
+                @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ControllerUrl, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.ControllerUrl, new { @class = "form-control", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.ControllerUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrefixUrl, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.PrefixUrl, new { @class = "form-control", @onkeyup = "makeUrl()" })
+                @Html.ValidationMessageFor(model => model.PrefixUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndUrl, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.EndUrl, new { @class = "form-control", @onkeyup = "makeUrl()" })
+                @Html.ValidationMessageFor(model => model.EndUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Target, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+
+                @Html.DropDownListFor(d => d.Target, Model.TargetDDL, ParvazPardaz.Resource.General.Generals.DDLSelect, new { id = "Target,", @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.Target, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rel, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(d => d.Rel, Model.RelDDL, ParvazPardaz.Resource.General.Generals.DDLSelect, new { id = "Rel,", @class = "form-control" })
+                @*@Html.TextBoxFor(model => model.Rel, new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.Rel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Keywords, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextAreaFor(model => model.Keywords, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Keywords, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Visible, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+
+                @Html.CheckBoxFor(model => model.Visible, new { @class = "flat-red", style = "margin-right:50px; margin-left:50px;" })
+                @Html.ValidationMessageFor(model => model.Visible, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.linkType, new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.linkType, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.linkType,"", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Changefreq, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EnumDropDownListFor(model => model.Changefreq, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Changefreq, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Priority, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomMetaTags, new { @class = "control-label col-md-2" })
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.CustomMetaTags, new { @class = "form-control", style="direction:ltr;" })
+                @Html.ValidationMessageFor(model => model.CustomMetaTags, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @*@Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })*@
+            </div>
+        </div>
+    </div>
+}
+
+@Html.Partial("_Toastr")
+<script>
+    $(document).ready(function () {
+        $("#frm-link").removeData("validator");
+        $("#frm-link").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frm-link");
+
+    });
+    function makeUrl() {
+       
+        var controllerUrl = $("#ControllerUrl").val();
+
+        var prefixUrl = $("#PrefixUrl").val();
+
+        var firstEndUrl = $("#EndUrl").val();
+        var endUrl = firstEndUrl.split('+').join('').split('*').join('').split('/').join('').split('\\').join('').split(' ').join('-');
+        var url;
+        if (prefixUrl!="") {
+            url = "/" + controllerUrl + "/" + prefixUrl + "/" + endUrl + "/";
+        }
+        else {
+            url = "/" + controllerUrl  + "/" + endUrl + "/";
+        }
+       
+        $("#URL").val(url);
+        $("#URLspan").text(url);
+
+    }
+    function checkForm() {
+    }
+    function SuccessSave(result) {
+        if (result == "update") {
+            window.location.href = "/admin/link/index?msg=update";
+        }
+        else if (result == "duplicate") {
+            toastr.options = { "positionClass": "toast-top-center" }
+            toastr.error('@ParvazPardaz.Resource.General.Generals.DuplicateAlert', '@ParvazPardaz.Resource.General.Generals.DuplicateTitle', { timeOut: 5000 })
+        }
+    }
+</script>

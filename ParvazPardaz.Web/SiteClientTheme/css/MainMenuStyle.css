@@ -1,0 +1,125 @@
+﻿.transparent-menu {
+    border-top: 5px solid #223871 !important;
+    background: #EAEAEA !important;
+    color: black !important;
+}
+
+    .transparent-menu .navbar-nav > li > section > a, .navbar-default .navbar-nav > li > a {
+        /*color: black !important;*/
+    }
+
+        .transparent-menu .navbar-nav > li > section > a:hover, .navbar-default .navbar-nav > li > a:hover {
+            color: #00A694 !important;
+            background-color: white !important;
+        }
+
+.mega-menu {
+    width: 100% !important;
+}
+
+.navbar-collapse {
+    width: 1170px !important;
+}
+
+.dropdown-menu li {
+    padding-right: 40px;
+}
+
+.mainMenu {
+    background-color: #00A694 !important;
+}
+
+.dropdown-menu {
+    top: 114% !important;
+}
+
+.transparent-menu .navbar-nav > li > section {
+    padding: 17px 10px !important;
+}
+
+.transparent-menu .dropdown-menu {
+    background-color: White !important;
+}
+
+.nav-container .mega-menu .links h5, .nav-container .mega-menu .links a, .mega-menu .links a:hover, .nav-container .mega-menu .links li::before {
+    color: #00A694 !important;
+}
+
+.transparent-menu .navbar-nav > li > section:hover {
+    background-color: white !important;
+}
+
+    .transparent-menu .navbar-nav > li > section:hover > a {
+        color: #00A694 !important;
+    }
+
+.dropdown:hover .dropdown-menu {
+    box-shadow: 3px 3px #BCBCBC;
+}
+
+.transparent-menu {
+    padding: 0px !important;
+}
+
+.font15 {
+    color: #00A694 !important;
+}
+
+.topMenu {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/****search ***/
+#imaginary_container {
+    /*max-width: 500px !important;*/
+    /*display: inline-block;*/
+}
+
+.stylish-input-group .input-group-addon {
+    background: white !important;
+}
+
+.stylish-input-group .form-control {
+    border-right: 0;
+    box-shadow: 0 0 0;
+    border-color: #ccc;
+}
+
+.stylish-input-group button {
+    border: 0;
+    background: transparent;
+}
+
+.stylish-input-group {
+    width: 100% !important;
+}
+
+.fa {
+    font-family: FontAwesome !important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #223871 !important;
+}
+
+.transparent-menu .navbar-default .navbar-toggle .icon-bar {
+    background: #223871 !important;
+}
+
+.navbar-header a {
+    color: #223871 !important;
+}
+
+.navbar-toggle {
+    margin: 0px !important;
+}
+
+header {
+    position: fixed !important;
+    direction: rtl !important;
+}
+
+.content-body {
+    margin-top: 9% !important;
+}

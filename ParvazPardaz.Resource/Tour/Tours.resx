@@ -1,0 +1,864 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Activity" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="ActivityManagment" xml:space="preserve">
+    <value>Activity Managment</value>
+  </data>
+  <data name="AddActivity" xml:space="preserve">
+    <value>Add Activity</value>
+  </data>
+  <data name="AddAdditionalService" xml:space="preserve">
+    <value>Add Additional Service</value>
+  </data>
+  <data name="AddAllowedBanned" xml:space="preserve">
+    <value>Add Allowed Banned</value>
+  </data>
+  <data name="AddCity" xml:space="preserve">
+    <value>Add City</value>
+  </data>
+  <data name="AddCompanyTransfer" xml:space="preserve">
+    <value>Add Company Transfer</value>
+  </data>
+  <data name="AddCompanyTransferVehicleType" xml:space="preserve">
+    <value>Add Company TransferVehicle Type</value>
+  </data>
+  <data name="AddCountry" xml:space="preserve">
+    <value>Add Country</value>
+  </data>
+  <data name="AddCurrency" xml:space="preserve">
+    <value>Add Currency</value>
+  </data>
+  <data name="AddHotel" xml:space="preserve">
+    <value>Add Hotel</value>
+  </data>
+  <data name="AddHotelFacility" xml:space="preserve">
+    <value>Add Hotel Facility</value>
+  </data>
+  <data name="AddHotelRank" xml:space="preserve">
+    <value>Add Hotel Rank</value>
+  </data>
+  <data name="AddItinerary" xml:space="preserve">
+    <value>Add Itinerary</value>
+  </data>
+  <data name="AdditionalService" xml:space="preserve">
+    <value>Additional Service</value>
+  </data>
+  <data name="AdditionalServiceManagement" xml:space="preserve">
+    <value>Additional service management</value>
+  </data>
+  <data name="AddLeader" xml:space="preserve">
+    <value>Add Leader</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AddState" xml:space="preserve">
+    <value>Add State</value>
+  </data>
+  <data name="AddTour" xml:space="preserve">
+    <value>AddTour</value>
+  </data>
+  <data name="AddTourCategory" xml:space="preserve">
+    <value>Add Tour Category</value>
+  </data>
+  <data name="AddTourLevel" xml:space="preserve">
+    <value>Add Tour Level</value>
+  </data>
+  <data name="AddTourType" xml:space="preserve">
+    <value>Add Tour Type</value>
+  </data>
+  <data name="AddVehicleType" xml:space="preserve">
+    <value>AddVehicleType</value>
+  </data>
+  <data name="AllowedBanned" xml:space="preserve">
+    <value>Allowed Banned</value>
+  </data>
+  <data name="AllowedBannedManagement" xml:space="preserve">
+    <value>Allowed and Banned Management</value>
+  </data>
+  <data name="Allows" xml:space="preserve">
+    <value>Allows</value>
+  </data>
+  <data name="Bans" xml:space="preserve">
+    <value>Bans</value>
+  </data>
+  <data name="CityManagement" xml:space="preserve">
+    <value>City management</value>
+  </data>
+  <data name="CityTitle" xml:space="preserve">
+    <value>City Title</value>
+  </data>
+  <data name="CompanyTransfer" xml:space="preserve">
+    <value>Company Transfer</value>
+  </data>
+  <data name="CompanyTransferManagement" xml:space="preserve">
+    <value>Company Transfer Management</value>
+  </data>
+  <data name="CompanyTransferVehicleType" xml:space="preserve">
+    <value>Company Transfer Vehicle Type</value>
+  </data>
+  <data name="CompanyTransferVehicleTypeManagement" xml:space="preserve">
+    <value>Company Transfer Vehicle Management</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CountryManagement" xml:space="preserve">
+    <value>Country management</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="CurrencyManagement" xml:space="preserve">
+    <value>Currency management</value>
+  </data>
+  <data name="DayOrder" xml:space="preserve">
+    <value>DayOrder</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DurationDay" xml:space="preserve">
+    <value>DurationDay</value>
+  </data>
+  <data name="EditHotelGallery" xml:space="preserve">
+    <value>Edit Hotel Gallery</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="FromCity" xml:space="preserve">
+    <value>FromCity</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Full name</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="GoToIndex" xml:space="preserve">
+    <value>Go To Index</value>
+  </data>
+  <data name="Hotel" xml:space="preserve">
+    <value>Hotel</value>
+  </data>
+  <data name="HotelFacility" xml:space="preserve">
+    <value>Hotel Facility</value>
+  </data>
+  <data name="HotelFacilityManagement" xml:space="preserve">
+    <value>Hotel Facility Management</value>
+  </data>
+  <data name="HotelGalleryManagement" xml:space="preserve">
+    <value>Hotel Gallery Management</value>
+  </data>
+  <data name="HotelManagement" xml:space="preserve">
+    <value>Hotel Management</value>
+  </data>
+  <data name="HotelRank" xml:space="preserve">
+    <value>Hotel Rank</value>
+  </data>
+  <data name="HotelRankManagement" xml:space="preserve">
+    <value>Hotel Rank Management</value>
+  </data>
+  <data name="HotelRankManagment" xml:space="preserve">
+    <value>Hotel Rank Managment</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ImageFileName" xml:space="preserve">
+    <value>Image file name</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="Leader" xml:space="preserve">
+    <value>Leader</value>
+  </data>
+  <data name="LeaderManagement" xml:space="preserve">
+    <value>Leader Management</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="ModelName" xml:space="preserve">
+    <value>Model name</value>
+  </data>
+  <data name="NonLimit" xml:space="preserve">
+    <value>Non Limit</value>
+  </data>
+  <data name="Place" xml:space="preserve">
+    <value>Place</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="StartDateTime" xml:space="preserve">
+    <value>Departure</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="StateManagement" xml:space="preserve">
+    <value>State management</value>
+  </data>
+  <data name="Tel" xml:space="preserve">
+    <value>Tel</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Tour" xml:space="preserve">
+    <value>Tour</value>
+  </data>
+  <data name="TourCategory" xml:space="preserve">
+    <value>Tour Category</value>
+  </data>
+  <data name="TourCategoryManagement" xml:space="preserve">
+    <value>Tour Category Management</value>
+  </data>
+  <data name="TourCode" xml:space="preserve">
+    <value>Tour Code</value>
+  </data>
+  <data name="TourLevel" xml:space="preserve">
+    <value>Tour Level</value>
+  </data>
+  <data name="TourLevelManagement" xml:space="preserve">
+    <value>Tour Level Management</value>
+  </data>
+  <data name="TourType" xml:space="preserve">
+    <value>Tour Type</value>
+  </data>
+  <data name="TourTypeManagement" xml:space="preserve">
+    <value>Tour Type Management</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transaction</value>
+  </data>
+  <data name="TransactionManagement" xml:space="preserve">
+    <value>Transaction Management</value>
+  </data>
+  <data name="UpdateItinerary" xml:space="preserve">
+    <value>Update Itinerary</value>
+  </data>
+  <data name="VehicleType" xml:space="preserve">
+    <value>Vehicle Type</value>
+  </data>
+  <data name="VehicleTypeMangement" xml:space="preserve">
+    <value>Vehicle Type Mangement</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Sale" xml:space="preserve">
+    <value>Sale</value>
+  </data>
+  <data name="SaleManagement" xml:space="preserve">
+    <value>SaleManagement</value>
+  </data>
+  <data name="TourManagement" xml:space="preserve">
+    <value>TourManagement</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="TourTitle" xml:space="preserve">
+    <value>Tour Title</value>
+  </data>
+  <data name="HotelTitle" xml:space="preserve">
+    <value>Hotel Title</value>
+  </data>
+  <data name="HotelRoom" xml:space="preserve">
+    <value>Hotel Room</value>
+  </data>
+  <data name="HotelRoomManagement" xml:space="preserve">
+    <value>Hotel Room Management</value>
+  </data>
+  <data name="TourSchedule" xml:space="preserve">
+    <value>Tour Schedule</value>
+  </data>
+  <data name="SoldQuantity" xml:space="preserve">
+    <value>Sold Quantity</value>
+  </data>
+  <data name="DurationTime" xml:space="preserve">
+    <value>Duration Time</value>
+  </data>
+  <data name="DestinationCity" xml:space="preserve">
+    <value>Destination City</value>
+  </data>
+  <data name="SelectCompanyTransfer" xml:space="preserve">
+    <value>--- Select Company Transfer ---</value>
+  </data>
+  <data name="SelectVehicleType" xml:space="preserve">
+    <value>--- Select Vehicle Type ---</value>
+  </data>
+  <data name="AddSchedule" xml:space="preserve">
+    <value>Add Schedule</value>
+  </data>
+  <data name="UpdateSchedule" xml:space="preserve">
+    <value>Update Schedule</value>
+  </data>
+  <data name="AddFlight" xml:space="preserve">
+    <value>Add Flight</value>
+  </data>
+  <data name="BookNow" xml:space="preserve">
+    <value>Book Now</value>
+  </data>
+  <data name="ArrivalTime" xml:space="preserve">
+    <value>ArrivalTime</value>
+  </data>
+  <data name="DepartureTime" xml:space="preserve">
+    <value>Departure Time</value>
+  </data>
+  <data name="FAQManagement" xml:space="preserve">
+    <value>FAQ Management</value>
+  </data>
+  <data name="Answer" xml:space="preserve">
+    <value>Answer</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Active?</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="HeaderImage" xml:space="preserve">
+    <value>Header Image</value>
+  </data>
+  <data name="ImagesGallery" xml:space="preserve">
+    <value>Images Gallery</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="ExpireDate" xml:space="preserve">
+    <value>Expire Date</value>
+  </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>From Date</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>To Date</value>
+  </data>
+  <data name="ArrivalDate" xml:space="preserve">
+    <value>Arrival Date</value>
+  </data>
+  <data name="DepartureDate" xml:space="preserve">
+    <value>Departure Date</value>
+  </data>
+  <data name="ShortDescription" xml:space="preserve">
+    <value>Short Description</value>
+  </data>
+  <data name="SelectPic" xml:space="preserve">
+    <value>Select Picture</value>
+  </data>
+  <data name="Shareit" xml:space="preserve">
+    <value>Share It</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="Transportation" xml:space="preserve">
+    <value>Transportation</value>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="AddFAQ" xml:space="preserve">
+    <value>Add FAQ</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="LatLongIframe" xml:space="preserve">
+    <value>Google map</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="IsPrimary" xml:space="preserve">
+    <value>Is Primary?</value>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="Person" xml:space="preserve">
+    <value>Person</value>
+  </data>
+  <data name="PersonUnit" xml:space="preserve">
+    <value>Person</value>
+  </data>
+  <data name="VehicleTypeId" xml:space="preserve">
+    <value>Vehicle Type</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="DateTitle" xml:space="preserve">
+    <value>DateTitle</value>
+  </data>
+  <data name="OwnerId" xml:space="preserve">
+    <value>OwnerId</value>
+  </data>
+  <data name="AddTourPackage" xml:space="preserve">
+    <value>AddTourPackage</value>
+  </data>
+  <data name="UpdateTourPackage" xml:space="preserve">
+    <value>UpdateTourPackage</value>
+  </data>
+  <data name="TourPackageTitle" xml:space="preserve">
+    <value>TourPackageTitle</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="addhotelPackage" xml:space="preserve">
+    <value>addhotelPackage</value>
+  </data>
+  <data name="OrderHotelPackage" xml:space="preserve">
+    <value>OrderHotelPackage</value>
+  </data>
+  <data name="FlightClass" xml:space="preserve">
+    <value>FlightClass</value>
+  </data>
+  <data name="FlightNumber" xml:space="preserve">
+    <value>FlightNumber</value>
+  </data>
+  <data name="Recomended" xml:space="preserve">
+    <value>Is Active?</value>
+  </data>
+  <data name="FromPrice" xml:space="preserve">
+    <value>Starting Price</value>
+  </data>
+  <data name="IataCode" xml:space="preserve">
+    <value>IATA Code</value>
+  </data>
+  <data name="ManagementAirport" xml:space="preserve">
+    <value>Management Of Airports</value>
+  </data>
+  <data name="ENTitle" xml:space="preserve">
+    <value>Title (en)</value>
+  </data>
+  <data name="AddAirport" xml:space="preserve">
+    <value>Add Airport</value>
+  </data>
+  <data name="Airports" xml:space="preserve">
+    <value>Airports</value>
+  </data>
+  <data name="ManagementTourRequiredDocs" xml:space="preserve">
+    <value>Management of Tours Required Documents</value>
+  </data>
+  <data name="AddRequiredDocs" xml:space="preserve">
+    <value>Add Required Document</value>
+  </data>
+  <data name="RequiredDocuments" xml:space="preserve">
+    <value>Required Documents</value>
+  </data>
+  <data name="DayTitle" xml:space="preserve">
+    <value>Day Title</value>
+  </data>
+  <data name="PicSizeActivity" xml:space="preserve">
+    <value>Picture size in width 447 and height 342.</value>
+  </data>
+  <data name="PicSizeHotel" xml:space="preserve">
+    <value>picture in width 700 and height 525.</value>
+  </data>
+  <data name="PicSizeTourPrimarySlider" xml:space="preserve">
+    <value>Picture size in width 835 and height 500. </value>
+  </data>
+  <data name="PicSize200x200" xml:space="preserve">
+    <value>Picture size in width 200 and height 200.</value>
+  </data>
+  <data name="PicSizeSlider" xml:space="preserve">
+    <value>Picture size in width 1280 and height 573.</value>
+  </data>
+  <data name="URL" xml:space="preserve">
+    <value>Link 404 Address</value>
+  </data>
+  <data name="ManagementNotFountLinks" xml:space="preserve">
+    <value>Management Of Not Fount Links 404</value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="SeoText" xml:space="preserve">
+    <value>Seo text</value>
+  </data>
+  <data name="UsedForTabMagazineSeo" xml:space="preserve">
+    <value>متن سئو در تب های مجله گردشگری مورد استفاده قرار خواهد گرفت</value>
+  </data>
+  <data name="ManagementHotelRules" xml:space="preserve">
+    <value>Management of hotel rules</value>
+  </data>
+  <data name="LinkTableTitle" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="LastSecondTour" xml:space="preserve">
+    <value>Last Second Tour </value>
+  </data>
+  <data name="ManagementContentGroup" xml:space="preserve">
+    <value>Management Of Content Groups</value>
+  </data>
+  <data name="AddLastSecondTour" xml:space="preserve">
+    <value>Add Last Second Tour</value>
+  </data>
+  <data name="ManagementLastSecondTours" xml:space="preserve">
+    <value>Management Of Last Second Tours</value>
+  </data>
+  <data name="PicSizeLastSecondTour" xml:space="preserve">
+    <value>&lt;strong&gt;Notice!&lt;/strong&gt; Picture size in width &lt;code&gt;447&lt;/code&gt;and height &lt;code&gt;342&lt;/code&gt; pixel</value>
+  </data>
+  <data name="IsAvailable" xml:space="preserve">
+    <value>Is available for select?</value>
+  </data>
+  <data name="TourLandingPageUrlPatternForGeneralTour" xml:space="preserve">
+    <value>/tour/country-city-season-airfloot/</value>
+  </data>
+  <data name="UseThisTourLandingPageUrlPattern" xml:space="preserve">
+    <value>لطفا URL را مطابق الگوی زیر ، با استفاده از کلمات انگلیسی و (نگارش صحیح) بسازید</value>
+  </data>
+  <data name="TourLandingPage" xml:space="preserve">
+    <value>Tour Landing Page</value>
+  </data>
+  <data name="UrlRequired" xml:space="preserve">
+    <value>Select tour's url</value>
+  </data>
+  <data name="UsedInTour" xml:space="preserve">
+    <value>Used In Tour</value>
+  </data>
+  <data name="IsSummary" xml:space="preserve">
+    <value>Make fast?</value>
+  </data>
+  <data name="DestinationAirport" xml:space="preserve">
+    <value>Destination Airport</value>
+  </data>
+  <data name="FromAirport" xml:space="preserve">
+    <value>From Airport</value>
+  </data>
+  <data name="LandingPageUrlType" xml:space="preserve">
+    <value>Tour url type</value>
+  </data>
+  <data name="DiscountedTour" xml:space="preserve">
+    <value>Discounted Tour</value>
+  </data>
+  <data name="GeneralTour" xml:space="preserve">
+    <value>General Tour</value>
+  </data>
+  <data name="ForDiscountTour" xml:space="preserve">
+    <value>For discount tour</value>
+  </data>
+  <data name="ForGeneralTour" xml:space="preserve">
+    <value>For general tour</value>
+  </data>
+  <data name="TourLandingPageUrlPatternForDiscountTour" xml:space="preserve">
+    <value>/tour/country-city-airfloot-offer/</value>
+  </data>
+  <data name="ManagementHotelBoard" xml:space="preserve">
+    <value>Management of Hotel Board</value>
+  </data>
+  <data name="HotelBoard" xml:space="preserve">
+    <value>Hotel Board</value>
+  </data>
+  <data name="FetchTours" xml:space="preserve">
+    <value>Display Tours</value>
+  </data>
+  <data name="TourPriorityManagement" xml:space="preserve">
+    <value>Tour Priority Management</value>
+  </data>
+  <data name="SelectAtLeastOneElement" xml:space="preserve">
+    <value>Select At Least One Element</value>
+  </data>
+  <data name="TourGroup" xml:space="preserve">
+    <value>Tour Group</value>
+  </data>
+  <data name="FetchToursByTourGroup" xml:space="preserve">
+    <value>Fetch Tours By Tour Groups</value>
+  </data>
+  <data name="ToursList" xml:space="preserve">
+    <value>Tours</value>
+  </data>
+  <data name="BatchUpdatePriceInTourPackage" xml:space="preserve">
+    <value>Batch Update Price In Tour Package</value>
+  </data>
+  <data name="Numeric" xml:space="preserve">
+    <value>Numeric</value>
+  </data>
+  <data name="Percent" xml:space="preserve">
+    <value>Percent</value>
+  </data>
+  <data name="CurrencyUpdatePriceVal" xml:space="preserve">
+    <value>Currency Update Price Value</value>
+  </data>
+  <data name="EnumUpdatePriceType" xml:space="preserve">
+    <value>Enum Update Price Type</value>
+  </data>
+  <data name="IranUpdatePriceVal" xml:space="preserve">
+    <value>Iran Update Price Value</value>
+  </data>
+  <data name="IsUpdateCurrencyPrice" xml:space="preserve">
+    <value>Is Update Currency Price</value>
+  </data>
+  <data name="TourPacageFromPrice" xml:space="preserve">
+    <value>Tour Pacage From Price</value>
+  </data>
+  <data name="TourPackage" xml:space="preserve">
+    <value>Tour Package</value>
+  </data>
+  <data name="NowruzTours" xml:space="preserve">
+    <value>Nowruz Tours</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Go</value>
+  </data>
+  <data name="BaseRialPrice" xml:space="preserve">
+    <value>Base Rial Price</value>
+  </data>
+  <data name="CurrenySign" xml:space="preserve">
+    <value>Curreny Sign</value>
+  </data>
+  <data name="AdultCapacity" xml:space="preserve">
+    <value>Max Adult Capacity</value>
+  </data>
+  <data name="ChildCapacity" xml:space="preserve">
+    <value>Max Child Capacity</value>
+  </data>
+  <data name="InfantCapacity" xml:space="preserve">
+    <value>Max Infant Capacity</value>
+  </data>
+  <data name="HasAdult" xml:space="preserve">
+    <value>Has Adult?</value>
+  </data>
+  <data name="HasChild" xml:space="preserve">
+    <value>Has Child?</value>
+  </data>
+  <data name="HasInfant" xml:space="preserve">
+    <value>Has Infant?</value>
+  </data>
+  <data name="AdultMaxCapacity" xml:space="preserve">
+    <value>Adult Max Capacity</value>
+  </data>
+  <data name="AdultMinCapacity" xml:space="preserve">
+    <value>Adult Min Capacity</value>
+  </data>
+  <data name="ChildMaxCapacity" xml:space="preserve">
+    <value>Child Max Capacity</value>
+  </data>
+  <data name="ChildMinCapacity" xml:space="preserve">
+    <value>Child Min Capacity</value>
+  </data>
+  <data name="InfantMaxCapacity" xml:space="preserve">
+    <value>Infant Max Capacity</value>
+  </data>
+  <data name="InfantMinCapacity" xml:space="preserve">
+    <value>Infant Min Capacity</value>
+  </data>
+  <data name="IsDddlDestination" xml:space="preserve">
+    <value>IsDddlDestination</value>
+  </data>
+  <data name="IsDddlFrom" xml:space="preserve">
+    <value>IsDddlFrom</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Iata Code</value>
+  </data>
+  <data name="TitleEn" xml:space="preserve">
+    <value>Title(EN)</value>
+  </data>
+  <data name="ManagementVehicleTypeClass" xml:space="preserve">
+    <value>Management Of Vehicle Type Class</value>
+  </data>
+  <data name="ShortCode" xml:space="preserve">
+    <value>Short Code</value>
+  </data>
+  <data name="VehicleTypeClass" xml:space="preserve">
+    <value>Vehicle Type Class</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>Adult Capacity</value>
+  </data>
+  <data name="AdultPrice" xml:space="preserve">
+    <value>Adult Price</value>
+  </data>
+  <data name="ChildPrice" xml:space="preserve">
+    <value>Child Price</value>
+  </data>
+  <data name="InfantPrice" xml:space="preserve">
+    <value>Infant Price</value>
+  </data>
+  <data name="PicSize100x100" xml:space="preserve">
+    <value>Picture size in width 100 and height 100.</value>
+  </data>
+  <data name="ServiceDesc" xml:space="preserve">
+    <value>Service Description</value>
+  </data>
+  <data name="HotelLocation" xml:space="preserve">
+    <value>Hotel Location</value>
+  </data>
+  <data name="TourPackageDayManagement" xml:space="preserve">
+    <value>TourPackageDayManagement</value>
+  </data>
+  <data name="TourPackgeDayId" xml:space="preserve">
+    <value>TourPackgeDayId</value>
+  </data>
+  <data name="LocationId" xml:space="preserve">
+    <value>Landing</value>
+  </data>
+  <data name="TourDuration" xml:space="preserve">
+    <value>TourDuration</value>
+  </data>
+  <data name="TourSuggestManagement" xml:space="preserve">
+    <value>TourSuggestManagement</value>
+  </data>
+  <data name="NavigationUrl" xml:space="preserve">
+    <value>NavigationUrl</value>
+  </data>
+  <data name="PackageManagement" xml:space="preserve">
+    <value>PackageManagement</value>
+  </data>
+  <data name="ImageURL" xml:space="preserve">
+    <value>ImageURL</value>
+  </data>
+  <data name="OfferPrice" xml:space="preserve">
+    <value>OfferPrice</value>
+  </data>
+  <data name="SarinaPrice" xml:space="preserve">
+    <value>SarinaPrice</value>
+  </data>
+</root>

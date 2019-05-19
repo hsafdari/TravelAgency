@@ -1,0 +1,660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddContact" xml:space="preserve">
+    <value>Add Contact</value>
+  </data>
+  <data name="AddContactItem" xml:space="preserve">
+    <value>AddContactItem</value>
+  </data>
+  <data name="AddEmail" xml:space="preserve">
+    <value>AddEmail</value>
+  </data>
+  <data name="AddFacebook" xml:space="preserve">
+    <value>AddFacebook</value>
+  </data>
+  <data name="AddFax" xml:space="preserve">
+    <value>AddFax</value>
+  </data>
+  <data name="AddFooter" xml:space="preserve">
+    <value>Add Footer</value>
+  </data>
+  <data name="AddGooglePlus" xml:space="preserve">
+    <value>AddGooglePlus</value>
+  </data>
+  <data name="AddInstagram" xml:space="preserve">
+    <value>AddInstagram</value>
+  </data>
+  <data name="AddMenuGroup" xml:space="preserve">
+    <value>Add Menu Group</value>
+  </data>
+  <data name="AddMobile" xml:space="preserve">
+    <value>AddMobile</value>
+  </data>
+  <data name="AddNewsletter" xml:space="preserve">
+    <value>Add Newsletter</value>
+  </data>
+  <data name="AddPage" xml:space="preserve">
+    <value>Add Page</value>
+  </data>
+  <data name="AddSocialItem" xml:space="preserve">
+    <value>Add Social Network Item</value>
+  </data>
+  <data name="AddSubFooter" xml:space="preserve">
+    <value>Add Subfooter </value>
+  </data>
+  <data name="AddTel" xml:space="preserve">
+    <value>AddTel</value>
+  </data>
+  <data name="AddTitle" xml:space="preserve">
+    <value>Add Title</value>
+  </data>
+  <data name="AddTwitter" xml:space="preserve">
+    <value>AddTwitter</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Commands" xml:space="preserve">
+    <value>Commands</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="ContactGroupIdList" xml:space="preserve">
+    <value>Contact groups</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="CopyLink" xml:space="preserve">
+    <value>Copy Link</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="DefaultStyle" xml:space="preserve">
+    <value>'&lt;div class="links"&gt;' +
+	'&lt;ul&gt;' +
+		'&lt;li class="mobile"&gt;&lt;i class="fa fa-phone"&gt;&lt;/i&gt;+21 9898777656&lt;/li&gt;' +
+		'&lt;li class="email"&gt;&lt;a href="#"&gt;&lt;i class="fa fa-envelope"&gt;&lt;/i&gt;info@sorrad.com&lt;/a&gt;&lt;/li&gt;' +
+		'&lt;li class="wrap_custom_block hidden-sm hidden-xs"&gt;' +
+			'&lt;a&gt;بلاک سفارشی&lt;b&gt;&lt;/b&gt;&lt;/a&gt;' +
+			'&lt;div class="dropdown-menu custom_block" style="display: none;"&gt;' +
+				'&lt;ul&gt;' +
+					'&lt;li&gt;' +
+						'&lt;table&gt;' +
+							'&lt;tbody&gt;' +
+								'&lt;tr&gt;' +
+									'&lt;td&gt;&lt;img alt="" src="/ClientTheme/image/banner/cms-block.jpg"&gt;&lt;/td&gt;' +
+									'&lt;td&gt;&lt;img alt="" src="/ClientTheme/image/banner/responsive.jpg"&gt;&lt;/td&gt;' +
+								'&lt;/tr&gt;' +
+								'&lt;tr&gt;' +
+									'&lt;td&gt;&lt;h4&gt;بلاک های محتوا&lt;/h4&gt;&lt;/td&gt;'+
+									'&lt;td&gt;&lt;h4&gt;قالب واکنش گرا&lt;/h4&gt;&lt;/td&gt;'+
+								'&lt;/tr&gt;'+
+								'&lt;tr&gt;' +
+									'&lt;td&gt;این یک بلاک مدیریت محتواست. شما میتوانید هر نوع محتوای html نوشتاری یا تصویری را در آن قرار دهید.&lt;/td&gt;' +
+									'&lt;td&gt;این یک بلاک مدیریت محتواست. شما میتوانید هر نوع محتوای html نوشتاری یا تصویری را در آن قرار دهید.&lt;/td&gt;' +
+								'&lt;/tr&gt;' +
+								'&lt;tr&gt;' +
+									'&lt;td&gt;&lt;strong&gt;&lt;a class="btn btn-default btn-sm" href="#"&gt;ادامه مطلب&lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;' +
+									'&lt;td&gt;&lt;strong&gt;&lt;a class="btn btn-default btn-sm" href="#"&gt;ادامه مطلب&lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;' +
+								'&lt;/tr&gt;' +
+							'&lt;/tbody&gt;' +
+						'&lt;/table&gt;' +
+					'&lt;/li&gt;' +
+				'&lt;/ul&gt;' +
+			'&lt;/div&gt;' +
+		'&lt;/li&gt;' +
+		'&lt;li&gt;&lt;a href="#"&gt;لیست علاقه مندی (0)&lt;/a&gt;&lt;/li&gt;' +
+		'&lt;li&gt;&lt;a href="checkout.html"&gt;تسویه حساب&lt;/a&gt;&lt;/li&gt;' +
+	'&lt;/ul&gt;' +
+'&lt;/div&gt;'</value>
+  </data>
+  <data name="DefaultStyleTitle" xml:space="preserve">
+    <value>Default Style</value>
+  </data>
+  <data name="DeleteContact" xml:space="preserve">
+    <value>Delete Contact</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="EditContact" xml:space="preserve">
+    <value>Edit Contact</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ErrorInDelete" xml:space="preserve">
+    <value>Error On Delete</value>
+  </data>
+  <data name="FirstLevel" xml:space="preserve">
+    <value>First Level?</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>FirstName</value>
+  </data>
+  <data name="Footer" xml:space="preserve">
+    <value>Footer</value>
+  </data>
+  <data name="FooterManagement" xml:space="preserve">
+    <value>Footer Management</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Group Name</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ImageURL" xml:space="preserve">
+    <value>Image URL</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Is Active ?</value>
+  </data>
+  <data name="IsCommentActive" xml:space="preserve">
+    <value>Is Comment Active ?</value>
+  </data>
+  <data name="IsRoot" xml:space="preserve">
+    <value>Is Root?</value>
+  </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>JobTitle</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>LastName</value>
+  </data>
+  <data name="ManagementContactGroups" xml:space="preserve">
+    <value>Contact groups management</value>
+  </data>
+  <data name="ManagementContacts" xml:space="preserve">
+    <value>Contacts management</value>
+  </data>
+  <data name="ManagementContactsForUser" xml:space="preserve">
+    <value>Contacts management  for </value>
+  </data>
+  <data name="ManagementContactUs" xml:space="preserve">
+    <value>Management Of Contact Us</value>
+  </data>
+  <data name="ManagementDepartment" xml:space="preserve">
+    <value>Management Of Department</value>
+  </data>
+  <data name="ManagementFooter" xml:space="preserve">
+    <value>Footer Management</value>
+  </data>
+  <data name="ManagementInternetAddressTypes" xml:space="preserve">
+    <value>Internet address types management</value>
+  </data>
+  <data name="ManagementMenu" xml:space="preserve">
+    <value>Menu Management</value>
+  </data>
+  <data name="ManagementMenuGroup" xml:space="preserve">
+    <value>Menu Group Management</value>
+  </data>
+  <data name="ManagementNewsLetter" xml:space="preserve">
+    <value>NewsLetter Management</value>
+  </data>
+  <data name="ManagementPages" xml:space="preserve">
+    <value>Page Management</value>
+  </data>
+  <data name="ManagementPhoneTypes" xml:space="preserve">
+    <value>Phone types management</value>
+  </data>
+  <data name="ManagementPostalAddressType" xml:space="preserve">
+    <value>Postal address type management</value>
+  </data>
+  <data name="ManagementSlider" xml:space="preserve">
+    <value>Slider Management</value>
+  </data>
+  <data name="ManagementSliderGroup" xml:space="preserve">
+    <value>Slider Group Management</value>
+  </data>
+  <data name="ManagementTabMagazine" xml:space="preserve">
+    <value>Management of Tab Magazine</value>
+  </data>
+  <data name="ManagerName" xml:space="preserve">
+    <value>Department Manager</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="MenuGroup" xml:space="preserve">
+    <value>Menu Group</value>
+  </data>
+  <data name="MenuGroupId" xml:space="preserve">
+    <value>Menu Group</value>
+  </data>
+  <data name="MenuIsActive" xml:space="preserve">
+    <value>Is Active ?</value>
+  </data>
+  <data name="MenuParentId" xml:space="preserve">
+    <value>Menu Parent</value>
+  </data>
+  <data name="MenuTitle" xml:space="preserve">
+    <value>Menu Title</value>
+  </data>
+  <data name="MenuType" xml:space="preserve">
+    <value>Menu Type</value>
+  </data>
+  <data name="MenuUrl" xml:space="preserve">
+    <value>Url</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NavigationUrl" xml:space="preserve">
+    <value>Navigation Url</value>
+  </data>
+  <data name="Newsletter" xml:space="preserve">
+    <value>Newsletter</value>
+  </data>
+  <data name="NewsletterManagement" xml:space="preserve">
+    <value>Newsletter Management</value>
+  </data>
+  <data name="OrderId" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="PageContent" xml:space="preserve">
+    <value>Page Content</value>
+  </data>
+  <data name="PageDatetime" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="PageDesc" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="PageHeaderImg" xml:space="preserve">
+    <value>Header Image</value>
+  </data>
+  <data name="PageManagement" xml:space="preserve">
+    <value>Page Management</value>
+  </data>
+  <data name="PageMetaTags" xml:space="preserve">
+    <value>Meta Tags</value>
+  </data>
+  <data name="PageName" xml:space="preserve">
+    <value>Page Name</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Page Title</value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="SaveSuccessful" xml:space="preserve">
+    <value>Save Successfully</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelectedGroups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="SelectedTags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="ShortDescription" xml:space="preserve">
+    <value>Short Description</value>
+  </data>
+  <data name="SliderGroupID" xml:space="preserve">
+    <value>Slider Group</value>
+  </data>
+  <data name="SubFooter" xml:space="preserve">
+    <value>Subfooter</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Target" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="TargetBlank" xml:space="preserve">
+    <value>Open in other page</value>
+  </data>
+  <data name="TargetSelf" xml:space="preserve">
+    <value>Open on this page</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Type_0" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Type_1" xml:space="preserve">
+    <value>Main menu link | submenus links</value>
+  </data>
+  <data name="Type_2" xml:space="preserve">
+    <value>Submenus + submenu's picture</value>
+  </data>
+  <data name="Type_3" xml:space="preserve">
+    <value>Submenus + main menu's picture</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="WantDelete" xml:space="preserve">
+    <value>Do you want to delete it?</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Please add correct data</value>
+  </data>
+  <data name="NewLink" xml:space="preserve">
+    <value>New Link</value>
+  </data>
+  <data name="OldLink" xml:space="preserve">
+    <value>Old Link</value>
+  </data>
+  <data name="ManagementLinkRedirection" xml:space="preserve">
+    <value>Management of  Link Redirection 301</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="SupportDateTime" xml:space="preserve">
+    <value>Support Date</value>
+  </data>
+  <data name="UpdateAdminDescription" xml:space="preserve">
+    <value>Technical description</value>
+  </data>
+  <data name="UpdateDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ManagementSupport" xml:space="preserve">
+    <value>Management Of Support</value>
+  </data>
+  <data name="AddSupport" xml:space="preserve">
+    <value>Add Supporting report</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="PicSizeFisrtPageCountryBox" xml:space="preserve">
+    <value>for slider box , picture must be in 370*310 px</value>
+  </data>
+  <data name="PicSizeFisrtPageSlider" xml:space="preserve">
+    <value>for first page slider , picture must be in 1280*573 px</value>
+  </data>
+  <data name="ReviewType" xml:space="preserve">
+    <value>For</value>
+  </data>
+  <data name="ManagementReviewItems" xml:space="preserve">
+    <value>Management Of Review Items</value>
+  </data>
+  <data name="LinkTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="selectRoles" xml:space="preserve">
+    <value>Please select roles</value>
+  </data>
+  <data name="PicSizeFisrtPageTourSlider" xml:space="preserve">
+    <value>for first page discount tour slider , picture must be in 447*342 px</value>
+  </data>
+  <data name="ManagementContentGroups" xml:space="preserve">
+    <value>Management Of Content Groups</value>
+  </data>
+  <data name="TitleEN" xml:space="preserve">
+    <value>Title (EN)</value>
+  </data>
+  <data name="ManagementLastSecondTours" xml:space="preserve">
+    <value>Management Of Last Second Tours</value>
+  </data>
+  <data name="ContentGroup" xml:space="preserve">
+    <value>Content Group</value>
+  </data>
+  <data name="Context" xml:space="preserve">
+    <value>Context</value>
+  </data>
+  <data name="CommentIsActive" xml:space="preserve">
+    <value>Comment Is Active ?</value>
+  </data>
+  <data name="ManagementLocations" xml:space="preserve">
+    <value>Management Of Tab Landing Page's Locations</value>
+  </data>
+  <data name="URL" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="HomeTabMagazine" xml:space="preserve">
+    <value>Home Tab Magazine</value>
+  </data>
+  <data name="ManagementTourLandingPageUrls" xml:space="preserve">
+    <value>Management Of Tour Landing Page's Urls</value>
+  </data>
+  <data name="TitleFA" xml:space="preserve">
+    <value>Title (FA)</value>
+  </data>
+  <data name="PicSizeFisrtPageNowruzBoxSlide" xml:space="preserve">
+    <value>for nowruz slide box , picture must be in 740*310 px</value>
+  </data>
+  <data name="BlogFooter" xml:space="preserve">
+    <value>Blog Footer</value>
+  </data>
+  <data name="MainFooter" xml:space="preserve">
+    <value>Main Footer</value>
+  </data>
+  <data name="FooterType" xml:space="preserve">
+    <value>Footer Type</value>
+  </data>
+  <data name="PicSizeBlogFisrtPageSlider" xml:space="preserve">
+    <value>For Blog first page slider picture size must be 1280*800 px</value>
+  </data>
+  <data name="ShoppingRules" xml:space="preserve">
+    <value>Shopping Rules</value>
+  </data>
+  <data name="TermsAndConditions" xml:space="preserve">
+    <value>Terms And Conditions</value>
+  </data>
+  <data name="ClientPage" xml:space="preserve">
+    <value>ClientPage</value>
+  </data>
+  <data name="Post" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="PostType" xml:space="preserve">
+    <value>Post Type</value>
+  </data>
+  <data name="ManagementSliderHome" xml:space="preserve">
+    <value>ManagementSliderHome</value>
+  </data>
+  <data name="Ticket" xml:space="preserve">
+    <value>Ticket</value>
+  </data>
+  <data name="SliderGroupTitle" xml:space="preserve">
+    <value>SliderGroupTitle</value>
+  </data>
+  <data name="footerLine1" xml:space="preserve">
+    <value>footerLine1</value>
+  </data>
+  <data name="footerLine2" xml:space="preserve">
+    <value>footerLine2</value>
+  </data>
+  <data name="HeaderDays" xml:space="preserve">
+    <value>HeaderDays</value>
+  </data>
+  <data name="NavDescription" xml:space="preserve">
+    <value>NavDescription</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="ManagementSliderTourLanding" xml:space="preserve">
+    <value>ManagementSliderTourLanding</value>
+  </data>
+  <data name="Expirationdate" xml:space="preserve">
+    <value>Expirationdate</value>
+  </data>
+  <data name="ColorCode" xml:space="preserve">
+    <value>Color Code</value>
+  </data>
+  <data name="AddDefaultColumn" xml:space="preserve">
+    <value>Add Default Column</value>
+  </data>
+  <data name="Permission" xml:space="preserve">
+    <value>Permission</value>
+  </data>
+  <data name="PermissionId" xml:space="preserve">
+    <value>Permission</value>
+  </data>
+  <data name="PermissionName" xml:space="preserve">
+    <value>PermissionName</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="ManagementPermission" xml:space="preserve">
+    <value>Management Of Permissions</value>
+  </data>
+  <data name="TagManagement" xml:space="preserve">
+    <value>TagManagement</value>
+  </data>
+  <data name="PleaseSelectPanelUserRole" xml:space="preserve">
+    <value>Please Select "PanelUser" Role</value>
+  </data>
+  <data name="PicSizeTourSuggestion" xml:space="preserve">
+    <value>PicSizeTourSuggestion</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>filter</value>
+  </data>
+  <data name="TermsAndConditionsManagement" xml:space="preserve">
+    <value>TermsAndConditionsManagement</value>
+  </data>
+</root>

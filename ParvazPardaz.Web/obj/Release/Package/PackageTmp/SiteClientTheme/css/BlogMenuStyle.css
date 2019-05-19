@@ -1,0 +1,184 @@
+﻿.transparent-menu .dropdown-menu {
+    margin-top: -7px !important;
+}
+
+.transparent-menu {
+    border-top: 5px solid #223871 !important;
+    background: #EAEAEA !important;
+    color: black !important;
+}
+
+.nav-container {
+    background: #EAEAEA !important;
+}
+
+.dropdown-menu {
+    border-bottom: 2px solid white !important;
+}
+
+.dropdown-menu {
+    background: white none repeat scroll 0 0 !important;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white !important;
+}
+
+    .transparent-menu .navbar-nav > li > section > a:hover, .navbar-default .navbar-nav > li > a:hover {
+        color: #00A694 !important;
+        background-color: white !important;
+    }
+
+.mega-menu {
+    width: 100% !important;
+}
+
+.navbar-collapse {
+    width: 1170px !important;
+}
+
+.dropdown-menu li {
+    padding-right: 40px;
+}
+
+.mainMenu {
+    background-color: #00A694 !important;
+}
+
+.dropdown-menu li {
+    padding-right: 0px !important;
+}
+
+.dropdown-menu {
+    top: 114% !important;
+    box-shadow: 3px 3px #BCBCBC;
+    margin-top: -32px !important;
+}
+
+    .dropdown-menu:hover .dropdown-menu {
+        margin-top: -32px !important;
+    }
+
+.navbar {
+    margin-bottom: 0px !important;
+}
+
+.transparent-menu .dropdown-menu {
+    background-color: White !important;
+}
+
+.nav-container .mega-menu .links h5, .nav-container .mega-menu .links a, .mega-menu .links a:hover, .nav-container .mega-menu .links li::before {
+    color: #00A694 !important;
+}
+
+.transparent-menu .navbar-nav > li > section:hover {
+    background-color: white !important;
+}
+
+    .transparent-menu .navbar-nav > li > section:hover > a {
+        color: #00A694 !important;
+    }
+
+.transparent-menu {
+    padding: 0px !important;
+}
+
+.font15 {
+    color: #00A694 !important;
+}
+
+.topMenu {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background: #EAEAEA none repeat scroll 0 0;
+}
+
+.dropdown-toggle:hover {
+    background-color: #EAEAEA !important;
+}
+
+/****search ***/
+
+.stylish-input-group .input-group-addon {
+    background: white !important;
+}
+
+.stylish-input-group .form-control {
+    border-right: 0;
+    box-shadow: 0 0 0;
+    border-color: #ccc;
+}
+
+.stylish-input-group button {
+    border: 0;
+    background: transparent;
+}
+
+.stylish-input-group {
+    width: 100% !important;
+}
+
+.fa {
+    font-family: FontAwesome !important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #223871 !important;
+}
+
+.transparent-menu .navbar-default .navbar-toggle .icon-bar {
+    background: #223871 !important;
+}
+
+.navbar-header a {
+    color: #223871 !important;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #00A694 !important;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover, .navbar-toggle:hover {
+    background-color: #EAEAEA !important;
+}
+
+.dropdown-menu > li > section > a {
+    color: #00A694 !important;
+}
+
+.dropdown-submenu > a::after {
+    border-right-color: #00A694 !important;
+}
+
+.ltr {
+    direction: ltr !important;
+}
+
+.navbar-toggle {
+    margin: 0px !important;
+}
+
+.navbar-header a {
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: bold !important;
+}
+
+.fa-search {
+    font-size: 1em !important;
+}
+
+#btnSearch {
+    padding: 9px !important;
+}
+
+header {
+    position: inherit !important;
+}
+
+/*.content-body {
+    margin-top: 9% !important;
+}*/

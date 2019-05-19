@@ -1,0 +1,24 @@
+﻿@model TourScheduleAdditionalServiceViewModel
+
+<div id="AddEditTourScheduleAdditionalService">
+    @Html.Partial("~/Areas/Admin/Views/TourScheduleAdditionalService/_AddTourScheduleAdditionalService.cshtml", new TourScheduleAdditionalServiceViewModel() { TourScheduleId = Model.TourScheduleId, AdditionalServiceDDL = Model.AdditionalServiceDDL, CRUDMode = CRUDMode.Create })
+</div>
+<div id="ListViewTourScheduleAdditionalService">
+    @{
+        if (Model != null && Model.ListView != null && Model.ListView.Any())
+        {
+            foreach (var listView in Model.ListView)
+            {
+                @Html.Partial("~/Areas/Admin/Views/TourScheduleAdditionalService/_ListViewTourScheduleAdditionalService.cshtml", listView)
+            }
+        }
+    }
+</div>
+
+
+
+<div class="form-group">
+    <div class="col-md-1" style="margin-bottom:20px;">
+        <a href="#" onclick="frmTourScheduleAdditionalServiceSubmitSucceeded()" class="btn btn-custom green">@ParvazPardaz.Resource.General.Generals.Submit</a>
+    </div>
+</div>

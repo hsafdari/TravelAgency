@@ -1,0 +1,17 @@
+/* CSS Document */
+
+.flight-item .item-body .item-table tbody tr td ul li:last-child .fa, .trip-item .item-body .item-table tbody tr td ul li:last-child .fa, .attraction-item .item-body .item-table tbody tr td ul li:last-child .fa, .hotel-item .item-body .item-table tbody tr td ul li:last-child .fa
+{
+	display:none;
+}
+
+
+.portfolio-item .portfolio-title {
+    top:100% !important;
+    bottom: 2px !important;
+    font-size: 30px !important;
+    text-align: center !important;
+    margin-top: 0 !important;
+    padding-bottom: 10px !important;
+    padding-top: 10px !important;
+}

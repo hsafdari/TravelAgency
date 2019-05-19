@@ -1,0 +1,86 @@
+﻿@model TourPackageBatchUpdatePriceViewModel
+@{
+    ViewBag.Title = "BatchUpdatePrice";
+}
+@using (Ajax.BeginForm("UpdatePrices", "TourPackage", null, new AjaxOptions() { OnSuccess = "SuccessResult", OnFailure = "FailureResult", LoadingElementId = "Preloader" }))
+{
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.Tour.Tours.BatchUpdatePriceInTourPackage</h3>
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TourId, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.TourId, ViewBag.TourDDL as SelectList, ParvazPardaz.Resource.General.Generals.DDLSelect, new { id = "TourDDL", @class = "form-control select-2 select" })
+                @Html.ValidationMessageFor(model => model.TourId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TourPackageId, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.TourPackageId, Enumerable.Empty<SelectListItem>(), ParvazPardaz.Resource.General.Generals.DDLSelect, new { id = "TourPackageDDL", @class = "form-control select-2 select" })
+                @Html.ValidationMessageFor(model => model.TourPackageId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="ResultDiv"></div>
+    </div>
+}
+@section scripts{
+    <script type="text/javascript">
+        $('.select').select2({ dir: "RTL" });
+
+        $("#TourDDL").change(function FetchData() {
+            var items = "";
+            var dataId = $("#TourDDL").val();
+            if (dataId == "") {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+                $("#TourPackageDDL").html(items);
+            }
+            else {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+                var x = $.getJSON("/Admin/TourPackage/FindTourPackageByTourId/" + dataId, function (data) {
+                    $.each(data, function (i, item) {
+                        items += "<option value=\"" + item.Value + "\" " + ((item.Selected == true) ? "Selected" : "") + " >" + item.Text + "</option>";
+                    });
+                    $("#TourPackageDDL").html(items);
+                });
+            }
+        });
+
+        $("#TourPackageDDL").change(function FetchData() {
+            var items = "";
+            var urlOfAction = "/Admin/TourPackage/GetTourPackagePricePartial";
+            var dataId = $("#TourPackageDDL").val();
+            if (dataId != "") {
+                $.ajax({
+                    url: urlOfAction,
+                    type: 'POST',
+                    dataType: "html",
+                    data: {
+                        tourPackageId: dataId
+                    },
+                    success: function (result) {
+                        $("#ResultDiv").html(result);
+                        $('.select').select2({ dir: "RTL" });
+                    },
+                    error: function (x, y, z) {
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.TryAginMessage', '@ParvazPardaz.Resource.General.Generals.ErrorTitle', { timeOut: 5000 })
+                    }
+                });
+            }
+        });
+
+        function SuccessResult(result) {
+            $("#ResultDiv").html("");
+            toastr.options = { "positionClass": "toast-top-center" }
+            toastr.info('@ParvazPardaz.Resource.General.Generals.EditAlert', '@ParvazPardaz.Resource.General.Generals.EditAlertTitle', { timeOut: 5000 })
+        }
+        function FailureResult() {
+            toastr.options = { "positionClass": "toast-top-center" }
+            toastr.error('@ParvazPardaz.Resource.General.Generals.TryAginMessage', '@ParvazPardaz.Resource.General.Generals.ErrorTitle', { timeOut: 5000 })
+        }
+    </script>
+}

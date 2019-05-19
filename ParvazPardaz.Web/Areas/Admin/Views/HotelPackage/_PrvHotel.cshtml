@@ -1,0 +1,23 @@
+﻿@model HotelPackageViewModel
+@{
+    var index = Model.index;
+}
+
+<tr class="hotelPackageSection hotelPackageItem">
+    <td>
+        @Html.DropDownListFor(model => model.HotelsInPackage[index].CityId, ViewBag.City as IEnumerable<SelectListItem>, string.Empty, new { @class = "CityId form-control search-select select", onchange = "cityHotel(" + index + ")", id = "City_hotel" + index })
+        @Html.ValidationMessageFor(model => model.HotelsInPackage[index].CityId, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @Html.DropDownListFor(model => model.HotelsInPackage[index].HotelId, ViewBag.Hotel as IEnumerable<SelectListItem>, new { @class = "HotelId form-control search-select select", id = "Hotel" + index })
+        @Html.ValidationMessageFor(model => model.HotelsInPackage[index].HotelId, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @Html.DropDownListFor(model => model.HotelsInPackage[index].HotelBoardId, ViewBag.HotelBoardDDL as SelectList, new { @class = "HotelBoardId form-control search-select select", id = "HotelBoardId" + index })
+        @Html.ValidationMessageFor(model => model.HotelsInPackage[index].HotelBoardId, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        <a class="btn btn-remove" onclick="$(this).closest('.hotelPackageSection').remove();"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+    </td>
+</tr>
+

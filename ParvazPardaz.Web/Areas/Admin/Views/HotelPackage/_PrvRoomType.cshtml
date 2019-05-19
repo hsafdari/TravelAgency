@@ -1,0 +1,70 @@
+﻿@model HotelPackageViewModel
+@{
+    var index = Model.index;
+}
+
+<tr class="RoomTypeSection RoomTypeItem">
+    <td class="CurrencyPriceSection">
+        @Html.DropDownListFor(model => Model.HotelRoomsInPackage[index].OtherCurrencyId,ViewBag.OtherCurrencyDDL as IEnumerable<SelectListItem>,  "انتخاب کنید", new { @class = "OtherCurrencyId" })
+        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[index].OtherCurrencyId, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @Html.DropDownListFor(model => Model.HotelRoomsInPackage[index].RoomTypeId, ViewBag.RoomTypeDDL as IEnumerable<SelectListItem>, new { @class = "RoomTypeId" })
+        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[index].RoomTypeId, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @*@Html.SpinFor(model => Model.HotelRoomsInPackage[index].AdultPrice, new { @class = "form-control Price", id = "HotelRoomsInPackage_" + index + "__AdultPrice" }).Limit(0, int.MaxValue).Postfix("ریال").CallConfigWithId(true)*@
+        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[index].AdultPrice, new { @class = "form-control AdultPrice", @min = "0", @type = "number", id = "HotelRoomsInPackage_" + index + "__AdultPrice" })
+        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[index].AdultPrice, "", new { @class = "text-danger" })
+    </td>
+    <td class="CurrencyPriceSection">
+        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[index].AdultOtherCurrencyPrice, new { @type = "number", @min = "0", @disabled = "disabled", @class = "form-control CurencyTextBox AdultOtherCurrencyPrice" })
+        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[index].AdultOtherCurrencyPrice, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[index].AdultCapacity, new { @type = "number", @min = "0", @class = "form-control AdultCapacity", id = "HotelRoomsInPackage_" + index + "__AdultCapacity" })
+        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[index].AdultCapacity, "", new { @class = "text-danger" })
+    </td>
+    <td class="childsection">
+        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[index].ChildPrice, new { @type = "number", @min = "0", @class = "form-control ChildPrice", id = "HotelRoomsInPackage_" + index + "__ChildPrice" })
+        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[index].ChildPrice, "", new { @class = "text-danger" })
+    </td>
+    <td class="childsection CurrencyPriceSection">
+        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[index].ChildOtherCurrencyPrice, new { @type = "number", @disabled = "disabled", @min = "0", @class = "form-control CurencyTextBox ChildOtherCurrencyPrice" })
+        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[index].ChildOtherCurrencyPrice, "", new { @class = "text-danger" })
+    </td>
+    <td class="childsection">
+        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[index].ChildCapacity, new { @type = "number", @min = "0", @class = "form-control ChildCapacity", id = "HotelRoomsInPackage_" + index + "__ChildCapacity" })
+        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[index].ChildCapacity, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[index].InfantPrice, new { @type = "number", @min = "0", @class = "form-control InfantPrice", id = "HotelRoomsInPackage_" + index + "__InfantPrice" })
+        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[index].InfantPrice, "", new { @class = "text-danger" })
+    </td>
+    <td class="CurrencyPriceSection">
+        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[index].InfantOtherCurrencyPrice, new { @type = "number", @min = "0", @disabled = "disabled", @class = "form-control CurencyTextBox InfantOtherCurrencyPrice" })
+        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[index].InfantOtherCurrencyPrice, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @Html.TextBoxFor(model => Model.HotelRoomsInPackage[index].InfantCapacity, new { @type = "number", @min = "0", @class = "form-control InfantCapacity", id = "HotelRoomsInPackage_" + index + "__InfantCapacity" })
+        @Html.ValidationMessageFor(model => Model.HotelRoomsInPackage[index].InfantCapacity, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @if (index > 0)
+        {
+            <a class="btn btn-remove" onclick="$(this).closest('.RoomTypeSection').remove();"><index class="fa fa-trash-o" aria-hidden="true"></index></a>
+        }
+    </td>
+</tr>
+<script>
+    $('.OtherCurrencyId').change(function () {
+        debugger;
+        if ($(this).val() != 0) {
+            $(".CurencyTextBox").prop("disabled", false);
+        }
+        else {
+            $(".CurencyTextBox").prop("disabled", true);
+        }
+    });
+</script>
+

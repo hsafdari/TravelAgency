@@ -1,0 +1,84 @@
+﻿/*#region صفحه اصلی */
+
+.directionFlight {
+    color: #87b74a !important;
+}
+
+.directionFlightVisited {
+    color: #ffffff !important;
+}
+
+.goingWidth {
+    width: 100% !important;
+}
+
+select {
+    padding: 0px !important;
+}
+
+.select2-container {
+    display: inline;
+}
+
+    .select2-container .select2-choice {
+        display: inline !important;
+        height: inherit !important;
+        border: none !important;
+        line-height: inherit !important;
+        border-radius: 0px !important;
+    }
+
+.awe-search-tabs__content .ui-tabs-panel .form-elements span {
+    display: inline !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    margin-top: 0px !important;
+}
+
+/* #### Tablets Portrait or Landscape #### */
+@@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .awe-search-tabs-2 .awe-search-tabs__content .ui-tabs-panel .form-group:nth-child(1) .form-elements {
+        width: calc(50% - 10px) !important;
+    }
+
+    .awe-search-tabs__content .ui-tabs-panel .form-group:nth-child(1) .form-elements:nth-child(2n+1) {
+        padding-right: 0px !important;
+    }
+
+    .awe-search-tabs__content .ui-tabs-panel .form-group:nth-child(1) .form-elements:nth-child(2n) {
+        padding-left: 2px !important;
+    }
+
+    .awe-search-tabs-2 .awe-search-tabs__content .ui-tabs-panel .form-group:nth-child(1) .form-elements:nth-child(2n) {
+        padding-left: 0px !important;
+    }
+
+    .awe-search-tabs-2 .awe-search-tabs__content .ui-tabs-panel .form-group:nth-child(2) .form-elements:nth-child(2n) {
+        padding-left: 5px !important;
+    }
+
+    .BtnSearchMargin {
+        margin-right: 0px !important;
+    }
+
+    .passengerCount {
+        width: 25% !important;
+    }
+}
+
+/* #### Desktops #### */
+@@media screen and (min-width: 1024px) {
+    .awe-search-tabs-2 .awe-search-tabs__content .ui-tabs-panel .form-group:nth-child(1) {
+        width: 30% !important;
+    }
+
+        .awe-search-tabs-2 .awe-search-tabs__content .ui-tabs-panel .form-group:nth-child(1) .form-elements {
+            width: calc(50% - 10px) !important;
+        }
+
+    .passengerCount {
+        width: 25% !important;
+    }
+}
+
+/*#endregion */

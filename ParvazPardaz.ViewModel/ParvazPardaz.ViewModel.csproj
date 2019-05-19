@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{40465939-8058-4D77-946B-6345E93C6C47}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ParvazPardaz.ViewModel</RootNamespace>
+    <AssemblyName>ParvazPardaz.ViewModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ParvazPardaz.Web\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="reCAPTCHA.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\reCAPTCH.MVC.1.0.1\lib\net45\reCAPTCHA.MVC.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccessLevel\AddPermissionViewModel.cs" />
+    <Compile Include="AccessLevel\EditPermissionViewModel.cs" />
+    <Compile Include="AccessLevel\GridPermissionViewModel.cs" />
+    <Compile Include="Account\AccountViewModel.cs" />
+    <Compile Include="Account\AddUserProfileViewModel.cs" />
+    <Compile Include="Account\AutorizeViewModel.cs" />
+    <Compile Include="Account\ChangePasswordViewModel.cs" />
+    <Compile Include="Account\ForgetPasswordViewModel.cs" />
+    <Compile Include="Account\LoginCustomerViewModel.cs" />
+    <Compile Include="Account\LoginViewModel.cs" />
+    <Compile Include="Account\MyProfileViewModel.cs" />
+    <Compile Include="Account\ResetPasswordConfirmViewModel.cs" />
+    <Compile Include="Account\SignupViewModel.cs" />
+    <Compile Include="Book\AgencySetting\AddAgencySettingViewModel.cs" />
+    <Compile Include="Book\AgencySetting\EditAgencySettingViewModel.cs" />
+    <Compile Include="Book\AgencySetting\GridAgencySettingViewModel.cs" />
+    <Compile Include="Book\LocationTour\TourLocationViewModel.cs" />
+    <Compile Include="Book\LocationTour\TourPackageLocationViewModel.cs" />
+    <Compile Include="Book\LocationTour\TourPackageRankViewModel.cs" />
+    <Compile Include="Book\OrderInformation\AddOrderInformationViewModel.cs" />
+    <Compile Include="Book\OrderInformation\EditOrderInformationViewModel.cs" />
+    <Compile Include="Book\OrderInformation\GridOrderInformationViewModel.cs" />
+    <Compile Include="Book\OrderTask\AddOrderTaskViewModel.cs" />
+    <Compile Include="Book\OrderTask\EditOrderTaskViewModel.cs" />
+    <Compile Include="Book\OrderTask\GridOrderTaskViewModel.cs" />
+    <Compile Include="Book\OrderType\AddOrderTypeViewModel.cs" />
+    <Compile Include="Book\OrderType\EditOrderTypeViewModel.cs" />
+    <Compile Include="Book\OrderType\GridOrderTypeViewModel.cs" />
+    <Compile Include="Book\Order\AddOrderViewModel.cs" />
+    <Compile Include="Book\Order\EditOrderViewModel.cs" />
+    <Compile Include="Book\Order\GridOrderViewModel.cs" />
+    <Compile Include="Book\Passenger\AddPassengerViewModel.cs" />
+    <Compile Include="Book\Passenger\PassengersViewModel.cs" />
+    <Compile Include="Book\Passenger\GridPassengerViewModel.cs" />
+    <Compile Include="Book\PaymentLog\GridPaymentLogViewModel.cs" />
+    <Compile Include="Book\RoomTypeHotelRoom\AddRoomTypeHotelRoomViewModel.cs" />
+    <Compile Include="Book\RoomTypeHotelRoom\EditRoomTypeHotelRoomViewModel.cs" />
+    <Compile Include="Book\RoomTypeHotelRoom\GridRoomTypeHotelRoomViewModel.cs" />
+    <Compile Include="Book\RoomType\AddRoomTypeViewModel.cs" />
+    <Compile Include="Book\RoomType\EditRoomTypeViewModel.cs" />
+    <Compile Include="Book\RoomType\GridRoomTypeViewModel.cs" />
+    <Compile Include="Book\SearchParam\FlightSearchParamViewModel.cs" />
+    <Compile Include="Book\SearchParam\PassengerSearchParamViewModel.cs" />
+    <Compile Include="Book\SearchParam\HotelSearchParamViewModel.cs" />
+    <Compile Include="Book\SelectedAddServ\AddSelectedAddServViewModel.cs" />
+    <Compile Include="Book\SelectedAddServ\EditSelectedAddServViewModel.cs" />
+    <Compile Include="Book\SelectedAddServ\GridSelectedAddServViewModel.cs" />
+    <Compile Include="Book\SelectedFlight\AddSelectedFlightViewModel.cs" />
+    <Compile Include="Book\SelectedFlight\EditSelectedFlightViewModel.cs" />
+    <Compile Include="Book\SelectedFlight\GridSelectedFlightViewModel.cs" />
+    <Compile Include="Book\SelectedHotelPackage\AddSelectedHotelPackageViewModel.cs" />
+    <Compile Include="Book\SelectedHotelPackage\EditSelectedHotelPackageViewModel.cs" />
+    <Compile Include="Book\SelectedHotelPackage\GridSelectedHotelPackageViewModel.cs" />
+    <Compile Include="Book\SelectedHotel\AddSelectedHotelViewModel.cs" />
+    <Compile Include="Book\SelectedHotel\EditSelectedHotelViewModel.cs" />
+    <Compile Include="Book\SelectedHotel\ExportExcelSelectedHotelViewModel.cs" />
+    <Compile Include="Book\SelectedHotel\GridSelectedHotelViewModel.cs" />
+    <Compile Include="Book\SelectedHotel\SelectedHotelViewModel.cs" />
+    <Compile Include="Book\SelectedRoom\AddSelectedRoomViewModel.cs" />
+    <Compile Include="Book\SelectedRoom\EditSelectedRoomViewModel.cs" />
+    <Compile Include="Book\SelectedRoom\GridSelectedRoomViewModel.cs" />
+    <Compile Include="Book\SelectedRoom\SelelectedRoomInPackageViewModel.cs" />
+    <Compile Include="Book\Task\AddTaskViewModel.cs" />
+    <Compile Include="Book\Task\EditTaskViewModel.cs" />
+    <Compile Include="Book\Task\GridTaskViewModel.cs" />
+    <Compile Include="Book\TourReserve\ApplyCouponViewModel.cs" />
+    <Compile Include="Book\TourReserve\ConfirmViewModel.cs" />
+    <Compile Include="Book\TourReserve\HotelRoomPassengerSectionViewModel.cs" />
+    <Compile Include="Book\TourReserve\RoomSectionViewModel.cs" />
+    <Compile Include="Book\TourReserve\RoomTypePriceInfoViewModel.cs" />
+    <Compile Include="Book\TourReserve\TourOrderDetailViewModel.cs" />
+    <Compile Include="Book\TourReserve\VoucherBookRoomList.cs" />
+    <Compile Include="Book\TourReserve\VoucherReceiverViewModel.cs" />
+    <Compile Include="Book\Voucher\VoucherViewModel.cs" />
+    <Compile Include="BreadCrumbs\BreadCrumbsItemViewModel.cs" />
+    <Compile Include="Comment\Client\CommentReviewViewModel.cs" />
+    <Compile Include="ContentGroup\AddContentGroupViewModel.cs" />
+    <Compile Include="ContentGroup\EditContentGroupViewModel.cs" />
+    <Compile Include="ContentGroup\GridContentGroupViewModel.cs" />
+    <Compile Include="Content\AddContentViewModel.cs" />
+    <Compile Include="Content\Client\LastSecondTourViewModel.cs" />
+    <Compile Include="Content\EditContentViewModel.cs" />
+    <Compile Include="Content\GridContentViewModel.cs" />
+    <Compile Include="Core\ContactUs\AddContactUsViewModel.cs" />
+    <Compile Include="Core\ContactUs\EditContactUsViewModel.cs" />
+    <Compile Include="Core\ContactUs\GridContactUsViewModel.cs" />
+    <Compile Include="Core\Department\AddDepartmentViewModel.cs" />
+    <Compile Include="Core\Department\EditDepartmentViewModel.cs" />
+    <Compile Include="Core\Department\GridDepartmentViewModel.cs" />
+    <Compile Include="Core\Permission\AddControllersListViewModel.cs" />
+    <Compile Include="Core\Permission\ControlActionViewModel.cs" />
+    <Compile Include="Core\Permission\EditControllersListViewModel.cs" />
+    <Compile Include="Core\Permission\GridControllersListViewModel.cs" />
+    <Compile Include="Core\Permission\RoleCheckBoxListViewModel.cs" />
+    <Compile Include="Core\Slider\AddTourHomeSliderViewModel.cs" />
+    <Compile Include="Core\Slider\EditTourHomeSliderViewModel.cs" />
+    <Compile Include="Core\Slider\GridTourHomeSliderViewModel.cs" />
+    <Compile Include="Core\Slider\SliderClient\SlidersUITourHomeViewModel.cs" />
+    <Compile Include="Core\Support\AddSupportViewModel.cs" />
+    <Compile Include="Core\Support\EditSupportViewModel.cs" />
+    <Compile Include="Core\Support\GridSupportViewModel.cs" />
+    <Compile Include="CountryViewModels\Country\CountryHomeViewModel.cs" />
+    <Compile Include="Coupon\AddCouponViewModel.cs" />
+    <Compile Include="Coupon\EditCouponViewModel.cs" />
+    <Compile Include="Coupon\GridCouponViewModel.cs" />
+    <Compile Include="Home\CorporatesViewModel.cs" />
+    <Compile Include="Home\TourAllViewModel.cs" />
+    <Compile Include="Home\TourPackageFilterViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelBoard\AddHotelBoardViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelBoard\EditHotelBoardViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelBoard\GridHotelBoardViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelPackage\ClientHotelRoomInfoViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelPackage\EditHotelRoomInPackageViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelPackage\HotelPackageViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelPackage\ListViewHotelPackageViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelRule\AddHotelRuleViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelRule\EditHotelRuleViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelRule\GridHotelRuleViewModel.cs" />
+    <Compile Include="HotelViewModels\Hotel\ChangeThumbViewModel.cs" />
+    <Compile Include="HotelViewModels\Hotel\ImageRadioButtonsViewModel.cs" />
+    <Compile Include="LinkRedirection\AddLinkRedirectionViewModel.cs" />
+    <Compile Include="LinkRedirection\EditLinkRedirectionViewModel.cs" />
+    <Compile Include="LinkRedirection\GridLinkRedirectionViewModel.cs" />
+    <Compile Include="Link\ShowDefaultPageViewModel.cs" />
+    <Compile Include="MagazineViewModels\Location\AddLocationViewModel.cs" />
+    <Compile Include="MagazineViewModels\Location\EditLocationViewModel.cs" />
+    <Compile Include="MagazineViewModels\Location\GridLocationViewModel.cs" />
+    <Compile Include="MagazineViewModels\Magazine\AddTabMagazineViewModel.cs" />
+    <Compile Include="MagazineViewModels\Magazine\EditTabMagazineViewModel.cs" />
+    <Compile Include="MagazineViewModels\Magazine\GridTabMagazineViewModel.cs" />
+    <Compile Include="MagazineViewModels\Magazine\CountryTabMagsViewModel.cs" />
+    <Compile Include="MagazineViewModels\Magazine\TabMagPostListViewModel.cs" />
+    <Compile Include="MagazineViewModels\Magazine\TabMagNestedItemViewModel.cs" />
+    <Compile Include="NotFoundLink\GridNotFoundLinkViewModel.cs" />
+    <Compile Include="Payamak\MessageViewModel.cs" />
+    <Compile Include="Post\Client\BlogWriterViewModel.cs" />
+    <Compile Include="Post\Client\MoreDataViewModel.cs" />
+    <Compile Include="Post\Client\UpdateProductRateViewModel.cs" />
+    <Compile Include="Review\AddReviewViewModel.cs" />
+    <Compile Include="Review\EditReviewViewModel.cs" />
+    <Compile Include="Review\GridReviewViewModel.cs" />
+    <Compile Include="Rule\AddTermsandConditionViewModel.cs" />
+    <Compile Include="Rule\EditTermsandConditionViewModel.cs" />
+    <Compile Include="Rule\GridTermsandConditionViewModel.cs" />
+    <Compile Include="Search\AddSearchLogViewModel.cs" />
+    <Compile Include="Search\GridSearchLogViewModel.cs" />
+    <Compile Include="Search\SearchResultViewModel.cs" />
+    <Compile Include="Search\SearchViewModel.cs" />
+    <Compile Include="SiteMap\SiteMapViewModel.cs" />
+    <Compile Include="SocialLog\AddSocialLogViewModel.cs" />
+    <Compile Include="TourSuggestion\TourPackageOfferViewModel.cs" />
+    <Compile Include="TourSuggestion\AddTourSuggestionViewModel.cs" />
+    <Compile Include="TourSuggestion\EditTourSuggestionViewModel.cs" />
+    <Compile Include="TourSuggestion\GridTourSuggestionViewModel.cs" />
+    <Compile Include="TourViewModels\Airport\AddAirportViewModel.cs" />
+    <Compile Include="TourViewModels\Airport\EditAirportViewModel.cs" />
+    <Compile Include="TourViewModels\Airport\GridAirportViewModel.cs" />
+    <Compile Include="TourViewModels\Report\BookDetailGridViewModel.cs" />
+    <Compile Include="TourViewModels\Report\BookDetailViewModel.cs" />
+    <Compile Include="TourViewModels\Report\ReportGridViewModel.cs" />
+    <Compile Include="TourViewModels\Report\ReportViewModel.cs" />
+    <Compile Include="TourViewModels\Activity\AddActivityViewModel.cs" />
+    <Compile Include="TourViewModels\Activity\EditActivityViewModel.cs" />
+    <Compile Include="TourViewModels\Activity\GridActivityViewModel.cs" />
+    <Compile Include="TourViewModels\AdditionalService\AddAdditionalServiceViewModel.cs" />
+    <Compile Include="TourViewModels\AdditionalService\EditAdditionalServiceViewModel.cs" />
+    <Compile Include="TourViewModels\AdditionalService\GridAdditionalServiceViewModel.cs" />
+    <Compile Include="TourViewModels\AllowedBanned\AddAllowedBannedViewModel.cs" />
+    <Compile Include="TourViewModels\AllowedBanned\EditAllowedBannedViewModel.cs" />
+    <Compile Include="TourViewModels\AllowedBanned\GridAllowedBannedViewModel.cs" />
+    <Compile Include="CountryViewModels\City\AddCityViewModel.cs" />
+    <Compile Include="CountryViewModels\City\EditCityViewModel.cs" />
+    <Compile Include="CountryViewModels\City\GridCityViewModel.cs" />
+    <Compile Include="Comment\Client\ClientCommentViewModel.cs" />
+    <Compile Include="Comment\EditCommentViewModel.cs" />
+    <Compile Include="Comment\GridCommentViewModel.cs" />
+    <Compile Include="Common\BaseViewModelBigId.cs" />
+    <Compile Include="Common\BaseViewModelId.cs" />
+    <Compile Include="Common\BigBaseViewModelOfEntity.cs" />
+    <Compile Include="Common\BaseViewModelOfEntity.cs" />
+    <Compile Include="Common\Comparer\TourScheduleHotelRoomsComparer.cs" />
+    <Compile Include="Common\CRUDMode.cs" />
+    <Compile Include="Common\EditFileUpload.cs" />
+    <Compile Include="Common\FilterList.cs" />
+    <Compile Include="TourViewModels\CompanyTransferVehicleType\AddCompanyTransferVehicleTypeViewModel.cs" />
+    <Compile Include="TourViewModels\CompanyTransferVehicleType\EditCompanyTransferVehicleTypeViewModel.cs" />
+    <Compile Include="TourViewModels\CompanyTransferVehicleType\GridCompanyTransferVehicleTypeViewModel.cs" />
+    <Compile Include="TourViewModels\CompanyTransfer\AddCompanyTransferViewModel.cs" />
+    <Compile Include="TourViewModels\CompanyTransfer\EditCompanyTransferViewModel.cs" />
+    <Compile Include="TourViewModels\CompanyTransfer\GridCompanyTransferViewModel.cs" />
+    <Compile Include="Core\Footer\AddFooterViewModel.cs" />
+    <Compile Include="Core\Footer\EditFooterViewModel.cs" />
+    <Compile Include="Core\Footer\FooterClient\FooterUIViewModel.cs" />
+    <Compile Include="Core\Footer\GridFooterViewModel.cs" />
+    <Compile Include="Core\MenuGroup\AddMenuGroupViewModel.cs" />
+    <Compile Include="Core\MenuGroup\EditMenuGroupViewModel.cs" />
+    <Compile Include="Core\MenuGroup\GridMenuGroupViewModel.cs" />
+    <Compile Include="Core\NewsLetter\AddNewsLetterViewModel.cs" />
+    <Compile Include="Core\NewsLetter\EditNewsLetterViewModel.cs" />
+    <Compile Include="Core\NewsLetter\GridNewsLetterViewModel.cs" />
+    <Compile Include="Core\SliderGroup\AddSliderGroupViewModel.cs" />
+    <Compile Include="Core\SliderGroup\EditSliderGroupViewModel.cs" />
+    <Compile Include="Core\SliderGroup\GridSliderGroupViewModel.cs" />
+    <Compile Include="Core\Slider\AddSliderViewModel.cs" />
+    <Compile Include="Core\Slider\EditSliderViewModel.cs" />
+    <Compile Include="Core\Slider\GridSliderViewModel.cs" />
+    <Compile Include="Core\Slider\SliderClient\SlidersUIViewModel.cs" />
+    <Compile Include="CountryViewModels\Country\AddCountryViewModel.cs" />
+    <Compile Include="CountryViewModels\Country\EditCountryViewModel.cs" />
+    <Compile Include="CountryViewModels\Country\GridCountryViewModel.cs" />
+    <Compile Include="TourViewModels\Currency\AddCurrencyViewModel.cs" />
+    <Compile Include="TourViewModels\Currency\EditCurrencyViewModel.cs" />
+    <Compile Include="TourViewModels\Currency\GridCurrencyViewModel.cs" />
+    <Compile Include="TourViewModels\FAQ\AddFAQViewModel.cs" />
+    <Compile Include="TourViewModels\FAQ\EditFAQViewModel.cs" />
+    <Compile Include="TourViewModels\FAQ\FAQClient\FAQClientViewModel.cs" />
+    <Compile Include="TourViewModels\FAQ\GridFAQViewModel.cs" />
+    <Compile Include="Home\HomeViewModel.cs" />
+    <Compile Include="Core\Menu\MenuTreeViewModel.cs" />
+    <Compile Include="Core\PageVisit\AddPageVisitViewModel.cs" />
+    <Compile Include="Core\PageVisit\EditPageVisitViewModel.cs" />
+    <Compile Include="Core\PageVisit\GridPageVisitViewModel.cs" />
+    <Compile Include="Core\Page\AddPageViewModel.cs" />
+    <Compile Include="Core\Page\EditPageViewModel.cs" />
+    <Compile Include="Core\Page\GridPageViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelFacility\AddHotelFacilityViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelFacility\EditHotelFacilityViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelFacility\GridHotelFacilityViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelGallery\AddHotelGalleryViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelGallery\EditHotelGalleryViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelGallery\GridHotelGalleryViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelRank\AddHotelRankViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelRank\EditHotelRankViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelRank\GridHotelRankViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelRoom\AddHotelRoomViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelRoom\EditHotelRoomViewModel.cs" />
+    <Compile Include="HotelViewModels\HotelRoom\GridHotelRoomViewModel.cs" />
+    <Compile Include="HotelViewModels\Hotel\AddHotelViewModel.cs" />
+    <Compile Include="HotelViewModels\Hotel\EditHotelViewModel.cs" />
+    <Compile Include="HotelViewModels\Hotel\FilterListForAutoComplete.cs" />
+    <Compile Include="HotelViewModels\Hotel\GridHotelViewModel.cs" />
+    <Compile Include="HotelViewModels\Hotel\HotelGalleryViewModel.cs" />
+    <Compile Include="TourViewModels\Leader\AddLeaderViewModel.cs" />
+    <Compile Include="TourViewModels\Leader\EditLeaderViewModel.cs" />
+    <Compile Include="TourViewModels\Leader\GridLeaderViewModel.cs" />
+    <Compile Include="Link\EditLinkViewModel.cs" />
+    <Compile Include="Link\GridLinkViewModel.cs" />
+    <Compile Include="TourViewModels\Order\BookViewModel.cs" />
+    <Compile Include="TourViewModels\Order\ConfirmationVieModel.cs" />
+    <Compile Include="TourViewModels\Order\Extra.cs" />
+    <Compile Include="TourViewModels\Order\PassengerDetailControl.cs" />
+    <Compile Include="TourViewModels\Order\PassengerDynamicControl.cs" />
+    <Compile Include="TourViewModels\Order\PriceSummary.cs" />
+    <Compile Include="PostGroup\AddPostGroupViewModel.cs" />
+    <Compile Include="PostGroup\Client\PostGroupViewModel.cs" />
+    <Compile Include="PostGroup\EditPostGroupViewModel.cs" />
+    <Compile Include="PostGroup\GridPostGroupViewModel.cs" />
+    <Compile Include="PostImage\ImageSliderViewModel.cs" />
+    <Compile Include="PostImage\ImageViewModel.cs" />
+    <Compile Include="Post\AddPostViewModel.cs" />
+    <Compile Include="Post\Client\FirstBlogPageViewModel.cs" />
+    <Compile Include="Post\Client\HotelDetailsViewModel.cs" />
+    <Compile Include="Post\Client\PostDetailViewModel.cs" />
+    <Compile Include="Post\Client\PostListDetailViewModel.cs" />
+    <Compile Include="Post\Client\PostListViewModel.cs" />
+    <Compile Include="Post\Client\SearchListViewModel.cs" />
+    <Compile Include="Post\EditPostViewModel.cs" />
+    <Compile Include="Post\GridPostViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role\AddRoleViewModel.cs" />
+    <Compile Include="Role\EditRoleViewModel.cs" />
+    <Compile Include="Role\GridRoleViewModel.cs" />
+    <Compile Include="PostImage\AddPostImageViewModel.cs" />
+    <Compile Include="CountryViewModels\State\AddStateViewModel.cs" />
+    <Compile Include="CountryViewModels\State\EditStateViewModel.cs" />
+    <Compile Include="CountryViewModels\State\GridStateViewModel.cs" />
+    <Compile Include="Tag\GridTagViewModel.cs" />
+    <Compile Include="Tag\EditTagViewModel.cs" />
+    <Compile Include="Tag\AddTagViewModel.cs" />
+    <Compile Include="TourViewModels\RequiredDocument\AddRequiredDocumentViewModel.cs" />
+    <Compile Include="TourViewModels\RequiredDocument\EditRequiredDocumentViewModel.cs" />
+    <Compile Include="TourViewModels\RequiredDocument\GridRequiredDocumentViewModel.cs" />
+    <Compile Include="TourViewModels\TourCategory\AddTourCategoryViewModel.cs" />
+    <Compile Include="TourViewModels\TourCategory\EditTourCategoryViewModel.cs" />
+    <Compile Include="TourViewModels\TourCategory\GridTourCategoryViewModel.cs" />
+    <Compile Include="TourViewModels\TourLandingPageUrl\AddTourLandingPageUrlViewModel.cs" />
+    <Compile Include="TourViewModels\TourLandingPageUrl\EditTourLandingPageUrlViewModel.cs" />
+    <Compile Include="TourViewModels\TourLandingPageUrl\GridTourLandingPageUrlViewModel.cs" />
+    <Compile Include="TourViewModels\TourLevel\AddTourLevelViewModel.cs" />
+    <Compile Include="TourViewModels\TourLevel\EditTourLevelViewModel.cs" />
+    <Compile Include="TourViewModels\TourLevel\GridTourLevelViewModel.cs" />
+    <Compile Include="TourViewModels\TourPackageDay\AddTourPackageDayViewModel.cs" />
+    <Compile Include="TourViewModels\TourPackageDay\EditTourPackageDayViewModel.cs" />
+    <Compile Include="TourViewModels\TourPackageDay\GridTourPackageDayViewModel.cs" />
+    <Compile Include="TourViewModels\TourPackage\EditTourPackageViewModel.cs" />
+    <Compile Include="TourViewModels\TourPackage\GridTourPackageViewModel.cs" />
+    <Compile Include="TourViewModels\TourPackage\ListViewTourPackageViewModel.cs" />
+    <Compile Include="TourViewModels\TourPackage\TourPackageBatchUpdatePriceViewModel.cs" />
+    <Compile Include="TourViewModels\TourPackage\TourPackageViewModel.cs" />
+    <Compile Include="TourViewModels\TourPriority\TourPriorityViewModel.cs" />
+    <Compile Include="TourViewModels\TourProgramDetail\ListViewTourProgramDetailViewModel.cs" />
+    <Compile Include="TourViewModels\TourProgramDetail\TourProgramDetailViewModel.cs" />
+    <Compile Include="TourViewModels\TourProgram\ListViewTourProgramViewModel.cs" />
+    <Compile Include="TourViewModels\TourProgram\TourProgramViewModel.cs" />
+    <Compile Include="Book\SelectedFlight\FlightViewModel.cs" />
+    <Compile Include="Book\TourReserve\TourReserveViewModel.cs" />
+    <Compile Include="TourViewModels\TourScheduleAdditionalService\ListViewTourScheduleAdditionalServiceViewModel.cs" />
+    <Compile Include="TourViewModels\TourScheduleAdditionalService\TourScheduleAdditionalServiceViewModel.cs" />
+    <Compile Include="TourViewModels\TourScheduleCompanyTransfers\AddTourScheduleCompanyTransferViewModel.cs" />
+    <Compile Include="TourViewModels\TourScheduleCompanyTransfers\EditTourScheduleCompanyTransferViewModel.cs" />
+    <Compile Include="TourViewModels\TourScheduleCompanyTransfers\GridTourScheduleCompanyTransferViewModel.cs" />
+    <Compile Include="TourViewModels\TourScheduleCompanyTransfer\ListViewTourScheduleCompanyTransferViewModel.cs" />
+    <Compile Include="TourViewModels\TourScheduleCompanyTransfer\TourScheduleCompanyTransferViewModel.cs" />
+    <Compile Include="TourViewModels\TourScheduleHotelRoom\TourScheduleHotelRoomViewModel.cs" />
+    <Compile Include="TourViewModels\TourScheduleHotel\ListViewTourScheduleHotelViewModel.cs" />
+    <Compile Include="TourViewModels\TourScheduleHotel\TourScheduleHotelViewModel.cs" />
+    <Compile Include="TourViewModels\TourSchedule\ListViewTourScheduleViewModel.cs" />
+    <Compile Include="TourViewModels\TourSchedule\TourScheduleViewModel.cs" />
+    <Compile Include="TourViewModels\TourSlider\AddTourSliderViewModel.cs" />
+    <Compile Include="TourViewModels\TourSlider\TourSliderGroupViewModel.cs" />
+    <Compile Include="TourViewModels\TourType\AddTourTypeViewModel.cs" />
+    <Compile Include="TourViewModels\TourType\EditTourTypeViewModel.cs" />
+    <Compile Include="TourViewModels\TourType\GridTourTypeViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\AddTourViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\EditTourViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\GridTourViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\ActivitiesUIViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\HotelRoomDDLViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\AllowBansViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\DayToDayViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\HotelPackageHotelRoomViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\IntroductionViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\MoreTravelInfoViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\TourDetailHotelUIViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\TourDetailViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\tourHomeViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\TourProgramTourDetailViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\TourSearchViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\TourSliderCountriesUIViewModel.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\TourUIDatePrice.cs" />
+    <Compile Include="TourViewModels\Tour\TourClient\TourUIViewModel.cs" />
+    <Compile Include="TourViewModels\VehicleTypeClass\AddVehicleTypeClassViewModel.cs" />
+    <Compile Include="TourViewModels\VehicleTypeClass\EditVehicleTypeClassViewModel.cs" />
+    <Compile Include="TourViewModels\VehicleTypeClass\GridVehicleTypeClassViewModel.cs" />
+    <Compile Include="UserAddress\UserAddressViewModel.cs" />
+    <Compile Include="UserCommission\EditUserCommissionViewModel.cs" />
+    <Compile Include="UserCommission\GridUserCommissionViewModel.cs" />
+    <Compile Include="UserGroup\AddUserGroupViewModel.cs" />
+    <Compile Include="UserGroup\EditUserGroupViewModel.cs" />
+    <Compile Include="UserGroup\GridUserGroupViewModel.cs" />
+    <Compile Include="User\AddUserUserProfileViewModel.cs" />
+    <Compile Include="User\AddUserViewModel.cs" />
+    <Compile Include="User\EditUserViewModel.cs" />
+    <Compile Include="User\GridUserViewModel.cs" />
+    <Compile Include="User\NewProfileViewModel.cs" />
+    <Compile Include="TourViewModels\VehicleType\AddVehicleTypeViewModel.cs" />
+    <Compile Include="TourViewModels\VehicleType\EditVehicleTypeViewModel.cs" />
+    <Compile Include="TourViewModels\VehicleType\GridVehicleTypeViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ParvazPardaz.Common\ParvazPardaz.Common.csproj">
+      <Project>{42f4215f-f999-474a-8ede-2b6be2b2f9c3}</Project>
+      <Name>ParvazPardaz.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParvazPardaz.Model\ParvazPardaz.Model.csproj">
+      <Project>{3bc859b7-44b6-45ec-930a-312f2f2baf0b}</Project>
+      <Name>ParvazPardaz.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParvazPardaz.Resource\ParvazPardaz.Resource.csproj">
+      <Project>{727137d5-626a-4b5b-bc23-4481e1e074c4}</Project>
+      <Name>ParvazPardaz.Resource</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Emails\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

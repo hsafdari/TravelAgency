@@ -1,0 +1,232 @@
+﻿@model GridPassengerViewModel
+@{ViewBag.Title = ParvazPardaz.Resource.Book.Book.sellesPassengerReports;}
+<link href="~/Plugins/PersianEnDateTime/css/persian-datepicker.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<h3>@ViewBag.Title</h3>
+<hr />
+<div class="container">
+    @{Html.RenderPartial("_PassengerSearch", Model.SearchViewModel);}
+    <div id="table">
+        <table id="grid" class="table table-bordered table-hover table-full-width dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>@Html.DisplayNameFor(model => model.Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.OrderId)</th>
+                    <th>@Html.DisplayNameFor(model => model.FlightDateTime)</th>
+                    <th>@Html.DisplayNameFor(model => model.ReturnFlightDateTime)</th>                    
+                    <th>@Html.DisplayNameFor(model => model.BuyerTitle)</th>
+                    <th>@Html.DisplayNameFor(model => model.TrackingCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.NationalCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                    <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                    <th>@Html.DisplayNameFor(model => model.EnFirstName)</th>
+                    <th>@Html.DisplayNameFor(model => model.EnLastName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Nationality)</th>
+                    <th>@Html.DisplayNameFor(model => model.PassportNo)</th>
+                    <th>@Html.DisplayNameFor(model => model.PassportExporterCountry)</th>
+                    <th>@Html.DisplayNameFor(model => model.PassportExpirationDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.AgeRangeTitle)</th>
+                    <th>@Html.DisplayNameFor(model => model.Birthdate)</th>
+                    <th>@Html.DisplayNameFor(model => model.BirthCountry)</th>
+                    <th>@Html.DisplayNameFor(model => model.GenderTitle)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreatorDateTime)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreatorDateTime)</th>
+                    <th>@Html.DisplayNameFor(model => model.LastModifierUserName)</th>
+                    <th>@Html.DisplayNameFor(model => model.LastModifierDate)</th>
+                </tr>
+            </thead>            
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $('.select2').select2({
+            dir: "RTL"
+        });
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+    @*<script src="~/Scripts/kendo.date/JalaliDate.js"></script>
+    <script src="~/Scripts/kendo.date/kendo.web.js"></script>
+    <script src="~/Scripts/kendo.date/fa-IR.js"></script>*@
+    <script>
+        var fetchCompanyTransferUrl = "@Url.Action("GetCompanyTransfers", "CompanyTransfer")"
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
+                return {
+                    "iStart": oSettings._iDisplayStart,
+                    "iEnd": oSettings.fnDisplayEnd(),
+                    "iLength": oSettings._iDisplayLength,
+                    "iTotal": oSettings.fnRecordsTotal(),
+                    "iFilteredTotal": oSettings.fnRecordsDisplay(),
+                    "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+                    "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
+                };
+            };
+            var table = $("#grid").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                'select': true,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+
+                    var numStart = this.fnPagingInfo().iStart;
+
+                    var index = numStart + iDisplayIndexFull + 1;
+                    $("td:first", nRow).html(index);
+                    return nRow;
+                },
+                scrollX: true,
+                scrollCollapse: true,
+                language: {
+                    url: '/Plugins/DataTables/Persian.json'
+                },
+                "ajax": {
+                    "url": "/Admin/Order/GetOrderPassengers",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: function (d) {
+                        d.fromdate = $("#fromdate").val(),
+                        d.todate = $("#todate").val(),
+                        d.reporttype = $("input[name='reporttype']:checked").val(),
+                        d.calendertype = $("#hdcalendertype").val()
+                    }
+                },
+                "columnDefs":
+            [{
+                "targets": [1],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": 'no-sort',
+                "orderable": false,
+            }]
+                    , "columns": [
+                    { "data": null },
+                    { "data": "Id", name: "Id", "autoWidth": true },
+                    { "data": "OrderId", name: "OrderId", "autoWidth": true },
+                     {
+                         "data": "FlightDateTime", name: "FlightDateTime", "autoWidth": true,
+                         render: function (data, type, row) {
+                             return (data != null ? moment(data).format('jYYYY/jMM/jDD') : '');
+                         }
+                     },
+                     {
+                         "data": "ReturnFlightDateTime", name: "ReturnFlightDateTime", "autoWidth": true,
+                         render: function (data, type, row) {
+                             return (data != null ? moment(data).format('jYYYY/jMM/jDD') : '');
+                         }
+                     },
+                    { "data": "BuyerTitle", name: "BuyerTitle", "autoWidth": true },
+                    { "data": "TrackingCode", name: "TrackingCode", "autoWidth": true },
+                    { "data": "NationalCode", name: "NationalCode", "autoWidth": true },
+                    { "data": "FirstName", name: "FirstName", "autoWidth": true },
+                    { "data": "LastName", name: "LastName", "autoWidth": true },
+                    { "data": "EnFirstName", name: "EnFirstName", "autoWidth": true },
+                    { "data": "EnLastName", name: "EnLastName", "autoWidth": true },
+                    { "data": "Nationality", name: "Nationality", "autoWidth": true },
+                    { "data": "PassportNo", name: "PassportNo", "autoWidth": true },
+                    { "data": "PassportExporterCountry", name: "PassportExporterCountry", "autoWidth": true },
+                    {
+                        "data": "PassportExpirationDate", name: "PassportExpirationDate", "autoWidth": true,
+                        render: function (data, type, row) {
+                            return (data != null ? moment(data).format('jYYYY/jMM/jDD') : '');
+                        }
+                    },
+                    { "data": "AgeRangeTitle", name: "AgeRangeTitle", "autoWidth": true },
+                    {
+                        "data": "Birthdate", name: "Birthdate", "autoWidth": true,
+                            render: function (data, type, row) {
+                                return (data != null ? moment(data).format('jYYYY/jMM/jDD') : '');
+                            }
+                    },
+                    { "data": "BirthCountry", name: "BirthCountry", "autoWidth": true },
+                    { "data": "GenderTitle", name: "GenderTitle", "autoWidth": true },
+                    {
+                        "data": "CreatorDateTime", name: "CreatorDateTime", "autoWidth": true,
+                        render: function (data, type, row) {
+                            return (data != null ? moment(data).format('jYYYY/jMM/jDD HH:mm') : '');
+                        }
+                    },
+                    {
+                        "data": "CreatorDateTime", name: "CreatorDateTime", "autoWidth": true,
+                        render: function (data, type, row) {
+                            return (data != null ? moment(data).format('YYYY/MM/DD HH:mm') : '');
+                        }
+                    },
+                    { "data": "LastModifierUserName", name: "LastModifierUserName", "autoWidth": true },
+                    {
+                        "data": "LastModifierDate", name: "LastModifierDate", "autoWidth": true,
+                        render: function (data, type, row) {
+                            return (data != null ? moment(data).format('jYYYY/jMM/jDD HH:mm') : '');
+                        }
+                    },
+                    ],
+                "order": [[2, 'desc']]
+            });
+
+            //$(".datepicker").kendoDatePicker();
+
+            $("#searchbutton").click(function () {
+                table.draw();
+            });            
+        });
+        function FetchCompanyTransfer() {
+        var coId = "#DDCompanyTransfer";
+                var vId = "#DDVehicleType";
+
+                var items = "";
+                var vehicleTypeId = $(vId).val();
+
+                if (vehicleTypeId == "") {
+                    items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectVehicleType' + "</option>";
+                    $(coId).html(items);
+                    items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+                }
+                else {
+                    items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.Tour.Tours.SelectCompanyTransfer' + "</option>";
+                    var x = $.getJSON(fetchCompanyTransferUrl + "/" + vehicleTypeId, null, function (data) {
+                        $.each(data, function (i, item) {
+                            items += "<option value=\"" + item.Id + "\">" + item.Title + "</option>";
+                        });
+                        $(coId).html(items);
+                    });
+                }
+
+                $(coId).trigger("change");
+            }
+    </script>
+<script src="~/Plugins/PersianEnDateTime/js/persian-date.min.js"></script>
+<script src="~/Plugins/PersianEnDateTime/js/persian-datepicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".datepicker").pDatepicker({
+            format: 'YYYY/MM/DD',
+            toolbox: {
+                calendarSwitch: {
+                    enabled: true
+                }
+            },
+            persianDigit: false,
+            onSelect: function () {
+
+                var test = $(this)["0"].calendar_;
+                $("#hdcalendertype").val(test);
+            }
+        });
+
+    });
+</script>
+
+}
+
+
+
+

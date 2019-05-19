@@ -1,0 +1,68 @@
+{
+  "name": "smooth-scroll",
+  "version": "12.1.3",
+  "description": "Animate scrolling to anchor links",
+  "main": "./dist/js/smooth-scroll.min.js",
+  "author": {
+    "name": "Chris Ferdinandi",
+    "url": "http://gomakethings.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/cferdinandi/smooth-scroll.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "node-fs": "^0.1.7",
+    "del": "^2.2.2",
+    "lazypipe": "^1.0.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-flatten": "^0.3.1",
+    "gulp-tap": "^0.1.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-header": "^1.8.8",
+    "gulp-footer": "^1.0.5",
+    "gulp-watch": "^4.3.11",
+    "gulp-livereload": "^3.8.1",
+    "jshint": "^2.9.4",
+    "gulp-jshint": "^2.0.4",
+    "jshint-stylish": "^2.2.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^2.1.2",
+    "gulp-optimize-js": "^1.1.0",
+    "gulp-markdown": "^1.2.0",
+    "gulp-file-include": "^0.14.0"
+  },
+  "gitHead": "bcc4fb643625572ea9c818901122073f481c8d04",
+  "bugs": {
+    "url": "https://github.com/cferdinandi/smooth-scroll/issues"
+  },
+  "homepage": "https://github.com/cferdinandi/smooth-scroll#readme",
+  "_id": "smooth-scroll@12.1.3",
+  "scripts": {},
+  "_shasum": "e04f2671aa420c1c8868efc39dcd196939d7ceb2",
+  "_from": "smooth-scroll@",
+  "_npmVersion": "3.10.10",
+  "_nodeVersion": "6.10.2",
+  "_npmUser": {
+    "name": "cferdinandi",
+    "email": "chris@gomakethings.com"
+  },
+  "dist": {
+    "shasum": "e04f2671aa420c1c8868efc39dcd196939d7ceb2",
+    "tarball": "https://registry.npmjs.org/smooth-scroll/-/smooth-scroll-12.1.3.tgz"
+  },
+  "maintainers": [
+    {
+      "email": "chris@gomakethings.com",
+      "name": "cferdinandi"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/smooth-scroll-12.1.3.tgz_1501781275002_0.7002033761236817"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/smooth-scroll/-/smooth-scroll-12.1.3.tgz"
+}

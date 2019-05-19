@@ -1,0 +1,132 @@
+﻿<style media="all">
+    .htmlprint {
+        background: whitesmoke;
+        position: relative;
+        width: 1140px;
+        min-height: 1654px;
+        padding: 50px;
+        margin: auto;
+    }
+
+    .bodyprint {
+        background: white;
+        min-height: calc(100% - 100px);
+        width: calc(100% - 100px);
+        padding: 50px;
+        position: relative;
+    }
+
+        .bodyprint h1 {
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            width: 50%;
+            font-size: 30px;
+            font-weight: 900;
+            text-align: left;
+            padding: 0;
+            margin: 0;
+        }
+
+        .bodyprint .list {
+            padding: 0;
+            padding-top: 75px;
+            background-position: top right !important;
+            background-repeat: no-repeat !important;
+            background-size: auto 65px !important;
+            margin: 0 0 30px 0;
+        }
+
+            .bodyprint .list.passenger {
+                background: url('/ClientTheme/Blog/Tour/img/icons/passenger-ticket.jpg');
+            }
+
+            .bodyprint .list.flight {
+                background-position: top left !important;
+                background: url('/ClientTheme/Blog/Tour/img/icons/flight-ticket-l.jpg');
+                width: calc(50% - 2.5px);
+                display: inline-block;
+                position: relative;
+            }
+
+                .bodyprint .list.flight::after {
+                    content: "رفــت";
+                    font-size: 23px;
+                    font-weight: 900;
+                    position: absolute;
+                    top: 32px;
+                    right: 250px;
+                }
+
+                .bodyprint .list.flight.back::after {
+                    content: "برگـشت";
+                    left: 250px;
+                    right: auto;
+                }
+
+                .bodyprint .list.flight.go {
+                    background-position: top right !important;
+                    background: url('/ClientTheme/Blog/Tour/img/icons/flight-ticket-r.jpg');
+                }
+
+            .bodyprint .list li {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                background: whitesmoke;
+                margin-bottom: 5px;
+                border-radius: 5px;
+                text-align: right;
+                padding: 10px;
+                font-size: 13px;
+                font-weight: 500;
+            }
+
+            .bodyprint .list.flight li {
+                padding: 5px;
+                font-size: 10px;
+                font-weight: 500;
+            }
+
+            .bodyprint .list li:nth-child(even) {
+                background: #dcf0f1;
+            }
+
+            .bodyprint .list li *:nth-child(n + 3) {
+                font-family: arial;
+                direction: ltr;
+                text-align: left;
+                font-weight: bold;
+                padding-left: 20px;
+            }
+
+            .bodyprint .list.flight li *:nth-child(2) {
+                font-weight: normal;
+                text-align: left;
+                padding-left: 20px;
+                border-left: 1px solid gray;
+            }
+
+            .bodyprint .list.flight li *:nth-child(3) {
+                font-weight: normal;
+                text-align: right;
+                padding-right: 20px;
+            }
+
+        .bodyprint footer {
+            display: grid;
+            grid-template-columns: 200px auto;
+            grid-template-rows: 45px;
+            border-top: 1px solid gray;
+            margin-top: 30px;
+            text-align: left;
+            padding-top: 10px;
+            align-items: center;
+            position: relative;
+            height: auto;
+            background: white;
+        }
+
+            .bodyprint footer img {
+                width: 100%;
+            }
+</style>

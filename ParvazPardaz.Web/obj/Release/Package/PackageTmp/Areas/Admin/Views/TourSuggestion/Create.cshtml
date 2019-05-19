@@ -1,0 +1,118 @@
+﻿
+
+@model ParvazPardaz.ViewModel.AddTourSuggestionViewModel
+@{
+    ViewBag.Title = "Create";  
+}
+
+@using (Html.BeginForm("Create", "TourSuggestion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.Tour.Tours.TourSuggestManagement</h3>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageIsActive, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+
+                @Html.CheckBoxFor(model => model.ImageIsActive, new { @class = "flat-red", style = "margin-right:50px; margin-left:50px;" })
+                @Html.ValidationMessageFor(model => model.ImageIsActive, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LocationId, new { @class = "control-label col-md-2" })
+            <div class="col-md-3 number">
+                @Html.DropDownListFor(model => model.LocationId, Model.LocationDDL, new { @class = "form-control search-select select" })            
+                @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TourTitle, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.TourTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TourTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TourDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.TourDate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TourDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AirlineTitle, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.AirlineTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AirlineTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TourDuration, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.TourDuration, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TourDuration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TourPrice, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.TourPrice, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TourPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NavigationUrl, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.NavigationUrl, new { @class = "text-left form-control", style = "direction:ltr" })
+                @Html.ValidationMessageFor(model => model.NavigationUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Priority, new { @class = "control-label col-md-1" })
+            <div class="col-md-3 number">
+                @Html.SpinFor(model => model.Priority, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.File, new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @Html.FileUploaderFor(model => model.File).AddMore(false).IsMultiple(false).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(false)
+                <div class="alert alert-info">
+                    <i class="fa fa-info-circle"></i>
+                    <strong>توجه!</strong>
+                    <p>@ParvazPardaz.Resource.CMS.CMS.PicSizeTourSuggestion</p>  
+                    <p class="text-danger">width:193px</p>
+                    <p class="text-danger">height:376px</p>
+                </div>
+                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+            </div>          
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Create class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_Toastr")
+}
+@section scripts{
+    <script type="text/javascript">
+        $('.select').select2({ dir: "RTL" });
+    </script>
+}
+
+
+
+

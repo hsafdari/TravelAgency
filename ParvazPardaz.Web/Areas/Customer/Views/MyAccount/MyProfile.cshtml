@@ -1,0 +1,338 @@
+﻿@model MyProfileViewModel
+@using ParvazPardaz.Common.HtmlHelpers;
+@{
+    ViewBag.Title = "اطلاعات کاربری";
+}
+<link href="~/Plugins/PersianEnDateTime/css/persian-datepicker.min.css" rel="stylesheet" />
+<style>
+    input[type="number"], input[type="email"], input[type="phone"], input[type="text"], input[type="password"], input[type="submit"], select {
+        cursor: pointer !important;
+    }
+</style>
+<style>
+    style, script {
+        display: none !important;
+    }
+
+    .form {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .jFiler-theme-default .jFiler-input {
+        width: auto !important;
+    }
+
+    #UserAddressSection {
+        grid-column: span 2 !important;
+    }
+
+    .UserAddressItem > * {
+        grid-column: span 1 !important;
+    }
+</style>
+<main id="account-settings" class="profile">
+    @Html.Partial("_PrvCustomerSidebarMenu")
+    <section>
+        <ul class="buttons-bar">
+            <li><a class="btn-1 user-info active" onclick="$(this).addClass('active'); $(this).closest('.buttons-bar').find('.user-password').removeClass('active');" href="#user-info">ویرایش اطلاعات کاربری</a></li>
+            <li><a class="btn-1 user-password" onclick="$(this).addClass('active'); $(this).closest('.buttons-bar').find('.user-info').removeClass('active');" href="#user-password">تغییر رمز عبور</a></li>
+            <li><a class="btn-4" href="/Account/LogOff">خروج از حساب کاربری</a></li>
+        </ul>
+        <section id="user-info">
+            <img src="@Model.AvatarUrl.GetThumbUrl()" class="Avatar" />
+
+            @using (Ajax.BeginForm("MyProfile", "MyAccount", new AjaxOptions() { HttpMethod = "post", OnSuccess = "AjaxProfileSuccess", OnFailure = "AjaxProfileFailure" }, new { enctype = "multipart/form-data", @class = "form", id = "form-profile" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Id);
+                @Html.HiddenFor(m => m.AvatarUrl)
+                @Html.HiddenFor(m => m.AvatarSize)
+                @Html.HiddenFor(m => m.AvatarExtension)
+                @Html.HiddenFor(m => m.AvatarFileName)
+                @*@Html.HiddenFor(m => m.RecoveryEmail)*@
+
+                @*<div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.FileUploaderFor(model => model.File).Captions(ParvazPardaz.Resource.User.Users.SelectAvatar, ParvazPardaz.Resource.User.Users.SelectAvatarMsg).AddMore(false).IsMultiple(false).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(false)
+                                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>*@
+
+                <label class="label">
+                    @Html.LabelFor(model => model.FirstName, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.FirstName)
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "form-error" })
+                    @*<i class="form-info"></i>*@
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.LastName, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.LastName)
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.Organization, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.Organization)
+                    @Html.ValidationMessageFor(model => model.Organization, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.MobileNumber, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.MobileNumber, new { @style = "direction:ltr" })
+                    @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.PhoneNumber, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { @style = "direction:ltr" })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.Fax, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.Fax, new { @style = "direction:ltr" })
+                    @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.RecoveryEmail, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.RecoveryEmail, new { @style = "direction:ltr" })
+                    @Html.ValidationMessageFor(model => model.RecoveryEmail, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.NationalCode, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.NationalCode, new { @style = "direction:ltr" })
+                    @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model._BirthDate, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model._BirthDate, new { @style = "direction:ltr",@class = "persianDatepicker", Value = DateTime.Parse(Model._BirthDate).ToString("yyyy/M/d") })
+                    <input type="hidden" id="hdcalendertype" name="Calendertype" value="persian" />
+                    @Html.ValidationMessageFor(model => model._BirthDate, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.Gender, new { @class = "label-text" })
+                    @Html.EnumDropDownListFor(model => model.Gender)
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.Facebook, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.Facebook, new { @style = "direction:ltr" })
+                    @Html.ValidationMessageFor(model => model.Facebook, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.Instagram, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.Instagram, new { @style = "direction:ltr" })
+                    @Html.ValidationMessageFor(model => model.Instagram, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.LinkedIn, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.LinkedIn, new { @style = "direction:ltr" })
+                    @Html.ValidationMessageFor(model => model.LinkedIn, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.Telegram, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.Telegram, new { @style = "direction:ltr" })
+                    @Html.ValidationMessageFor(model => model.Telegram, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.OtherSocialNetwork, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.OtherSocialNetwork, new { @style = "direction:ltr" })
+                    @Html.ValidationMessageFor(model => model.OtherSocialNetwork, "", new { @class = "form-error" })
+                </label>
+
+                <label class="label">
+                    @Html.LabelFor(model => model.WebSiteUrl, new { @class = "label-text" })
+                    @Html.TextBoxFor(model => model.WebSiteUrl, new { @style = "direction:ltr" })
+                    @Html.ValidationMessageFor(model => model.WebSiteUrl, "", new { @class = "form-error" })
+                </label>
+
+
+                <h4 class="paddingTopSection">آدرس های من</h4><hr />
+                <input type="hidden" id="UserAddressIndex" value=@( (Model.UserAddresses != null && Model.UserAddresses.Any()) ? (Model.UserAddresses.Count - 1) : -1)>
+
+                <div id="UserAddressSection">
+                    @if (Model.UserAddresses != null && Model.UserAddresses.Any())
+                    {
+                        for (var i = 0; i < Model.UserAddresses.Count; i++)
+                        {
+                            <div class="partialSection UserAddressItem">
+                                <div class="btn-remove-section"><a class="btn btn-xs btn-remove" onclick="var $ = jQuery.noConflict(); $(this).closest('.partialSection').remove();">حذف</a></div>
+
+                                <label class="label">
+                                    @Html.LabelFor(model => model.UserAddresses[i].AddressName, new { @class = "label-text" })
+                                    @Html.EnumDropDownListFor(model => model.UserAddresses[i].AddressName, new { @class = "DDLAddressName" })
+                                    @Html.ValidationMessageFor(model => model.UserAddresses[i].AddressName, "", new { @class = "form-error" })
+                                </label>
+
+                                <label class="label">
+                                    @Html.LabelFor(model => model.UserAddresses[i].CityId, new { @class = "label-text" })
+                                    @Html.DropDownListFor(model => model.UserAddresses[i].CityId, new SelectList(Model.CityDDL, "Value", "Text", Model.UserAddresses[i].CityId), new { @class = "DDLCityId" })
+                                    @Html.ValidationMessageFor(model => model.UserAddresses[i].CityId, "", new { @class = "form-error" })
+                                </label>
+
+                                <label class="label">
+                                    @Html.LabelFor(model => model.UserAddresses[i].Street1, new { @class = "label-text" })
+                                    @Html.TextBoxFor(model => model.UserAddresses[i].Street1, new { @class = "TxtStreet1" })
+                                    @Html.ValidationMessageFor(model => model.UserAddresses[i].Street1, "", new { @class = "form-error" })
+                                </label>
+
+                                <label class="label">
+                                    @Html.LabelFor(model => model.UserAddresses[i].Street2, new { @class = "label-text" })
+                                    @Html.TextBoxFor(model => model.UserAddresses[i].Street2, new { @class = "TxtStreet2" })
+                                    @Html.ValidationMessageFor(model => model.UserAddresses[i].Street2, "", new { @class = "form-error" })
+                                </label>
+
+                                <label class="label">
+                                    @Html.LabelFor(model => model.UserAddresses[i].Telephone, new { @class = "label-text" })
+                                    @Html.TextBoxFor(model => model.UserAddresses[i].Telephone, new { @class = "TxtTelephone", @style = "direction:ltr" })
+                                    @Html.ValidationMessageFor(model => model.UserAddresses[i].Telephone, "", new { @class = "form-error" })
+                                </label>
+
+                                <label class="label">
+                                    @Html.LabelFor(model => model.UserAddresses[i].Fax, new { @class = "label-text" })
+                                    @Html.TextBoxFor(model => model.UserAddresses[i].Fax, new { @class = "TxtFax", @style = "direction:ltr" })
+                                    @Html.ValidationMessageFor(model => model.UserAddresses[i].Fax, "", new { @class = "form-error" })
+                                </label>
+
+                                <label class="label">
+                                    @Html.LabelFor(model => model.UserAddresses[i].ZipCode, new { @class = "label-text" })
+                                    @Html.TextBoxFor(model => model.UserAddresses[i].ZipCode, new { @class = "TxtZipCode", @style = "direction:ltr" })
+                                    @Html.ValidationMessageFor(model => model.UserAddresses[i].ZipCode, "", new { @class = "form-error" })
+                                </label>
+
+                                <label class="label">
+                                    @Html.LabelFor(model => model.UserAddresses[i].IsDefault, new { @class = "label-text" })
+                                    @Html.CheckBoxFor(model => model.UserAddresses[i].IsDefault, new { @class = "ChkIsDefault" })
+                                    @Html.ValidationMessageFor(model => model.UserAddresses[i].IsDefault, "", new { @class = "form-error" })
+                                </label>
+
+                                <label class="label">
+                                    @Html.LabelFor(model => model.UserAddresses[i].Address, new { @class = "label-text" })
+                                    @Html.TextAreaFor(model => model.UserAddresses[i].Address, 2, 40, new { @class = "TxtAddress" })
+                                    @Html.ValidationMessageFor(model => model.UserAddresses[i].Address, "", new { @class = "form-error" })
+                                </label>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <a href="javascript:void(0)" onclick="addNewUserAddress();" class="btn-4 addAddress">افزودن آدرس</a>
+
+                <div class="field-group submit-field-group">
+                    <div class="row">
+                        <div class="col-xxs-12 col-xs-12">
+                            <input type="submit" value="ثبت تغییرات" class="btn btn-success" onclick="sortAddress()" />
+                            <div class="place-holder"></div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </section>
+        <section id="user-password">
+            @Html.Partial("_PrvChangePassword")
+        </section>
+    </section>
+</main>
+@section scripts{
+<script src="~/Plugins/PersianEnDateTime/js/persian-date.min.js"></script>
+<script src="~/Plugins/PersianEnDateTime/js/persian-datepicker.js"></script>
+    <script>
+        //واکشی پارشال-ویوو برای آدرس جدید
+        function addNewUserAddress() {
+            var i = parseInt(document.getElementById("UserAddressIndex").value) + 1;
+            document.getElementById("UserAddressIndex").value = i;
+            var $ = jQuery.noConflict();
+            $.ajax({
+                url: "/Customer/MyAccount/GetUserAddressSection",
+                type: "post",
+                contentType: "application/html; charset=utf-8",
+                dataType: "html",
+                data: {
+                    index: i
+                },
+                success: function (result) {
+                    $("#UserAddressSection").append(result);
+                }
+            });
+        }
+    </script>
+    <!-- Arrange dynamic sections IDs -->
+    <script type="text/javascript">
+        function sortAddress() {
+            var userAddressElements = document.getElementsByClassName("UserAddressItem");
+            for (var i = 0, len = userAddressElements.length; i < len; i++) {
+                userAddressElements[i].getElementsByClassName("DDLAddressName")[i].setAttribute("name", "UserAddresses[" + i + "].AddressName");
+                userAddressElements[i].getElementsByClassName("DDLCityId")[i].setAttribute("name", "UserAddresses[" + i + "].CityId");
+                userAddressElements[i].getElementsByClassName("TxtStreet1")[i].setAttribute("name", "UserAddresses[" + i + "].Street1");
+                userAddressElements[i].getElementsByClassName("TxtTelephone")[i].setAttribute("name", "UserAddresses[" + i + "].Telephone");
+                userAddressElements[i].getElementsByClassName("TxtStreet2")[i].setAttribute("name", "UserAddresses[" + i + "].Street2");
+                userAddressElements[i].getElementsByClassName("TxtFax")[i].setAttribute("name", "UserAddresses[" + i + "].Fax");
+                userAddressElements[i].getElementsByClassName("TxtZipCode")[i].setAttribute("name", "UserAddresses[" + i + "].ZipCode");
+                userAddressElements[i].getElementsByClassName("ChkIsDefault")[i].setAttribute("name", "UserAddresses[" + i + "].IsDefault");
+                userAddressElements[i].getElementsByClassName("TxtAddress")[i].setAttribute("name", "UserAddresses[" + i + "].Address");
+            }
+        }
+
+        $('.persianDatepicker').persianDatepicker({
+            initialValue: false,
+            initialValueType: 'persian',
+            autoClose: true,
+            format: 'YYYY/M/D',
+            //'position': [0, -100],
+            onSelect: function () {
+                var test = $(this)["0"].calendar_;
+                $("#hdcalendertype").val(test);
+            }
+        });
+
+        function AjaxChangePasswordSuccess(result) {
+            if (result.status == true) {
+                $("#form-reset-pass")[0].reset();
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.success('کلمه عبور شما با موفقیت بازنشانی شد', 'بازنشانی کلمه عبور', { timeOut: 5000 })
+                setTimeout(function () {
+                    window.location.href = result.redirectUrl;
+                }, 2000);
+            } else {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error(result.message, 'بازنشانی کلمه عبور', { timeOut: 5000 })
+            }
+        }
+
+        function AjaxChangePasswordFailure() {
+            toastr.options = { "positionClass": "toast-top-center" }
+            toastr.error('لطفا از مرورگر دیگری استفاده نمایید', 'بازنشانی کلمه عبور', { timeOut: 5000 })
+        }
+
+        function AjaxProfileSuccess(result) {
+            if (result.status == true) {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.success('اطلاعات کاربری شما با موفقیت ویرایش گردید', 'اطلاعات کاربری', { timeOut: 5000 })
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+            } else {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('لطفا دوباره تلاش کنید', 'اطلاعات کاربری', { timeOut: 5000 })
+            }
+            
+        }
+
+        function AjaxProfileFailure() {
+            toastr.options = { "positionClass": "toast-top-center" }
+            toastr.error('لطفا از مرورگر دیگری استفاده نمایید', 'اطلاعات کاربری', { timeOut: 5000 })
+        }
+    </script>
+}

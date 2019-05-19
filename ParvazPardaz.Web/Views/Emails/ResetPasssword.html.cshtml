@@ -1,0 +1,38 @@
+﻿@model ResetPasswordViewModel
+Content-Type: text/html; charset=utf-8
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+
+
+<body style="direction: rtl;">
+
+    <div style="border-style: double; width: 1050px; border-color: #009688; height: 145px; text-align: center; padding: 24px; border-radius: 44px; ">
+
+        <div>
+            @Html.Label("نام کاربری :", new { style = "color:blue;" })
+            @Html.Label(Model.UserName != null ? Model.UserName : string.Empty)
+        </div>
+        <div>
+            @Html.Label("نام خانوادگی :", new { style = "color:blue;" })
+            @Html.Label(Model.Family != null ? Model.Family : string.Empty)
+        </div>
+
+        <div>
+            @Html.Label("نام :", new { style = "color:blue;" })
+            @Html.Label(Model.Name != null ? Model.Name : string.Empty)
+        </div>
+
+
+        <p style="color: #052aaa;font-size: large;font-style: oblique;"> @Html.Raw("لطفا برای بازیابی رمز عبور روی لینک زیر کلیک نمایید")</p>
+        <a href="@Model.ConfirmUrl" type="text/html"> @Html.Raw("بازیابی رمز عبور") </a>
+        <br />
+    </div>
+</body>
+
+
+</html>

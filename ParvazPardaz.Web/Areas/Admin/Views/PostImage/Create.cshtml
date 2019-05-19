@@ -1,0 +1,96 @@
+﻿@model ParvazPardaz.ViewModel.AddPostImageViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+@section css{
+    <link href="~/Content/admin/View/Tour.css" rel="stylesheet" />
+    <style>
+        body,html{
+            overflow-x:hidden !important;
+        }
+    </style>
+}
+<h3>مدیریت تصاویر پست ها</h3>
+
+@*<ul id="progress">
+    <li>Tour</li>
+    <li class="active">Gallery</li>
+    <li>Itenrary</li>
+    <li>Schedule</li>
+</ul>
+<br />
+<br />*@
+@*@using (Html.BeginForm("CheckForm", "TourSlider", FormMethod.Post))
+{*@
+    @Html.HiddenFor(model => model.PostId)
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.File765, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.FileUploaderFor(model => model.File765).AddMore(true).IsMultiple(true).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(true).Extension(new List<string>() { "jpg", "png", "jpeg" }).Limit(1).UploadUrl("/Admin/PostImage/Upload/", new Dictionary<string, object>() { { "postId ", Model.PostId } }).RemoveUrl("/Admin/PostImage/Delete/").Edit(Model.EditModeFileUploads765).RemoveUrl("/Admin/PostImage/Delete/")
+                @Html.ValidationMessageFor(model => model.File765, "", new { @class = "text-danger" })
+                <div>
+                    تصویر را در اندازه عرض 765 و طول535 پیکسل وارد کنید 
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.File575, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.FileUploaderFor(model => model.File575).AddMore(true).IsMultiple(true).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(true).Extension(new List<string>() { "jpg", "png", "jpeg" }).Limit(1).UploadUrl("/Admin/PostImage/Upload/", new Dictionary<string, object>() { { "postId ", Model.PostId } }).RemoveUrl("/Admin/PostImage/Delete/").Edit(Model.EditModeFileUploads575).RemoveUrl("/Admin/PostImage/Delete/")
+                @Html.ValidationMessageFor(model => model.File575, "", new { @class = "text-danger" })
+                <div>
+                    تصویر را در اندازه عرض 575 و طول 530 پیکسل وارد کنید
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.File370, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.FileUploaderFor(model => model.File370).AddMore(true).IsMultiple(true).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(true).Extension(new List<string>() { "jpg", "png", "jpeg" }).Limit(1).UploadUrl("/Admin/PostImage/Upload/", new Dictionary<string, object>() { { "postId ", Model.PostId } }).RemoveUrl("/Admin/PostImage/Delete/").Edit(Model.EditModeFileUploads370).RemoveUrl("/Admin/PostImage/Delete/")
+                @Html.ValidationMessageFor(model => model.File370, "", new { @class = "text-danger" })
+                <div>
+                    تصویر را در اندازه عرض 370 و طول 292 پیکسل وارد کنید
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.File277, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.FileUploaderFor(model => model.File277).AddMore(true).IsMultiple(true).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(true).Extension(new List<string>() { "jpg", "png", "jpeg" }).Limit(1).UploadUrl("/Admin/PostImage/Upload/", new Dictionary<string, object>() { { "postId ", Model.PostId } }).RemoveUrl("/Admin/PostImage/Delete/").Edit(Model.EditModeFileUploads277).RemoveUrl("/Admin/PostImage/Delete/")
+                @Html.ValidationMessageFor(model => model.File277, "", new { @class = "text-danger" })
+                <div>
+                    تصویر را در اندازه عرض 277 و طول 186 پیکسل وارد کنید
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.File98, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.FileUploaderFor(model => model.File98).AddMore(true).IsMultiple(true).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(true).Extension(new List<string>() { "jpg", "png", "jpeg" }).Limit(1).UploadUrl("/Admin/PostImage/Upload/", new Dictionary<string, object>() { { "postId ", Model.PostId } }).RemoveUrl("/Admin/PostImage/Delete/").Edit(Model.EditModeFileUploads98).RemoveUrl("/Admin/PostImage/Delete/")
+                @Html.ValidationMessageFor(model => model.File98, "", new { @class = "text-danger" })
+                <div>
+                    تصویر را در اندازه عرض 98 و طول 98 پیکسل وارد کنید
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-11">
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Edit", "Post", new { id = Model.PostId }, new { @class = "btn btn-custom red", })
+                @*<input type="submit" class="btn btn-custom green" name="name" value="@ParvazPardaz.Resource.General.Generals.Next" />*@
+                @*@Html.ActionLink(ParvazPardaz.Resource.General.Generals.Next, "Create", "TourProgram", new { tourId = Model.PostId }, new { @class = "btn btn-custom green" })*@
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Finish, "Index", "Post", null, new { @class = "btn btn-custom green" })
+            </div>
+        </div>
+    </div>
+@*}*@
+
+
+
+
+

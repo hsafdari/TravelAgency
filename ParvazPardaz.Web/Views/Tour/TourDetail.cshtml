@@ -1,0 +1,584 @@
+﻿@*@model IEnumerable<HotelDetailsViewModel>*@
+<link data-n-head="true" rel="canonical" href="@String.Format("{0}{1}{2}{3}", Request.Url.Scheme, System.Uri.SchemeDelimiter, Request.Url.Authority, ViewBag.canonical)" />
+@model TourReserveViewModel
+@{
+    ViewBag.Title = ViewBag.PageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //لیست پروازهای رفت
+    var departureFlights = ViewBag.DepartureFlights as List<FlightViewModel>;
+    //پرواز رفت انتخاب شده
+    string defaultDepFlightId = System.Convert.ToString(ViewBag.SelectedDefaultDepFlightId);
+    //لیست پروازهای برگشت
+    var defaultArrFlights = ViewBag.ArrivalFlightList as List<FlightViewModel>;
+    //پرواز برگشت انتخاب شده
+    var defaultArrFlightId = System.Convert.ToInt32(ViewBag.SelectedDefaultArrivalFlightId);
+    //عناوین پکیج های تور
+    List<string> tourPackageTitles = ViewBag.TourPackageTitles as List<string>;
+    //لیست هتل های مربوط به پکیج هتل مرتبط
+    var defaultHotelPackageList = ViewBag.DefaultHotelPackageList as List<ListViewHotelPackageViewModel>;
+    //پکیج هتل پیش فرض
+    var defaultHotelPackageId = System.Convert.ToInt32(ViewBag.DefaultHotelPackageId);
+    //هتل انتخاب شده
+    var defaultHotelId = System.Convert.ToInt32(ViewBag.DefaultHotelId);
+    //اطلاعات تور مرتبط
+    var defaultTour = ViewBag.Tour as ParvazPardaz.Model.Entity.Tour.Tour;
+    //انواع اتاق
+    var RoomTypeList = ViewBag.RoomTypeList as List<ParvazPardaz.Model.Entity.Hotel.HotelRoom>;
+    //واحدهای پولی
+    var currencyList = ViewBag.CurrencyList as List<ParvazPardaz.Model.Entity.Tour.Currency>;
+    //میزان مالیات بر ارزش افزوده
+    var vat = System.Convert.ToInt64(System.Configuration.ConfigurationManager.AppSettings["TaxPercentage"]);
+
+}
+@Styles.Render("~/bundles/TourCustomCss")
+<style>
+    .hidden {
+        display: none !important;
+    }
+</style>
+<section class="main search landing-page">
+    <form class="form search-bar" action="/TourSearch" method="Post">
+        @Html.DropDownList("DepartureCityId", ViewBag.FormCitiesDDL as IEnumerable<SelectListItem>, new { @class = "from select2", @placeholder = "مبدا حرکت خود را مشخص کنید" })
+        @Html.DropDownList("ArrivalCityId", ViewBag.DestCitiesDDL as IEnumerable<SelectListItem>, new { @class = "from select2", @placeholder = "مقصد حرکت خود را مشخص کنید" })
+        <label name="go-date">
+            <span></span>
+            <span></span>
+            @Html.TextBox("FlightDateTemp", "", new { @id = "dFlightDateTemp", @class = "datepicker j", @placeholder = "تاریخ پرواز", required = "required" })
+            <input type="hidden" name="FlightDate" value="@Model.TourSearchParams.FlightDate" />
+            <input type="hidden" name="Calendertype" value="@Model.TourSearchParams.Calendertype" />
+        </label>
+        <button class="btn-1 active" type="submit" name="submit" value="جستجو ">جستجو</button>
+    </form>
+</section>
+@if (departureFlights != null && departureFlights.Any())
+{
+    <section class="main navigator">
+        <h2 class="sectionTitle">انتخاب ویژگی‌های تور</h2>
+        <ul>
+            <li>ورود اطلاعات مسافر</li>
+            <li>تکمیل خرید</li>
+            <li>رزرو تور</li>
+        </ul>
+    </section>
+    <article id="TourDataSection" class="main tour-description white clearfix">
+        @if (defaultTour != null)
+        {
+            <h1>@defaultTour.Title</h1>
+            <div class="image-sq">
+                <img src="@(defaultTour.TourSliders != null && defaultTour.TourSliders.Any() ? defaultTour.TourSliders.FirstOrDefault().ImageUrl : "")" alt="@defaultTour.Title">
+            </div>
+            @Html.Raw(defaultTour.Description)
+            <button name="toggle" class="btn-2">اطلاعات تور</button>
+        }
+    </article>
+    using (Html.BeginForm("", "TourReserve", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-reserve" }))
+    {
+        @Html.HiddenFor(x => x.TourSearchParams.AdultCount)
+        @Html.HiddenFor(x => x.TourSearchParams.ChildCount)
+        @Html.HiddenFor(x => x.TourSearchParams.InfantCount)
+        @Html.HiddenFor(x => x.TourSearchParams.ArrivalCityId)
+        @Html.HiddenFor(x => x.TourSearchParams.DepartureCityId)
+        @Html.HiddenFor(x => x.TourSearchParams.DurationTime)
+        @Html.HiddenFor(x => x.TourSearchParams.FlightDate)
+        foreach (var hr in RoomTypeList)
+        {
+            <input type="hidden" id="hr_@(hr.Id)" data-hasadult="@hr.HasAdult" data-haschild="@hr.HasChild" data-hasinfant="@hr.HasInfant" data-adultmincapacity="@hr.AdultMinCapacity" data-adultmaxcapacity="@hr.AdultMaxCapacity" data-childmincapacity="@hr.ChildMinCapacity" data-childmaxcapacity="@hr.ChildMaxCapacity" data-infantmincapacity="@hr.InfantMinCapacity" data-infantmaxcapacity="@hr.InfantMaxCapacity" />
+        }
+        foreach (var item in currencyList)
+        {
+            <input type="hidden" id="cur_@(item.Id)" value="@item.BaseRialPrice.ToString("0")" />
+        }
+        <input type="hidden" id="taxpercentage" value="@System.Configuration.ConfigurationManager.AppSettings["TaxPercentage"]" />
+        <section class="main tour-flight flight-custom white clearfix">
+            <h2 class="sectionTitle">اطلاعات بلیط</h2>
+            <div class="form">
+                <label class="label">
+                    <h3>بلیط رفت</h3>
+                    <input type="hidden" name="SelectedDepartureFlightId" value="@defaultArrFlights[0].DepartureFlightId" checked="Checked" />
+                    <img src="@departureFlights[0].CompanyTransfer.ImageUrl" alt="@departureFlights[0].CompanyTransfer.Title" class="airline-logo">
+                    <span class="flight-date">@departureFlights[0].StartDateTime.ToString("dddd dd MMM")</span>
+                    <span class="flight-clock"><b>@departureFlights[0].StartDateTime.ToString("HH:mm")</b><b>@departureFlights[0].EndDateTime.ToString("HH:mm")</b></span>
+                    <span class="flight-duration">
+                        @{var durationTime = departureFlights[0].EndDateTime - departureFlights[0].StartDateTime;}
+                        @string.Format("{0}{1} ساعت و {2} دقیقه", (durationTime.Days > 0 ? durationTime.Days.ToString() + " روز ، " : ""), durationTime.Hours, durationTime.Minutes)
+                    </span>
+                    <span class="flight-class">@departureFlights[0].FlightClass</span>
+                    <span class="flight-number">@string.Format("{0} {1}", departureFlights[0].FlightNumber, departureFlights[0].CompanyTransfer.Title)</span>
+                </label>
+                <label class="label">
+                    <h3>بلیط برگشت</h3>
+                    <input type="hidden" name="SelectedArrivalFlightId" value="@defaultArrFlights[0].Id" checked="Checked" />
+                    <img src="@defaultArrFlights[0].CompanyTransfer.ImageUrl" alt="@defaultArrFlights[0].CompanyTransfer.Title" class="airline-logo">
+                    <span class="flight-date">@defaultArrFlights[0].StartDateTime.ToString("dddd dd MMM")</span>
+                    <span class="flight-clock"><b>@defaultArrFlights[0].StartDateTime.ToString("HH:mm")</b><b>@defaultArrFlights[0].EndDateTime.ToString("HH:mm")</b></span>
+                    <span class="flight-duration">
+                        @{var durationTimeBack = defaultArrFlights[0].EndDateTime - defaultArrFlights[0].StartDateTime;}
+                        @string.Format("{0}{1} ساعت و {2} دقیقه", (durationTimeBack.Days > 0 ? durationTimeBack.Days.ToString() + " روز ، " : ""), durationTimeBack.Hours, durationTimeBack.Minutes)
+                    </span>
+                    <span class="flight-class">@defaultArrFlights[0].FlightClass</span>
+                    <span class="flight-number">@string.Format("{0} {1}", defaultArrFlights[0].FlightNumber, defaultArrFlights[0].CompanyTransfer.Title)</span>
+                </label>
+            </div>
+        </section>
+
+        if (defaultHotelPackageList != null && defaultHotelPackageList.Any())
+        {
+            <section id="HotelsSection" class="main tour-hotel white clearfix">
+                <h2 class="sectionTitle">انتخاب هتل</h2>
+                <ul class="sort-bar">
+                    <li class="">نام و اطلاعات هتل</li>
+                    <li class="sort-ascend">ستاره</li>
+                    <li class="">خدمات هتل</li>
+                    <li class="sort-descend">شروع قیمت از</li>
+                </ul>
+                <div class="form">
+                    @foreach (var item in defaultHotelPackageList.ToList())
+                    {
+                        foreach (var h in item.hotelsInPackage)
+                        {
+                            var AdultHotelRoomsInPackage = item.hotelRoomsInPackage.Where(x => x.AdultPrice > 0).OrderBy(x => x.AdultPrice).ToList();
+                            decimal pricevalue = AdultHotelRoomsInPackage.Any() ? AdultHotelRoomsInPackage.Select(x => new { price = x.AdultPrice + ((x.AdultPrice * vat) / 100) }).Select(x => x.price).First() : 0;
+                            string price = pricevalue != 0 ? pricevalue.ToString("#,0 تومان") : "";
+                             <label class="label" sortable-name="@h.HotelTitle" sortable-star="@h.RankOrderId" sortable-facility="@h.HotelBoardTitle" sortable-price="@pricevalue">
+                                <input type="radio" name="SelectedHotelPackageId" value="@item.Id" onclick="FetchTourData(@item.TourId); ResetRoomSection();" @(h.HotelId == defaultHotelId && item.Id == defaultHotelPackageId ? "Checked=Checked" : "") />
+                                <span class="radio-replace"></span>
+                                <img src="@h.Thumbnail" alt="@h.HotelTitle" class="hotel-logo">
+                                <span class="hotel-name">@h.HotelTitle</span>
+                                <img class="hotel-star" src="@h.RankLogo" alt="@h.RankOrderId" title="@h.HotelTitle" />
+
+                                <span class="hotel-facility">
+                                    <img src="@(String.IsNullOrEmpty(h.HotelBoardLogo) == true ? "#" : h.HotelBoardLogo)" title="@h.HotelBoardTitle" alt="@h.HotelBoardTitle" />
+                                    @h.HotelBoardTitle
+                                </span>
+                                <span class="hotel-price">
+                                    @(AdultHotelRoomsInPackage.Any() ? AdultHotelRoomsInPackage.Select(x => new { price = (x.AdultPrice/10) }).Select(x => x.price).First().ToString("#,0 تومان") : "")
+                                </span>
+                                <span name="toggle" class="btn-2">اطلاعات</span>
+
+                                <div class="details roll">
+                                    <p>
+                                        <b>مکان هتل:</b>
+                                        @string.Format("{0}{1}", h.CityTitle, (h.Location != null ? " ، " + h.Location : ""))
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <b>شرح خدمات:</b>
+                                        @Html.Raw(h.Summary)
+                                    </p>
+                                    <ul class="slider cards" style="direction: ltr;">
+                                        @if (h.HotelGalleryImages != null && h.HotelGalleryImages.Any())
+                                        {
+                                            foreach (var img in h.HotelGalleryImages)
+                                            {
+                                                <li class="active"><img src="@img"></li>
+                                            }
+                                        }
+                                    </ul>
+                                    <button class="btn-3" type="button" name="next" onclick="roll(1,this,3)"></button>
+                                    <button class="btn-3" type="button" name="prev" onclick="roll(-1,this,3)"></button>
+                                </div>
+                            </label>
+                        
+                            @*<label class="label">
+                                <input type="radio" name="SelectedHotelPackageId" value="@item.Id" onclick="FetchTourData(@item.TourId); ResetRoomSection();" @(h.HotelId == defaultHotelId && item.Id == defaultHotelPackageId ? "Checked=Checked" : "") />
+                                <span class="radio-replace"></span>
+                                <img src="@h.Thumbnail" alt="@h.HotelTitle" class="hotel-logo">
+                                <span class="hotel-name">@h.HotelTitle</span>
+                                <span>
+                                    <img src="@h.RankLogo" alt="@h.RankOrderId" title="@h.HotelTitle" />
+                                </span>
+                                <span class="hotel-facility">
+                                    <img src="@(String.IsNullOrEmpty(h.HotelBoardLogo) == true ? "#" : h.HotelBoardLogo)" title="@h.HotelBoardTitle" alt="@h.HotelBoardTitle" />
+                                </span>
+                                <span class="hotel-price">
+                                    @{
+                            var AdultHotelRoomsInPackage = item.hotelRoomsInPackage.Where(x => x.AdultPrice > 0).OrderBy(x => x.AdultPrice).ToList();
+                                    }
+                                    @(AdultHotelRoomsInPackage.Any() ? AdultHotelRoomsInPackage.Select(x => new { price = x.AdultPrice + ((x.AdultPrice * vat) / 100) }).Select(x => x.price).First().ToString("#,0 تومان") : "")
+                                </span>
+                                <span name="toggle" class="btn-2">اطلاعات</span>
+                            </label>
+                            <div class="details roll">
+                                <p>
+                                    <b>مکان هتل:</b>
+                                    @string.Format("{0}{1}", h.CityTitle, (h.Location != null ? " ، " + h.Location : ""))
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <b>شرح خدمات:</b>
+                                </p>
+                                <ul class="slider cards" style="direction: ltr;">
+                                    @if (h.HotelGalleryImages != null && h.HotelGalleryImages.Any())
+                                    {
+                                        foreach (var img in h.HotelGalleryImages)
+                                        {
+                                            <li class="active"><img src="@img"></li>
+                                        }
+                                    }
+                                </ul>
+                                <button class="btn-3" type="button" name="next" onclick="roll(1,this,3)"></button>
+                                <button class="btn-3" type="button" name="prev" onclick="roll(-1,this,3)"></button>
+                            </div>*@
+                        }
+                    }
+                </div>
+            </section>
+        }
+        <b class="main">برای محاسبه قیمت، لطفا ویژگی‌های تور را انتخاب کنید. ارزانترین پکیج تور به طور پیشفرض انتخاب شده است.</b>
+        <section class="main tour-rooms white clearfix">
+            <h2 class="sectionTitle">تعداد مسافران و اتاق</h2>
+            <div id="MasterRoomSection">
+                <div class="row partialSection">
+                    <label>
+                        <span>نوع اتاق</span>
+                        <select id="RoomSections_0__SelectedRoomTypeId" name="RoomSections[0].SelectedRoomTypeId" class="RoomTypeDDL SelectedRoomTypeId" onchange="ManagePersonCounter(this); CalculateTotalPrice();">
+                            @foreach (var item in (ViewBag.RoomType as List<HotelRoomDDLViewModel>))
+                            {
+                                <option data-adultcurrencyprice="@item.AdultOtherCurrencyPrice" data-adultprice="@item.AdultPrice" data-adultmaxcapacity="@item.TotalAdultCapacity"
+                                        data-childcurrencyprice="@item.ChildOtherCurrencyPrice" data-childprice="@item.ChildPrice" data-childmaxcapacity="@item.TotalChildCapacity"
+                                        data-infantcurrencyprice="@item.InfantOtherCurrencyPrice" data-infantprice="@item.InfantPrice" data-infantmaxcapacity="@item.TotalInfantCapacity"
+                                        data-currencyid="#cur_@item.CurrencyId" value="@item.Value">
+                                    @item.Title
+                                </option>
+                            }
+                        </select>
+                    </label>
+                    <label>
+                        <span>تعداد بزرگسال</span>
+                        @Html.TextBoxFor(x => x.RoomSections[0].AdultCount, new { @class = "AdultCount", @type = "number", @Value = 1, @onchange = "CalculateTotalPrice()" })
+                    </label>
+                    <label>
+                        <span>تعداد کودک (۳ تا ۶ سال)</span>
+                        @Html.TextBoxFor(x => x.RoomSections[0].ChildCount, new { @class = "ChildCount", @type = "number", @Value = 0, @onchange = "CalculateTotalPrice()" })
+                    </label>
+                    <label>
+                        <span>تعداد نوزاد (بدون تخت)</span>
+                        @Html.TextBoxFor(x => x.RoomSections[0].InfantCount, new { @class = "InfantCount", @type = "number", @Value = 0, @onchange = "CalculateTotalPrice()" })
+                    </label>
+                </div>
+                <div id="RoomSection"></div>
+            </div>
+            <input type="button" onclick="FetchRoomSection()" name="add-room" value="اضافه ‌کردن اتاق جدید">
+        </section>
+        <section class="main tour-price clearfix">
+            <div class="sum">
+                <span>قیمت تمام شده : </span>
+                <span id="totalpaysection"></span>
+                <span> تومان</span>
+            </div>
+            @*@if (User.Identity.IsAuthenticated)
+            {
+                <button id="btn-next" @(defaultHotelPackageList == null && !defaultHotelPackageList.Any() ? "disabled style=\" cursor:not-allowed\"" : "") class="btn-1 active" type="submit" name="button">ادامه فرآیند خرید</button>
+            }
+            else
+            {
+                <button id="btn-next" @(defaultHotelPackageList == null && !defaultHotelPackageList.Any() ? "style=\" cursor:not-allowed\"" : "") onclick="ShowLoginModal();" class="btn-1 active" type="button" name="button">ادامه فرآیند خرید</button>
+            }*@
+            <a class="btn-1 active" onclick="showpopup()">ادامه فرایند خرید</a>
+        </section>
+        <div class="modal" id="autorize-modal" style="display:none;">
+            <div class="dvmodalinternal">
+                <span class="modalspan" style="cursor:pointer;" >&times;</span>
+                <div class="wrapper signin">
+                    <div id="frm-popup" class="form signup">
+                        <div class="alertheader">برای رزرو یا کسب اطلاعات کامل تور <div class="alertheadercall">با ما تماس بگیرید</div></div>
+                        <h2><a href="tel:+98212779">021-2779</a></h2>
+                        <div>
+                            <ul class="alertcontent">
+                                <li class="alertcontentheader">داخلی:</li>
+                                <li>
+                                    <ul class="alertinercontent">
+                                        <li><div class="alertcontentcol">تور مشهد:</div><div class="alertcontentcol2">داخلی 701</div></li>
+                                        <li><div class="alertcontentcol">تور کیش:</div><div class="alertcontentcol2">داخلی 702</div></li>
+                                        <li><div class="alertcontentcol">تور قشم:</div><div class="alertcontentcol2">داخلی 703</div></li>
+                                        <li><div class="alertcontentcol">سایر تورهای داخلی:</div><div class="alertcontentcol2">داخلی 704</div></li>
+                                    </ul>
+                                </li>
+                                <li class="alertcontentheader">خارجی:</li>
+                                <li>
+                                    <ul class="alertinercontent">
+                                        <li><div class="alertcontentcol">تور استانبول:</div><div class="alertcontentcol2">داخلی 705</div></li>
+                                        <li><div class="alertcontentcol">تور آنتالیا:</div><div class="alertcontentcol2">داخلی 706</div></li>
+                                        <li><div class="alertcontentcol">تور تفلیس:</div><div class="alertcontentcol2">داخلی 707</div></li>
+                                        <li><div class="alertcontentcol">تور مسقط:</div><div class="alertcontentcol2">داخلی 708</div></li>
+                                        <li><div class="alertcontentcol">تور باکو:</div><div class="alertcontentcol2">داخلی 709</div></li>
+                                        <li><div class="alertcontentcol">سایر تورهای خارجی:</div><div class="alertcontentcol2">داخلی 710</div></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="alertcontentfooter">
+                            @*<div><a class="btn-1 active" >بله، ممنونم</a></div>*@
+                            <img src="/ClientTheme/images/Logo/keysafarlogo.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                }
+                            }
+                            else
+                            {
+    <section class="main tour-flight flight-go white clearfix" style="margin-top:24px;">
+        <p><strong>کاربر گرامی!</strong> جستجوی شما نتیجه ای دربر نداشت. لطفا دوباره تلاش نمایید . . . </p>
+    </section>
+}
+<input id="RoomSectionIndex" type="hidden" value="@Model.RoomSectionIndex" />
+
+@section scripts{
+    <script>
+        $(".select2").select2({
+            dir: "rtl"
+        });
+
+        function GetArrivalFlights(DepartureFlight) {
+            jQuery.ajax({
+                url: "/GetArrivalFlights",
+                type: "post",
+                dataType: "html",
+                cache: false,
+                data: {
+                    DepartureFlight: DepartureFlight
+                },
+                success: function (result) {
+                    jQuery("#arrivalFlightSection").replaceWith(result);
+                    $('html, body').animate({
+                        scrollTop: $("#arrivalFlightSection").offset().top
+                    }, 1000);
+                },
+                error: function () {
+                    alert("error!");
+                }
+            });
+        }
+
+        function GetHotelPackage(id) {
+            jQuery.ajax({
+                url: "/GetHotelPackages",
+                type: "post",
+                dataType: "html",
+                cache: false,
+                data: {
+                    tourPackageId: id
+                },
+                success: function (result) {
+                    jQuery("#HotelsSection").replaceWith(result);
+                    $('html, body').animate({
+                        scrollTop: $("#HotelsSection").offset().top
+                    }, 1000);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("error!");
+                }
+            });
+        }
+
+        function FetchRoomSection() {
+
+            var roomSectionIndex = parseInt(document.getElementById("RoomSectionIndex").value) + 1;
+            document.getElementById("RoomSectionIndex").value = roomSectionIndex;
+            var selectedHotelPackageId = $("input:hidden[name=SelectedHotelPackageId]:checked").val();
+            jQuery.ajax({
+                url: "/FetchRoomSection",
+                type: "post",
+                dataType: "html",
+                cache: false,
+                data: {
+                    index: roomSectionIndex,
+                    sHotelPackageId: selectedHotelPackageId
+                },
+                success: function (result) {
+                    jQuery("#RoomSection").replaceWith(result);
+                    $(".RoomTypeDDL").each(function (index, element) {
+                        ManagePersonCounter(element);
+                    });
+                    //محاسبه قیمت کل
+                    CalculateTotalPrice();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("error!");
+                }
+            });
+        }
+
+        function ResetRoomSection() {
+            var roomSectionIndex = 0;
+            document.getElementById("RoomSectionIndex").value = roomSectionIndex;
+            var selectedHotelPackageId = $("input:hidden[name=SelectedHotelPackageId]:checked").val();
+            jQuery.ajax({
+                url: "/FetchRoomSection",
+                type: "post",
+                dataType: "html",
+                cache: false,
+                data: {
+                    index: roomSectionIndex,
+                    sHotelPackageId: selectedHotelPackageId
+                },
+                success: function (result) {
+
+                    jQuery("#MasterRoomSection").html(result);
+
+                    jQuery(".RoomTypeDDL").each(function (index, element) {
+                        ManagePersonCounter(element);
+                    });
+                    //محاسبه قیمت کل
+                    CalculateTotalPrice();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                    alert("error!");
+                }
+            });
+        }
+
+        function ManagePersonCounter(element) {
+
+            var selectedRoomTypeId = $(element).val();
+            var hiddenInputId = "hr_" + selectedRoomTypeId + "";
+
+            //آیا شامل بزرگسال می شود؟
+            var hasadult = $("#" + hiddenInputId + "").data("hasadult");
+            var adultmincapacity = $("#" + hiddenInputId + "").data("adultmincapacity");
+            var adultmaxcapacity = $("#" + hiddenInputId + "").data("adultmaxcapacity");
+            $(element).closest(".partialSection").find("input.AdultCount").attr("disabled", (hasadult == "False"));
+            $(element).closest(".partialSection").find("input.AdultCount").attr("min", adultmincapacity);
+            $(element).closest(".partialSection").find("input.AdultCount").attr("max", adultmaxcapacity);
+            $(element).closest(".partialSection").find("input.AdultCount").attr("title", "تعداد بزرگسال مجاز از " + adultmincapacity + " تا " + adultmaxcapacity + " نفر است");
+
+            if (hasadult == "False") {
+                $(element).closest(".partialSection").find("input.AdultCount").val('0');
+            }
+
+            //آیا شامل کودک می شود؟
+            var haschild = $("#" + hiddenInputId + "").data("haschild");
+            var childmincapacity = $("#" + hiddenInputId + "").data("childmincapacity");
+            var childmaxcapacity = $("#" + hiddenInputId + "").data("childmaxcapacity");
+            $(element).closest(".partialSection").find("input.ChildCount").attr("disabled", (haschild == "False"));
+            $(element).closest(".partialSection").find("input.ChildCount").attr("min", childmincapacity);
+            $(element).closest(".partialSection").find("input.ChildCount").attr("max", childmaxcapacity);
+
+            $(element).closest(".partialSection").find("input.ChildCount").attr("title", "تعداد کودک مجاز از " + childmincapacity + " تا " + childmaxcapacity + " نفر است");
+            if (haschild == "False") {
+                $(element).closest(".partialSection").find("input.ChildCount").val('0');
+            }
+
+            //آیا شامل نوزاد می شود؟
+            var hasinfant = $("#" + hiddenInputId + "").data("hasinfant");
+            var infantmincapacity = $("#" + hiddenInputId + "").data("infantmincapacity");
+            var infantmaxcapacity = $("#" + hiddenInputId + "").data("infantmaxcapacity");
+            $(element).closest(".partialSection").find("input.InfantCount").attr("disabled", (hasinfant == "False"));
+            $(element).closest(".partialSection").find("input.InfantCount").attr("min", infantmincapacity);
+            $(element).closest(".partialSection").find("input.InfantCount").attr("max", infantmaxcapacity);
+            $(element).closest(".partialSection").find("input.InfantCount").attr("title", "تعداد نوزاد مجاز از " + infantmincapacity + " تا " + infantmaxcapacity + " نفر است");
+            if (hasinfant == "False") {
+                $(element).closest(".partialSection").find("input.InfantCount").val('0');
+            }
+        }
+
+
+        $(document).ready(function () {
+            $(".RoomTypeDDL").each(function (index, element) {
+                ManagePersonCounter(element);
+            });
+            CalculateTotalPrice();
+            //$.extend($.validator.messages, {
+            //    required: "This field is required.",
+            //    remote: "Please fix this field.",
+            //    email: "Please enter a valid email address.",
+            //    url: "Please enter a valid URL.",
+            //    date: "Please enter a valid date.",
+            //    dateISO: "Please enter a valid date (ISO).",
+            //    number: "Please enter a valid number.",
+            //    digits: "Please enter only digits.",
+            //    creditcard: "Please enter a valid credit card number.",
+            //    equalTo: "Please enter the same value again.",
+            //    accept: "Please enter a value with a valid extension.",
+            //    maxlength: $.validator.format("Please enter no more than {0} characters."),
+            //    minlength: $.validator.format("Please enter at least {0} characters."),
+            //    rangelength: $.validator.format("Please enter a value between {0} and {1} characters long."),
+            //    range: $.validator.format("Please enter a value between {0} and {1}."),
+            //    max: $.validator.format("لطفا عددی کوچکتر یا مساوی {0} وارد کنید."),
+            //    min: $.validator.format("لطفا عددی بزرگتر یا مساوی {0} وارد کنید.")
+            //});
+        });
+        $(document).on('click', ".modalspan", function () {
+            $("#autorize-modal").css("display", "none");
+        });
+        // Arrange dynamic sections IDs
+        $("#frm-reserve").submit(function (e) {
+            var elements = document.getElementsByClassName("partialSection");
+            for (var i = 0, len = elements.length; i < len; i++) {
+                elements[i].getElementsByClassName("SelectedRoomTypeId")[0].setAttribute("name", "RoomSections[" + i + "].SelectedRoomTypeId");
+                elements[i].getElementsByClassName("AdultCount")[0].setAttribute("name", "RoomSections[" + i + "].AdultCount");
+                elements[i].getElementsByClassName("ChildCount")[0].setAttribute("name", "RoomSections[" + i + "].ChildCount");
+                elements[i].getElementsByClassName("InfantCount")[0].setAttribute("name", "RoomSections[" + i + "].InfantCount");
+            }
+        });
+
+        function FetchTourData(id) {
+            $.ajax({
+                url: "/FetchTourData",
+                type: "post",
+                dataType: "html",
+                cache: false,
+                data: {
+                    tourId: id
+                },
+                success: function (result) {
+                    $("#TourDataSection").replaceWith(result);
+                    $("#btn-next").prop('disabled', false);
+                    $("#btn-next").css("cursor", "pointer");
+                    //$('html, body').animate({
+                    //    scrollTop: $("#TourDataSection").offset().top
+                    //}, 1000);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        function CalculateTotalPrice() {
+            var totalPayPrice = 0;
+            var totalAdult = 0;
+            var totalChild = 0;
+            var totalInfant = 0;
+            $(".RoomTypeDDL").each(function (index, element) {
+                var adultCount = parseInt($(element).closest(".partialSection").find("input.AdultCount").val());
+                var childCount = parseInt($(element).closest(".partialSection").find("input.ChildCount").val());
+                var infantCount = parseInt($(element).closest(".partialSection").find("input.InfantCount").val());
+                var baseRialPrice = 0;
+                var currencyId = $(element).find(":selected").data("currencyid");
+                var tax = parseInt($("#taxpercentage").val());
+                if (currencyId != "#cur_0") {
+                    baseRialPrice = parseInt($(currencyId).val());
+                }
+                if (adultCount > 0) {
+                    var adultprice = $(element).find(':selected').data('adultprice');
+                    var adultcurrencyprice = $(element).find(":selected").data("adultcurrencyprice");
+                    var tempadult = (adultcurrencyprice * baseRialPrice) + adultprice;
+                    totalAdult = totalAdult + (tempadult + ((tempadult * tax) / 100));
+                    totalAdult = totalAdult * adultCount;
+                }
+                if (childCount > 0) {
+                    var childprice = $(element).find(':selected').data('childprice');
+                    var childcurrencyprice = $(element).find(":selected").data("childcurrencyprice");
+                    var tempchild = (childcurrencyprice * baseRialPrice) + childprice;
+                    totalChild = totalChild + (tempchild + ((tempchild * tax) / 100));
+                    totalChild = totalChild * childCount;
+                }
+                if (infantCount > 0) {
+                    var infantprice = $(element).find(':selected').data('infantprice');
+                    var infantcurrencyprice = $(element).find(":selected").data("infantcurrencyprice");
+                    var tempinfant = (infantcurrencyprice * baseRialPrice) + infantprice;
+                    totalInfant = totalInfant + (tempinfant + ((tempinfant * tax) / 100));
+                    totalInfant = totalInfant * infantCount;
+                }
+
+                //محاسبه
+                //totalPayPrice = totalAdult + totalChild + totalInfant;
+                totalPayPrice = Math.ceil(((totalAdult + totalChild + totalInfant) / 10));
+
+            });
+            $("#totalpaysection").text(totalPayPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        }
+        function showpopup() {
+            $("#frm-popup").css("display", "block");
+            $("#autorize-modal").css("display", "flex");
+        }    
+    </script>
+}

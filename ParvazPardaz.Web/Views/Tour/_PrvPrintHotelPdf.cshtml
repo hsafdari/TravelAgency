@@ -1,0 +1,81 @@
+﻿@model List<HotelClientViewModel>
+@{
+
+    var selectedRooms = ViewBag.SelectedRooms as List<ParvazPardaz.ViewModel.Book.VoucherBookRoomList>;
+    string CheckingDate = ViewContext.HttpContext.Items["CheckingDate"].ToString();
+    string CheckingDateEn = ViewContext.HttpContext.Items["CheckingDateEn"].ToString();
+    string CheckoutDate = ViewContext.HttpContext.Items["CheckoutDate"].ToString();
+    string CheckoutDateEn = ViewContext.HttpContext.Items["CheckoutDateEn"].ToString();
+}
+@foreach (var item in Model)
+{
+    <ul class="hotel list">
+        <li>
+            <span>نام هتل:</span>
+            <span>@item.hotel</span>
+            <span>@item.hotel</span>
+            <span>Hotel Name:</span>
+        </li>
+        <li>
+            <span>نوع اتاق:</span>
+            <span>
+                <span>
+                    @foreach (var roomitem in selectedRooms)
+                    {
+                        <i>@string.Format("{0}{1} X {2}", selectedRooms.IndexOf(roomitem) > 0 ? " ، " : "", roomitem.Count, roomitem.Title)</i>
+                    }
+                </span>
+            </span>
+            <span>
+                <span>
+                    @foreach (var roomitem in selectedRooms)
+                    {
+                        <i>@string.Format("{0}{1} X{2}", selectedRooms.ToList().IndexOf(roomitem) > 0 ? " ، " : "", roomitem.Count, roomitem.TitleEn)</i>
+                    }
+                </span>
+            </span>
+            <span>Room:</span>
+        </li>
+        <li>
+            <span>تعداد ستاره:</span>
+            <span>@item.stars</span>
+            <span>@item.stars</span>
+            <span>‌Hotel Stars:</span>
+        </li>
+        <li>
+            <span>محل هتل:</span>
+            <span>@item.location</span>
+            <span>@item.location</span>
+            <span>Location:</span>
+        </li>
+        <li>
+            <span>امکانات هتل:</span>
+            <span>@item.description</span>
+            <span>@item.description</span>
+            @*@if (item.facilities != null)
+            {
+                <span>@String.Join(",", item.facilities)</span>
+                <span>@String.Join(",", item.facilities)</span>
+            }
+            else
+            {
+                <span></span>
+                <span></span>
+            }*@
+            <span>Facilities:</span>
+        </li>
+        <li>
+            <span>زمان چک‌این:</span>
+            <span>14:00 @CheckingDate</span>
+            <span>14:00 @CheckingDateEn</span>
+            <span>Checkin:</span>
+        </li>
+        <li>
+            <span>زمان چک‌آوت:</span>
+            <span>12:00 @CheckoutDate</span>
+            <span>12:00 @CheckoutDateEn</span>
+            <span>Checkout:</span>
+        </li>
+    </ul>
+
+}

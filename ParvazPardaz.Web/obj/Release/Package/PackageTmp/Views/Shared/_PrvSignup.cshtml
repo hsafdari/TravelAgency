@@ -1,0 +1,35 @@
+﻿@model SignupViewModel
+@using (Ajax.BeginForm("Signup", "Account", null, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "SuccessLogin" }, new { id = "frm-signup", @class = "form signup" }))
+{
+    @Html.AntiForgeryToken()
+    <h2>ثبت‌ نام در کی سفر</h2>
+    <label>
+        @Html.LabelFor(model => model.FullName, new { @class = "label-text" })
+        @Html.TextBoxFor(model => model.FullName)
+        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "form-error" })
+    </label>
+    <label>
+        @Html.LabelFor(model => model.PhoneNumber, new { @class = "label-text" })
+        @Html.TextBoxFor(model => model.PhoneNumber, new { style = "direction:ltr" })
+        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "form-error" })
+    </label>
+    <label>
+        @Html.LabelFor(model => model.Email, new { @class = "label-text" })
+        @Html.TextBoxFor(model => model.Email, new {@id="sgEmail",style = "direction:ltr" })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "form-error" })
+    </label>
+    <label>
+        @Html.LabelFor(model => model.Password, new { @class = "label-text" })
+        @Html.TextBoxFor(model => model.Password, new {@id="sPassword", type = "password", style = "direction:ltr" })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "form-error" })
+    </label>
+    <input class="btn-1 active" type="submit" name="" value="ثبت نام">
+}
+@section scripts{
+    <script>
+        var form = jQuery("#frm-signup").closest("form");
+        form.removeData('validator');
+        form.removeData('unobtrusiveValidation');
+        jQuery.validator.unobtrusive.parse(form);
+    </script>
+}

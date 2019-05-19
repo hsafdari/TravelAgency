@@ -1,0 +1,9 @@
+﻿@{
+    Layout = null;
+}
+<aside class="profile-nav">
+    <a href="/Customer/Order/Index" class="@("/Customer/Order/Index" == Request.Url.LocalPath ? "active" : "")">سفارش‌های من</a>
+    <a href="/Customer/Passenger/Index" class="@("/Customer/Passenger/Index" == Request.Url.LocalPath ? "active" : "")">لیست مسافران</a>
+    <a href="javascript:void(0)" class="@("" == Request.Url.LocalPath ? "active" : "")">تراکنش‌های مالی</a>
+    <a href="/Customer/MyAccount/MyProfile#user-info" class="@("/Customer/MyAccount/MyProfile" == Request.Url.LocalPath ? "active" : "")">اطلاعات کاربری</a>
+</aside>

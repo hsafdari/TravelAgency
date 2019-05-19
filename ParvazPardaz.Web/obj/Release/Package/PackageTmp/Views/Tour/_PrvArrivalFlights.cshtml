@@ -1,0 +1,42 @@
+﻿@model TourReserveViewModel
+@using ParvazPardaz.Common.Extension
+@{
+    Layout = null;
+    var arrivalFlights = ViewBag.ArrivalFlights as List<FlightViewModel>;
+    var tourPackageDDL = ViewBag.TourPackageDDL as SelectList;
+}
+@if (arrivalFlights != null && arrivalFlights.Any())
+{
+    <section id="arrivalFlightSection" class="main tour-flight flight-back white clearfix ">
+        <h2 class="sectionTitle">پرواز برگشت</h2>
+        <div class="row form">
+            @if (tourPackageDDL != null && tourPackageDDL.Any())
+{
+    foreach (var item in tourPackageDDL)
+    {
+        <input class="tab btn-1 tpTitle tpTitle_@(item.Value) @(tourPackageDDL.First().Value.Equals(item.Value) ? "active" : "")" type="button" name="tab-1" value="@item.Text" onclick="ChangeArrivalFlight('@(item.Value)')">
+    }
+}
+        </div>
+        @for (int i = 0; i < arrivalFlights.Count(); i++)
+        {
+            @*<div class="form tp_@(arrivalFlights[i].TourSchedule.TourPackageId)">*@
+            <div class="form arrFlights tp_@(arrivalFlights[i].TourSchedule.TourPackageId) @(System.Convert.ToInt32(tourPackageDDL.ElementAt(0).Value) == arrivalFlights[i].TourSchedule.TourPackageId ? "" : "hidden")">
+                <label>
+                    <input type="hidden" name="SelectedDepartureFlightId" value="@arrivalFlights[i].DepartureFlightId">
+                    <input type="radio" class="checkbox-custom" name="SelectedArrivalFlightId" value="@arrivalFlights[i].Id" id="flayD@(i)" onclick="$(this).prev().click().attr('checked','checked'); GetHotelPackage(@arrivalFlights[i].TourSchedule.TourPackageId.ToString())" />
+                    <span class="radio-replace"></span>
+                    <img src="@arrivalFlights[i].CompanyTransfer.ImageUrl" alt="@arrivalFlights[i].CompanyTransfer.Title" class="airline-logo">
+                    <span class="flight-date">@arrivalFlights[i].StartDateTime.ToString("dddd dd MMM")</span>
+                    <span class="flight-clock"><b>@arrivalFlights[i].StartDateTime.ToString("HH:mm")</b><b>@arrivalFlights[i].EndDateTime.ToString("HH:mm")</b></span>
+                    <span class="flight-duration">
+                        @{var durationTime = arrivalFlights[i].EndDateTime - arrivalFlights[i].StartDateTime;}
+                        @string.Format("{0}{1} ساعت و {2} دقیقه", (durationTime.Days > 0 ? durationTime.Days.ToString() + " روز ، " : ""), durationTime.Hours, durationTime.Minutes)
+                    </span>
+                    <span class="flight-class">@arrivalFlights[i].FlightClass</span>
+                    <span class="flight-number">@string.Format("{0} {1}", arrivalFlights[i].FlightNumber, arrivalFlights[i].CompanyTransfer.Title)</span>
+                </label>
+            </div>
+        }
+    </section>
+}

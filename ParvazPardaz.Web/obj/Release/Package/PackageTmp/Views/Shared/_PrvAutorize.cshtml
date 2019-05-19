@@ -1,0 +1,101 @@
+﻿@model AutorizeViewModel
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="fullframe modal" id="autorize-modal">
+        <div class="wrapper signin">
+            @Html.Partial("_PrvLogin")
+            @Html.Partial("_PrvSignup")
+            @Html.Partial("_PrvForgetPassword")
+            <div class="switch signin">
+                <p>
+                    حساب کاربری ندارید؟
+                    <span onclick="$('.modal .wrapper').removeClass('signin').removeClass('signup').addClass('passrestore')">رمز عبور را فراموش کرده‌اید؟</span>
+                </p>
+                <button class="btn-4 active" type="button" name="singup" onclick="$('.modal .wrapper').removeClass('signin').removeClass('passrestore').addClass('signup')">ثبت نام در کی سفر</button>
+            </div>
+            <div class="switch signup ">
+                <p>حساب کاربری دارید؟</p>
+                <button class="btn-4 active" type="button" name="singin" onclick="$('.modal .wrapper').removeClass('signup').removeClass('passrestore').addClass('signin')">ورود به کی سفر</button>
+            </div>
+        </div>
+    </div>
+    <div class="dim"></div>
+    <script type="text/javascript">
+        function SuccessLogin(result) {
+            if (result.status == "Success") {
+                $("#autorize-modal").fadeOut('slow', function () {
+                    HideLoginModal();
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetClientAuthSection", "Account")",
+                    success: function (data) {
+                        $("#MenuAuthSection").html(data);
+                    },
+                    error: function (textStatus, errorThrown) {
+                    }
+                });
+
+                if (window.location.pathname == "/TourSearch") {
+                    $("#frm-reserve").submit();
+                }
+            }
+            else if (result.status == "TryAgain") {
+                toastr.options = { "positionClass": "toast-top-right" }
+                toastr.error(result.message, 'ورود به سیستم', { timeOut: 5000 })
+                document.getElementById("frm-login").reset();
+            }
+            else if (result.status == "LockedOut") {
+                document.getElementById("frm-login").reset();
+                toastr.options = { "positionClass": "toast-top-right" }
+                toastr.error(result.message, 'ورود به سیستم', { timeOut: 5000 })
+            }
+            else if (result.status == "Failure") {
+                document.getElementById("frm-login").reset();
+                toastr.options = { "positionClass": "toast-top-right" }
+                toastr.error(result.message, 'ورود به سیستم', { timeOut: 5000 })
+            }
+            else if (result.status == "EmailExist") {
+                document.getElementById("frm-signup").reset();
+                toastr.options = { "positionClass": "toast-top-right" }
+                toastr.error(result.message, 'عضویت در سیستم', { timeOut: 5000 })
+            }
+            else if (result.status == "SignupFailure") {
+                document.getElementById("frm-signup").reset();
+                toastr.options = { "positionClass": "toast-top-right" }
+                toastr.error('کاربر گرامی! عضویت شما با مشکل مواجه شده است ، لطفا لحظاتی بعد اقدام کنید', 'عضویت در سیستم', { timeOut: 5000 })
+            }
+        }
+
+        function SuccessForgetPassword(result) {
+            $("#frm-forget-password")[0].reset();
+            $("#BtnResetPassword").val("بازیابی رمز عبور");
+            $("#BtnResetPassword").prop("disabled", false);
+            if (result.isRedirect) {
+                //$("#Recaptcha-error-section").hide();
+                $("#autorize-modal").fadeOut('slow', function () {
+                    HideLoginModal();
+                });
+                toastr.options = { "positionClass": "toast-top-right" }
+                toastr.success(result.validationMsg, 'بازیابی رمز عبور', { timeOut: 5000 })
+
+            } else if (result.status == "InvalidCaptcha") {
+                $("#Recaptcha-error-section").show();
+            } else {
+                $("#Recaptcha-error-section").hide();
+                toastr.options = { "positionClass": "toast-top-right" }
+                toastr.error(result.validationMsg, 'بازیابی رمز عبور', { timeOut: 5000 })
+            }
+        }
+
+        function SuccessSignUp(data) {
+
+        }
+
+        function BeginForgetPassword() {
+            $("#BtnResetPassword").val("در حال ارسال اطلاعات...");
+            $("#BtnResetPassword").prop("disabled", true);
+        }
+
+    </script>
+}

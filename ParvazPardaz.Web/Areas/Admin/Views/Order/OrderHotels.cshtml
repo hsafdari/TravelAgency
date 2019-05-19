@@ -1,0 +1,233 @@
+﻿@model GridSelectedHotelPackageViewModel
+@{ ViewBag.Title = "OrderHotel"; }
+<link href="~/Plugins/PersianEnDateTime/css/persian-datepicker.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<h3>@ParvazPardaz.Resource.Book.Book.sellesHotelsReports </h3>
+
+<hr />
+<div class="container">
+    @{Html.RenderPartial("_HotelSearch", Model.SearchViewModel);}
+    <div id="table">
+        <table id="grid" class="table table-bordered table-hover table-full-width dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>@Html.DisplayNameFor(model => model.Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.OrderId)</th>
+                    <th>@ParvazPardaz.Resource.Book.Book.Hotel</th>
+                    <th>@Html.DisplayNameFor(model => model.FlightDateTime)</th>
+                    <th>@ParvazPardaz.Resource.Tour.Tours.CityTitle</th>
+                    <th>@Html.DisplayNameFor(model => model.NumberRoom)</th>
+                    <th>@ParvazPardaz.Resource.Tour.Tours.HotelRoom</th>
+                    <th>@Html.DisplayNameFor(model => model.NationalCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.TrackingCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.TourCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.TourTitle)</th>
+                    <th>@Html.DisplayNameFor(model => model.TourPackageCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.TourPackageTitle)</th>
+                    <th>@Html.DisplayNameFor(model => model.BuyerTitle)</th>
+                    <th>@ParvazPardaz.Resource.Book.Book.OrderDate</th>
+
+                    <th>@Html.DisplayNameFor(model => model.LastModifierUserName)</th>
+                    <th>@Html.DisplayNameFor(model => model.LastModifierDate)</th>
+                </tr>
+            </thead>
+            @*<tfoot>
+                    <tr>
+                        <th colspan="16" style="text-align:right">مجموع :</th>
+                        <th></th>
+                        <th colspan="1" style="text-align:right"></th>
+                        <th></th>
+                    </tr>
+                </tfoot>*@
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $('.select2').select2({
+            dir: "RTL"
+        });
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+    <script src="~/Scripts/kendo.date/JalaliDate.js"></script>
+    <script src="~/Scripts/kendo.date/kendo.web.js"></script>
+    <script src="~/Scripts/kendo.date/fa-IR.js"></script>
+    <script>
+        var fetchCompanyTransferUrl = "@Url.Action("GetCompanyTransfers", "CompanyTransfer")"
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
+                return {
+                    "iStart": oSettings._iDisplayStart,
+                    "iEnd": oSettings.fnDisplayEnd(),
+                    "iLength": oSettings._iDisplayLength,
+                    "iTotal": oSettings.fnRecordsTotal(),
+                    "iFilteredTotal": oSettings.fnRecordsDisplay(),
+                    "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+                    "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
+                };
+            };
+            var table = $("#grid").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                'select': true,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+
+                    var numStart = this.fnPagingInfo().iStart;
+
+                    var index = numStart + iDisplayIndexFull + 1;
+                    $("td:first", nRow).html(index);
+                    return nRow;
+                },
+                scrollX: true,
+                scrollCollapse: true,
+                language: {
+                    url: '/Plugins/DataTables/Persian.json'
+                },
+                "ajax": {
+                    "url": "/Admin/Order/GetOrderHotels",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: function (d) {
+                        d.fromdate = $("#fromdate").val(),
+                        d.todate = $("#todate").val(),
+                        d.reporttype = $("input[name='reporttype']:checked").val(),
+                        d.cityId = $("#cityId").val(),
+                        d.hotelid = $("#hotelId").val(),
+                        d.calendertype = $("#hdcalendertype").val()
+                    }
+                },
+                "columnDefs":
+            [{
+                "targets": [1],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": 'no-sort',
+                "orderable": false,
+            }]
+                    , "columns": [
+                    { "data": null },
+                    { "data": "Id", name: "Id", "autoWidth": true },
+                    { "data": "OrderId", name: "OrderId", "autoWidth": true },
+                    {
+                        "data": "hotelsInPackage", name: "hotelsInPackage", "autoWidth": true,
+                        render: function (data, type, row) {
+                            var result = "";
+                            for (i = 0; i < data.length; i++) {
+                                result = result + "<span class='hoteldet'>" + data[i].HotelTitle + "</span>";
+                            }
+                            return result;
+                        }
+
+                    },
+                     {
+                         "data": "FlightDateTime", name: "FlightDateTime", "autoWidth": true,
+                         render: function (data, type, row) {
+                             return (data != null ? moment(data).format('jYYYY/jMM/jDD') : '');
+                         }
+                     },
+                     {
+                         "data": "hotelsInPackage", name: "hotelsInPackage", "autoWidth": true,
+                         render: function (data, type, row) {
+                             var result = "";
+                             for (i = 0; i < data.length; i++) {
+                                 result = result + "<span class='hoteldet'>" + data[i].CityTitle + "</span>";
+                             }
+                             return result;
+                         }
+
+                     },
+                    { "data": "NumberRoom", name: "NumberRoom", "autoWidth": true },
+                      {
+                          "data": "hotelRoomsInPackage", name: "hotelRoomsInPackage", "autoWidth": true,
+                          render: function (data, type, row) {
+                              var result = "";
+                              for (i = 0; i < data.length; i++) {
+                                  result = result + "<span class='hoteldet'>" + data[i].Title + "</span>";
+                              }
+                              return result;
+                          }
+
+                      },
+                    { "data": "NationalCode", name: "NationalCode", "autoWidth": true },
+                    { "data": "TrackingCode", name: "TrackingCode", "autoWidth": true },
+                    { "data": "TourCode", name: "TourCode", "autoWidth": true },
+                    { "data": "TourTitle", name: "TourTitle", "autoWidth": true },
+                    { "data": "TourPackageCode", name: "TourPackageCode", "autoWidth": true },
+                    { "data": "TourPackageTitle", name: "TourPackageTitle", "autoWidth": true },
+                    { "data": "BuyerTitle", name: "BuyerTitle", "autoWidth": true },
+                    {
+                        "data": "CreatorDateTime", name: "CreatorDateTime", "autoWidth": true,
+                        render: function (data, type, row) {
+                            return (data != null ? moment(data).format('YYYY/MM/DD HH:mm') : '');
+                        }
+                    },
+                    { "data": "LastModifierUserName", name: "LastModifierUserName", "autoWidth": true },
+                    {
+                        "data": "LastModifierDate", name: "LastModifierDate", "autoWidth": true,
+                        render: function (data, type, row) {
+                            return (data != null ? moment(data).format('jYYYY/jMM/jDD HH:mm') : '');
+                        }
+                    },
+                    ],
+                "order": [[2, 'desc']]
+            });
+
+            //$(".datepicker").kendoDatePicker();
+
+            $("#searchbutton").click(function () {
+                table.draw();
+            });
+        });
+        function Fetchhotel() {
+
+            var hotelIDString = "#hotelId";
+            var cityId = $("#cityId").val();
+            if (cityId == "") {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+                $(hotelIDString).html(items);
+            }
+            else {
+                items = "<option value=\"" + 0 + "\">" + '@ParvazPardaz.Resource.General.Generals.DDLSelect' + "</option>";
+                var x = $.getJSON("/Admin/HotelPackage/FindHotelByCityId/" + cityId, function (data) {
+                    $.each(data, function (i, item) {
+                        items += "<option value=\"" + item.Value + "\" " + ((item.Selected == true) ? "Selected" : "") + " >" + item.Text + "</option>";
+                    });
+                    $(hotelIDString).html(items);
+                });
+            }
+        }
+    </script>
+    <script src="~/Plugins/PersianEnDateTime/js/persian-date.min.js"></script>
+    <script src="~/Plugins/PersianEnDateTime/js/persian-datepicker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".datepicker").pDatepicker({
+                format: 'YYYY/MM/DD',
+                toolbox: {
+                    calendarSwitch: {
+                        enabled: true
+                    }
+                },
+                persianDigit: false,
+                onSelect: function () {
+
+                    var test = $(this)["0"].calendar_;
+                    $("#hdcalendertype").val(test);
+                }
+            });
+
+        });
+    </script>
+}
+
+

@@ -1,0 +1,44 @@
+﻿@model TourScheduleHotelViewModel
+<style>
+    #divMoreHoteRoom {
+        text-align: left;
+        padding-left: 75px;
+    }
+</style>
+<div id="AddEditTourScheduleHotel">
+    @Html.Partial("~/Areas/Admin/Views/TourScheduleHotel/_AddTourScheduleHotel.cshtml", new TourScheduleHotelViewModel()
+{
+    TourScheduleId = Model.TourScheduleId,
+    CRUDMode = CRUDMode.Create,
+    TourId = Model.TourId
+})
+</div>
+<div id="ListViewTourScheduleHotel">
+    @{
+        if (Model != null && Model.ListView != null && Model.ListView.Any())
+        {
+            foreach (var listView in Model.ListView)
+            {
+                @Html.Partial("~/Areas/Admin/Views/TourScheduleHotel/_ListViewTourScheduleHotel.cshtml", listView)
+            }
+        }
+    }
+</div>
+
+<div>
+    @Html.Action("Create", "TourScheduleHotelRoom", new { tourScheduleId = Model.TourScheduleId })
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

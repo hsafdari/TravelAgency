@@ -1,0 +1,257 @@
+﻿@model ParvazPardaz.ViewModel.GridHotelViewModel
+
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+@if (ParvazPardaz.Resource.General.Generals.Direction == "RTL")
+{
+    if (ParvazPardaz.Resource.General.Generals.Regional == "AR")
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+    @Scripts.Render("~/Scripts/kendo/ar-IQ/js");
+    }
+    else
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+    @Scripts.Render("~/Scripts/kendo/fa-IR/js");
+    }
+}
+else
+{
+    @Styles.Render("~/content/kendo/LTR/css");
+    @Scripts.Render("/Scripts/kendo/en-US/js");
+}
+
+<h3>@ParvazPardaz.Resource.Tour.Tours.HotelManagement </h3>
+
+<hr />
+
+<p>
+   <p>
+    @if (Infrastructure.HasPermission.CanAccess("Create", "/Admin/Hotel/Create"))
+    {
+        <a href="@Url.Action("Create")" class="btn btn-green">
+            <i class="fa fa-plus"></i>
+            @ParvazPardaz.Resource.General.Generals.Create
+        </a>
+    }
+    @if (Infrastructure.HasPermission.CanAccess("Edit", "/Admin/Hotel/Edit"))
+    {
+        <a onclick="edit()" class="btn btn-blue">
+            <i class="fa fa-edit"></i>
+            @ParvazPardaz.Resource.General.Generals.Edit
+        </a>
+    }
+    @if (Infrastructure.HasPermission.CanAccess("Delete", "/Admin/Hotel/Delete"))
+    {
+        <a onclick="del()" class="btn btn-red">
+            <i class="fa fa-trash-o"></i>
+            @ParvazPardaz.Resource.General.Generals.Delete
+        </a>
+    }
+    <a onclick="gallery()" class="btn btn-purple">
+        <i class="fa fa-picture-o"></i>
+        @ParvazPardaz.Resource.Tour.Tours.EditHotelGallery
+    </a>
+    <a onclick="ChangeThumb()" class="btn btn-purple">
+        <i class="fa fa-picture-o"></i>
+        @ParvazPardaz.Resource.EShop.EShopResource.ChangeDefaultProductThumb
+    </a>
+</p>
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid<ParvazPardaz.ViewModel.GridHotelViewModel>()
+        .Name("Grid")
+        .Columns(columns =>
+            {
+                columns.Bound(model => model.Id).Width(80);
+                columns.Bound(model => model.Title).Width(150);
+                columns.Bound(model => model.IsActive).Width(150);
+                columns.Bound(model => model.HotelTags).ClientTemplate("#=DisplayList(HotelTags)#").Filterable(false).Groupable(false).Sortable(false).Width(150);
+                columns.Bound(model => model.PostGroups).ClientTemplate("#=DisplayList(PostGroups)#").Filterable(false).Groupable(false).Sortable(false).Width(150);
+                //columns.Bound(model => model.ImageUrl).ClientTemplate("#=GetImgThumb(ImageUrl)#").HtmlAttributes(new { @style = "text-align:center" }).Width(100);
+                columns.Bound(model => model.CityTitle).Width(150);
+                columns.Bound(model => model.Summary).Width(150);
+                columns.Bound(model => model.MetaKeywords).Width(150);
+                columns.Bound(model => model.MetaDescription).Width(150);
+                columns.Bound(model => model.PublishDatetime).ClientTemplate("#=(PublishDatetime != null ? moment(PublishDatetime).format('jYYYY/jMM/jDD HH:mm') : '')#").Width(150);
+                columns.Bound(model => model.Sort).Width(150);
+                columns.Bound(model => model.IsActiveComments).Width(150);
+                columns.Bound(model => model.PictureCount).Width(150);
+                columns.Bound(model => model.Location).Width(150);
+                columns.Bound(model => model.Address).Width(150);
+                columns.Bound(model => model.Tel).Width(150);
+                columns.Bound(model => model.Rate).Width(150);
+                //columns.Bound(model => model.CityId).Width(150);
+                
+                columns.Bound(model => model.CreatorUserName).Width(150);
+                columns.Bound(model => model.CreatorDateTime).ClientTemplate("#=(CreatorDateTime != null ? moment(CreatorDateTime).format('jYYYY/jMM/jDD HH:mm') : '')#").Width(150);
+                columns.Bound(model => model.LastModifierUserName).Width(150);
+                columns.Bound(model => model.LastModifierDate).ClientTemplate("#=(LastModifierDate != null ? moment(LastModifierDate).format('jYYYY/jMM/jDD HH:mm') : '')#").Width(150);
+
+            })
+            .Groupable()
+            .Pageable()
+            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single)
+            .Type(GridSelectionType.Row))
+            .Navigatable()
+            .Sortable()
+            .Scrollable(scr => scr.Height(400))
+            .Filterable()
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Sort(st =>
+                        {
+                            st.Add(s => s.CreatorDateTime).Descending();
+                            st.Add(s => s.Id).Descending();
+                        })
+
+                .Model(model => model.Id(item => item.Id))
+                .Read(read => read.Action("GetHotel", "Hotel", null)).PageSize(50)
+            )
+    )
+    @Html.Partial("_Toastr")
+</div>
+
+@Html.Partial("_ConfirmationMessage")
+
+@section scripts{
+    <script id="tmpListView" type="text/javascript">
+        function DisplayList(datalst) {
+            var str = "<ul class='lstingrv'>";
+            for (var i = 0; i < datalst.length; i++) {
+                str += "<li>" + datalst[i] + "</li>";
+            }
+            return str;
+        }
+    </script>
+
+    <!-- Get Image URL in thumbnail -->
+    <script>
+        function GetImgThumb(ImageUrl) {
+            if (ImageUrl == null) {
+                ImageUrl = "/Images/404/no-image.png";
+
+                return "<img src=\"" + ImageUrl + "\" title='بدون تصویر'/>";
+            }
+            else {
+                var splitedUrl = ImageUrl.split('.');
+                return "<img src=\"" + splitedUrl[0] + "_Thumb." + splitedUrl[1] + "\" style=\"width:60px; height:60px;\" class=\"img-circle\" />";
+            }
+        }
+    </script>
+   
+
+
+
+    <script>
+        var CreateUrl = "@Url.Action("Create", "Hotel")";
+        var EditUrl = "@Url.Action("Edit", "Hotel")";
+        var DeleteUrl = "@Url.Action("Delete", "Hotel")";
+        var galleryUrl = "@Url.Action("CreateGallary", "Hotel")";
+        var TestDetail = "@Url.Action("TestDetail", "Hotel")";
+        var ChangeThumbURL = "@Url.Action("ChangeThumb", "Hotel")";
+    </script>
+
+    <script>
+        function CheckSelectedGrid() {
+            var gview = $("#Grid").data("kendoGrid");
+            var selectedItem = gview.dataItem(gview.select());
+            if (selectedItem == null) {
+                toastr.options = { "positionClass": "toast-top-center" }
+                toastr.error('@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlert', '@ParvazPardaz.Resource.General.Generals.SelectedGridRowAlertTitle', { timeOut: 5000 })
+                return false;
+            }
+            else {
+                var selectedId = selectedItem.Id;
+                return selectedId;
+            }
+        }
+        var wndRemove = $("#ConfirmationMessage").kendoWindow({
+            title: "",
+            modal: true,
+            visible: false,
+            resizable: false,
+            width: 400,
+        }).data("kendoWindow");
+
+        function create(parameters) {
+            window.location.replace(CreateUrl);
+        }
+
+        function edit(parameters) {
+            var result = CheckSelectedGrid();
+            if (result) {
+                window.location.replace(EditUrl + "/" + result);
+            }
+        }
+
+        function del(parameters) {
+            var result = CheckSelectedGrid();
+            if (result) {
+                wndRemove.center();
+                wndRemove.open();
+            }
+        }
+        function gallery(parameters) {
+            var selectedId = CheckSelectedGrid();
+            if (selectedId) {
+                window.location.replace(galleryUrl + "/?hotelId=" + selectedId);
+            }
+        }
+
+        function ChangeThumb(parameters) {
+            var selectedId = CheckSelectedGrid();
+            if (selectedId) {
+                window.location.replace(ChangeThumbURL + "/" + selectedId);
+            }
+        }
+
+        function TestDetail(parameters) {
+            var selectedId = CheckSelectedGrid();
+            if (selectedId) {
+                window.location.replace(TestDetail + "/?hotelId=" + selectedId);
+            }
+        }
+
+        $("#btnYes").click(function () {
+            var gview = $("#Grid").data("kendoGrid");
+            var selectedItem = gview.dataItem(gview.select());
+            var selectedId = selectedItem.Id;
+            $.ajax({
+                url: DeleteUrl,
+                type: "post",
+                dataType: "json",
+                cache: false,
+                data: { Id: selectedId },
+                success: function (result) {
+                    var gridm = $("#Grid").data("kendoGrid");
+                    if (gridm != undefined && result) {
+                        if (gridm.dataSource.transport.cache._store)
+                            gridm.dataSource.transport.cache._store = {};
+                        gridm.dataSource.fetch();
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.DeleteAlert', '@ParvazPardaz.Resource.General.Generals.DeleteAlertTitle', { timeOut: 5000 })
+                    }
+                    else {
+                        toastr.options = { "positionClass": "toast-top-center" }
+                        toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                    }
+                },
+                error: function (xhr) {
+                    toastr.options = { "positionClass": "toast-top-center" }
+                    toastr.error('@ParvazPardaz.Resource.General.Generals.ErrorAlert', '@ParvazPardaz.Resource.General.Generals.ErrorAlertTitle', { timeOut: 5000 })
+                }
+            });
+            wndRemove.close();
+        })
+        $("#btnNo").click(function () {
+            wndRemove.close();
+        })
+    </script>
+}
+
+

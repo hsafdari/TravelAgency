@@ -1,0 +1,90 @@
+﻿
+
+@model ParvazPardaz.ViewModel.EditTourLandingPageUrlViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.CMS.CMS.ManagementTourLandingPageUrls </h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.CityId, new { @class = "control-label col-md-2" })
+            <div class="col-md-3 number">
+                @Html.DropDownListFor(model => model.CityId, Model.CityDDL, ParvazPardaz.Resource.General.Generals.DDLSelect, new { @class = "form-control select" })
+                @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LandingPageUrlType, new { @class = "control-label col-md-2" })
+            <div class="col-md-3 number">
+                @Html.EnumDropDownListFor(model => model.LandingPageUrlType, ParvazPardaz.Resource.General.Generals.DDLSelect, new { @class = "form-control select" })
+                @Html.ValidationMessageFor(model => model.LandingPageUrlType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.URL, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.URL, new { @class = "form-control", style = "direction:ltr" })
+                <div class="alert alert-info" style="margin-top:10px">
+                    <i class="fa fa-info-circle"></i>
+                    <strong>توجه!</strong>
+                    <p>@ParvazPardaz.Resource.Tour.Tours.UseThisTourLandingPageUrlPattern</p>
+                    <p>@ParvazPardaz.Resource.Tour.Tours.ForGeneralTour</p>
+                    <p style="direction:ltr">@ParvazPardaz.Resource.Tour.Tours.TourLandingPageUrlPatternForGeneralTour</p>
+                    <p>@ParvazPardaz.Resource.Tour.Tours.ForDiscountTour</p>
+                    <p style="direction:ltr">@ParvazPardaz.Resource.Tour.Tours.TourLandingPageUrlPatternForDiscountTour</p>
+                </div>
+                @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsAvailable, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.CheckBoxFor(model => model.IsAvailable, new { @class = "flat-red", style = "margin-right:50px; margin-left:50px;" })
+                @Html.ValidationMessageFor(model => model.IsAvailable, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+    $('.select').select2({
+        dir: "RTL"
+    });
+</script>
+
+}

@@ -1,0 +1,174 @@
+﻿/*
+company: parvazpardaz
+author:Niloofar taban
+1396/02/30
+
+modified by : behzad alizadeh h.
+modified date : 96/06/28
+
+version 1.0
+
+*/
+.btn {
+    *padding: 0 !important;
+}
+
+ul li {
+    margin-left: 0 !important;
+}
+
+.packages .package {
+    width: 100% !important;
+}
+
+.thumbnail {
+    padding: 0px !important;
+    border: 0 !important;
+}
+
+.calc_lowestPrice {
+    height: 100% !important;
+}
+
+.btn {
+    display: block !important;
+    text-align: right !important;
+}
+
+.calc_lowestPrice .book, .day.selected, .tour_navigator > * {
+    text-align: center !important;
+}
+
+.tour_navigator {
+    height: 100% !important;
+}
+
+/* tour detail */
+.tourLandingPageUrlTitle {
+    position: relative;
+    overflow: hidden;
+    z-index: 99;
+    margin-bottom: 25px !important;
+    padding: 15px;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    display: block;
+    margin: 50px auto 0px auto !important;
+    direction: rtl !important;
+    line-height: 1.7 !important;
+}
+
+.tourLandingPageUrlDesc {
+    background-color: white !important;
+    padding: 30px !important;
+    position: relative;
+    overflow: hidden;
+    z-index: 99;
+    margin-bottom: 25px !important;
+    background-color: white !important;
+    padding: 15px;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    display: block;
+    margin: 25px auto !important;
+    direction: rtl !important;
+    line-height: 1.7 !important;
+}
+
+    @media only screen and (min-device-width:1000px) {
+        .topOfPage {
+            top: 140px !important;
+        }
+    }
+
+    @media only screen and (max-device-width:1000px) {
+        .topOfPage {
+            top: 80px !important;
+        }
+    }
+
+.topOfPage {
+    /*top: 100px !important;*/ /*75px*/
+    z-index: 99;
+    display: block;
+    margin: 25px -14px !important;
+    direction: rtl !important;
+    line-height: 1.7 !important;
+    position: absolute;
+    overflow: hidden;
+    background-color: white !important;
+}
+
+#tour_details {
+    margin-top: 160px !important;
+}
+
+.breadcrumb {
+    margin-bottom: 0px !important;
+}
+
+    .breadcrumb > li + li::before {
+        content: ">\00a0" !important;
+    }
+
+.tour_essentials ul li {
+    line-height: 170% !important;
+}
+
+.bulletService {
+    color: #00A694 !important; /*goldenrod*/
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+/* تغییر رنگ های سازمانی در جزییات تور */
+
+.tour_title {
+    border-bottom: 2px solid #223871 !important;
+}
+
+.tour_navigator > .btn.active, .tour_navigator > .btn:hover {
+    background: #00A694 !important;
+    color: #fff !important;
+}
+
+.packages .package:hover, .packages .package.active {
+    background: #00A694 !important;
+    box-shadow: 0 6px 15px #00A694 !important;
+}
+
+.calc_lowestPrice .book {
+    background: #00A694 !important;
+    color: white !important;
+}
+
+.tour_package_details > .active, .tour_package_details > :hover {
+    background: #00A694;
+}
+
+.tour_package_details > :hover .checker, .tour_package_details > .active .checker, .checker:hover {
+    border: 3px solid !important;
+    color: #00A694 !important;
+}
+
+.tour_essentials ul li i {
+    color: #00A694 !important;
+}
+
+.tour_package_details .icon.bullet, .hotel_stars, .flight_time i {
+    color: #00A694 !important;
+}
+
+.tour_package_details > .active, .tour_package_details > :hover {
+    background: #00A694 !important;
+}
+
+.day.selected {
+    background: #00A694 !important;
+    box-shadow: 0 6px 15px #00A694 !important;
+    color: #fff !important;
+}
+
+.calc_lowestPrice.sticky,.tour_navigator.sticky {
+    background: #223871 !important;
+}

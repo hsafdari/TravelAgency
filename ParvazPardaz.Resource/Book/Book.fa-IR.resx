@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdultCount" xml:space="preserve">
+    <value>تعداد بزرگسال</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="ChildCount" xml:space="preserve">
+    <value>تعداد کودک</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>واحد پولی</value>
+  </data>
+  <data name="DollarBasePrice" xml:space="preserve">
+    <value>قیمت پایه دلار</value>
+  </data>
+  <data name="FlightDateTime" xml:space="preserve">
+    <value>تاریخ پرواز</value>
+  </data>
+  <data name="InfantCount" xml:space="preserve">
+    <value>تعداد نوزاد</value>
+  </data>
+  <data name="IsDate" xml:space="preserve">
+    <value>از نوع تاریخ؟</value>
+  </data>
+  <data name="IsSuccessful" xml:space="preserve">
+    <value>موفق؟</value>
+  </data>
+  <data name="ManagementOrders" xml:space="preserve">
+    <value>مدیریت فروش</value>
+  </data>
+  <data name="ManagementOrderTypes" xml:space="preserve">
+    <value>مدیریت انواع فروش</value>
+  </data>
+  <data name="ManagementTasks" xml:space="preserve">
+    <value>مدیریت اقدامات فروش</value>
+  </data>
+  <data name="OrderStep" xml:space="preserve">
+    <value>وضعیت  فروش</value>
+  </data>
+  <data name="PreFactor" xml:space="preserve">
+    <value>پیش فاکتور</value>
+  </data>
+  <data name="RemainingFlightCapacity" xml:space="preserve">
+    <value>ظزفیت باقیمانده پرواز</value>
+  </data>
+  <data name="Reservation" xml:space="preserve">
+    <value>رزرواسیون</value>
+  </data>
+  <data name="Retrieval" xml:space="preserve">
+    <value>استرداد</value>
+  </data>
+  <data name="Successful" xml:space="preserve">
+    <value>موفق</value>
+  </data>
+  <data name="TicketReferenceNo" xml:space="preserve">
+    <value>شماره رفرنس بلیط</value>
+  </data>
+  <data name="TotalDiscountPrice" xml:space="preserve">
+    <value>تخفیف کل</value>
+  </data>
+  <data name="TotalPayPrice" xml:space="preserve">
+    <value>کل مبلغ قابل پرداخت</value>
+  </data>
+  <data name="TotalPrice" xml:space="preserve">
+    <value>قیمت کل</value>
+  </data>
+  <data name="TotalTaxPrice" xml:space="preserve">
+    <value>مالیات کل</value>
+  </data>
+  <data name="TrackingCode" xml:space="preserve">
+    <value>کد پیگیری</value>
+  </data>
+  <data name="Unsuccessful" xml:space="preserve">
+    <value>ناموفق</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>فروش</value>
+  </data>
+  <data name="Task" xml:space="preserve">
+    <value>اقدامات فروش</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>مقدار</value>
+  </data>
+  <data name="LogoUrl" xml:space="preserve">
+    <value>نمایه</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="PrintText" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>عنوان</value>
+  </data>
+  <data name="ManagementAgencySettings" xml:space="preserve">
+    <value>مدیریت تنظیمات آژانس مسافرتی</value>
+  </data>
+  <data name="PicSize200x200" xml:space="preserve">
+    <value>&lt;strong&gt;توجه!&lt;/strong&gt; اندازه تصویر باید با عرض &lt;code&gt;200&lt;/code&gt;  و ارتفاع &lt;code&gt;200&lt;/code&gt; پیکسل باشد</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>بزرگسال</value>
+  </data>
+  <data name="Child" xml:space="preserve">
+    <value>کودک</value>
+  </data>
+  <data name="Infant" xml:space="preserve">
+    <value>نوزاد</value>
+  </data>
+  <data name="AgeRange" xml:space="preserve">
+    <value>رده سنی</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>جنسیت</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>نام خانوادگی</value>
+  </data>
+  <data name="NationalCode" xml:space="preserve">
+    <value>کد ملی</value>
+  </data>
+  <data name="Nationality" xml:space="preserve">
+    <value>ملیت</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>قیمت</value>
+  </data>
+  <data name="TicketNo" xml:space="preserve">
+    <value>شماره بلیط</value>
+  </data>
+  <data name="AddServ" xml:space="preserve">
+    <value>خدمات اضافی</value>
+  </data>
+  <data name="AddServTitle" xml:space="preserve">
+    <value>عنوان خدمات اضافی</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Qty" xml:space="preserve">
+    <value>تعداد</value>
+  </data>
+  <data name="Charter" xml:space="preserve">
+    <value>چارتر</value>
+  </data>
+  <data name="Systematic" xml:space="preserve">
+    <value>سیستمی</value>
+  </data>
+  <data name="AirlineIATACode" xml:space="preserve">
+    <value>کد یاتا شرکت هواپیمایی</value>
+  </data>
+  <data name="FlightNo" xml:space="preserve">
+    <value>شماره پرواز</value>
+  </data>
+  <data name="FlightType" xml:space="preserve">
+    <value>نوع پرواز</value>
+  </data>
+  <data name="FromIATACode" xml:space="preserve">
+    <value>کد یاتا مبدا</value>
+  </data>
+  <data name="ToIATACode" xml:space="preserve">
+    <value>کد یاتا مقصد</value>
+  </data>
+  <data name="TourSchedule" xml:space="preserve">
+    <value>زمانبندی سفر</value>
+  </data>
+  <data name="ManagementRoomTypes" xml:space="preserve">
+    <value>مدیریت انواع اتاق هتل</value>
+  </data>
+  <data name="SelectedDBLCount" xml:space="preserve">
+    <value>تعداد اتاق دوتخته</value>
+  </data>
+  <data name="SelectedEXTCount" xml:space="preserve">
+    <value>تعداد اتاق اضافی</value>
+  </data>
+  <data name="SelectedRoomCount" xml:space="preserve">
+    <value>تعداد اتاق</value>
+  </data>
+  <data name="SelectedSGLCount" xml:space="preserve">
+    <value>تعداد اتاق یک تخته</value>
+  </data>
+  <data name="TotalServicePrice" xml:space="preserve">
+    <value>قیمت کل خدمات</value>
+  </data>
+  <data name="HotelPackage" xml:space="preserve">
+    <value>پکیج هتل</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>ظرفیت درخواستی</value>
+  </data>
+  <data name="HotelRoom" xml:space="preserve">
+    <value>اتاق</value>
+  </data>
+  <data name="RoomTypeCapacity" xml:space="preserve">
+    <value>حداکثر ظرفیت اتاق</value>
+  </data>
+  <data name="SelectedHotelPackage" xml:space="preserve">
+    <value>پکیج انتخاب شده هتل</value>
+  </data>
+  <data name="CheckInDateTime" xml:space="preserve">
+    <value>تاریخ ورود</value>
+  </data>
+  <data name="CheckOutDateTime" xml:space="preserve">
+    <value>تاریخ خروج</value>
+  </data>
+  <data name="Hotel" xml:space="preserve">
+    <value>هتل</value>
+  </data>
+  <data name="HotelDescription" xml:space="preserve">
+    <value>توضیحات هتل</value>
+  </data>
+  <data name="MaximumCapacity" xml:space="preserve">
+    <value>حداکثر ظرفیت</value>
+  </data>
+  <data name="RoomType" xml:space="preserve">
+    <value>نوع اتاق</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>آدرس</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>سن</value>
+  </data>
+  <data name="Cellphone" xml:space="preserve">
+    <value>تلفن</value>
+  </data>
+  <data name="Tel" xml:space="preserve">
+    <value>تلفن</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>کاربر</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>فعال؟</value>
+  </data>
+  <data name="Rule" xml:space="preserve">
+    <value>قوانین و مقررات</value>
+  </data>
+  <data name="AreBooking" xml:space="preserve">
+    <value>در حال رزرو</value>
+  </data>
+  <data name="ProvisionalBooking" xml:space="preserve">
+    <value>رزرو موقت</value>
+  </data>
+  <data name="CurrenySign" xml:space="preserve">
+    <value>علامت</value>
+  </data>
+  <data name="NationalCodePassportNo" xml:space="preserve">
+    <value>کد ملی / شماره پاسپورت</value>
+  </data>
+  <data name="BankTitle" xml:space="preserve">
+    <value>بانک</value>
+  </data>
+  <data name="OrderId" xml:space="preserve">
+    <value>کد فروش</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>تاریخ پرداخت</value>
+  </data>
+  <data name="PaymentResponseCode" xml:space="preserve">
+    <value>کد پاسخ بانک</value>
+  </data>
+  <data name="PaymentResponseMessage" xml:space="preserve">
+    <value>پیام بانک</value>
+  </data>
+  <data name="PaymentUniqueNumberID" xml:space="preserve">
+    <value>شناسه یکتای فروش</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>مبلغ پرداختی</value>
+  </data>
+  <data name="OservationPaymentLog" xml:space="preserve">
+    <value>مشاهده لاگ ها </value>
+  </data>
+  <data name="SuccessfulPaymentLogs" xml:space="preserve">
+    <value>لاگ های موفق</value>
+  </data>
+  <data name="UnSuccessfulPaymentLogs" xml:space="preserve">
+    <value>لاگ های ناموفق</value>
+  </data>
+  <data name="Buyer" xml:space="preserve">
+    <value>خریدار</value>
+  </data>
+  <data name="OrderReport" xml:space="preserve">
+    <value>گزارش فروش</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>کد سیستمی</value>
+  </data>
+  <data name="SellsReport" xml:space="preserve">
+    <value> گزارش فروش پکیج</value>
+  </data>
+  <data name="reserve" xml:space="preserve">
+    <value>زمان سفر</value>
+  </data>
+  <data name="sales" xml:space="preserve">
+    <value>زمان فروش</value>
+  </data>
+  <data name="BookingCapacity" xml:space="preserve">
+    <value>ظرفیت در حال رزرو</value>
+  </data>
+  <data name="CapacitySold" xml:space="preserve">
+    <value>ظرفیت فروخته شده</value>
+  </data>
+  <data name="HotelPackageHotelRoomId" xml:space="preserve">
+    <value>شناسه اتاق</value>
+  </data>
+  <data name="HotelPackageId" xml:space="preserve">
+    <value>شناسه پکیج هتل</value>
+  </data>
+  <data name="HotelPackageTitle" xml:space="preserve">
+    <value>عنوان پکیج هتل</value>
+  </data>
+  <data name="HotelRoomTitle" xml:space="preserve">
+    <value>عنوان اتاق</value>
+  </data>
+  <data name="OtherCurrency" xml:space="preserve">
+    <value>ارز</value>
+  </data>
+  <data name="OtherCurrencyPrice" xml:space="preserve">
+    <value>مبلغ ارزی</value>
+  </data>
+  <data name="RemainBookingCapacity" xml:space="preserve">
+    <value>طرفیت باقی مانده فروش</value>
+  </data>
+  <data name="RemainTotalCapacity" xml:space="preserve">
+    <value>ظرفیت باقی مانده</value>
+  </data>
+  <data name="TotalCapacity" xml:space="preserve">
+    <value>ظرفیت کل</value>
+  </data>
+  <data name="TourId" xml:space="preserve">
+    <value>شناسه تور</value>
+  </data>
+  <data name="TourPackageId" xml:space="preserve">
+    <value>شناسه پکیج تور</value>
+  </data>
+  <data name="TourPackageTitle" xml:space="preserve">
+    <value>عنوان پکیج تور</value>
+  </data>
+  <data name="TourTitle" xml:space="preserve">
+    <value>عنوان تور</value>
+  </data>
+  <data name="AreBookingReport" xml:space="preserve">
+    <value>در حال رزرو</value>
+  </data>
+  <data name="OrderDate" xml:space="preserve">
+    <value>تاریخ فروش</value>
+  </data>
+  <data name="PayExpiredDateTime" xml:space="preserve">
+    <value>زمان لغو رزرو</value>
+  </data>
+  <data name="ReserveDate" xml:space="preserve">
+    <value>زمان سفر</value>
+  </data>
+  <data name="ManagementRoomCapacity" xml:space="preserve">
+    <value>مدیریت ظرفیت و قیمت اتاق ها</value>
+  </data>
+  <data name="EnFirstName" xml:space="preserve">
+    <value>نام لاتین</value>
+  </data>
+  <data name="EnLastName" xml:space="preserve">
+    <value>نام خانوادگی لاتین</value>
+  </data>
+  <data name="Birthdate" xml:space="preserve">
+    <value>تاریخ تولد</value>
+  </data>
+  <data name="BirthCountry" xml:space="preserve">
+    <value>کشور محل تولد</value>
+  </data>
+  <data name="PassportExpirationDate" xml:space="preserve">
+    <value>تاریخ انقضای پاسپورت</value>
+  </data>
+  <data name="PassportExporterCountry" xml:space="preserve">
+    <value>کشور صادرکننده پاسپورت</value>
+  </data>
+  <data name="PassportNo" xml:space="preserve">
+    <value>شماره پاسپورت</value>
+  </data>
+  <data name="sellesFlightReports" xml:space="preserve">
+    <value>گزارش فروش پرواز</value>
+  </data>
+  <data name="ReturnFlightDateTime" xml:space="preserve">
+    <value>زمان بازگشت</value>
+  </data>
+  <data name="sellesHotelsReports" xml:space="preserve">
+    <value>گزارش فروش هتل</value>
+  </data>
+  <data name="sellesPassengerReports" xml:space="preserve">
+    <value>گزارش فروش لیست مسافران</value>
+  </data>
+  <data name="NumberRoom" xml:space="preserve">
+    <value>مجموع افراد</value>
+  </data>
+  <data name="PassportExpirationDateValidate" xml:space="preserve">
+    <value>تاریخ انقضای پاسپورت باید حداقل 6 ماه اعتبار داشته باشد</value>
+  </data>
+  <data name="miladiDate" xml:space="preserve">
+    <value>تاریخ میلادی</value>
+  </data>
+  <data name="shamsiDate" xml:space="preserve">
+    <value>تاریخ شمسی</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>حقوقی</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>حقیقی</value>
+  </data>
+  <data name="OrderReportCompany" xml:space="preserve">
+    <value>گزارش فروش حقوقی</value>
+  </data>
+  <data name="OrderReportPersonal" xml:space="preserve">
+    <value>گزارش فروش حقیقی</value>
+  </data>
+  <data name="ReservationManagement" xml:space="preserve">
+    <value>اطلاعات پایه فروش</value>
+  </data>
+  <data name="both" xml:space="preserve">
+    <value>هردو</value>
+  </data>
+  <data name="BaseCommission" xml:space="preserve">
+    <value>کمیسیون پایه</value>
+  </data>
+  <data name="CommissionPrice" xml:space="preserve">
+    <value>مبلغ کمیسیون</value>
+  </data>
+  <data name="CouponManagement" xml:space="preserve">
+    <value>مدیریت کد تخفیف</value>
+  </data>
+  <data name="DiscountPercent" xml:space="preserve">
+    <value>در صد تخفیف</value>
+  </data>
+  <data name="ExpireDate" xml:space="preserve">
+    <value>تاریخ انقضا تخفیف</value>
+  </data>
+  <data name="ValidatedDate" xml:space="preserve">
+    <value>تاریخ استفاده</value>
+  </data>
+  <data name="ValidatedUserId" xml:space="preserve">
+    <value>کاربر استفاده کننده</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>کد تخفیف</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>نام و نام خانوادگی</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>ایمیل</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>موبایل</value>
+  </data>
+  <data name="Coupon" xml:space="preserve">
+    <value>کد تخفیف</value>
+  </data>
+  <data name="TotalAdultCapacity" xml:space="preserve">
+    <value>ظرفیت کل بزرگسال</value>
+  </data>
+  <data name="TotalChildCapacity" xml:space="preserve">
+    <value>ظرفیت کل کودک</value>
+  </data>
+  <data name="TotalInfantCapacity" xml:space="preserve">
+    <value>ظرفیت کل نوزاد</value>
+  </data>
+  <data name="AdultCapacitySold" xml:space="preserve">
+    <value>ظرفیت بزرگسال فروخته شده</value>
+  </data>
+  <data name="ChildCapacitySold" xml:space="preserve">
+    <value>ظرفیت کودک فروخته شده</value>
+  </data>
+  <data name="InfantCapacitySold" xml:space="preserve">
+    <value>ظرفیت نوزاد فروخته شده</value>
+  </data>
+  <data name="AdultOtherCurrencyPrice" xml:space="preserve">
+    <value>مبلغ ارزی بزرگسال</value>
+  </data>
+  <data name="ChildOtherCurrencyPrice" xml:space="preserve">
+    <value>مبلغ ارزی کودک</value>
+  </data>
+  <data name="InfantOtherCurrencyPrice" xml:space="preserve">
+    <value>مبلغ ارزی نوزاد</value>
+  </data>
+  <data name="Cash" xml:space="preserve">
+    <value>پرداخت آنلاین</value>
+  </data>
+  <data name="Credit" xml:space="preserve">
+    <value>پرداخت اعتباری</value>
+  </data>
+  <data name="BookNow" xml:space="preserve">
+    <value>رزرو</value>
+  </data>
+  <data name="BookNowTour" xml:space="preserve">
+    <value>رزرو تـــور</value>
+  </data>
+</root>

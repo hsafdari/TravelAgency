@@ -1,0 +1,45 @@
+﻿@model TourReserveViewModel
+@{
+    var Index = Model.RoomSectionIndex;
+}
+<div class="row partialSection">
+    <label>
+        <span>نوع اتاق</span>
+        <select id="RoomSections_0__SelectedRoomTypeId" name="RoomSections[0].SelectedRoomTypeId" class="RoomTypeDDL SelectedRoomTypeId" onchange="ManagePersonCounter(this); CalculateTotalPrice();">
+            @foreach (var item in (ViewBag.RoomType as List<HotelRoomDDLViewModel>))
+            {
+                <option data-adultcurrencyprice="@item.AdultOtherCurrencyPrice" data-adultprice="@item.AdultPrice" data-adultmaxcapacity="@item.TotalAdultCapacity"
+                        data-childcurrencyprice="@item.ChildOtherCurrencyPrice" data-childprice="@item.ChildPrice" data-childmaxcapacity="@item.TotalChildCapacity"
+                        data-infantcurrencyprice="@item.InfantOtherCurrencyPrice" data-infantprice="@item.InfantPrice" data-infantmaxcapacity="@item.TotalInfantCapacity"
+                        data-currencyid="#cur_@item.CurrencyId" value="@item.Value">
+                    @item.Title
+                </option>
+            }
+        </select>
+    </label>
+    <label>
+        <span>تعداد بزرگسال</span>
+        @Html.TextBoxFor(x => x.RoomSections[Index].AdultCount, new { @class = "AdultCount", @type = "number", @Value = 1, @onchange = "CalculateTotalPrice()" })
+    </label>
+    <label>
+        <span>تعداد کودک (۳ تا ۶ سال)</span>
+        @Html.TextBoxFor(x => x.RoomSections[Index].ChildCount, new { @class = "ChildCount", @type = "number", @Value = 0, @onchange = "CalculateTotalPrice()" })
+    </label>
+    <label>
+        <span>تعداد نوزاد (بدون تخت)</span>
+        @Html.TextBoxFor(x => x.RoomSections[Index].InfantCount, new { @class = "InfantCount", @type = "number", @Value = 0, @onchange = "CalculateTotalPrice()" })
+    </label>
+    @if (Index > 0)
+    {
+        <label>
+            <button class="btn-4" onclick="$(this).closest('.partialSection').remove(); CalculateTotalPrice();">حذف</button>
+        </label>
+    }
+</div>
+<div id="RoomSection"></div>
+
+<script>
+    jQuery(document).ready(function ($) {
+        inputNumber()
+    });
+</script>

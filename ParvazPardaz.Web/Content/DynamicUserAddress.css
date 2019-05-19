@@ -1,0 +1,31 @@
+﻿    .btn-remove {
+        color: #c9302c;
+        border-color: #ac2925;
+    }
+
+        .btn-remove:hover {
+            color: #fff;
+            background-color: #c9302c;
+            border-color: #ac2925;
+        }
+
+    .btn-remove-section {
+        padding: 10px;
+        text-align: left;
+    }
+
+    .partialSection {
+        border: 1px dotted #5f2c42;
+        padding-bottom:20px;
+    }
+    .faLineHeight {
+        line-height: 1 !important;
+    }
+    .btn-addSection {
+        cursor: pointer;
+        float: left;
+        position: static;
+    }
+    .paddingTopSection{
+        padding-top:20px !important;
+    }

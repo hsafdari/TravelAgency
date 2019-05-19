@@ -1,0 +1,322 @@
+﻿@model TourScheduleCompanyTransferViewModel
+
+<link rel="stylesheet" href="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" />
+
+<link href="~/Plugins/EasyAutocomplete-1.3.5/easy-autocomplete.min.css" rel="stylesheet" />
+<link href="~/Plugins/EasyAutocomplete-1.3.5/easy-autocomplete.themes.min.css" rel="stylesheet" />
+<script src="~/Plugins/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script>
+
+@using (Ajax.BeginForm(Model.CRUDMode == CRUDMode.Create ? "Create" : "Edit", "TourScheduleCompanyTransfer", null, new AjaxOptions()
+{
+    OnComplete = "",
+    InsertionMode = Model.CRUDMode == CRUDMode.Create ? InsertionMode.InsertBefore : InsertionMode.Replace,
+    UpdateTargetId = Model.CRUDMode == CRUDMode.Create ? "ListViewTourScheduleCompanyTransfer" : Model.SectionId,
+    HttpMethod = "POST",
+    OnSuccess = "LoadPartialForTourScheduleCompanyTransfer(" + Model.TourScheduleId + ")"
+}, new { id = "frmTourScheduleCompanyTransfer" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.TourScheduleId)
+    @Html.HiddenFor(model => model.FromCityId)
+    @Html.HiddenFor(model => model.DestinationCityId)
+
+    <div class="well">
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="@(Model.CRUDMode == CRUDMode.Create ? "fa fa-plus" : "fa fa-edit ")"></i>@(Model.CRUDMode == CRUDMode.Create ? ParvazPardaz.Resource.General.Generals.Add : ParvazPardaz.Resource.General.Generals.Update)
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="text-right col-md-3">
+                            @Html.LabelFor(model => model.DepartureDate, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-5">
+                            @Html.TextBoxFor(model => model.DepartureDate, "{0:yyyy/MM/dd}", new { @class = "datepicker form-control" })
+                            @Html.ValidationMessageFor(model => model.DepartureDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.DepartureTime, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-5">
+                            @Html.TextBoxFor(model => model.DepartureTime, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.DepartureTime, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.ArrivalDate, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-5">
+                            @Html.TextBoxFor(model => model.ArrivalDate, "{0:yyyy/MM/dd}", new { @class = "datepicker form-control" })
+                            @Html.ValidationMessageFor(model => model.ArrivalDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.ArrivalTime, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-5">
+                            @Html.TextBoxFor(model => model.ArrivalTime, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ArrivalTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3">
+                            @Html.LabelFor(model => model.DurationTime, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-8">
+                            @Html.TextBoxFor(model => model.DurationTime, new { @class = "datepicker form-control" })
+                            @Html.ValidationMessageFor(model => model.DurationTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-2">
+                            @Html.LabelFor(model => model.Capacity, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-6">
+                            @Html.SpinFor(model => model.Capacity, new { @class = "form-control", id = "inputCapacityTourScheduleCompanyTransfer" }).Limit(1, 500).Postfix(ParvazPardaz.Resource.Tour.Tours.Person).CallConfigWithId(true)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-4">
+                            @Html.LabelFor(model => model.NonLimit, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field col-md-3">
+                            @Html.CheckBoxFor(model => model.NonLimit, new { @class = " form-control checkbox checkbox-primary", onchange = "checkNonLimitTourScheduleCompanyTransfer(this)", id = "chkNonLimitinputCapacityTourScheduleCompanyTransfer" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            @*<div class="row">
+              
+            </div>*@
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-3 ">
+                            @Html.LabelFor(model => model.FromCityTitle, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-4" id="divFromCity">
+                            @Html.TextBoxFor(model => model.FromCityTitle, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FromCityTitle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="editor-label text-right col-md-4">
+                            @Html.LabelFor(model => model.DestinationCityTitle, new { @class = "control-label " })
+                        </div>
+                        <div class="editor-field col-md-4" id="divDestinationCity">
+                            @Html.TextBoxFor(model => model.DestinationCityTitle, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DestinationCityTitle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @{if (Model.CRUDMode == CRUDMode.Create)
+            {
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="editor-label text-right col-md-3">
+                                @Html.LabelFor(model => model.VehicleTypeId, new { @class = "control-label " })
+                            </div>
+                            <div class="editor-field col-md-6">
+                                @Html.DropDownListFor(model => model.VehicleTypeId, ViewBag.VehicleTypes as IEnumerable<SelectListItem>, ParvazPardaz.Resource.Tour.Tours.SelectVehicleType, new { @class = "form-control", id = "DDVehicleType", onchange = "FetchCompanyTransfer()", })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="editor-label text-right col-md-4">
+                                @Html.LabelFor(model => model.CompanyTransferId, new { @class = "control-label " })
+                            </div>
+                            <div class="editor-field col-md-5">
+                                @Html.DropDownListFor(model => model.CompanyTransferId, ViewBag.CompanyTransfers as IEnumerable<SelectListItem>, new { @class = "form-control", id = "DDCompanyTransfer" })
+                                @Html.ValidationMessageFor(model => model.CompanyTransferId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.CompanyTransferId)
+            }
+            }
+        </div>
+    </div>
+
+}
+<script src="~/Plugins/MaskedTextbox/jQueryMaskedInputPlugin1.4.1.js"></script>
+
+<script type="text/javascript" src="~/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="~/Plugins/bootstrap-datepicker/jquery-ui-timepicker-addon.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#frmTourScheduleCompanyTransfer").removeData("validator");
+        $("#frmTourScheduleCompanyTransfer").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmTourScheduleCompanyTransfer");
+
+        $(function ($) {
+            $("#DepartureTime").mask('99:99')
+            $("#ArrivalTime").mask("99:99");
+        });
+
+        $(".datepicker").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+            regional: 'en',
+            dateFormat: "yy/mm/dd"
+        });
+
+
+        if ($("#chkNonLimitinputCapacityTourScheduleCompanyTransfer").prop('checked')) {
+            $("#inputCapacityTourScheduleCompanyTransfer").attr("disabled", "disabled");
+            $("#inputCapacityTourScheduleCompanyTransfer").val(0);
+        }
+        else {
+            $("#inputCapacityTourScheduleCompanyTransfer").removeAttr('disabled');
+        }
+
+
+    })
+
+
+    //debugger;
+    var options = {
+
+        url: function (phrase) {
+            return "/admin/city/getcities/?term=" + phrase;
+        },
+
+        getValue: function (element) {
+            return element.Title;
+        },
+
+        //template: {
+        //    type: "description",
+        //    fields: {
+        //        description: "Title"
+        //    }
+        //},
+
+        ajaxSettings: {
+            dataType: "json",
+            method: "Get",
+            data: {
+                dataType: "json"
+            }
+        },
+
+        list: {
+            onSelectItemEvent: function () {
+               // debugger;
+                var selectedItemValue = $("#FromCityTitle").getSelectedItemData().Id;
+                $("#FromCityId").val(selectedItemValue).trigger("change");
+            },
+            //onHideListEvent: function () {
+            //    $("#FromCityId").val("").trigger("change");
+            //}
+        },
+
+        preparePostData: function (data) {
+            data.phrase = $("#FromCityTitle").val();
+            return data;
+        },
+
+        requestDelay: 400,
+        theme: "square"
+    };
+    $("#FromCityTitle").easyAutocomplete(options);
+
+
+
+
+    debugger;
+    var options = {
+
+        url: function (phrase) {
+            return "/admin/city/getcities/?term=" + phrase;
+        },
+
+        getValue: function (element) {
+            return element.Title;
+        },
+
+        //template: {
+        //    type: "description",
+        //    fields: {
+        //        description: "Title"
+        //    }
+        //},
+
+        ajaxSettings: {
+            dataType: "json",
+            method: "Get",
+            data: {
+                dataType: "json"
+            }
+        },
+
+        list: {
+            onSelectItemEvent: function () {
+                var selectedItemValue = $("#DestinationCityTitle").getSelectedItemData().Id;
+                $("#DestinationCityId").val(selectedItemValue).trigger("change");
+            },
+            //onHideListEvent: function () {
+            //    $("#DestinationCityId").val("").trigger("change");
+            //}
+        },
+
+        preparePostData: function (data) {
+            data.phrase = $("#DestinationCityTitle").val();
+            return data;
+        },
+
+        requestDelay: 400,
+        theme: "square"
+    };
+    $("#DestinationCityTitle").easyAutocomplete(options);
+
+</script>

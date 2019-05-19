@@ -1,0 +1,21 @@
+﻿@model IEnumerable<PostListDetailViewModel>
+<div class="container">
+    <aside>
+        <div class="latest-update col-md-2 no-padding">
+            <h3>آخرین نوشته ها</h3>
+        </div>
+        <div class="col-md-10 latest-post-list no-padding">
+            <div data-speed="20000" data-direction="right" class='marquee'>
+                @foreach (var item in Model)
+                {
+                    <a href="@item.URL" title="@item.Title" rel="@item.Rel">
+                        <section>
+                            <span class="hidden">@item.Name</span>
+                            @item.Name
+                        </section>
+                    </a>
+                }
+            </div>
+        </div>
+    </aside>
+</div>

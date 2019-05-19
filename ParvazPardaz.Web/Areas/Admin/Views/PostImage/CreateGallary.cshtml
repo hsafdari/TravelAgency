@@ -1,0 +1,51 @@
+﻿@model ParvazPardaz.ViewModel.ImageSliderViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+    @Html.HiddenFor(model => model.PostId)
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.Tour.Tours.HotelGalleryManagement </h3>
+        <hr />
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.ImageTitle, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+               @Html.EditorFor(model=>model.ImageTitle)
+                @Html.ValidationMessageFor(model => model.ImageTitle, "", new { @class = "text-danger" })
+            </div>
+
+        </div> 
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageDesc, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+              @Html.EditorFor(model => model.ImageDesc)
+                @Html.ValidationMessageFor(model => model.ImageDesc, "", new { @class = "text-danger" })
+            </div>
+
+        </div>*@ 
+        <div class="form-group">
+            <span class="alert alert-info col-md-7 text-center">
+                فایل تصویر هتل با عرض 700 و ارتفاع 525 پیکسل باشد
+            </span>
+        </div> 
+        <div class="form-group">
+            @Html.LabelFor(model => model.File, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.FileUploaderFor(model => model.File).Limit(20).AddMore(true).IsMultiple(true).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButton(true).RemoveButtonInEditMode(true).Extension(new List<string>() { "jpg", "png", "jpeg" }).Limit(20).UploadUrl("/Admin/PostImage/CreateGallaryUpload/", new Dictionary<string, object>() { { "PostId ", Model.PostId } }).RemoveUrl("/Admin/PostImage/DeleteGallery/").Edit(Model.EditModeFileUploads).RemoveUrl("/Admin/PostImage/DeleteGallery/")
+                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+            </div>
+           
+        </div>  
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-11">
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Edit", "Post", new { id = Model.PostId }, new { @class = "btn btn-custom red", })
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Finish, "Index", "Post", null, new { @class = "btn btn-custom green" })
+            </div>
+        </div>
+
+    </div>
+
+
+

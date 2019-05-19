@@ -1,0 +1,21 @@
+﻿@model Nullable<DateTime>
+
+
+
+@Html.TextBoxFor(model => model, "{0:yyyy/MM/dd}", new { @class = "datepicker" })
+
+<link href="~/Plugins/KendoDateTimePicker/Kendo.default.min.css" rel="stylesheet" />
+<link href="~/Plugins/KendoDateTimePicker/Kendo.common.min.css" rel="stylesheet" />
+@*<script src="~/Plugins/KendoDateTimePicker/jquery-1.9.1.min.js"></script>*@
+<script src="~/Scripts/kendo.date/JalaliDate.js"></script>
+<script src="~/Scripts/kendo.date/kendo.web.js"></script>
+<script src="~/Scripts/kendo.date/fa-IR.js"></script>
+<script type="text/javascript">
+    var kd = jQuery.noConflict();
+    kd(document).ready(function () {
+        kd(".datepicker").kendoDatePicker();
+    });
+</script>
+
+
+

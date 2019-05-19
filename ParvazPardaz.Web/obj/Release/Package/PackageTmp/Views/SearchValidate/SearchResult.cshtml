@@ -1,0 +1,110 @@
+﻿<link href="~/SiteClientTheme/custom/CountryTabMagStyles.css" rel="stylesheet" />
+@model SearchResultViewModel
+@{
+    ViewBag.Title = ViewBag.PageTitle;
+    var counter = 0;
+}
+<style>
+    .blog-item {
+        min-height: 405px;
+    }
+
+    .h3 {
+        color: white !important;
+        font-size: 15px !important;
+    }
+</style>
+<link href="@Url.Content("~/SiteClientTheme/custom/custom-footer.css")" rel="stylesheet" />
+<div class="content-body">
+    <div class="container">
+        <aside>
+            <h2 class="title-section direction">@string.Format("جستجوی '{0}' در تورها", Model.Title)</h2>
+            <div class="cws_divider mb-10 mt-5"></div>
+            <div class="element-section">
+                <div class="row">
+                    <div class="col-lg-12 mb-lg-40">
+                        <div class="tabs">
+                            <div class="block-tabs-btn clearfix"></div>
+                            <div class="tabs-keeper col-xs-12 direction">
+                                @if (Model.TourList != null && Model.TourList.Any())
+                                {
+                                <div class="container-tabs active">
+                                    <section>
+                                        <h1 class="hidden">@string.Format("تورهای '{0}'", Model.Title)</h1>
+
+                                        @foreach (var item in Model.TourList)
+                                            {
+                                            <div class="col-md-4 col-sm-6 col-xs-12 mb-30">
+                                                <div class="blog-item clearfix border boxed">
+                                                    <div class="blog-media">
+                                                        <a href="@item.PostUrl" rel="@item.Rel" target="@item.Target">
+                                                            <div class="pic"><img src="@item.ImageUrl.GetTabMagDefaultUrl("277x186")" alt="@item.Name"></div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="blog-item-body clearfix">
+                                                        <a href="@item.PostUrl" rel="@item.Rel" target="@item.Target">
+                                                            <h6 class="blog-title">@item.Name </h6>
+                                                        </a>
+                                                        <p class="postSummery">
+                                                            @Html.Raw(item.PostSummery)
+                                                        </p>
+                                                        <br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                counter++;
+                                                if (counter == 3)
+                                                {
+                                            <div class="hidden-xs" style="clear:both;"></div>
+                                                    counter = 0;
+                                                }
+                                            }
+                                    </section>
+                                </div>
+                                        counter = 0;
+                                }
+                                else
+                                {
+                                    <div class="">
+                                        <h4>کاربر گرامی!</h4>
+                                        <p>جستجوی شما در تورها نتیجه ای در بر نداشت</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="title-section direction">@string.Format("جستجوی '{0}' در مجله گردشگری", Model.Title)</h2>
+            <div class="cws_divider mb-10 mt-5"></div>
+            <div class="element-section mb-100">
+                <div class="row">
+                    <div class="col-lg-12 mb-lg-40">
+                        <div class="tabs">
+                            <div class="block-tabs-btn clearfix"></div>
+                            <div class="tabs-keeper col-xs-12 direction">
+                                @if (Model.TourList != null && Model.TourList.Any())
+                                {
+                                    <div class="container-tabs active">
+                                        <section>
+                                            <h1 class="hidden">@string.Format("تورهای '{0}'", Model.Title)</h1>
+
+                                            @Html.Partial("_PrvMagSearchedResult", Model)
+                                        </section>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="">
+                                        <h4>کاربر گرامی!</h4>
+                                        <p>جستجوی شما در مجله گردشگری نتیجه ای در بر نداشت</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>

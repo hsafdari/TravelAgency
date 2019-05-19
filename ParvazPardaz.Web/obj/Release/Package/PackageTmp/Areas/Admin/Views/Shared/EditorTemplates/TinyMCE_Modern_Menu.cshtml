@@ -1,0 +1,116 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+
+        tinymce.init({
+
+            selector: "#@ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty)",
+            valid_elements: "*[*]",
+            convert_urls: false,
+            valid_children: "+body[i],+body[section],+div[i]",
+            theme: "modern",
+            height: 300,
+            setup: function (editor) {
+                editor.addButton('BtnDefaultStyle', {
+                    text: '@ParvazPardaz.Resource.CMS.CMS.DefaultStyleTitle',
+                    icon: false,
+                    onclick: function () {
+                        editor.insertContent(@Html.Raw(ParvazPardaz.Resource.CMS.CMS.DefaultStyle));
+                    }
+                });
+                editor.addButton('BtnAddContactItem', {
+                    type: 'menubutton',
+                    text: '@ParvazPardaz.Resource.CMS.CMS.AddContactItem',
+                    icon: false,
+                    menu: [{
+                        text: '@ParvazPardaz.Resource.CMS.CMS.AddTel',
+                        onclick: function () {
+                            editor.insertContent('<li class="mobile"><i class="fa fa-phone"></i>&nbsp;Phone&nbsp;</li>');
+                        }
+                    }, {
+                        text: '@ParvazPardaz.Resource.CMS.CMS.AddMobile',
+                        onclick: function () {
+                            editor.insertContent('<li class="mobile"><i class="fa fa-mobile"></i>&nbsp;Mobile&nbsp;</li>');
+                        }
+                    }, {
+                        text: '@ParvazPardaz.Resource.CMS.CMS.AddFax',
+                        onclick: function () {
+                            editor.insertContent('<li class="mobile"><i class="fa fa-mobile"></i>&nbsp;Fax&nbsp;</li>');
+                        }
+                    }, {
+                        text: '@ParvazPardaz.Resource.CMS.CMS.AddEmail',
+                        onclick: function () {
+                            editor.insertContent('<li class="email"><i class="fa fa-envelope"></i>&nbsp;Email&nbsp;</li>');
+                        }
+                    }, {
+                        text: '@ParvazPardaz.Resource.CMS.CMS.AddFacebook',
+                        onclick: function () {
+                            editor.insertContent('<li class="email"><i class="fa fa-facebook"></i>&nbsp;Facebook&nbsp;</li>');
+                        }
+                    }, {
+                        text: '@ParvazPardaz.Resource.CMS.CMS.AddInstagram',
+                        onclick: function () {
+                            editor.insertContent('<li class="email"><i class="fa fa-instagram"></i>&nbsp;Instagram&nbsp;</li>');
+                        }
+                    }, {
+                        text: '@ParvazPardaz.Resource.CMS.CMS.AddGooglePlus',
+                        onclick: function () {
+                            editor.insertContent('<li class="email"><i class="fa fa-google-plus"></i>&nbsp;Google+&nbsp;</li>');
+                        }
+                    }, {
+                        text: '@ParvazPardaz.Resource.CMS.CMS.AddTwitter',
+                        onclick: function () {
+                            editor.insertContent('<li class="email"><i class="fa fa-twitter "></i>&nbsp;Twitter&nbsp;</li>');
+                        }
+                    }]
+                });
+            },
+            plugins: [
+         "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+         "save table contextmenu directionality emoticons template paste textcolor"
+            ],
+            content_css: "/Plugins/tinymce/content.css",
+            toolbar: "BtnDefaultStyle | BtnAddContactItem | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+            file_browser_callback: RoxyFileBrowser,
+            style_formats: [
+        { title: 'Bold text', inline: 'b' },
+        { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } },
+        { title: 'Red header', block: 'h1', styles: { color: '#ff0000' } },
+        { title: 'Example 1', inline: 'span', classes: 'example1' },
+        { title: 'Example 2', inline: 'span', classes: 'example2' },
+        { title: 'Table styles' },
+        { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }
+            ]
+        });
+        var roxyFileman = '/Areas/Admin/scripts/RoxyFileManager/index.html?integration=tinymce4';
+        function RoxyFileBrowser(field_name, url, type, win) {
+            var cmsURL = roxyFileman;  // script URL - use an absolute path!
+            if (cmsURL.indexOf("?") < 0) {
+                cmsURL = cmsURL + "?type=" + type;
+            }
+            else {
+                cmsURL = cmsURL + "&type=" + type;
+            }
+            cmsURL += '&input=' + field_name + '&value=' + win.document.getElementById(field_name).value;
+            tinyMCE.activeEditor.windowManager.open({
+                file: cmsURL,
+                title: 'ParvazPardaz File Manager',
+                width: 850, // Your dimensions may differ - toy around with them!
+                height: 650,
+                resizable: "yes",
+                plugins: "media",
+                inline: "yes", // This parameter only has an effect if you use the inlinepopups plugin!
+                close_previous: "no"
+            }, {
+                window: win,
+                input: field_name
+            });
+            return false;
+        }
+
+    });
+
+</script>
+
+@Html.TextArea(string.Empty, ViewData.TemplateInfo.FormattedModelValue)
+

@@ -1,0 +1,82 @@
+﻿@model LastSecondTourViewModel
+@{
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+}
+<link href="@Url.Content("~/Plugins/cool-share/plugin.css")" rel="stylesheet" />
+<div class="page-breadcrumb">
+    <div class="container">
+        <h1>@Model.Title</h1>
+        <ol class="breadcrumb pull-left">
+            <li><a href="/tourism/">صفحه اصلی</a></li>
+            @*@if (Model.breadCrumbItems != null && Model.breadCrumbItems.Any())
+                {
+                    for (int i = (Model.breadCrumbItems.Count - 1); i >= 0; i--)
+                    {
+                        <li><a href="@Model.breadCrumbItems[i].URL">@Model.breadCrumbItems[i].Title</a></li>
+                    }
+                }*@
+        </ol>
+    </div>
+</div>
+<a href="#menu-toggle" class="btn btn-default hidden-lg hidden-md hidden-sm btn-sidebar" id="menu-toggle"><i class="fa fa-arrow-left"></i>دیگر مطالب مرتبط</a>
+<div id="single-post" class="single-post wrapper">
+    <div class="container">
+        <div class="row">
+            <div id="sidebar-wrapper" class="widget-sidebar">@*@{Html.RenderPartial("_PrvSideBar", Model.RelatedPosts);}*@</div>
+            <div id="page-content-wrapper" class="col-xs-12" style="position:relative;">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <article>
+                        <div class="blog-box">
+                            <div class="entry-cover">
+                                <a href="#"><img src="@Model.ImageUrl" alt="@Model.Title" /></a>
+                                @*<a id="add_sign_count-1" class="add-sign-big color-pink-red"><i class="fa fa-angle-down"></i></a>*@
+                            </div>
+                            <div class="blog-content">
+                                <div>
+                                    <div class="col-sm-12 col-xs-12 marginBottom20px">
+                                        <div class="col-md-9 col-sm-5 col-xs-12" style="display:inline-block; padding-right:0px;">
+                                            <h2 class="entry-title pull-right">@Model.Title </h2>
+                                        </div>
+                                        <div class="col-md-3 dateMarginTop">
+                                            <div class="col-md-2 socialDiv">
+                                                <span class="socialShare"> <!-- The share buttons will be inserted here --> </span>
+                                            </div>
+                                            @*<h2 class="entry-title pull-right">@Model.Title </h2>*@
+                                            <p class="time"><i class="fa fa-clock-o"></i>@Model.ContentDateTime.Value.ToString("yyyy/MM/dd")</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="postContent col-xs-12">
+                                    @Html.Raw(Model.Context)
+
+                                    @if (ViewBag.TourLandingPageDescription != "")
+                                    {
+                                        <hr />
+                                        <div class="tourLandingPageUrlDesc">
+                                            @Html.Raw(ViewBag.TourLandingPageDescription)
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="blog-social blog-content-inner">
+                                    <aside class="widget widget_social_icons">
+                                        <h4>به اشتراک بگذارید</h4>
+                                        <ul class="pull-right">
+                                            <li><a href="#" target="_blank" class="fb"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#" target="_blank" class="tw"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#" target="_blank" class="gp"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="#" target="_blank" class="lin"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a href="#" target="_blank" class="dr"><i class="fa fa-dribbble"></i></a></li>
+                                        </ul>
+                                    </aside>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4 col-sm-6 widget-sidebar hidden-xs">@{Html.RenderPartial("_PrvOtherLastSecondTours", Model.OtherLastSecondTours);}</div>
+                
+            </div>
+        </div>
+    </div>
+</div>

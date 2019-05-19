@@ -1,0 +1,68 @@
+﻿@model TourPriorityViewModel
+@{
+    ViewBag.Title = "";
+}
+<style>
+    .Preloader {
+        width: 40px !important;
+        display: none;
+    }
+</style>
+<div class="form-horizontal col-md-12">
+    <h3>@ParvazPardaz.Resource.Tour.Tours.TourPriorityManagement</h3>
+    <hr />
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-external-link-square"></i>
+            @ParvazPardaz.Resource.Tour.Tours.FetchToursByTourGroup
+            <div class="panel-tools">
+                <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
+                </a>
+                <a class="btn btn-xs btn-link panel-expand" href="#">
+                    <i class="fa fa-resize-full"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            @using (Ajax.BeginForm("FetchToursByGroup", "Tour", null, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ResultDiv", LoadingElementId = "Preloader1" }))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SelectedTourGroupIds, new { @class = "control-label col-md-1" })
+                    <div class="col-md-11">
+                        @Html.ListBoxFor(model => model.SelectedTourGroupIds, Model.TourGroupMSL, new { @class = "form-control search-select select" })
+                        @Html.ValidationMessageFor(model => model.SelectedTourGroupIds, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-11">
+                        <input type="submit" value="@ParvazPardaz.Resource.Tour.Tours.FetchTours" class="btn btn-custom green" />
+                        <img id="Preloader" class="Preloader" src="~/Content/Preloader/preloader.gif" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-external-link-square"></i>
+            @ParvazPardaz.Resource.Tour.Tours.ToursList
+            <div class="panel-tools">
+                <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
+                </a>
+                <a class="btn btn-xs btn-link panel-expand" href="#">
+                    <i class="fa fa-resize-full"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div id="ResultDiv">
+                @Html.Partial("_PrvTourPriorityStatus", true)
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $('.select').select2({ dir: "RTL" });
+    </script>
+}

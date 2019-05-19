@@ -1,0 +1,82 @@
+﻿@*@model string*@
+@{
+    ViewBag.Title = ViewBag.PageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    footer li a {
+        line-height: 28px !important;
+        list-style: none !important;
+        font-size: 14px !important;
+    }
+
+    footer h4 {
+        font-size: 26px !important;
+    }
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<input type="hidden" id="tourId" value="@ViewBag.Id" />
+<div class="clearfix"></div>
+<link href="~/SiteClientTheme/TourDetail/css/CustomStyle.css" rel="stylesheet" />
+<link rel="stylesheet" href="/SiteClientTheme/TourDetail/css/eric-meyer-reset.min.css">
+<link rel="stylesheet" href="/SiteClientTheme/TourDetail/css/tour-detail.css">
+<link rel="stylesheet" href="/SiteClientTheme/TourDetail/css/font.css">
+@*<link href="~/SiteClientTheme/css/component.css" rel="stylesheet" />*@
+
+
+<!-- LOADER -->
+<div id="site-loader" class="load-complete" style="text-align:center; margin-top:200px;">
+    <div class="load-position">
+        <div class="logo"><img src="/content/charteran/assets/img/logo.png" alt="logo" id="logo" /></div>
+        <h6>لطفا صبر کنید...</h6>
+        <div class="loading" style="margin-top:350px">
+            <div class="loading-line"></div>
+            <div class="loading-break loading-dot-1"></div>
+            <div class="loading-break loading-dot-2"></div>
+            <div class="loading-break loading-dot-3"></div>
+        </div>
+    </div>
+</div>
+<!-- Loader /- -->
+
+@*<script type="text/javascript" src="/SiteClientTheme/TourDetail/js/jquery.min.js"></script>*@
+
+<script type="text/javascript">
+    //var $ = jQuery.noConflict;
+    $(document).ready(function () {
+        //var tour = tourdata;
+        var tId = $("#tourId").val();
+
+        $.ajax({
+            async: false,
+            type: "Get",
+            url: "/Tour/TourData/",
+            data: {
+                tourId: tId,
+            },
+            success: function (data) {
+                $("#site-loader").hide();
+                tour = JSON.parse(data);
+                //tour = data;
+                //alert(tour.name);
+            },
+            error: function (textStatus, errorThrown) {
+                alert("fail");
+            }
+        });
+    });
+
+</script>
+@*<script type="text/javascript" src="/SiteClientTheme/TourDetail/js/data.js"></script>*@
+<script type="text/javascript" src="/SiteClientTheme/TourDetail/js/tour-detail.js"></script>
+
+<div class="clearfix"></div>
+
+@if (ViewBag.TourLandingPageDescription != "")
+{
+    <div class="tourLandingPageUrlDesc">
+        @Html.Raw(ViewBag.TourLandingPageDescription)
+    </div>
+}

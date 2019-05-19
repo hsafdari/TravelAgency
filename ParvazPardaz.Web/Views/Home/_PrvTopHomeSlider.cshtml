@@ -1,0 +1,36 @@
+﻿@model List<ParvazPardaz.ViewModel.SlidersUITourHomeViewModel>
+<button name="next" style="display:none;"></button>
+<ul class="slider">
+    @foreach (var item in Model)
+    {
+        <li class="@(Model.IndexOf(item)==0?"active":"")">
+            <img src="@item.ImageURL">
+        </li>
+    }
+</ul>
+<ul class="slider-details">
+    @foreach (var item in Model)
+    {
+        <li class="@(Model.IndexOf(item)==0?"active":"")">
+            <h2>@item.ImageTitle</h2>
+            <h3>@item.NavDescription</h3>
+            <h4>
+                @if (item.Price != null)
+                {
+                    <text>
+                        {
+                        از
+                        <span>@item.Price</span>
+                        تومان
+                        }
+                    </text>
+
+                }
+            </h4>
+            @if (item.NavigationUrl != null && item.NavigationUrl != "")
+            {
+                <a class="btn-4" href="@item.NavigationUrl">جزئیات تور</a>
+            }
+        </li>
+    }
+</ul>

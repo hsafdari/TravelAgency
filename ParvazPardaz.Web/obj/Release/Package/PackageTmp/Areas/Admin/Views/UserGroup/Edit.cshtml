@@ -1,0 +1,72 @@
+﻿@model ParvazPardaz.ViewModel.EditUserGroupViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.User.Users.ManagementUserGroups </h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Percent, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.SpinFor(model => model.Percent).PreFix("%")
+                @Html.ValidationMessageFor(model => model.Percent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MinCreditValue, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.MinCreditValue, "{0:#}", new { @class = "form-control", @onKeyUp = "separatePrice()" })
+                <span class="separate" id="separate">@Model.MinCreditValue.ToString("#,0")</span>
+                @Html.ValidationMessageFor(model => model.MinCreditValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SalesCountPerDay, new { @class = "control-label col-md-2" })
+            <div class="col-md-3 number">
+                @Html.EditorFor(model => model.SalesCountPerDay, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SalesCountPerDay, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Plugins/priceformat/jquery.price_format.2.0.min.js"></script>
+<script type="text/javascript">
+    function separatePrice() {
+        var totalPrice = document.getElementById("MinCreditValue").value;
+
+        var lbl = document.getElementById("separate");
+        lbl.innerText = totalPrice;
+        $(".separate").priceFormat({
+            prefix: '',
+            thousandsSeparator: ',',
+            clearPrefix: true,
+            centsSeparator: '',
+            centsLimit: 0
+        });
+    }
+</script>

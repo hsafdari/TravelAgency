@@ -1,0 +1,122 @@
+﻿
+
+@model ParvazPardaz.ViewModel.EditTourPackageViewModel
+
+@{
+    ViewBag.Title = "EditImage";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("EditImage", "TourPackage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h3>@ParvazPardaz.Resource.Tour.Tours.PackageManagement </h3>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model=>model.ImageURL)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TourTitle, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.TourTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TourTitle,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TourCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.TourCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TourCode,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Title,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateTitle, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.DateTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DateTitle,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Code, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Code, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Code,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TourPackgeDayId, new { @class = "control-label col-md-2" })
+            <div class="col-md-3 number">
+                @Html.DropDownListFor(model=>model.TourPackgeDayId,ViewBag.TourPackageDay as IEnumerable<SelectListItem>, "انتخاب کنید",new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TourPackgeDayId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FromPrice, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.FromPrice, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FromPrice,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Priority, new { @class = "control-label col-md-2" })
+            <div class="col-md-3 number">
+                @Html.EditorFor(model => model.Priority, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Priority,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OfferPrice, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.OfferPrice, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.OfferPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description,"", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.File, new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @Html.FileUploaderFor(model => model.File).AddMore(false).IsMultiple(false).ItemAppendToEnd(false).RemoveConfirmation(true).ShowThumbs(true).RemoveButtonInEditMode(false).RemoveButton(true).Edit(new List<EditModeFileUpload>() { new EditModeFileUpload() { Name = "", Type = "", Size = 0, Url = Model.ImageURL } })
+                <div class="alert alert-info">
+                    <i class="fa fa-info-circle"></i>
+                    <strong>توجه!</strong>
+                    <p>@ParvazPardaz.Resource.CMS.CMS.PicSizeTourSuggestion</p>
+                    <p class="text-danger">width:336px</p>
+                    <p class="text-danger">height:203px</p>
+                </div>
+                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, "Index", null, new { @class = "btn btn-custom red" })
+            </div>
+        </div>
+    </div>
+}
+

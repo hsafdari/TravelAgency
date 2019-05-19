@@ -1,0 +1,8 @@
+﻿@model List<ListViewHotelPackageViewModel>
+@if (Model != null && Model != null && Model.Any())
+{
+    foreach (var listView in Model)
+    {
+        @Html.Partial("~/Areas/Admin/Views/HotelPackage/_ListViewHotelPackage.cshtml", listView)
+    }
+}

@@ -1,0 +1,293 @@
+/*
+Author: Niloofar Taban
+Date: 29/01/1394
+url: drestaki.ir
+Company: parvaz pardaz
+Update: 30/01/1394
+ Author:Hossein Safdari
+ update:05/02/1394
+version:1.2
+*/
+
+#beradcrumb
+{
+	height:30px;
+	/*background-color:#0F9;*/
+	margin-top:-20px;
+}
+#beradcrumb a
+{
+	color:#000;
+}
+#pageHeader
+{
+	background-color:#ccc;
+	color:#0097d6;
+	border-right:4px solid #0097d6;
+	height:50px;
+	padding-top:10px;
+	font-size:20px;	
+}
+#master
+{
+	min-height:500px;
+	background-color:#fff;
+	padding:0;
+	border:1px solid #ccc;
+	margin-bottom:20px;
+}
+	#right_bar
+	{
+		min-height:500px;
+		/*background-color:#9F6;*/
+		padding-right:0;
+		
+	}
+		.khadamat
+		{
+			margin-top:10px;
+			
+		}
+		#cont_khadamat
+		{
+			min-height:300px;
+	                font-size:16px;
+			/*background-color:#0CF;*/
+		}
+		
+	#left_bar
+	{
+		min-height:500px;
+		/*background-color:#C99;*/
+		padding-top:10px;
+		border-right:1px solid #ccc;
+		padding-bottom:10px;
+	}
+/***************************************khabar**************************************/
+#tamas
+{
+	min-height:200px;
+	/*background-color:#09F;*/
+	margin-right:7px;
+	margin-top:10px;
+	border-radius:5px;
+	border:1px solid #ccc;
+	padding:0;
+}
+#head_akhbar
+{
+	height:30px;
+	background-color:#0097d6;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	padding-top:5px;
+	padding-right:5px;
+}
+#head_akhbar i
+{
+	font-size:24px;
+	color:rgba(255, 169, 32, 1);
+}
+#title
+{
+}
+#tell
+{
+	margin-top:10px;
+}
+#tell i
+{
+	font-size:24px;
+}
+#address
+{
+	margin-top:10px;
+    font-size:12px;
+}
+#address i
+{
+	font-size:24px;
+}
+#cont_khabar
+{
+	/*background-color:#F96;*/
+	min-height:100px;
+	margin-top:10px;
+	padding:20px;
+    font-size:16px;
+}
+#hr
+{
+	border-top:2px solid #0097d6;
+	height:1px;
+}
+
+
+
+
+
+
+
+
+
+
+/*********************************bubble comment **********************************/
+.clearfix:after {
+				visibility:hidden;
+				display:block;
+				font-size:0;
+				content: ".";
+				clear:both;
+				height:0;
+				line-height:
+			}
+			.clearfix {
+				display: inline-block;
+			}
+			* html .clearfix {
+				height: 1%;
+			}
+
+			.bubble-list .bubble #comment_name_a,.bubble #comment_name_q {
+				
+				width:70px;
+				height:70px;
+				border:3px solid #ffffff;
+				border-radius:10px;
+				text-align:center;
+				padding:0;
+			}
+			#comment_name_a
+			{
+				float:left;
+			}
+			#comment_name_q
+			{
+				float:right;
+			}
+			.bubble-content_a{
+				position:relative;
+				float:left;
+				margin-left:12px;
+				width:400px;
+				padding:0px 20px;
+				border-radius:10px;
+				background-color:#FFFFFF;
+				box-shadow:1px 1px 5px rgba(0,0,0,.2);
+			}
+
+			.bubble {
+				margin-top:20px;
+			}
+			.point_a {
+				border-top:10px solid transparent;
+				border-bottom:10px solid transparent;
+				border-right: 12px solid #FFF;
+				position:absolute;
+				left:-10px;
+				top:5px;
+			} 
+
+			#comment_name_q,#comment_name_a
+			{
+				background-color:rgba(255, 169, 32, 1);
+				border-radius:5px;
+			}
+
+			.point_q {
+				border-top:10px solid transparent;
+				border-bottom:10px solid transparent;
+				border-left: 12px solid #FFF;
+				position:absolute;
+				right:-10px;
+				top:5px;
+			}
+			.bubble-content_q{
+				position:relative;
+				float:left;
+				margin-right:12px;
+				width:400px;
+				padding:0px 20px;
+				border-radius:10px;
+				background-color:#FFFFFF;
+				box-shadow:1px 1px 5px rgba(0,0,0,.2);
+			}
+
+			.bubble-content_q p
+			{
+				font-size:12px !important;
+			}
+/*****************************************************************************/
+			.head_comment
+			{
+				height:30px;
+			}
+			.date
+			{
+				height:30px;
+				font-size:12px;
+				padding:0;
+			}
+			.like
+			{
+				padding-right:10px;
+			}
+			.like a
+			{
+				color:#000;
+			}
+			
+			
+		#add_comment
+		{
+			min-height:200px;
+			/*background-color:#C96;*/
+			margin-top:10px;
+			padding-top:10px;
+			border:1px solid #ccc;
+			border-radius:5px;
+		}
+/************************************maghalat****************************/
+#related li
+{
+	list-style:none;
+
+}
+#related a
+{
+	color:#000;
+	
+}
+#related a:hover
+{
+	text-decoration:none;
+}
+#related i
+{
+	font-size:20px;
+	color:rgba(255,169,32,1) !important;
+	margin-left:10px;
+}
+#cont_maghale
+{
+	min-height:200px;
+    font-size:13px;
+	/*background-color:#99F;*/
+}
+div#related
+{
+    font-size:13px;
+}
+#dl 
+{
+	padding-bottom:10px;
+}
+#dl i
+{
+	font-size:20px;
+	padding-left:5px;
+}
+#dl button
+{
+	background-color:rgba(255,169,32,1);
+}

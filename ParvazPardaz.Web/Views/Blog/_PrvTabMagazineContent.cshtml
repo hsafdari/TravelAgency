@@ -1,0 +1,45 @@
+﻿@model TabMagPostListViewModel
+@{
+    var counter = 0;
+}
+@if (Model.TabMagPostList != null && Model.TabMagPostList.Any())
+{
+    foreach (var post in Model.TabMagPostList)
+    {
+        <!-- Blog Post-->
+        <div class="col-md-4 col-sm-6 col-xs-12 mb-30">
+            <!-- Blog item-->
+            <div class="blog-item clearfix border boxed">
+                <!-- Blog Image-->
+                <div class="blog-media">
+                    <a href="@post.PostUrl" rel="@post.Rel" target="@post.Target">
+                        <div class="pic"><img src="@post.ImageUrl.GetTabMagDefaultUrl("277x186")" alt="@post.Name"></div>
+                        <!-- .GetTabMagUrl("277x186") -->
+                    </a>
+                </div>
+                <!-- blog body-->
+                <div class="blog-item-body clearfix">
+                    <!-- title-->
+                    <a href="@post.PostUrl" rel="@post.Rel" target="@post.Target">
+                        <h6 class="blog-title">@post.Name </h6>
+                    </a>
+
+                    <!-- Text Intro-->
+                    @Html.Raw(post.PostSummery)
+                    <br />
+                    @*<a href="@post.PostUrl" class="blog-button">بیشتر</a>*@
+                </div>
+            </div>
+            <!-- ! Blog item-->
+        </div>
+        <!-- ! Blog Post-->
+        counter++;
+        if (counter == 3)
+        {
+            <div class="hidden-xs" style="clear:both;"></div>
+            counter = 0;
+        }
+    }
+
+}
+

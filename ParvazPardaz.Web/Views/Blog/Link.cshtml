@@ -1,0 +1,23 @@
+﻿@model FirstBlogPageViewModel
+@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+}
+@if (Model.firstSlider != null)
+{
+    @Html.Partial("_PrvSlider", Model.firstSlider)
+}
+
+@if (Model.secondBox.Count() > 0)
+{
+    @Html.Partial("_PrvSecondBox", Model.secondBox)
+}
+@if (Model.BigBox.Count() > 0)
+{
+    @Html.Partial("_PrvBigBox", Model.BigBox)
+}
+@if (Model.middleSlider.Count() > 0)
+{
+    @Html.Partial("_PrvMiddleSlider", Model.middleSlider)
+}
+

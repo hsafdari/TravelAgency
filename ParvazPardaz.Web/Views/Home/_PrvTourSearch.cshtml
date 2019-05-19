@@ -1,0 +1,37 @@
+﻿@model TourSearchViewModel
+<form id="search-package" class="form tab-cont active" action="/tour/GetAllPackage" method="Post">
+    <label style="color:#ffffff">سفر به :</label>
+    <label name="go-date">
+        <span></span>
+        <span></span>
+        @Html.TextBox("FlightDateTemp", "", new { @id = "dFlightDateTemp", @class = "datepicker j", @placeholder = "تاریخ پرواز", required = "required" })
+        <input type="hidden" name="FlightDate" value="@DateTime.Now.ToString("yyyy/MM/dd")" />
+        <input type="hidden" name="Calendertype" value="persian" />
+    </label>
+    @Html.DropDownListFor(x => x.ArrivalCityId, Model.CitiesAllDDL as IEnumerable<SelectListItem>, new { @id = "dArrivalCityId", @class = "from select2", @placeholder = "مقصد حرکت خود را مشخص کنید" })
+    <button class="btn-1 active" type="submit" name="submit" value="جستجو">جستجو</button>
+</form>
+<form id="search-tour-domestic" class="form tab-cont" action="/TourSearch" method="Post">
+    @Html.DropDownListFor(x => x.DepartureCityId, ViewBag.DomesticFromDDL as IEnumerable<SelectListItem>, new { @id = "dDepartureCityId", @class = "from select2", @placeholder = "مبدا حرکت خود را مشخص کنید" })
+    <label name="go-date">
+        <span></span>
+        <span></span>
+        @Html.TextBox("FlightDateTemp", "", new { @id = "dFlightDateTemp", @class = "datepicker j", @placeholder = "تاریخ پرواز", required = "required" })
+        <input type="hidden" name="FlightDate" value="@DateTime.Now.ToString("yyyy/MM/dd")" />
+        <input type="hidden" name="Calendertype" value="persian" />
+    </label>
+    @Html.DropDownListFor(x => x.ArrivalCityId, ViewBag.DomesticDestinationDDL as IEnumerable<SelectListItem>, new { @id = "dArrivalCityId", @class = "from select2", @placeholder = "مقصد حرکت خود را مشخص کنید" })
+    <button class="btn-1 active" type="submit" name="submit" value="جستجو">جستجو</button>
+</form>
+<form id="search-tour" class="form tab-cont" action="/TourSearch" method="Post">
+    @Html.DropDownListFor(x => x.DepartureCityId, Model.CitiesFromDDL as IEnumerable<SelectListItem>, new { @id = "iDepartureCityId", @class = "from select2", @placeholder = "مبدا حرکت خود را مشخص کنید" })
+    <label name="go-date">
+        <span></span>
+        <span></span>
+        @Html.TextBox("FlightDateTemp", "", new { @id = "iFlightDateTemp", @class = "datepicker j", @placeholder = "تاریخ پرواز", required = "required"  })
+        <input type="hidden" name="FlightDate" value="@DateTime.Now.ToString("yyyy/MM/dd")"/>
+        <input type="hidden" name="Calendertype" value="persian" />
+    </label>
+    @Html.DropDownListFor(x => x.ArrivalCityId, Model.CitiesDestinationDDL as IEnumerable<SelectListItem>, new { @id = "iArrivalCityId", @class = "from select2", @placeholder = "مقصد حرکت خود را مشخص کنید" })
+    <button class="btn-1 active" type="submit" name="submit" value="جستجو">جستجو</button>
+</form>

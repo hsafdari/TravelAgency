@@ -1,0 +1,135 @@
+﻿@model ParvazPardaz.ViewModel.AddContactUsViewModel
+@{
+    ViewBag.Title = "تماس با ما";
+}
+<link rel="canonical" href="@Request.Url.AbsoluteUri.Replace("/tour/","/")" />
+<link href="~/ClientTheme/Blog/Tour/css/about.css" rel="stylesheet" />
+<script src='https://www.google.com/recaptcha/api.js?hl=@ParvazPardaz.Resource.General.Generals.Regional'></script>
+<section class="top-img">
+    <div>
+        <img src="~/ClientTheme/images/contact/contactus.png" alt="@ViewBag.Title" />
+    </div>
+</section>
+@using (Ajax.BeginForm("Create", "ContactUs", new { Area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "success", OnFailure = "gotError" }, new { id = "form", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="section-about">
+        <section class="content">
+            <div class="halfcontent">
+                <img class="contact-worldicon" src="~/ClientTheme/images/contact/international-delivery.png" />
+
+                <div class="rowcontent contact-address">
+                    کیش ، پردیس 1 ، شش ضلعی غرفه 162
+                </div>
+                <div class="rowcontent">
+                    <div class="center-block">
+                        07644456096
+                        <img class="contact-call-ico" src="~/ClientTheme/images/contact/call-volume.png" />
+                    </div>
+                </div>
+            </div>
+            <div class="halfcontent">
+                <iframe class="contact-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3569.4840498701255!2d54.019133665037025!3d26.536713383290934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e50abb5c4fd8481%3A0xa0b3fd6f7254b3df!2sHormozgan+Province%2C+Kish%2C+Razi+Street%2C+Pardis+1+Shopping+Center!5e0!3m2!1sen!2s!4v1547876961496" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+        </section>
+        <section class="content" style="display:block">
+            <div class="rowcontent">
+                <img class="share-icon" src="~/ClientTheme/images/contact/share-symbol.png" />
+                با ما در ارتباط باشید و مارا دنبال کنید
+
+            </div>
+            <div class="rowcontent">
+                <div class="contact-socialblock">
+                    @*<a href="https://t.me/keysafar" target="_blank" rel="nofollow"><img class="contact-cws-social" src="~/ClientTheme/images/contact/telegram icon.png" /></a>
+                    <a href="#" target="_blank" rel="nofollow"><img class="contact-cws-social" src="~/ClientTheme/images/contact/facebook icon.png" /></a>
+                    <a href="https://www.instagram.com/keysafar.ir/" target="_blank" rel="nofollow"><img class="contact-cws-social" src="~/ClientTheme/images/contact/insta icon.png" /></a>*@
+                    <a href="https://t.me/keysafar" target="_blank" rel="nofollow"><img class="contact-cws-social" src="~/ClientTheme/images/contact/telegram icon.png" /></a>
+                    <a href="https://www.facebook.com/keysafar.travellagency" target="_blank" rel="nofollow"><img class="contact-cws-social" src="~/ClientTheme/images/contact/facebook icon.png" /></a>
+                    <a href="http://www.instagram.com/keysafar.ir/" target="_blank" rel="nofollow"><img class="contact-cws-social" src="~/ClientTheme/images/contact/insta icon.png" /></a>
+                </div>
+            </div>
+        </section>
+        <div class="content contactus">
+            <div class="rowcontent">
+                <div class="halfcontent">
+                    <div class="rowcontent">
+                        <label class="contact-label">نام و نام خانوادگی:</label>
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control cantactusinput" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="halfcontent">
+                    <div class="rowcontent">
+                        <label class="contact-label">تلفن همراه:</label>
+                        @Html.TextBoxFor(model => model.CellPhone, new {@style= "direction:ltr", @class = "form-control cantactusinput" })
+                        @Html.ValidationMessageFor(model => model.CellPhone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="rowcontent">
+                <div class="halfcontent">
+                    <div class="rowcontent">
+                        <label class="contact-label">واحد اداری:</label>
+                        @Html.DropDownListFor(model => model.DepartmentID, ViewBag.DepartmentDDL as SelectList, "انتخاب کنید", new { @class = "contact-ddl", @placeholder = "واحد اداری" })
+                        @Html.ValidationMessageFor(model => model.DepartmentID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="rowcontent">
+                        <label class="contact-label">متن پیام:</label>
+                        @Html.TextAreaFor(model => model.Content, 10, 10, new { @class = "form-control cantactustextarea" })
+                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="rowcontent">
+                        <div class="input-group">
+                            <div class="g-recaptcha" data-sitekey="@System.Configuration.ConfigurationManager.AppSettings["ReCaptchaSiteKey"]" data-callback="recaptchaCallback"></div>
+                        </div>
+                        <span id="DivRecaptchaRequired" style="display:none" class="text-danger field-validation-error"><span id="Name-error" class="">لطفا گزینه 'من ربات نیستم' را تیک بزنید</span></span>
+                    </div>
+                    <div class="rowcontent">
+                        <div class="btncontent">
+                            <button id="contacts-submit" type="submit" class="btn-1 active">ارسال</button>
+                        </div>
+                    </div>
+                    <div class="rowcontent">
+                        <div id="DivSuccessfulMessage" class="input-group message" style="display:none">
+                            <div class="alert alert-dismissible alert-info">
+                                کاربر گرامی! پیام شما با موفقیت ثبت شد
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="halfcontent">
+                    <img class="contact-textlogo" src="~/ClientTheme/images/contact/victor.png" />
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    @Html.Partial("_Toastr")
+
+    <script type="text/javascript">
+    function success(e) {
+        if (e == "success") {
+            $('#form').clearForm();
+            $("#DivSuccessfulMessage").show();
+            $("#DivSuccessfulMessage").hide(6000);
+        }
+        else if (e == "InvalidCaptcha") {
+            $("#DivRecaptchaRequired").show();
+        }
+    }
+    function gotError() {
+        alert('ErrorSavingAlert')
+    }
+    </script>
+}
+
+
+
+
+
+
+
+
+

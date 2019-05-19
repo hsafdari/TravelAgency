@@ -1,0 +1,356 @@
+﻿@model PostListViewModel
+@{
+    //ViewBag.Title = "BlogList";
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+}
+@Styles.Render("~/BlogListStyles")
+<link href="~/Content/assets/plugins/Select2_V4/css/select2.css" rel="stylesheet" />
+<link href="~/SiteClientTheme/custom/BlogCustomStyles.css" rel="stylesheet" />
+<style>
+    .btn-sortby {
+        color: #fff;
+        background-color: #14232a;
+        border-color: #14232a;
+    }
+
+        .btn-sortby:active:hover, .btn-sortby.active:hover, .open > .dropdown-toggle.btn-sortby:hover, .btn-sortby:active:focus, .btn-sortby.active:focus, .open > .dropdown-toggle.btn-sortby:focus, .btn-sortby.focus:active, .btn-sortby.active.focus, .open > .dropdown-toggle.btn-sortby.focus {
+            color: #fff;
+            background-color: #14232a;
+            border-color: #14232a;
+        }
+
+    .orderby-dropdown-menu {
+        left: 0 !important;
+        right: auto !important;
+    }
+
+    .sort-font {
+        font-size: 13px !important;
+    }
+</style>
+
+@helper GetImgurl(ImageViewModel _image)
+{
+    //item.Image.ImageUrl + "-736x512" + item.Image.ImageExtension
+    if (_image != null)
+    {
+        string image = _image.Width == 700 ? _image.ImageUrl + "-700x525" + _image.ImageExtension : _image.ImageUrl + "-736x512" + _image.ImageExtension;
+        <img src="@image" alt="@Model.Title" />
+    }
+    else
+    {
+        <img src="~/ClientTheme/images/keysafarlogo725.jpg" alt="keysafar.com" />
+    }
+}
+
+<!--page-breadcrumb -->
+<div class="page-breadcrumb">
+    <div class="container">
+        @*<h1><a href="@Model.URL">@Model.Name</a></h1>*@
+        <h1>@Model.Title</h1>
+        <ol class="breadcrumb pull-left">
+            <li><a href="/tourism/">صفحه اصلی</a></li>
+            @if (Model.breadCrumbItems != null && Model.breadCrumbItems.Any())
+            {
+                for (int i = (Model.breadCrumbItems.Count - 1); i >= 0; i--)
+                {
+                    <li><a href="@Model.breadCrumbItems[i].URL">@Model.breadCrumbItems[i].Title</a></li>
+                }
+            }
+        </ol>
+    </div>
+</div>
+<!-- page-breadcrumb /- -->
+
+<a href="#menu-toggle" class="btn btn-default hidden-lg hidden-md hidden-sm btn-sidebar" id="menu-toggle"><i class="fa fa-arrow-left"></i>دیگر مطالب مرتبط</a>
+
+<!-- Blog Section -->
+<div id="blog-section" class="blog-section wrapper">
+    <div id="blog-section" class="blog-section" style="padding-top:60px;">
+        <!-- container -->
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar -->
+                <div id="sidebar-wrapper" class="widget-sidebar ">
+
+                    <!-- related Group -->
+                    @if (Model.RelatedGroups != null && Model.RelatedGroups.Any())
+                    {
+                        @Html.Partial("_PrvRelatedGroups", Model.RelatedGroups)
+                    }
+                    <!-- /related Group -->
+                    <!-- Latest Post -->
+                    @{Html.RenderAction(actionName: "LatestUpdateSideBar", controllerName: "Blog");}
+
+                </div>
+                <div id="page-content-wrapper" class="col-xs-12" style="position:relative;">
+                    <!-- col-md-8 -->
+                    <div class="col-md-8 col-sm-6">
+                        @if (Model.SearchList.HotelRankList != null)
+                        {
+                            @*<div class="col-xs-12 searchListPage">
+
+                                    <div class="col-md-4 col-xs-12 nopadding">
+                                        @Html.LabelFor(model => model.SearchList.HotelRankId, new { @class = "control-label col-md-3 col-sm-4 col-xs-3  nopadding" })
+                                        <div class="col-md-9 col-sm-8 col-xs-9 ">
+                                            @Html.DropDownListFor(d => d.SearchList.HotelRankId, Model.SearchList.HotelRankList, ParvazPardaz.Resource.General.Generals.DDLSelect, new { id = "DDHotelRank", @class = "form-control search-select select" }) <!-- , onchange = "FetchState()" -->
+                                            @Html.ValidationMessageFor(model => model.SearchList.HotelRankId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-12 nopadding">
+                                        @Html.LabelFor(model => model.SearchList.SearchTitle, new { @class = "control-label col-md-5 col-sm-5 col-xs-12 nopadding" })
+                                        <div class="col-md-7 col-sm-7 col-xs-12 ">
+                                            @Html.TextBoxFor(x => x.SearchList.SearchTitle, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.SearchList.SearchTitle, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-xs-12 hidden-xs">
+                                        <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Search class="btn btn-custom btn-search" />
+                                    </div>
+                                    <div class="col-md-2 col-xs-12 text-center visible-xs mgt-10">
+                                        <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Search class="btn btn-custom btn-search" />
+                                    </div>
+                                </div>*@
+                        }
+
+                        <div class="row" style="margin-bottom: 30px; direction:rtl;">
+                            <div class="col-md-12">
+                                <h4 style="float:right" id="DivResultTitle">@Model.Title</h4>
+                                <div class="dropdown" style="float:left">
+                                    <button class="btn btn-sortby dropdown-toggle" type="button" data-toggle="dropdown">
+                                        @ParvazPardaz.Resource.General.Generals.SortingBy
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu orderby-dropdown-menu">
+                                        <li class="sort-font hotelsorting" style="display:@((bool)ViewBag.HadHotel ? "block":"none" )"><a style="cursor:pointer" onclick="GetPostsOrderBy('mosthotelrank')">@ParvazPardaz.Resource.General.Generals.SortByMostHotelRank</a></li>
+                                        <li class="sort-font hotelsorting" style="display:@((bool)ViewBag.HadHotel ? "block":"none" )"><a style="cursor:pointer" onclick="GetPostsOrderBy('mostreviewcount')">@ParvazPardaz.Resource.General.Generals.SortByReviewCount</a></li>
+                                        <li class="sort-font postsorting" style="display:@((bool)ViewBag.HadHotel ? "none":"block" )"><a style="cursor:pointer" onclick="GetPostsOrderBy('mostlike')">@ParvazPardaz.Resource.General.Generals.SortByMostLike</a></li>
+                                        <li class="sort-font"><a style="cursor:pointer" onclick="GetPostsOrderBy('mostrate')">@ParvazPardaz.Resource.General.Generals.SortByMostRate</a></li>
+                                        <li class="sort-font"><a style="cursor:pointer" onclick="GetPostsOrderBy('alphabet')">@ParvazPardaz.Resource.General.Generals.SortByAlphabet</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="DivResult">
+                            @{
+                                var counter = 0;
+                                var idCount = 0;
+                            }
+                            @foreach (var item in Model.PostDetail)
+                            {
+                                <article class="col-md-4">
+                                    <!-- blog-box -->
+                                    <div class="blog-box">
+                                        <div class="entry-cover">
+                                            @*<a href="@item.URL">@GetImgurl(item.Image)</a>*@
+                                            <a href="@item.URL" target="@item.Target" rel="@item.Rel"><img src="@Url.Content(item.Thumbnail)" /></a>
+                                            @{
+                                var signid = "add_sign_count-" + idCount;
+                                var postid = "post-content-" + idCount;
+                                            }
+                                            <a id="@signid" target="@item.Target" rel="@item.Rel" class="add-sign-big color-Yellow"><img src="/ClientTheme/images/icon/big-plus.png" alt="big-plus" /></a>
+                                        </div>
+
+                                        <div class="post-box-inner">
+                                            <div class="box-content">
+                                                @*<span>Entertainment</span>*@
+                                                <a href="@item.URL" id="@item.Name.Replace(" ","-")" target="@item.Target" rel="@item.Rel" class="entry-title">@item.Name</a>
+                                                <p>@item.PostSummery</p>
+                                                <p class="time"><i class="fa fa-clock-o"></i> @item.PublishDatetime.ToString("yyyy/MM/dd")</p>
+                                                @*<div class="showPostGroups">
+                                                        @if (@item.PostGroups.Count() > 0)
+                                                        {
+                                                            <a href="#" class="postG">دسته ها: </a>
+                                                            foreach (var group in item.PostGroups)
+                                                            {
+                                                                <a href="@group.URL">@group.Name </a>
+
+                                                            }
+                                                        }
+
+                                                    </div>*@
+
+                                                @*<span class="byline">
+                                                        <a href="#" class="author-image"><img src="/ClientTheme/images/home/home4/blog/author-img-1.jpg" alt="author img" /></a>
+                                                        <span class="author vcard">
+                                                            <span>Posted By</span>
+                                                            <a href="#" class="url fn n">Dwayne Hilson </a>
+                                                        </span>
+                                                    </span>*@
+                                                <div class="post-content" id="@postid">
+                                                    <p>@item.PostSummery</p>
+                                                    @*<a href="#"><i class="fa fa-heart"></i> @item.PostRateCount</a>
+                                                        <a href="#"><img src="/ClientTheme/images/icon/comment-icon.png" alt="comment" />0</a>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- blog-box /- -->
+
+                                    <div class="blog-social">
+                                        @*<aside class="widget widget_social_icons">
+                                                <ul>
+                                                    <li><a href="#" target="_blank" class="fb"><i class="fa fa-facebook"></i></a></li>
+                                                    <li><a href="#" target="_blank" class="tw"><i class="fa fa-twitter"></i></a></li>
+                                                    <li><a href="#" target="_blank" class="gp"><i class="fa fa-google-plus"></i></a></li>
+                                                    <li><a href="#" target="_blank" class="lin"><i class="fa fa-linkedin"></i></a></li>
+                                                    <li><a href="#" target="_blank" class="dr"><i class="fa fa-dribbble"></i></a></li>
+                                                </ul>
+                                            </aside>*@
+
+                                        <a href="@item.URL" class="read-more " target="@item.Target" rel="@item.Rel">بیشتر</a>
+                                    </div>
+                                </article>
+                                counter++;
+                                idCount++;
+                                if (counter == 3)
+                                {
+                                    <div class="hidden-xs" style="clear:both;"></div>
+                                    counter = 0;
+                                }
+                            }
+                        </div>
+
+
+                    </div><!-- col-md-8 /- -->
+                    <!-- col-md-4 -->
+                    <div class="col-md-4 col-sm-6 hidden-xs widget-sidebar">
+                        <!-- related Group -->
+                        @if (Model.RelatedGroups != null && Model.RelatedGroups.Any())
+                        {
+                            @Html.Partial("_PrvRelatedGroups", Model.RelatedGroups)
+                        }
+                        <!-- /related Group -->
+                        <!-- Latest Post -->
+                        @{Html.RenderAction(actionName: "LatestUpdateSideBar", controllerName: "Blog");}
+                        <!-- Latest Post /- -->
+                        <!-- Categories -->
+                    </div><!-- col-md-4 /- -->
+                </div>
+
+            </div>
+        </div>
+        <!-- container /- -->
+    </div>
+</div>
+<!-- Blog Section /- -->
+@section scripts{
+    <script src="~/Content/assets/plugins/Select2_V4/js/select2.js"></script>
+
+    <script type="text/javascript">
+        $('.select').select2({
+            dir: "RTL"
+        });
+    </script>
+
+    <script>
+        function GetPosts(urlAddress, title) {
+            $("#DivResultTitle").html(title)
+            $("#DivResult").hide(500);
+            //change browser-url without refreshing page
+            window.history.pushState(null, null, urlAddress);
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "/Blog/GetPostsByGroup/",
+                data: {
+                    url: urlAddress
+                },
+                success: function (data) {
+                    //alert(data);
+                    $("#DivResult").html(data);
+                    $("#DivResult").show(1000);
+                },
+                error: function (textStatus, errorThrown) {
+
+                }
+            });
+
+            RefreshFilterDDL();
+        }
+
+        function RefreshFilterDDL() {
+            debugger;
+            var urlAddress = "" + window.location.pathname + "";
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "/Blog/HasHotel/",
+                data: {
+                    url: decodeURI(urlAddress),
+                },
+                success: function (hasHotel) {
+                    debugger;
+                    if (hasHotel) {
+                        $(".postsorting").css("display", "none");
+                        $(".hotelsorting").css("display", "block");
+                        $(".hotelsorting").css("display", "block");
+                    } else {
+                        $(".postsorting").css("display", "block");
+                        $(".hotelsorting").css("display", "none");
+                        $(".hotelsorting").css("display", "none");
+                    }
+                },
+                error: function (textStatus, errorThrown) {
+
+                }
+            });
+        }
+
+        function GetPostsOrderBy(orderby) {
+            debugger;
+            $("#DivResult").hide(500);
+            //change browser-url without refreshing page
+            //window.history.pushState(null, null, urlAddress);
+            var urlAddress = "" + window.location.pathname + "";
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "/Blog/GetPostsOrderBy/",
+                data: {
+                    url: decodeURI(urlAddress),
+                    orderby: orderby
+                },
+                success: function (data) {
+                    //debugger;
+                    $("#DivResult").html(data.result);
+                    $("#DivResult").show(1000);
+
+
+                    //if (data.hashotel) {
+                    //    $(".postsorting").css("display", "none");
+                    //    $(".hotelsorting").css("display", "block");
+                    //    $(".hotelsorting").css("display", "block");
+                    //} else {
+                    //    $(".postsorting").css("display", "block");
+                    //    $(".hotelsorting").css("display", "none");
+                    //    $(".hotelsorting").css("display", "none");
+                    //}
+                },
+                error: function (textStatus, errorThrown) {
+                    //debugger;
+                }
+            });
+
+            RefreshFilterDDL();
+        }
+    </script>
+
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#blog-section").toggleClass("toggled");
+
+
+            if ($("#blog-section").hasClass("toggled")) {
+                $("#menu-toggle").html("بازگشت به مطلب اصلی <i class='fa fa-arrow-right'></i>");
+                $("#sidebar-wrapper").css("position", "static")
+            }
+            else {
+                $("#menu-toggle").html("<i class='fa fa-arrow-left'></i>دیگر مطالب مرتبط");
+                $("#sidebar-wrapper").css("position", "absolute")
+            }
+
+            //$("#page-content-wrapper").css("position", "absolute");
+        });
+    </script>
+}

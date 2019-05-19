@@ -1,0 +1,101 @@
+﻿@model ParvazPardaz.Model.Entity.Core.Menu
+@*@model ParvazPardaz.ViewModel.MenuViewModel*@
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>@ParvazPardaz.Resource.General.Generals.Edit</h2>
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Menu", routeValues: new { area = "Admin" }, method: FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>@ParvazPardaz.Resource.CMS.CMS.ManagementMenu</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div id="MenuTypeDiv" style="display:@ViewBag.Display" class="form-group">
+            @Html.LabelFor(model => model.MenuType, new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @*@Html.DropDownList("MenuType")*@
+                @Html.EnumDropDownListFor(model => model.MenuType, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(model => model.MenuType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MenuTitle, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MenuTitle)
+                @Html.ValidationMessageFor(model => model.MenuTitle)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderId)
+                @Html.ValidationMessageFor(model => model.OrderId)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MenuIsActive, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.MenuIsActive)
+                @Html.ValidationMessageFor(model => model.MenuIsActive)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MenuUrl, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.MenuUrl, new { @class = "text-left", @style = "direction:ltr;" })
+                @Html.ValidationMessageFor(model => model.MenuUrl)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Target, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Target")
+                @Html.ValidationMessageFor(model => model.Target)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                    <div class="fileupload-new thumbnail" style="max-width: 200px; max-height: 150px;">
+                        <img src="@(Model.Image == null ? "/Images/Menu/no-image.png" : @Model.Image)" alt="" />
+                    </div>
+                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                    <div>
+                        <span class="btn btn-light-grey btn-file">
+                            <span class="fileupload-new"><i class="fa fa-picture-o"></i> @ParvazPardaz.Resource.General.Generals.Select</span><span class="fileupload-exists"><i class="fa fa-picture-o"></i> @ParvazPardaz.Resource.General.Generals.Change</span>
+                            <input type="file" name="Image" id="Image" />
+                        </span>
+                        <a href="#" class="btn fileupload-exists btn-light-grey" data-dismiss="fileupload">
+                            <i class="fa fa-times"></i> @ParvazPardaz.Resource.General.Generals.Delete
+                        </a>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Image)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ShortDescription, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.TextAreaFor(model => model.ShortDescription, 3, 30, new { })*@
+                @Html.EditorFor(model => model.ShortDescription)
+                @Html.ValidationMessageFor(model => model.ShortDescription)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-11">
+                <input type="submit" value=@ParvazPardaz.Resource.General.Generals.Edit class="btn btn-custom green" />
+                @Html.ActionLink(ParvazPardaz.Resource.General.Generals.Back, actionName: "Index", controllerName: "Menu", routeValues: new { @Area = "Admin", @id = @Model.MenuGroupId }, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+
+}

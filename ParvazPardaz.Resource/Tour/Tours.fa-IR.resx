@@ -1,0 +1,865 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Activity" xml:space="preserve">
+    <value>فعالیت</value>
+  </data>
+  <data name="ActivityManagment" xml:space="preserve">
+    <value>مدیریت فعالیت های تور</value>
+  </data>
+  <data name="AddActivity" xml:space="preserve">
+    <value>افزودن فعالیت تور</value>
+  </data>
+  <data name="AddAdditionalService" xml:space="preserve">
+    <value>افزودن خدمات اضافی</value>
+  </data>
+  <data name="AddAllowedBanned" xml:space="preserve">
+    <value>افزودن مجاز/غیرمجاز</value>
+  </data>
+  <data name="AddCity" xml:space="preserve">
+    <value>افزودن شهر</value>
+  </data>
+  <data name="AddCompanyTransfer" xml:space="preserve">
+    <value>افزودن شرکت حمل و نقل</value>
+  </data>
+  <data name="AddCompanyTransferVehicleType" xml:space="preserve">
+    <value>افزودن نوع وسیله حمل و نقل</value>
+  </data>
+  <data name="AddCountry" xml:space="preserve">
+    <value>افزودن کشور</value>
+  </data>
+  <data name="AddCurrency" xml:space="preserve">
+    <value>افزودن واحد پولی</value>
+  </data>
+  <data name="AddFAQ" xml:space="preserve">
+    <value>افزودن در FAQ</value>
+  </data>
+  <data name="AddFlight" xml:space="preserve">
+    <value>افزودن پرواز</value>
+  </data>
+  <data name="AddHotel" xml:space="preserve">
+    <value>افزودن هتل</value>
+  </data>
+  <data name="AddHotelFacility" xml:space="preserve">
+    <value>افزودن امکانات هتل</value>
+  </data>
+  <data name="AddHotelRank" xml:space="preserve">
+    <value>درج رتبه هتل</value>
+  </data>
+  <data name="AddItinerary" xml:space="preserve">
+    <value>افزودن برنامه سفر</value>
+  </data>
+  <data name="AdditionalService" xml:space="preserve">
+    <value>خدمات اضافی</value>
+  </data>
+  <data name="AdditionalServiceManagement" xml:space="preserve">
+    <value>مدیریت خدمات اضافی</value>
+  </data>
+  <data name="AddLeader" xml:space="preserve">
+    <value>افزودن راهنمای تور</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>آدرس</value>
+  </data>
+  <data name="AddSchedule" xml:space="preserve">
+    <value>درج زمانبندی سفر</value>
+  </data>
+  <data name="AddState" xml:space="preserve">
+    <value>افزودن استان</value>
+  </data>
+  <data name="AddTour" xml:space="preserve">
+    <value>افزودن تور</value>
+  </data>
+  <data name="AddTourCategory" xml:space="preserve">
+    <value>افزودن گروه تور</value>
+  </data>
+  <data name="AddTourLevel" xml:space="preserve">
+    <value>افزودن سطح تور</value>
+  </data>
+  <data name="AddTourType" xml:space="preserve">
+    <value>افزودن نوع تور</value>
+  </data>
+  <data name="AddVehicleType" xml:space="preserve">
+    <value>افزودن نوع وسیله نقلیه</value>
+  </data>
+  <data name="AllowedBanned" xml:space="preserve">
+    <value>مجاز/غیرمجاز</value>
+  </data>
+  <data name="AllowedBannedManagement" xml:space="preserve">
+    <value>مدیریت مجازها/غیرمجازها</value>
+  </data>
+  <data name="Allows" xml:space="preserve">
+    <value>مجازها</value>
+  </data>
+  <data name="Answer" xml:space="preserve">
+    <value>پاسخ</value>
+  </data>
+  <data name="ArrivalDate" xml:space="preserve">
+    <value>تاریخ ورود</value>
+  </data>
+  <data name="ArrivalTime" xml:space="preserve">
+    <value>ساعت ورود</value>
+  </data>
+  <data name="Bans" xml:space="preserve">
+    <value>غیرمجازها</value>
+  </data>
+  <data name="BookNow" xml:space="preserve">
+    <value>رزرو</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>ظرفیت</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="CityManagement" xml:space="preserve">
+    <value>مدیریت شهرها</value>
+  </data>
+  <data name="CityTitle" xml:space="preserve">
+    <value>عنوان شهر</value>
+  </data>
+  <data name="CompanyTransfer" xml:space="preserve">
+    <value>شرکت حمل و نقل</value>
+  </data>
+  <data name="CompanyTransferManagement" xml:space="preserve">
+    <value>مدیریت شرکت های حمل و نقل</value>
+  </data>
+  <data name="CompanyTransferVehicleType" xml:space="preserve">
+    <value>نوع وسیله نقلیه</value>
+  </data>
+  <data name="CompanyTransferVehicleTypeManagement" xml:space="preserve">
+    <value>مدیریت وسایل نقلیه</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>کشور</value>
+  </data>
+  <data name="CountryManagement" xml:space="preserve">
+    <value>مدیریت کشورها</value>
+  </data>
+  <data name="CountryManagement1" xml:space="preserve">
+    <value>مدیریت کشورها</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>واحد پولی</value>
+  </data>
+  <data name="CurrencyManagement" xml:space="preserve">
+    <value>مدیریت واحدهای پولی</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>روز</value>
+  </data>
+  <data name="DayOrder" xml:space="preserve">
+    <value>روز</value>
+  </data>
+  <data name="DepartureDate" xml:space="preserve">
+    <value>تاریخ خروج</value>
+  </data>
+  <data name="DepartureTime" xml:space="preserve">
+    <value>ساعت خروج</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="DestinationCity" xml:space="preserve">
+    <value>شهر مقصد</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>بازه زمانی</value>
+  </data>
+  <data name="DurationDay" xml:space="preserve">
+    <value>بازه زمانی(روز)</value>
+  </data>
+  <data name="DurationTime" xml:space="preserve">
+    <value>بازه زمانی(ساعت)</value>
+  </data>
+  <data name="EditHotelGallery" xml:space="preserve">
+    <value>ویرایش گالری هتل</value>
+  </data>
+  <data name="ExpireDate" xml:space="preserve">
+    <value>تاریخ انقضا</value>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>پرسش و پاسخ</value>
+  </data>
+  <data name="FAQManagement" xml:space="preserve">
+    <value>مدیریت پرسش و پاسخ</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="FromCity" xml:space="preserve">
+    <value>از شهر</value>
+  </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>از تاریخ</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>نام کامل</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>جنسیت</value>
+  </data>
+  <data name="GoToIndex" xml:space="preserve">
+    <value>بازگشت به فهرست</value>
+  </data>
+  <data name="HeaderImage" xml:space="preserve">
+    <value>تصویر هدر</value>
+  </data>
+  <data name="Hotel" xml:space="preserve">
+    <value>هتل</value>
+  </data>
+  <data name="HotelFacility" xml:space="preserve">
+    <value>امکانات هتل</value>
+  </data>
+  <data name="HotelFacilityManagement" xml:space="preserve">
+    <value>مدیریت امکانات هتل</value>
+  </data>
+  <data name="HotelGalleryManagement" xml:space="preserve">
+    <value>مدیریت گالری هتل</value>
+  </data>
+  <data name="HotelManagement" xml:space="preserve">
+    <value>مدیریت هتل ها</value>
+  </data>
+  <data name="HotelRank" xml:space="preserve">
+    <value>رتبه</value>
+  </data>
+  <data name="HotelRankManagement" xml:space="preserve">
+    <value>مدیریت رتبه های هتل</value>
+  </data>
+  <data name="HotelRankManagment" xml:space="preserve">
+    <value>مدیریت رتبه های هتل</value>
+  </data>
+  <data name="HotelRoom" xml:space="preserve">
+    <value>اتاق هتل</value>
+  </data>
+  <data name="HotelRoomManagement" xml:space="preserve">
+    <value>مدیریت اتاق های هتل</value>
+  </data>
+  <data name="HotelTitle" xml:space="preserve">
+    <value>عنوان هتل</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+  <data name="ImageFileName" xml:space="preserve">
+    <value>نام فایل تصویری</value>
+  </data>
+  <data name="ImagesGallery" xml:space="preserve">
+    <value>گالری تصاویر</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>فعال؟</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>نام خانوادگی</value>
+  </data>
+  <data name="Leader" xml:space="preserve">
+    <value>راهنمای تور</value>
+  </data>
+  <data name="LeaderManagement" xml:space="preserve">
+    <value>مدیریت راهنمایان(لیدر) تور</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>موبایل</value>
+  </data>
+  <data name="ModelName" xml:space="preserve">
+    <value>نام مدل</value>
+  </data>
+  <data name="NonLimit" xml:space="preserve">
+    <value>نامحدود</value>
+  </data>
+  <data name="Place" xml:space="preserve">
+    <value>مکان</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>قیمت</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>سوال</value>
+  </data>
+  <data name="Sale" xml:space="preserve">
+    <value>فروش</value>
+  </data>
+  <data name="SaleManagement" xml:space="preserve">
+    <value>مدیریت فروش</value>
+  </data>
+  <data name="SelectCompanyTransfer" xml:space="preserve">
+    <value>--- انتخاب نمایید ---</value>
+  </data>
+  <data name="SelectPic" xml:space="preserve">
+    <value>انتخاب تصویر</value>
+  </data>
+  <data name="SelectVehicleType" xml:space="preserve">
+    <value>--- انتخاب نمایید ---</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>جنسیت</value>
+  </data>
+  <data name="Shareit" xml:space="preserve">
+    <value>به اشتراک بگذارید</value>
+  </data>
+  <data name="ShortDescription" xml:space="preserve">
+    <value>توضیحات کوتاه</value>
+  </data>
+  <data name="SoldQuantity" xml:space="preserve">
+    <value>تعداد فروخته شده</value>
+  </data>
+  <data name="StartDateTime" xml:space="preserve">
+    <value>تاریخ خروج</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>استان</value>
+  </data>
+  <data name="StateManagement" xml:space="preserve">
+    <value>مدیریت استان ها</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>دسته ها</value>
+  </data>
+  <data name="Tel" xml:space="preserve">
+    <value>تلفن</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>عنوان</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>تا تاریخ</value>
+  </data>
+  <data name="Tour" xml:space="preserve">
+    <value>تور</value>
+  </data>
+  <data name="TourCategory" xml:space="preserve">
+    <value>گروه تور</value>
+  </data>
+  <data name="TourPackageDayManagement" xml:space="preserve">
+    <value>مدیریت روز پکیج</value>
+  </data>
+  <data name="TourCode" xml:space="preserve">
+    <value>کد تور</value>
+  </data>
+  <data name="TourLevel" xml:space="preserve">
+    <value>سطح تور</value>
+  </data>
+  <data name="TourLevelManagement" xml:space="preserve">
+    <value>مدیریت سطح تور</value>
+  </data>
+  <data name="TourManagement" xml:space="preserve">
+    <value>مدیریت تورها</value>
+  </data>
+  <data name="TourSchedule" xml:space="preserve">
+    <value>زمانبندی تور</value>
+  </data>
+  <data name="TourTitle" xml:space="preserve">
+    <value>عنوان تور</value>
+  </data>
+  <data name="TourType" xml:space="preserve">
+    <value>نوع تور</value>
+  </data>
+  <data name="TourTypeManagement" xml:space="preserve">
+    <value>مدیریت نوع تور</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>تراکنش</value>
+  </data>
+  <data name="TransactionManagement" xml:space="preserve">
+    <value>مدیریت تراکنش ها</value>
+  </data>
+  <data name="Transportation" xml:space="preserve">
+    <value>حمل و نقل</value>
+  </data>
+  <data name="UpdateItinerary" xml:space="preserve">
+    <value>ویرایش برنامه سفر</value>
+  </data>
+  <data name="UpdateSchedule" xml:space="preserve">
+    <value>ویرایش زمانبندی سفر</value>
+  </data>
+  <data name="VehicleType" xml:space="preserve">
+    <value>نوع وسیله نقلیه</value>
+  </data>
+  <data name="VehicleTypeMangement" xml:space="preserve">
+    <value>مدیریت نوع وسیله نقلیه</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>وبسایت</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>طول جغرافیایی</value>
+  </data>
+  <data name="LatLongIframe" xml:space="preserve">
+    <value>نقشه گوگل</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>عرض جغرافیایی</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+  <data name="IsPrimary" xml:space="preserve">
+    <value>اصلی؟</value>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>رتبه هتل</value>
+  </data>
+  <data name="Person" xml:space="preserve">
+    <value>نفر</value>
+  </data>
+  <data name="PersonUnit" xml:space="preserve">
+    <value>نفر</value>
+    <comment>PersonUnit</comment>
+  </data>
+  <data name="VehicleTypeId" xml:space="preserve">
+    <value>نوع وسیله نقلیه</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>کد حسابداری</value>
+  </data>
+  <data name="DateTitle" xml:space="preserve">
+    <value>شروع تاریخ از</value>
+  </data>
+  <data name="OwnerId" xml:space="preserve">
+    <value>خرید از</value>
+  </data>
+  <data name="AddTourPackage" xml:space="preserve">
+    <value>افزودن پکیج تور</value>
+  </data>
+  <data name="UpdateTourPackage" xml:space="preserve">
+    <value>به روز رسانی پکیج تور</value>
+  </data>
+  <data name="TourPackageTitle" xml:space="preserve">
+    <value>عنوان پکیج تور</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>ترتیب</value>
+  </data>
+  <data name="addhotelPackage" xml:space="preserve">
+    <value>افزودن پکیج هتل</value>
+  </data>
+  <data name="OrderHotelPackage" xml:space="preserve">
+    <value>ترتیب پکیج هتل</value>
+  </data>
+  <data name="FlightClass" xml:space="preserve">
+    <value>کلاس پروازی</value>
+  </data>
+  <data name="FlightNumber" xml:space="preserve">
+    <value>شماره پرواز</value>
+  </data>
+  <data name="Recomended" xml:space="preserve">
+    <value>فعال؟</value>
+  </data>
+  <data name="FromPrice" xml:space="preserve">
+    <value>شروع قیمت از</value>
+  </data>
+  <data name="IataCode" xml:space="preserve">
+    <value>یاتا کد</value>
+  </data>
+  <data name="ManagementAirport" xml:space="preserve">
+    <value>مدیریت فرودگاه ها</value>
+  </data>
+  <data name="ENTitle" xml:space="preserve">
+    <value>عنوان (انگلیسی)</value>
+  </data>
+  <data name="AddAirport" xml:space="preserve">
+    <value>افزودن فرودگاه</value>
+  </data>
+  <data name="Airports" xml:space="preserve">
+    <value>فرودگاه ها</value>
+  </data>
+  <data name="ManagementTourRequiredDocs" xml:space="preserve">
+    <value>مدیریت مدارک مورد نیاز تورها</value>
+  </data>
+  <data name="AddRequiredDocs" xml:space="preserve">
+    <value>افزودن مدرک مورد نیاز</value>
+  </data>
+  <data name="RequiredDocuments" xml:space="preserve">
+    <value>مدارک مورد نیاز تور</value>
+  </data>
+  <data name="DayTitle" xml:space="preserve">
+    <value>عنوان روز</value>
+  </data>
+  <data name="PicSizeActivity" xml:space="preserve">
+    <value>سایز تصویر با عرض 447 و ارتفاع 342 پیکسل باشد</value>
+  </data>
+  <data name="PicSizeHotel" xml:space="preserve">
+    <value>سایز تصویر با عرض 700 و ارتفاع 525 پیکسل باشد</value>
+  </data>
+  <data name="PicSizeTourPrimarySlider" xml:space="preserve">
+    <value>سایز تصویر با عرض 835 و ارتفاع 500 پیکسل باشد</value>
+  </data>
+  <data name="PicSize200x200" xml:space="preserve">
+    <value>سایز تصویر با عرض 200 و ارتفاع 200 پیکسل باشد</value>
+  </data>
+  <data name="PicSizeSlider" xml:space="preserve">
+    <value>سایز تصویر با عرض 1280 و ارتفاع 573 پیکسل باشد</value>
+  </data>
+  <data name="URL" xml:space="preserve">
+    <value>آدرس لینک 404</value>
+  </data>
+  <data name="ManagementNotFountLinks" xml:space="preserve">
+    <value>مدیریت لینک های یافت نشده 404</value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>ترتیب</value>
+  </data>
+  <data name="SeoText" xml:space="preserve">
+    <value>متن سئو</value>
+  </data>
+  <data name="UsedForTabMagazineSeo" xml:space="preserve">
+    <value>متن سئو در تب های مجله گردشگری مورد استفاده قرار خواهد گرفت</value>
+  </data>
+  <data name="ManagementHotelRules" xml:space="preserve">
+    <value>مدیریت قوانین و مقررات هتل</value>
+  </data>
+  <data name="LinkTableTitle" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="LastSecondTour" xml:space="preserve">
+    <value>تور لحظه آخری</value>
+  </data>
+  <data name="ManagementContentGroup" xml:space="preserve">
+    <value>مدیریت گروه های محتوا</value>
+  </data>
+  <data name="AddLastSecondTour" xml:space="preserve">
+    <value>افزودن تور لحظه آخری</value>
+  </data>
+  <data name="ManagementLastSecondTours" xml:space="preserve">
+    <value>مدیریت تورهای لحظه آخری</value>
+  </data>
+  <data name="PicSizeLastSecondTour" xml:space="preserve">
+    <value>&lt;strong&gt;توجه!&lt;/strong&gt; سایز تصویر با عرض  &lt;code&gt;447&lt;/code&gt; و ارتفاع &lt;code&gt;342&lt;/code&gt; پیکسل باشد</value>
+  </data>
+  <data name="IsAvailable" xml:space="preserve">
+    <value>آزاد برای انتخاب؟</value>
+  </data>
+  <data name="TourLandingPageUrlPatternForGeneralTour" xml:space="preserve">
+    <value>/tour/country-city-season-airfloot/</value>
+  </data>
+  <data name="UseThisTourLandingPageUrlPattern" xml:space="preserve">
+    <value>لطفا URL را مطابق الگوی زیر ، با استفاده از کلمات انگلیسی و (نگارش صحیح) بسازید</value>
+  </data>
+  <data name="TourLandingPage" xml:space="preserve">
+    <value>تور لندینگ پیج</value>
+  </data>
+  <data name="UrlRequired" xml:space="preserve">
+    <value>آدرس تور را انتخاب نمایید</value>
+  </data>
+  <data name="UsedInTour" xml:space="preserve">
+    <value>استفاده در تور</value>
+  </data>
+  <data name="IsSummary" xml:space="preserve">
+    <value>ایجاد سریع؟</value>
+  </data>
+  <data name="DestinationAirport" xml:space="preserve">
+    <value>فرودگاه مقصد</value>
+  </data>
+  <data name="FromAirport" xml:space="preserve">
+    <value>فرودگاه مبدا</value>
+  </data>
+  <data name="LandingPageUrlType" xml:space="preserve">
+    <value>نوع آدرس تور</value>
+  </data>
+  <data name="DiscountedTour" xml:space="preserve">
+    <value>تور تخفیف دار</value>
+  </data>
+  <data name="GeneralTour" xml:space="preserve">
+    <value>تور عمومی</value>
+  </data>
+  <data name="ForDiscountTour" xml:space="preserve">
+    <value>برای تور تخفیف دار</value>
+  </data>
+  <data name="ForGeneralTour" xml:space="preserve">
+    <value>برای تور عمومی</value>
+  </data>
+  <data name="TourLandingPageUrlPatternForDiscountTour" xml:space="preserve">
+    <value>/tour/country-city-airfloot-offer/</value>
+  </data>
+  <data name="ManagementHotelBoard" xml:space="preserve">
+    <value>مدیریت بورد هتل</value>
+  </data>
+  <data name="HotelBoard" xml:space="preserve">
+    <value>بورد هتل</value>
+  </data>
+  <data name="FetchTours" xml:space="preserve">
+    <value>نمایش تورها</value>
+  </data>
+  <data name="TourPriorityManagement" xml:space="preserve">
+    <value>مدیریت اولویت دهی به تورها</value>
+  </data>
+  <data name="SelectAtLeastOneElement" xml:space="preserve">
+    <value>حداقل یک مورد را انتخاب نمایید</value>
+  </data>
+  <data name="TourGroup" xml:space="preserve">
+    <value>گروه تور</value>
+  </data>
+  <data name="FetchToursByTourGroup" xml:space="preserve">
+    <value>واکشی تورها بر اساس گروه تور</value>
+  </data>
+  <data name="ToursList" xml:space="preserve">
+    <value>تورها</value>
+  </data>
+  <data name="BatchUpdatePriceInTourPackage" xml:space="preserve">
+    <value>به روز رسانی دسته ای قیمت ها در پکیج تور</value>
+  </data>
+  <data name="Numeric" xml:space="preserve">
+    <value>عددی</value>
+  </data>
+  <data name="Percent" xml:space="preserve">
+    <value>درصدی</value>
+  </data>
+  <data name="CurrencyUpdatePriceVal" xml:space="preserve">
+    <value>افزایش/کاهش (ارزی)</value>
+  </data>
+  <data name="EnumUpdatePriceType" xml:space="preserve">
+    <value>افزایش/کاهش به صورت</value>
+  </data>
+  <data name="IranUpdatePriceVal" xml:space="preserve">
+    <value>افزایش/کاهش (تومان)</value>
+  </data>
+  <data name="IsUpdateCurrencyPrice" xml:space="preserve">
+    <value>ویرایش ارزی؟</value>
+  </data>
+  <data name="TourPacageFromPrice" xml:space="preserve">
+    <value>شروع قیمت در پکیج تور</value>
+  </data>
+  <data name="TourPackage" xml:space="preserve">
+    <value>پکیج تور</value>
+  </data>
+  <data name="NowruzTours" xml:space="preserve">
+    <value>تورهای نوروزی</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>برگشت</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>رفت</value>
+  </data>
+  <data name="BaseRialPrice" xml:space="preserve">
+    <value>مبلغ پایه ریالی</value>
+  </data>
+  <data name="CurrenySign" xml:space="preserve">
+    <value>علامت</value>
+  </data>
+  <data name="AdultCapacity" xml:space="preserve">
+    <value>حداکثر ظرفیت بزرگسال</value>
+  </data>
+  <data name="ChildCapacity" xml:space="preserve">
+    <value>حداکثر ظرفیت کودک</value>
+  </data>
+  <data name="InfantCapacity" xml:space="preserve">
+    <value>حداکثر ظرفیت نوزاد</value>
+  </data>
+  <data name="HasAdult" xml:space="preserve">
+    <value>بزرگسال؟</value>
+  </data>
+  <data name="HasChild" xml:space="preserve">
+    <value>کودک؟</value>
+  </data>
+  <data name="HasInfant" xml:space="preserve">
+    <value>نوزاد؟</value>
+  </data>
+  <data name="AdultMaxCapacity" xml:space="preserve">
+    <value>حداکثر ظرفیت بزرگسال</value>
+  </data>
+  <data name="AdultMinCapacity" xml:space="preserve">
+    <value>حداقل ظرفیت بزرگسال</value>
+  </data>
+  <data name="ChildMaxCapacity" xml:space="preserve">
+    <value>حداکثر ظرفیت کودک</value>
+  </data>
+  <data name="ChildMinCapacity" xml:space="preserve">
+    <value>حداقل ظرفیت کودک</value>
+  </data>
+  <data name="InfantMaxCapacity" xml:space="preserve">
+    <value>حداکثر ظرفیت نوزاد</value>
+  </data>
+  <data name="InfantMinCapacity" xml:space="preserve">
+    <value>حداقل ظرفیت نوزاد</value>
+  </data>
+  <data name="IsDddlDestination" xml:space="preserve">
+    <value>آیا در جستجوی مقصد فعال شود؟</value>
+  </data>
+  <data name="IsDddlFrom" xml:space="preserve">
+    <value>آیا در جستجوی مبدا فعال شود؟</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>کد یاتا</value>
+  </data>
+  <data name="TitleEn" xml:space="preserve">
+    <value>عنوان انگلیسی</value>
+  </data>
+  <data name="ManagementVehicleTypeClass" xml:space="preserve">
+    <value>مدیریت کلاس های انواع وسیله نقلیه</value>
+  </data>
+  <data name="ShortCode" xml:space="preserve">
+    <value>کد اختصاری</value>
+  </data>
+  <data name="VehicleTypeClass" xml:space="preserve">
+    <value>کلاس نوع وسیله</value>
+  </data>
+  <data name="AdultPrice" xml:space="preserve">
+    <value>قیمت بزرگسال</value>
+  </data>
+  <data name="ChildPrice" xml:space="preserve">
+    <value>قیمت کودک</value>
+  </data>
+  <data name="InfantPrice" xml:space="preserve">
+    <value>قیمت نوزاد</value>
+  </data>
+  <data name="PicSize100x100" xml:space="preserve">
+    <value>سایز تصویر با عرض 100 و ارتفاع  100پیکسل باشد</value>
+  </data>
+  <data name="ServiceDesc" xml:space="preserve">
+    <value>شرح خدمات</value>
+  </data>
+  <data name="HotelLocation" xml:space="preserve">
+    <value>موقعیت هتل</value>
+  </data>
+  <data name="ToruPackageDayManagement" xml:space="preserve">
+    <value>مدیریت روز پکیج تور</value>
+  </data>
+  <data name="TourPackgeDayId" xml:space="preserve">
+    <value>چند روز؟</value>
+  </data>
+  <data name="LocationId" xml:space="preserve">
+    <value>لندینگ</value>
+  </data>
+  <data name="TourDuration" xml:space="preserve">
+    <value>مدت زمان</value>
+  </data>
+  <data name="TourSuggestManagement" xml:space="preserve">
+    <value>مدیریت تورهای پیشنهادی</value>
+  </data>
+  <data name="NavigationUrl" xml:space="preserve">
+    <value>آدرس لینک</value>
+  </data>
+  <data name="PackageManagement" xml:space="preserve">
+    <value>مدیریت پکیج تور ها</value>
+  </data>
+  <data name="ImageURL" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+  <data name="OfferPrice" xml:space="preserve">
+    <value>مبلغ تخفیف</value>
+  </data>
+  <data name="SarinaPrice" xml:space="preserve">
+    <value>قیمت دهی هتل سارینا</value>
+  </data>
+</root>

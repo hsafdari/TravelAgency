@@ -1,0 +1,340 @@
+﻿@model TourReserveViewModel
+@{
+    Layout = null;
+    var index = 0;
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<link rel="stylesheet" href="~/Content/assets/plugins/Select2_V4/css/select2.css">
+<style>
+    .select2 {
+        padding: 0px !important;
+    }
+</style>
+<script src="~/Content/assets/plugins/Select2_V4/js/select2.js"></script>
+@if (Model.RoomSections != null && Model.RoomSections.Any())
+{
+    foreach (var room in Model.RoomSections)
+    {
+        <section class="main white tour-room-data">
+            <h2 class="sectionTitle">اطلاعات مسافران اتاق @(Model.RoomSections.IndexOf(room) + 1)</h2>
+            <div class="form">
+                @for (int i = 0; i < room.AdultCount; i++)
+                {
+                    <div class="passengerItem" role="group">
+                        <legend>مسافر بزرگسال</legend>
+                        <label class="label">
+                            <span class="label-text">جنسیت</span>
+                            @Html.EnumDropDownListFor(x => x.PassengerList[index].Gender)
+                            @Html.HiddenFor(x => x.PassengerList[index].AgeRange, new { @Value = ParvazPardaz.Model.Enum.AgeRange.Adult, @class = "AgeRange" })
+                            @Html.HiddenFor(x => x.PassengerList[index].RoomIndex, new { @Value = Model.RoomSections.IndexOf(room), @class = "RoomIndex" })
+                            <input type="hidden" class="SectionIndex" value="@index" />
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].Gender, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label">
+                            <span class="label-text">کد ملی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].NationalCode, new { @class = "NationalCode" })
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].NationalCode, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label dateFields">
+                            <span class="label-text">تاریخ تولد میلادی</span>
+                            @Html.HiddenFor(x => x.PassengerList[index].Birthdate, new { @class = "HiddenDate" })
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].Birthdate, "", new { @class = "form-error" })
+                            <input type="number" class="date-day" min="1" value="">
+                            <select class="date-month">
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <input type="number" class="date-year" min="1900" value="">
+                        </label>
+                        @if (Model.IsForeignTour)
+                        {
+                        <label class="label">
+                            <span class="label-text">کشور محل تولد</span>
+                            @Html.DropDownListFor(x => x.PassengerList[index].BirthCountryId, ViewBag.CountryDDL as IEnumerable<SelectListItem>)
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].BirthCountryId, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label">
+                            <span class="label-text">شماره پاسپورت</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].PassportNo, new { @Class = "PassportNo" })
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].PassportNo, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label dateFields">
+                            <span class="label-text">تاریخ انقضای پاسپورت</span>
+                            @Html.HiddenFor(x => x.PassengerList[index].PassportExpirationDate, new { @class = "HiddenDate" })
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].PassportExpirationDate, "", new { @class = "form-error" })
+                            <input type="number" class="date-day passport" min="1" value="">
+                            <select class="date-month passport">
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <input type="number" class="date-year passport" min="@DateTime.Now.Year" value="">
+                        </label>
+                        }
+                        <label class="label">
+                            <span class="label-text">نام فارسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].FirstName, new { @class = "OnlyPersianChar" })
+                            <i class="form-info">لطفا از نامی استفاده کنید که در شناسنامه مسافر ذکر شده است</i>
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].FirstName, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label">
+                            <span class="label-text">نام خانوادگی فارسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].LastName, new { @class = "OnlyPersianChar" })
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].LastName, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label lblEnFirstName">
+                            <span class="label-text">نام انگلیسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].EnFirstName, new { @class = "OnlyEnglishChar" })
+                            <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].EnFirstName, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label lblEnLastName">
+                            <span class="label-text">نام خانوادگی انگلیسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].EnLastName, new { @class = "OnlyEnglishChar" })
+                            <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].EnLastName, "", new { @class = "form-error" })
+                        </label>
+                        <button name="op" class="btn-4 edit active" onclick="event.preventDefault(); otherPassengers(this);">از مسافر سابق</button>
+                        <div class="otherPassengerSection">
+                            @Html.DropDownList("PreviousPassenger", ViewBag.AdultPreviousPassengerDDL as SelectList, ParvazPardaz.Resource.General.Generals.PleaseSelect, new { @class = "select", @onChange = "FetchPassengerInfo(this)" })
+                        </div>
+                    </div>
+                        index++;
+                }
+                @for (int i = 0; i < room.ChildCount; i++)
+                {
+                    <div class="passengerItem" role="group">
+                        <legend>مسافر کودک</legend>
+                        <label class="label">
+                            <span class="label-text">جنسیت</span>
+                            @Html.EnumDropDownListFor(x => x.PassengerList[index].Gender)
+                            @Html.HiddenFor(x => x.PassengerList[index].AgeRange, new { @Value = ParvazPardaz.Model.Enum.AgeRange.Child, @class = "AgeRange" })
+                            @Html.HiddenFor(x => x.PassengerList[index].RoomIndex, new { @Value = Model.RoomSections.IndexOf(room), @class = "RoomIndex" })
+                            <input type="hidden" class="SectionIndex" value="@index" />
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].Gender, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label">
+                            <span class="label-text">کد ملی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].NationalCode, new { @class = "NationalCode" })
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].NationalCode, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label dateFields">
+                            <span class="label-text">تاریخ تولد میلادی</span>
+                            @Html.HiddenFor(x => x.PassengerList[index].Birthdate, new { @class = "HiddenDate" })
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].Birthdate, "", new { @class = "form-error" })
+                            <input type="number" class="date-day" min="1" value="">
+                            <select class="date-month">
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <input type="number" class="date-year"  min="@DateTime.Now.Year-5"  value="">
+                        </label>
+                        @if (Model.IsForeignTour)
+                        {
+                            <label class="label">
+                                <span class="label-text">کشور محل تولد</span>
+                                @Html.DropDownListFor(x => x.PassengerList[index].BirthCountryId, ViewBag.CountryDDL as IEnumerable<SelectListItem>)
+                                @Html.ValidationMessageFor(model => model.PassengerList[index].BirthCountryId, "", new { @class = "form-error" })
+                            </label>
+                            <label class="label">
+                                <span class="label-text">شماره پاسپورت</span>
+                                @Html.TextBoxFor(x => x.PassengerList[index].PassportNo)
+                                @Html.ValidationMessageFor(model => model.PassengerList[index].PassportNo, "", new { @class = "form-error" })
+                            </label>
+                            <label class="label dateFields">
+                                <span class="label-text">تاریخ انقضای پاسپورت</span>
+                                @Html.HiddenFor(x => x.PassengerList[index].PassportExpirationDate, new { @class = "HiddenDate" })
+                                @Html.ValidationMessageFor(model => model.PassengerList[index].PassportExpirationDate, "", new { @class = "form-error" })
+                                <input type="number" class="date-day passport" min="1" value="">
+                                <select class="date-month passport">
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                                <input type="number" class="date-year passport" min="@DateTime.Now.Year" value="">
+                            </label>
+                        }
+                        <label class="label">
+                            <span class="label-text">نام فارسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].FirstName, new { @class = "OnlyPersianChar" })
+                            <i class="form-info">لطفا از نامی استفاده کنید که در شناسنامه مسافر ذکر شده است</i>
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].FirstName, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label">
+                            <span class="label-text">نام خانوادگی فارسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].LastName, new { @class = "OnlyPersianChar" })
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].LastName, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label">
+                            <span class="label-text">نام انگلیسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].EnFirstName, new { @class = "OnlyEnglishChar" })
+                            <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].EnFirstName, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label">
+                            <span class="label-text">نام خانوادگی انگلیسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].EnLastName, new { @class = "OnlyEnglishChar" })
+                            <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].EnLastName, "", new { @class = "form-error" })
+                        </label>
+                        <button name="op" class="btn-4 edit active" onclick="event.preventDefault(); otherPassengers(this);">از مسافر سابق</button>
+                        <div class="otherPassengerSection">
+                            @Html.DropDownList("PreviousPassenger", ViewBag.ChildPreviousPassengerDDL as SelectList, ParvazPardaz.Resource.General.Generals.PleaseSelect, new { @class = "select", @onChange = "FetchPassengerInfo(this)" })
+                        </div>
+                    </div>
+                        index++;
+                }
+                @for (int i = 0; i < room.InfantCount; i++)
+                {
+                    <div class="passengerItem" role="group">
+                        <legend>مسافر نوزاد</legend>
+                        <label class="label">
+                            <span class="label-text">جنسیت</span>
+                            @Html.EnumDropDownListFor(x => x.PassengerList[index].Gender)
+                            @Html.HiddenFor(x => x.PassengerList[index].AgeRange, new { @Value = ParvazPardaz.Model.Enum.AgeRange.Infant, @class = "AgeRange" })
+                            @Html.HiddenFor(x => x.PassengerList[index].RoomIndex, new { @Value = Model.RoomSections.IndexOf(room), @class = "RoomIndex" })
+                            <input type="hidden" class="SectionIndex" value="@index" />
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].Gender, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label">
+                            <span class="label-text">کد ملی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].NationalCode, new { @class = "NationalCode" })
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].NationalCode, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label dateFields">
+                            <span class="label-text">تاریخ تولد میلادی</span>
+                            @Html.HiddenFor(x => x.PassengerList[index].Birthdate, new { @class = "HiddenDate" })
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].Birthdate, "", new { @class = "form-error" })
+                            <input type="number" class="date-day" min="1" value="">
+                            <select class="date-month">
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <input type="number" class="date-year" min="@DateTime.Now.Year-3" value="">
+                        </label>
+                        @if (Model.IsForeignTour)
+                        {
+                            <label class="label">
+                                <span class="label-text">کشور محل تولد</span>
+                                @Html.DropDownListFor(x => x.PassengerList[index].BirthCountryId, ViewBag.CountryDDL as IEnumerable<SelectListItem>)
+                                @Html.ValidationMessageFor(model => model.PassengerList[index].BirthCountryId, "", new { @class = "form-error" })
+                            </label>
+                            <label class="label">
+                                <span class="label-text">شماره پاسپورت</span>
+                                @Html.TextBoxFor(x => x.PassengerList[index].PassportNo)
+                                @Html.ValidationMessageFor(model => model.PassengerList[index].PassportNo, "", new { @class = "form-error" })
+                            </label>
+                            <label class="label dateFields">
+                                <span class="label-text">تاریخ انقضای پاسپورت</span>
+                                @Html.HiddenFor(x => x.PassengerList[index].PassportExpirationDate, new { @class = "HiddenDate" })
+                                @Html.ValidationMessageFor(model => model.PassengerList[index].PassportExpirationDate, "", new { @class = "form-error" })
+                                <input type="number" class="date-day passport" min="1" value="">
+                                <select class="date-month passport">
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                                <input type="number" class="date-year passport" min="@DateTime.Now.Year" value="">
+                            </label>
+                        }
+                        <label class="label">
+                            <span class="label-text">نام فارسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].FirstName, new { @class = "OnlyPersianChar" })
+                            <i class="form-info">لطفا از نامی استفاده کنید که در شناسنامه مسافر ذکر شده است</i>
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].FirstName, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label">
+                            <span class="label-text">نام خانوادگی فارسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].LastName, new { @class = "OnlyPersianChar" })
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].LastName, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label">
+                            <span class="label-text">نام انگلیسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].EnFirstName, new { @class = "OnlyEnglishChar" })
+                            <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].EnFirstName, "", new { @class = "form-error" })
+                        </label>
+                        <label class="label">
+                            <span class="label-text">نام خانوادگی انگلیسی</span>
+                            @Html.TextBoxFor(x => x.PassengerList[index].EnLastName, new { @class = "OnlyEnglishChar" })
+                            <i class="form-info">لطفا هنگام ورود حروف نام لاتین دقت کنید!</i>
+                            @Html.ValidationMessageFor(model => model.PassengerList[index].EnLastName, "", new { @class = "form-error" })
+                        </label>
+                        <button name="op" class="btn-4 edit active" onclick="event.preventDefault(); otherPassengers(this);">از مسافر سابق</button>
+                        <div class="otherPassengerSection">
+                            @Html.DropDownList("PreviousPassenger", ViewBag.InfantPreviousPassengerDDL as SelectList, ParvazPardaz.Resource.General.Generals.PleaseSelect, new { @class = "select", @onChange = "FetchPassengerInfo(this)" })
+                        </div>
+                    </div>
+                        index++;
+                }
+            </div>
+        </section>
+    }
+}
+else
+{
+    <div class="alert alert-dismissible alert-info">
+        <strong>کاربر گرامی!</strong> لطفا مجددا اقدام به جستجو نمایید
+    </div>
+}

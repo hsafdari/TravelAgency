@@ -1,0 +1,764 @@
+﻿@model List<ParvazPardaz.Model.Entity.Core.Menu>
+@helper ShowTree(IEnumerable<ParvazPardaz.Model.Entity.Core.Menu>
+        menuitems)
+{
+    foreach (var item in menuitems)
+    {
+        if (item != null)
+        {
+            // -Parent , -Child --> Root
+            if (item.MenuChilds.Count == 0 && item.MenuParentId == null)
+                {
+                    <li class="@(item.MenuUrl == Request.Url.LocalPath ? "active" : "")">
+                        <a href="@item.MenuUrl" target="@item.Target">
+                            <span class="title">@item.MenuTitle</span>
+                        </a>
+                    </li>
+                }
+                // -Parent , +Child --> Root
+                else if (item.MenuChilds.Count > 0 && item.MenuParentId == null)
+                {
+                    <li class="@(item.MenuChilds.Any(x=>x.MenuUrl.Contains(Request.Url.LocalPath)) ? "active open" : "")">
+                        <a href="javascript:void(0)">
+                            <i class="clip-screen"></i>
+                            <span class="title">@item.MenuTitle</span><i class="icon-arrow"></i>
+                            <span class="selected"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            @ShowTree(item.MenuChilds)
+                        </ul>
+                    </li>
+                }
+                // +Parent , -Child  --> Child
+                else if (item.MenuChilds.Count == 0 && item.MenuParentId != null)
+                {
+                    <li class="@(item.MenuUrl == Request.Url.LocalPath ? "active" : "")">
+                        <a href="@item.MenuUrl" target="@item.Target">
+                            <span class="title">@item.MenuTitle</span>
+                        </a>
+                    </li>
+                }
+                // +Parent , +Child  --> Child
+                else if (item.MenuChilds.Count > 0 && item.MenuParentId != null)
+                {
+                    <li class="@(item.MenuChilds.Any(x=>x.MenuUrl.Contains(Request.Url.LocalPath)) ? "active open" : "")">
+                        <a href="javascript:void(0)">
+                            <i class="clip-screen"></i>
+                            <span class="title">@item.MenuTitle</span><i class="icon-arrow"></i>
+                            <span class="selected"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            @ShowTree(item.MenuChilds)
+                        </ul>
+                    </li>
+                }
+           
+        }
+    }
+}
+
+@ShowTree(Model)
+
+@*<li class="active open">
+        <a href="/Admin/Dashboard/Index">
+            <i class="clip-home-3"></i>
+            <span class="title"> @ParvazPardaz.Resource.General.Generals.Dashboard </span><span class="selected"></span>
+        </a>
+    </li>
+    <li>
+        <a href="javascript:void(0)">
+            <i class="clip-screen"></i>
+            <span class="title">مدیریت سئو</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+
+            <li>
+                <a href="/Admin/PostGroup/Index">
+                    <span class="title">@ParvazPardaz.Resource.EShop.EShopResource.PostGroupManagement</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Admin/Tag/Index">
+                    <span class="title">مدیریت تگ ها</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="javascript:void(0)">
+            <i class="clip-screen"></i>
+            <span class="title">مدیریت مجله خبری</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/Post/Create">
+                    <span class="title">@ParvazPardaz.Resource.EShop.EShopResource.AddPost</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Post/Index">
+                    <span class="title">@ParvazPardaz.Resource.EShop.EShopResource.PostManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="title">عملکرد کاربر</span>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:void(0)">
+            <i class="clip-screen"></i>
+            <span class="title">@ParvazPardaz.Resource.General.Generals.WebSiteManagement</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            @if (User.IsInRole("SystemAdministrator") || User.IsInRole("Administrators"))
+            {
+                <li>
+                    <a href="/Admin/Permission/Index">
+                        <span class="title">@ParvazPardaz.Resource.CMS.CMS.ManagementPermission</span>
+                    </a>
+                </li>
+            }
+            <li>
+                <a href="/Admin/MenuGroup/Index">
+                    <span class="title">@ParvazPardaz.Resource.CMS.CMS.ManagementMenuGroup</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Footer/Index">
+                    <span class="title">@ParvazPardaz.Resource.CMS.CMS.FooterManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/slidergroup/Index">
+                    <span class="title">@ParvazPardaz.Resource.CMS.CMS.ManagementSliderGroup</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/slider/Index">
+                    <span class="title">@ParvazPardaz.Resource.CMS.CMS.ManagementSlider</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/slider/HomeSliderIndex">
+                    <span class="title">@ParvazPardaz.Resource.CMS.CMS.ManagementSliderHome</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/slider/TourLandingSliderIndex">
+                    <span class="title">@ParvazPardaz.Resource.CMS.CMS.ManagementSliderTourLanding</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/PostGroup/Create">
+                    <span class="title">@ParvazPardaz.Resource.EShop.EShopResource.PostGroupManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Post/Index">
+                    <span class="title">@ParvazPardaz.Resource.EShop.EShopResource.PostManagement</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Admin/Review/Index">
+                    <span class="title">@ParvazPardaz.Resource.CMS.CMS.ManagementReviewItems</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Comment/Index">
+                    <span class="title">@ParvazPardaz.Resource.EShop.EShopResource.ManagementComments</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Tag/Index">
+                    <span class="title">مدیریت تگ ها</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/NewsLetter/Index">
+                    <span class="title">مدیریت خبرنامه</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Department/Index">
+                    <span class="title">واحدهای اداری</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/ContactUs/Index">
+                    <span class="title">تماس با ما</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:void(0)">
+            <i class="clip-screen"></i>
+            <span class="title">@ParvazPardaz.Resource.CMS.CMS.HomeTabMagazine</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/Location/Index">
+                    <span class="title">@ParvazPardaz.Resource.CMS.CMS.ManagementLocations</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/TabMagazine/Index">
+                    <span class="title">@ParvazPardaz.Resource.CMS.CMS.ManagementTabMagazine</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Tour/TourPriority">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.TourPriorityManagement</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:void(0)">
+            <i class="clip-screen"></i>
+            <span class="title">عملکرد </span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="#">
+                    <span class="title">عملکرد کاربر</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="title">عملکرد مدیر سئو</span>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:void(0)">
+            <i class="clip-screen"></i>
+            <span class="title">لینک ها </span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+
+            <li>
+                <a href="/Admin/Link/Index">
+                    <span class="title">مدیریت لینک ها</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/LinkRedirection/Index">
+                    <span class="title">مدیریت لینک های 301</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/NotFoundLink/Index">
+                    <span class="title">لاگ لینک های 404</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:void(0)">
+            <i class="clip-screen"></i>
+            <span class="title">@ParvazPardaz.Resource.User.Users.UserManagement</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/User/Index">
+                    <span class="title">@ParvazPardaz.Resource.User.Users.UserManagementPersonal</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/User/Company">
+                    <span class="title">@ParvazPardaz.Resource.User.Users.UserManagementCompany</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Role/Index">
+                    <span class="title">@ParvazPardaz.Resource.User.Users.RoleManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/UserGroup/Index">
+                    <span class="title">@ParvazPardaz.Resource.User.Users.ManagementUserGroups</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/UserCommission/Index">
+                    <span class="title">@ParvazPardaz.Resource.User.Users.UserCommissionsManagement</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:void(0)">
+            <i class="clip-folder"></i>
+            <span class="title">@ParvazPardaz.Resource.Book.Book.ReservationManagement</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/OrderType/Index">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.ManagementOrderTypes</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Task/Index">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.ManagementTasks</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Admin/AgencySetting/Index">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.ManagementAgencySettings</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/RoomType/Index">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.ManagementRoomTypes</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Coupon/Index">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.CouponManagement</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:void(0)">
+            <i class="clip-folder"></i>
+            <span class="title">@ParvazPardaz.Resource.Book.Book.OrderReport</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/Order/Index">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.SellsReport</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Order/Doing">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.AreBookingReport</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Order/OrderFlights">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.sellesFlightReports</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Order/OrderHotels">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.sellesHotelsReports</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Order/OrderPassengers">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.sellesPassengerReports</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- Country -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa fa-flag"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.Country</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/Country/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.CountryManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/State/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.StateManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/City/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.CityManagement</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- Currency -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa fa-money"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.Currency</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/Currency/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.CurrencyManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Currency/Create">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AddCurrency</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- Payment Logs -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="clip-checkbox-checked-2"></i>
+            <span class="title"> @ParvazPardaz.Resource.Book.Book.OservationPaymentLog </span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/PaymentLog/Index/1">
+                    <span class="title"> @ParvazPardaz.Resource.Book.Book.SuccessfulPaymentLogs</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/PaymentLog/Index/0">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.UnSuccessfulPaymentLogs</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- AllowedBanned -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa fa-ban"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.AllowedBanned</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/AllowedBanned/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AllowedBannedManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/AllowedBanned/Create">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AddAllowedBanned</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!--  Leader -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa fa-users"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.Leader</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/Leader/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.LeaderManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Leader/Create">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AddLeader</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- TourCategory -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa fa-suitcase"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.TourCategory</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/TourCategory/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.TourCategoryManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/TourCategory/Create">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AddTourCategory</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- TourLevel -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa fa-suitcase"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.TourLevel</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/TourLevel/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.TourLevelManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/TourLevel/Create">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AddTourLevel</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- TourType -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa fa-suitcase"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.TourType</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/TourType/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.TourTypeManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/TourType/Create">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AddTourType</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- VehicleType -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa fa-plane" aria-hidden="true"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.Transportation</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/VehicleTypeClass/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.ManagementVehicleTypeClass</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/VehicleType/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.VehicleTypeMangement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/CompanyTransfer/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.CompanyTransferManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/CompanyTransferVehicleType/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.CompanyTransferVehicleTypeManagement</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- Airport -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa fa-flag"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.Airports</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/Airport/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.ManagementAirport</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Airport/Create">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AddAirport</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- Hotel -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa fa-home"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.Hotel</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/HotelRule/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.ManagementHotelRules</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/HotelFacility/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.HotelFacilityManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/HotelRank/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.HotelRankManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Hotel/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.HotelManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/HotelRoom/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.HotelRoomManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/HotelBoard/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.ManagementHotelBoard</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- Activity -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa fa-smile-o"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.Activity</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/Activity/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.ActivityManagment</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Activity/Create">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AddActivity</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- Tours Required Documents -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa clip-calendar"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.RequiredDocuments</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/RequiredDocument/Index/">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.ManagementTourRequiredDocs</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/RequiredDocument/Create/">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AddRequiredDocs</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- Tour -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa clip-calendar"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.Tour</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/Tour/Index/">
+
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.TourManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Tour/Create/">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AddTour</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/TourPackageDay/Index/">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.TourPackageDayManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/TourPackage/BatchUpdatePrice/">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.BatchUpdatePriceInTourPackage</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/HotelPackage/EditHotelRoomInPackage">
+                    <span class="title">@ParvazPardaz.Resource.Book.Book.ManagementRoomCapacity</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:void(0)">
+            <i class="fa clip-calendar"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.TourLandingPage</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/TourLandingPageUrl/Index">
+                    <span class="title">@ParvazPardaz.Resource.CMS.CMS.ManagementTourLandingPageUrls</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- FAQ -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class="clip-question-2"></i>
+            <span class="title">@ParvazPardaz.Resource.Tour.Tours.FAQ</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/FAQ/Index">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.FAQManagement</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/FAQ/Create">
+                    <span class="title">@ParvazPardaz.Resource.Tour.Tours.AddFAQ</span>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+    <!-- Supporting -->
+    <li>
+        <a href="javascript:void(0)">
+            <i class=" clip-wrench  "></i>
+            <span class="title">@ParvazPardaz.Resource.CMS.CMS.Support</span><i class="icon-arrow"></i>
+            <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/Support/Index">
+                    <span class="title">@ParvazPardaz.Resource.CMS.CMS.ManagementSupport</span>
+                </a>
+            </li>
+            @if (User.IsInRole("SystemAdministrator"))
+            {
+                <li>
+                    <a href="/Admin/Support/Create">
+                        <span class="title">@ParvazPardaz.Resource.CMS.CMS.AddSupport</span>
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </li>*@

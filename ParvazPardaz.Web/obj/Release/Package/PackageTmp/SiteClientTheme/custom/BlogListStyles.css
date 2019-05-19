@@ -1,0 +1,20 @@
+﻿.btn-sortby {
+    color: #fff;
+    background-color: #14232a;
+    border-color: #14232a;
+}
+
+    .btn-sortby:active:hover, .btn-sortby.active:hover, .open > .dropdown-toggle.btn-sortby:hover, .btn-sortby:active:focus, .btn-sortby.active:focus, .open > .dropdown-toggle.btn-sortby:focus, .btn-sortby.focus:active, .btn-sortby.active.focus, .open > .dropdown-toggle.btn-sortby.focus {
+        color: #fff;
+        background-color: #14232a;
+        border-color: #14232a;
+    }
+
+.orderby-dropdown-menu {
+    left: 0 !important;
+    right: auto !important;
+}
+
+.sort-font {
+    font-size: 13px !important;
+}

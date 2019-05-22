@@ -17,7 +17,8 @@ namespace ParvazPardaz.Model.Enum
 
         [Display(Name = "Ticket", ResourceType = typeof(ParvazPardaz.Resource.CMS.CMS))]
         Ticket,
-
+        [Display(Name = "SeoContext", ResourceType = typeof(ParvazPardaz.Resource.CMS.CMS))]
+        SeoContext,
         //[Display(Name = "ShoppingRules", ResourceType = typeof(ParvazPardaz.Resource.CMS.CMS))]
         //ShoppingRules
     }

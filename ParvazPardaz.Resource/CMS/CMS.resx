@@ -657,4 +657,7 @@
   <data name="TermsAndConditionsManagement" xml:space="preserve">
     <value>TermsAndConditionsManagement</value>
   </data>
+  <data name="SeoContext" xml:space="preserve">
+    <value>Seo Context</value>
+  </data>
 </root>

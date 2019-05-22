@@ -926,33 +926,38 @@
     }
 
 
-#callus {
-    bottom: 15% !important;
-    left: 3%;
-}
-
-    #callus a img {
-        height: 50px !important;
-        width: 110px !important;
+    #callus {
+        bottom: 15% !important;
+        left: 3%;
     }
 
-.pricezone .tourpackageprice {
-    display: block;
-    width: 100%;
-}
+        #callus a img {
+            height: 50px !important;
+            width: 110px !important;
+        }
 
-    .pricezone .tourpackageprice span {
-        width: 100%;
+    .pricezone .tourpackageprice {
         display: block;
-        line-height: 1.9;
+        width: 100%;
     }
 
-.imgOffer {
-    display: block;
-    position: absolute;
-    width: 84px;
-    top: -22px;
-    left: -15px;
-    z-index: 1;
-}
+        .pricezone .tourpackageprice span {
+            width: 100%;
+            display: block;
+            line-height: 1.9;
+        }
+
+    .imgOffer {
+        display: block;
+        position: absolute;
+        width: 84px;
+        top: -22px;
+        left: -15px;
+        z-index: 1;
+    }
+
+    footer .authorizations
+{
+
+    }
 }

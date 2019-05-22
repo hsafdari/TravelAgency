@@ -90,10 +90,10 @@
         }
         <input type="hidden" id="taxpercentage" value="@System.Configuration.ConfigurationManager.AppSettings["TaxPercentage"]" />
         <section class="main tour-flight flight-custom white clearfix">
-            <h2 class="sectionTitle">اطلاعات پرواز</h2>
+            <h2 class="sectionTitle">اطلاعات بلیط</h2>
             <div class="form">
                 <label class="label">
-                    <h3>پرواز رفت</h3>
+                    <h3>بلیط رفت</h3>
                     <input type="hidden" name="SelectedDepartureFlightId" value="@defaultArrFlights[0].DepartureFlightId" checked="Checked" />
                     <img src="@departureFlights[0].CompanyTransfer.ImageUrl" alt="@departureFlights[0].CompanyTransfer.Title" class="airline-logo">
                     <span class="flight-date">@departureFlights[0].StartDateTime.ToString("dddd dd MMM")</span>
@@ -106,7 +106,7 @@
                     <span class="flight-number">@string.Format("{0} {1}", departureFlights[0].FlightNumber, departureFlights[0].CompanyTransfer.Title)</span>
                 </label>
                 <label class="label">
-                    <h3>پرواز برگشت</h3>
+                    <h3>بلیط برگشت</h3>
                     <input type="hidden" name="SelectedArrivalFlightId" value="@defaultArrFlights[0].Id" checked="Checked" />
                     <img src="@defaultArrFlights[0].CompanyTransfer.ImageUrl" alt="@defaultArrFlights[0].CompanyTransfer.Title" class="airline-logo">
                     <span class="flight-date">@defaultArrFlights[0].StartDateTime.ToString("dddd dd MMM")</span>

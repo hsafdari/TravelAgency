@@ -645,4 +645,7 @@
   <data name="TermsAndConditionsManagement" xml:space="preserve">
     <value>مدیریت قوانین و مقررات</value>
   </data>
+  <data name="SeoContext" xml:space="preserve">
+    <value>متن سئو</value>
+  </data>
 </root>

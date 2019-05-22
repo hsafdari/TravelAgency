@@ -1333,6 +1333,15 @@ namespace ParvazPardaz.Resource.CMS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Seo Context.
+        /// </summary>
+        public static string SeoContext {
+            get {
+                return ResourceManager.GetString("SeoContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shopping Rules.
         /// </summary>
         public static string ShoppingRules {

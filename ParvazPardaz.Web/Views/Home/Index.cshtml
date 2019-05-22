@@ -1,5 +1,5 @@
 ﻿@model HomeViewModel
-<link rel="canonical" href="@Request.Url.AbsoluteUri)" />
+<link rel="canonical" href="@Request.Url.AbsoluteUri" />
 @Styles.Render("~/bundles/HomeCustomCss")
 <section class="home-display">
     @Html.Partial("_PrvTopHomeSlider", Model.TopHomeSlider)
@@ -48,7 +48,8 @@
         </section>
     </section>
     @Html.Partial("_PrvBelowSlider", Model.sliderbellow)
-    @Html.Partial("_Toastr")
+    @{Html.RenderAction("GetSeoContext", "Home"); }
+        @Html.Partial("_Toastr")
     @section scripts{
         <script type="text/javascript">
             $(".select2").select2({

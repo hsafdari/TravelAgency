@@ -560,6 +560,10 @@ namespace ParvazPardaz.Web.Controllers
             return View(List);
         }
         #endregion
-
+        public ActionResult GetSeoContext()
+        {
+            var content = _unitOfWork.Set<Footer>().Where(x => x.FooterType == EnumFooterType.SeoContext).FirstOrDefault();
+            return PartialView("_PrvSeoContent", content);
+        }
     }
 }

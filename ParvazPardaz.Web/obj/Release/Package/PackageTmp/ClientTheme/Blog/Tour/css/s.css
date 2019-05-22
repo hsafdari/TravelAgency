@@ -412,9 +412,9 @@
     footer .authorizations {
         grid-column: span 1;
         grid-row: span 1;
-        padding: 0;
-        height: 180px;
+        padding: 0;       
         text-align:center;
+        flex-wrap:wrap;
     }
 
     .dp-body {

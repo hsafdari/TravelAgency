@@ -3883,3 +3883,11 @@ canvas {
         transform: translate3d(0em, 0, 0);
     }
 }
+#seocontent {
+    /*display: grid;*/
+    grid-template-columns: 1fr repeat(2, minmax(580px, 2.5fr)) 1fr;
+    background: #e8e8e8;
+}
+    #seocontent #seodv {
+        width:100%;
+    }

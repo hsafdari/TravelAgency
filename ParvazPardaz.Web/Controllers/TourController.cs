@@ -2087,6 +2087,7 @@ namespace ParvazPardaz.Web.Controllers
         }
         //,int[] day
         [HttpPost]
+        [Route("Tour-GetTourPackages")]
         public ActionResult GetTourPackages(TourPackageFilterViewModel viewModel, int pageNumber, int pageSize = 6)
         {
             //var destinationlist = Request.UrlReferrer.LocalPath.Split('-').ToList();

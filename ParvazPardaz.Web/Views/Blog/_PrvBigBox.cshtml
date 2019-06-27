@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<PostDetailViewModel>
 <div id="fashion-style-section" class="fashion-style-section">
-    <aside>
+    @*<aside>
         <div class="section-header">
             <h2>جاذبه های گردشگری</h2>
         </div>
@@ -156,7 +156,7 @@
                                         <p>@(Model.ElementAt(3).PostSummery) </p>
                                         <a href="#"><i class="fa fa-heart"></i> @(Model.ElementAt(3).LikeCount)</a>
                                         <a href="#"><img src="/ClientTheme/images/icon/comment-icon.png" alt="comment" /> 13</a>
-                                        <a href="#"><i class="fa fa-eye"></i> @Model.ElementAt(3).VisitCount</a>
+                                        @*<a href="#"><i class="fa fa-eye"></i> @Model.ElementAt(3).VisitCount</a>
 
                                         @if (Model.ElementAt(3).PostGroups != null)
                                         {
@@ -222,5 +222,5 @@
                 </section>
             </div>
         </div>
-    </aside>
+    </aside>*@
 </div>

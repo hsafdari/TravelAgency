@@ -194,7 +194,7 @@
              }
             $.ajax({
                 type: "POST",
-                url: "/Tour/GetTourPackages/",
+                url: "/tour-GetTourPackages/",
                 data: $(".tourlocationRside :input").serialize(),
                 success: function (data) {
                     if (data.trim() != '') {

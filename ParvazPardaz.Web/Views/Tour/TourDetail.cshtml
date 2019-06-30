@@ -334,6 +334,7 @@
 
 
         $(document).on('click', "#ContinueProcess", function (e) {
+            debugger;
             e.preventDefault();
             var $form = $("form");
             var data = []
@@ -355,7 +356,7 @@
                 obj.AdultCount = adult;
                 obj.ChildCount = child;
                 obj.InfantCount = infant;
-                obj.RoomType = roomtype;
+                obj.RoomType = roomtype.trim();
                 obj.RoomTypeId = $this.find(".SelectedRoomTypeId option:selected").val();
                 obj.HotelPackageId = selectedHotelPackageId;
                 obj.HotelPackageTitle = selectedHotelPackageTitle;

@@ -112,3 +112,41 @@ F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Common\bi
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Common\obj\Debug\ParvazPardaz.Common.csprojResolveAssemblyReference.cache
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Common\obj\Debug\ParvazPardaz.Common.dll
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Common\obj\Debug\ParvazPardaz.Common.pdb
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\ParvazPardaz.Common.dll.config
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\ParvazPardaz.Common.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\ParvazPardaz.Common.pdb
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\AutoMapper.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Microsoft.Owin.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Microsoft.Owin.Security.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Owin.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\ParvazPardaz.Resource.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\PersianDateTime.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.Helpers.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.Mvc.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.Razor.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.WebPages.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\ParvazPardaz.Resource.pdb
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\AutoMapper.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Microsoft.Owin.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Microsoft.Owin.Security.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.Helpers.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.Mvc.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.Razor.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.WebPages.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\bin\Debug\fa-IR\ParvazPardaz.Resource.resources.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\obj\Debug\ParvazPardaz.Common.csprojResolveAssemblyReference.cache
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\obj\Debug\ParvazPardaz.Common.dll
+C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Common\obj\Debug\ParvazPardaz.Common.pdb

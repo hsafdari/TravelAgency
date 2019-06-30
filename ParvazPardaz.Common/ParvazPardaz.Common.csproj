@@ -108,6 +108,7 @@
     <Compile Include="Controller\PersianCulture.cs" />
     <Compile Include="Extension\AutoIgnore.cs" />
     <Compile Include="Extension\CommonHelper.cs" />
+    <Compile Include="Extension\ControllerExtension.cs" />
     <Compile Include="Extension\Convert.cs" />
     <Compile Include="Extension\CurrencyExtension.cs" />
     <Compile Include="Extension\DateTimeExtention.cs" />

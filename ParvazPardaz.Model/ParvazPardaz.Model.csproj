@@ -123,6 +123,7 @@
     <Compile Include="Configuration\Magazine\TourSuggestionConfig.cs" />
     <Compile Include="Configuration\Rule\TermsandConditionConfig.cs" />
     <Compile Include="Configuration\SocialLog\SearchLogConfig.cs" />
+    <Compile Include="Configuration\Tour\RequestConfig.cs" />
     <Compile Include="Configuration\Tour\TourLandingPageUrlConfig.cs" />
     <Compile Include="Configuration\Tour\TourPackageDayConfig.cs" />
     <Compile Include="Configuration\Tour\VehicleTypeClassConfig.cs" />
@@ -273,6 +274,7 @@
     <Compile Include="Entity\Hotel\HotelPackage.cs" />
     <Compile Include="Entity\Hotel\HotelPackageHotelRoom.cs" />
     <Compile Include="Entity\Tour\Leader.cs" />
+    <Compile Include="Entity\Tour\Request.cs" />
     <Compile Include="Entity\Tour\RequiredDocument.cs" />
     <Compile Include="Entity\Tour\Tour.cs" />
     <Compile Include="Entity\Tour\TourAllowBanned.cs" />

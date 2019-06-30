@@ -25,7 +25,7 @@ namespace ParvazPardaz.Web.Areas.Admin.Controllers
     /// <summary>
     /// مدیریت شرکت های حمل ونقل
     /// </summary>
-    [Mvc5AuthorizeAttribute(StandardRoles.PanelUser, StandardRoles.SystemAdministrator)]
+    //[Mvc5AuthorizeAttribute(StandardRoles.PanelUser, StandardRoles.SystemAdministrator)]
     public class CompanyTransferController : BaseController
     {
         #region	Fields

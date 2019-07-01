@@ -1178,6 +1178,7 @@
     <Content Include="ClientTheme\images\phone-39-5122.png" />
     <Content Include="ClientTheme\images\phone.png" />
     <Content Include="ClientTheme\images\responsive-logo.png" />
+    <Content Include="ClientTheme\images\summer-2.png" />
     <Content Include="ClientTheme\images\Termsandcondition.jpg" />
     <Content Include="ClientTheme\images\widget\comment-1.jpg" />
     <Content Include="ClientTheme\images\widget\comment-2.png" />

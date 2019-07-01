@@ -86,8 +86,13 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Core">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
@@ -5622,6 +5627,15 @@
     <Content Include="Content\Font\fontello.ttf" />
     <Content Include="Content\Font\fontello.woff" />
     <Content Include="Content\Font\IranianSans.css" />
+    <Content Include="Content\requestpage\image\img-menu-1.png" />
+    <Content Include="Content\requestpage\image\img-menu-2.png" />
+    <Content Include="Content\requestpage\image\img-menu-3.png" />
+    <Content Include="Content\requestpage\image\img-menu-4.png" />
+    <Content Include="Content\requestpage\image\link-div.png" />
+    <Content Include="Content\requestpage\image\main-image.png" />
+    <Content Include="Content\requestpage\image\tik.png" />
+    <Content Include="Content\requestpage\image\timer.png" />
+    <Content Include="Content\requestpage\request.css" />
     <Content Include="Content\~home\css\bootstrap.min.css" />
     <Content Include="Content\~home\css\ByekanFonts.css" />
     <Content Include="Content\~home\css\colors\blue.css" />
@@ -7315,6 +7329,39 @@
     <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
     <Content Include="CodeTemplates\MvcView\List.cs.t4" />
     <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap.min.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap4.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap4.min.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.foundation.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.foundation.min.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.jqueryui.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.jqueryui.min.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.semanticui.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.semanticui.min.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\jquery.dataTables.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\css\jquery.dataTables.min.css" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\images\sort_asc.png" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\images\sort_asc_disabled.png" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\images\sort_both.png" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\images\sort_desc.png" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\images\sort_desc_disabled.png" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap.js" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap.min.js" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap4.js" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap4.min.js" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.foundation.js" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.foundation.min.js" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.jqueryui.js" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.jqueryui.min.js" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.semanticui.js" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.semanticui.min.js" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\jquery.dataTables.js" />
+    <Content Include="lib\DataTables\DataTables-1.10.18\js\jquery.dataTables.min.js" />
+    <Content Include="lib\DataTables\datatables.css" />
+    <Content Include="lib\DataTables\datatables.js" />
+    <Content Include="lib\DataTables\datatables.min.css" />
+    <Content Include="lib\DataTables\datatables.min.js" />
     <Content Include="OpenSearchDescription.xml" />
     <Content Include="jsonTest\test.json" />
     <Content Include="Plugins\bootstrap-datepicker\bootstrap-theme.css" />
@@ -9022,6 +9069,7 @@
     <Content Include="ClientTheme\Hotel\libs\jquery\README.md" />
     <Content Include="ClientTheme\Hotel\libs\jquery\src\.eslintrc.json" />
     <Content Include="Areas\Admin\Views\Hotel\SarinaPrice.cshtml" />
+    <Content Include="Areas\Admin\Views\Request\Index.cshtml" />
     <None Include="Properties\PublishProfiles\charteran.pubxml" />
     <None Include="Properties\PublishProfiles\keyberim.pubxml" />
     <None Include="Properties\PublishProfiles\Sorrad.pubxml" />
@@ -9475,6 +9523,8 @@
     <Content Include="Scripts\jquery-ui-1.12.0.min.js" />
     <Content Include="Scripts\jquery-ui-1.9.2.js" />
     <Content Include="Scripts\jquery.jqEasyCharCounter.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -11247,6 +11297,7 @@
     <Compile Include="Areas\Admin\Controllers\PostController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostImageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RequestController.cs" />
     <Compile Include="Areas\Admin\Controllers\RequiredDocumentController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReviewController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
@@ -11325,6 +11376,7 @@
     <Compile Include="AutoMapperProfile\PassengerProfile.cs" />
     <Compile Include="AutoMapperProfile\PostGroupProfile.cs" />
     <Compile Include="AutoMapperProfile\PostProfile.cs" />
+    <Compile Include="AutoMapperProfile\RequestProfile.cs" />
     <Compile Include="AutoMapperProfile\RequiredDocumentProfile.cs" />
     <Compile Include="AutoMapperProfile\ReviewProfile.cs" />
     <Compile Include="AutoMapperProfile\RoleProfile.cs" />
@@ -11392,6 +11444,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Content Include="SiteClientTheme\css\BlogMenuStyle.css" />
+    <Compile Include="SignalR\RequestHub.cs" />
     <Compile Include="Views\Emails\ViewModel\ResetPassword.cs" />
     <Compile Include="Views\Emails\ViewModel\WelcomeEmail.cs" />
     <Compile Include="Web References\BPService\Reference.cs">
@@ -11503,6 +11556,7 @@
     <Content Include="Views\Hotel\Index.cshtml" />
     <Content Include="Views\Hotel\Index.Mobile.cshtml" />
     <Content Include="Views\Home\_PrvSeoContent.cshtml" />
+    <Content Include="Views\Tour\RequestSuccess.cshtml" />
     <None Include="Web References\BPService\IPaymentGateway.wsdl" />
     <None Include="Web References\BPService\PaymentGatewayImplService.wsdl" />
     <Content Include="Web References\BPService\Reference.map">

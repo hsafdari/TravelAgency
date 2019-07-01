@@ -20,7 +20,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ParvazPardaz.Web.Areas.Admin.Controllers
 {
-     [Mvc5AuthorizeAttribute(StandardRoles.PanelUser, StandardRoles.SystemAdministrator)]
+     //[Mvc5AuthorizeAttribute(StandardRoles.PanelUser, StandardRoles.SystemAdministrator)]
     public class CommentController : Controller
     {
         #region	Fields

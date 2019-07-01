@@ -1,0 +1,185 @@
+﻿@*@model ParvazPardaz.ViewModel.TourViewModels.Request.GridRequestViewModel*@
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (ParvazPardaz.Resource.General.Generals.Direction == "RTL")
+{
+    if (ParvazPardaz.Resource.General.Generals.Regional == "AR")
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+        @Scripts.Render("~/Scripts/kendo/ar-IQ/js");
+    }
+    else
+    {
+        @Styles.Render("~/content/kendo/RTL/css");
+        @Scripts.Render("~/Scripts/kendo/fa-IR/js");
+    }
+}
+else
+{
+    @Styles.Render("~/content/kendo/LTR/css");
+    @Scripts.Render("/Scripts/kendo/en-US/js");
+}
+
+<h3>@ParvazPardaz.Resource.EShop.EShopResource.PostGroupManagement </h3>
+<hr />
+<p>
+    @if (Infrastructure.HasPermission.CanAccess("Create", "/Admin/PostGroup/Create"))
+    {
+        <a href="@Url.Action("Create")" class="btn btn-green">
+            <i class="fa fa-plus"></i>
+            @ParvazPardaz.Resource.General.Generals.Create
+        </a>
+    }
+    @if (Infrastructure.HasPermission.CanAccess("Edit", "/Admin/PostGroup/Edit"))
+    {
+        <a onclick="edit()" class="btn btn-blue">
+            <i class="fa fa-edit"></i>
+            @ParvazPardaz.Resource.General.Generals.Edit
+        </a>
+    }
+    @if (Infrastructure.HasPermission.CanAccess("Delete", "/Admin/PostGroup/Delete"))
+    {
+        <a onclick="del()" class="btn btn-red">
+            <i class="fa fa-trash-o"></i>
+            @ParvazPardaz.Resource.General.Generals.Delete
+        </a>
+    }
+</p>
+
+<div>
+    <table class="table table-bordered" id="request-tbl">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">نام تور</th>
+                <th scope="col">تعداد بزرگسال</th>
+                <th scope="col">تعداد کودک</th>
+                <th scope="col">تعداد نوزاد</th>
+                <th scope="col">نوع اتاق</th>
+                <th scope="col">شماره تلفن</th>
+                <th scope="col">تاریخ</th>
+                <th scope="col">#</th>
+            </tr>
+        </thead>
+        <tbody id="request-tbl-body"></tbody>
+    </table>
+</div>
+
+@Html.Partial("_ConfirmationMessage")
+
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script>
+        var CreateUrl = "@Url.Action("Create", "PostGroup")";
+        var EditUrl = "@Url.Action("Edit", "PostGroup")";
+        var DeleteUrl = "@Url.Action("Delete", "PostGroup")";
+    </script>
+
+
+
+    <script type="text/javascript">
+
+        $(function () { //This section will run whenever we call this page
+
+            var objHub = $.connection.requestHub;
+            //loadClientMethods(objHub);
+            $.connection.hub.start().done(function () {
+                objHub.server.getusers();
+            });
+            objHub.client.onConnected = function (userInfo) {
+                debugger;
+                // the parameter rooms is a serialized List<Room>
+                // which here will be an array of room objects.
+                //$.getJSON('/admin/request/gettour/', { tourId: userInfo.tourId}, function (response) {
+                //    debugger;
+                var html = '<tr>' +
+                             '<th scope="row">1</th>' +
+                              '<td>' + userInfo.tour + '</td>' +
+                              '<td>' + userInfo.AdultCount + '</td>' +
+                              '<td>' + userInfo.ChildCount + '</td>' +
+                              '<td>' + userInfo.InfantCount + '</td>' +
+                              '<td>' + userInfo.RoomType + '</td>' +
+                              '<td>' + userInfo.PhoneNumber + '</td>' +
+                              '<td>' + userInfo.CreateDateTime + '</td>' +
+                              '<td><a class="btn btn-xs btn-success" data-val="' + userInfo.ConnectionId + '"> تایید </a></td>' +
+                           '</tr>';
+                $("#request-tbl-body").append(html);
+                //$.each(response.results, function (i, item) {
+                //    items += "<option value=\"" + item.value + "\">" + item.text + "</option>";
+                //});
+                //$("#EndWorkingHour").html(items);
+                //});
+            }
+            objHub.client.userLoaded = function (userList) {
+                debugger;
+                var html = '';
+                for (i = 0; i < rooms.length; ++i) {
+                    html += '<tr>' +
+                                 '<th scope="row">1</th>' +
+                                  '<td>' + userList[i].tour + '</td>' +
+                                  '<td>' + userList[i].AdultCount + '</td>' +
+                                  '<td>' + userList[i].ChildCount + '</td>' +
+                                  '<td>' + userList[i].InfantCount + '</td>' +
+                                  '<td>' + userList[i].RoomType + '</td>' +
+                                  '<td>' + userList[i].PhoneNumber + '</td>' +
+                                  '<td>' + userList[i].CreateDateTime + '</td>' +
+                                  '<td><a class="btn btn-xs btn-success" data-val="' + userList[i].ConnectionId + '"> تایید </a></td>' +
+                              '</tr>';
+                }
+                $("#request-tbl-body").html(html);
+            }
+            objHub.client.userDisconnected = function (userList) {
+                debugger;
+                var html = '';
+                for (i = 0; i < rooms.length; ++i) {
+                    html += '<tr>' +
+                                 '<th scope="row">1</th>' +
+                                  '<td>' + userList[i].tour + '</td>' +
+                                  '<td>' + userList[i].AdultCount + '</td>' +
+                                  '<td>' + userList[i].ChildCount + '</td>' +
+                                  '<td>' + userList[i].InfantCount + '</td>' +
+                                  '<td>' + userList[i].RoomType + '</td>' +
+                                  '<td>' + userList[i].PhoneNumber + '</td>' +
+                                  '<td>' + userList[i].CreateDateTime + '</td>' +
+                                  '<td><a class="btn btn-xs btn-success" data-val="' + userList[i].ConnectionId + '"> تایید </a></td>' +
+                              '</tr>';
+                }
+                $("#request-tbl-body").html(html);
+            }
+
+
+        });
+
+
+
+
+
+        //$(function () {
+        //    debugger;
+        //    // Reference the hub.
+        //    var hubNotif = $.connection.requestHub;
+
+        //    // Start the connection.
+        //    $.connection.hub.start().done(function () {
+        //        debugger;
+        //        var connectionID = $.connection.hub.id;
+        //        //getAll();
+        //        //dataTable.getdata();
+
+        //    });
+
+        //    // Notify while anyChanges.
+        //    hubNotif.client.updatedData = function () {
+        //        var connectionID = $.connection.hub.id;
+        //        debugger;
+        //        getAll();
+        //    };
+        //});
+    </script>
+}
+
+

@@ -182,6 +182,7 @@
     <Compile Include="Contract\Rule\ITermsandConditionService.cs" />
     <Compile Include="Contract\SocialLog\ISearchLogService.cs" />
     <Compile Include="Contract\SocialLog\ISocialLogService.cs" />
+    <Compile Include="Contract\Tour\IRequestService.cs" />
     <Compile Include="Contract\Tour\IRequiredDocumentService.cs" />
     <Compile Include="Contract\Tags\ITagService.cs" />
     <Compile Include="Contract\Tour\IActivityService.cs" />
@@ -274,6 +275,7 @@
     <Compile Include="DataAccessService\SocialLog\SearchLogService.cs" />
     <Compile Include="DataAccessService\SocialLog\SocialLogService.cs" />
     <Compile Include="DataAccessService\Tour\CurrencyService.cs" />
+    <Compile Include="DataAccessService\Tour\RequestService.cs" />
     <Compile Include="DataAccessService\Tour\RequiredDocumentService.cs" />
     <Compile Include="DataAccessService\Tags\TagService.cs" />
     <Compile Include="DataAccessService\Tour\ActivityService.cs" />

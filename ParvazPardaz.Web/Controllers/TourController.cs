@@ -39,6 +39,9 @@ using ParvazPardaz.TravelAgency.UI.Services.Interface.Book;
 using ParvazPardaz.Service.Contract.Core;
 using ParvazPardaz.ViewModel.Book.LocationTour;
 using ParvazPardaz.Service.Contract.Magazine;
+using ParvazPardaz.ViewModel.Book.TourReserve;
+using ParvazPardaz.Web.SignalR;
+using Microsoft.AspNet.SignalR;
 
 namespace ParvazPardaz.Web.Controllers
 {
@@ -1779,6 +1782,81 @@ namespace ParvazPardaz.Web.Controllers
             return 0;
         }
         #endregion
+
+        public JsonResult CreateRequest(CreateRequestViewModel viewModel)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                Request model = new Model.Entity.Tour.Request()
+                {
+                    AdultCount = viewModel.AdultCount,
+                    ChildCount = viewModel.ChildCount,
+                    InfantCount = viewModel.InfantCount,
+                    RoomType = viewModel.RoomType,
+                    HotelPackageTitle = viewModel.HotelPackageTitle,
+                    HotelPackageId = viewModel.HotelPackageId,
+                    TourPackageTitle = viewModel.TourPackageTitle,
+                    TourPackageId = viewModel.TourPackageId,
+                    DepartureFlightId = viewModel.DepartureFlightId,
+                    ArrivalFlightId = viewModel.ArrivalFlightId,
+                    TotalPrice = viewModel.TotalPrice
+                };
+                _unitOfWork.Set<Request>().Add(model);
+                var HubContext = GlobalHost.ConnectionManager.GetHubContext<RequestHub>();
+                RequestHub HubObj = new RequestHub();
+                //var RequiredId = HubObj.InvokeHubMethod();
+                _unitOfWork.SaveAllChanges();
+                HubObj.BroadcastData();
+                //HubContext.InvokeHubMethod();
+                return new JsonResult()
+                {
+                    Data = new
+                    {
+                        success = true,
+                        TourPackageId = model.TourPackageId,
+                        TourPackageTitle = viewModel.TourPackageTitle,
+                        HotelPackageId = viewModel.HotelPackageId,
+                        HotelPackageTitle = viewModel.HotelPackageTitle,
+                        id = model.Id
+                        //View = this.RenderPartialViewToString("_Report", viewModel)
+                    },
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            else
+            {
+                return new JsonResult()
+                {
+                    Data = new
+                    {
+                        success = false
+                    },
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
+
+        public ActionResult RequestSuccess(int request)
+        {
+            var model = _unitOfWork.Set<Request>().FirstOrDefault(x => x.Id == request);
+            var arrival = _unitOfWork.Set<TourScheduleCompanyTransfer>().AsNoTracking().FirstOrDefault(x => x.Id == model.ArrivalFlightId);
+            var departure = _unitOfWork.Set<TourScheduleCompanyTransfer>().AsNoTracking().FirstOrDefault(x => x.Id == model.DepartureFlightId);
+
+            var viewModel = new SuccessRequestViewModel()
+            {
+                AdultCount = model.AdultCount,
+                ChildCount = model.ChildCount,
+                InfantCount = model.InfantCount,
+                ArrivalFlight = arrival != null ? string.Format("{0}/از {1} به مقصد {2}", arrival.FlightNumber, _unitOfWork.Set<Airport>().FirstOrDefault(x => x.Id == arrival.FromAirportId).Title, _unitOfWork.Set<Airport>().FirstOrDefault(x => x.Id == arrival.DestinationAirportId).Title) : "",
+                DepartureFlight = departure != null ? string.Format("{0}/از {1} به مقصد {2}", departure.FlightNumber, _unitOfWork.Set<Airport>().FirstOrDefault(x => x.Id == departure.FromAirportId).Title, _unitOfWork.Set<Airport>().FirstOrDefault(x => x.Id == departure.DestinationAirportId).Title) : "",
+                HotelPackageTitle = model.HotelPackageTitle,
+                RoomType = model.RoomType,
+                TourPackageTitle = model.TourPackageTitle,
+                TotalCount = model.AdultCount + model.ChildCount + model.InfantCount,
+                TotalPrice = model.TotalPrice
+            };
+            return View(viewModel);
+        }
 
         public string GeLinkUrl(int tourPackageId)
         {

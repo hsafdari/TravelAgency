@@ -15,6 +15,7 @@ using Microsoft.AspNet;
 using ParvazPardaz.Service.DataAccessService.Users;
 using ParvazPardaz.Service.Contract.Users;
 
+[assembly: OwinStartupAttribute(typeof(ParvazPardaz.Web.Startup))]
 namespace ParvazPardaz.Web
 {
     public class Startup

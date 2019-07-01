@@ -110,9 +110,9 @@ namespace ParvazPardaz.Service.DataAccessService.Users
         #region SeedDatabase
         public void SeedDatabase()
         {
-            const string systemAdminUserName = "Admin";
+            const string systemAdminUserName = "admin";
             const string systemAdminPassword = "123456";
-            const string systemAdminEmail = "Admin@gmail.com";
+            const string systemAdminEmail = "admin@gmail.com";
             const string systemAdminDisplayName = "System Administrator";
 
             var user = _users.FirstOrDefault(u => u.IsSystemAccount);

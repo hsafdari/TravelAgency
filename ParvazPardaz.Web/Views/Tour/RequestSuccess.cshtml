@@ -1,0 +1,94 @@
+﻿@model ParvazPardaz.ViewModel.Book.TourReserve.SuccessRequestViewModel
+@{
+    ViewBag.Title = "ثبت درخواست با موفقیت ارسال شد";
+}
+<link href="~/Content/requestpage/request.css" rel="stylesheet" />
+
+<div class="amaj-reservation">
+    <div class="container pt-5">
+
+        <div class="row align-items-center text-top">
+            <div class="col-12 col-md-6  pl-0  pr-0"><span class="pr-1 color-green"> <img src="~/Content/requestpage/image/tik.png"> انتخاب تور</span> </div>
+            <div class="col-12 col-md-6 text-md-left float-left  pl-0  pr-0"> <a href="#"> ورود اطلاعات </a> <img src="~/Content/requestpage/image/link-div.png"><a href="#"> تکمیل خرید </a> <img src="~/Content/requestpage/image/link-div.png"><a href="#"> رزرو تور </a> </div>
+        </div>
+
+
+        <div class="d-flex flex-md-nowrap flex-wrap justify-content-center align-items-center align-items-xl-end justify-content-md-between reservation-main">
+
+            <div class="tour-info-box order-1">
+                <div class="green-box text-center"> @Model.TourPackageTitle </div>
+                <div class="p-3">
+                    <div class="pt-2 pb-2 mt-1 mb-1"><img src="~/Content/requestpage/image/img-menu-1.png" alt="" class="pl-3 image-icon"> <span class=" menu-item">پرواز رفت : </span> <span> @Model.DepartureFlight</span> </div>
+                    <div class="pt-2 pb-2 mt-1 mb-1"><img src="~/Content/requestpage/image/img-menu-2.png" alt="" class="pl-3 image-icon"> <span class=" menu-item">پرواز برگشت : </span> <span>@Model.ArrivalFlight</span> </div>
+                    <div class="pt-2 pb-2 mt-1 mb-1 "><img src="~/Content/requestpage/image/img-menu-3.png" alt="" class="pl-3 image-icon"> <span class="menu-item">نام هتل : </span> <span>@Model.HotelPackageTitle</span> </div>
+                    <div class="pt-2 pb-2 mt-1 mb-1 "><img src="~/Content/requestpage/image/img-menu-4.png" alt="" class="pl-3 image-icon"> <span class="menu-item">تعداد مسافران : </span> <span>@Model.AdultCount.GetPersianNumber()</span> </div>
+                </div>
+                <div class="green-box text-center p-0"> <span style="font-size: 2.5rem"> @Model.TotalPrice.GetPersianNumber()</span> <small> تومان  </small></div>
+            </div>
+
+            <div class="reservation-pic order-0 order-xl-1 pl-4 pr-4 align-self-start ">
+                <img src="~/Content/requestpage/image/main-image.png" alt="" class="w-100">
+            </div>
+
+            <div class="reservation-time order-1 ">
+                <div class="right-box text-center">
+                    <div class="" style="font-weight: bold; font-size: 1.5rem">درخواسـت شمـا ارسـال شد</div>
+                    <div style="font-size: 0.85rem">همکاران ما پس از بررسی ظرفیت دقیق اتاق های هتل در کوتاه تـرین زمان ممکـن با شمـا تماس خواهـند گــرفت</div>
+                </div>
+
+                <div class="circel-txt">
+                    <img src="~/Content/requestpage/image/timer.png" class="pt-3">
+                    <div id="timer" class="time pt-4"></div>
+                </div>
+
+                <div class="right-box text-center">
+                    <div style="font-size: 1rem">در صـورت تاخیر، با شمـاره زیر تمـاس فرمایید:</div>
+                    <div>
+                        <span style="font-size: 1rem" class="pl-3">کی سفر   </span> <span style="font-size: 1rem ; color: #00247a ; font-weight: bold;">
+                            داخلی ۷۰۱
+                            <span class="ml-2 mr-2">-</span>۲۹۹۷
+                            <span class="ml-2 mr-2">-</span> ۰۲۱
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- .row -->
+
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("6/3/2020 15:37:25").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in an element with id="demo"
+            document.getElementById("timer").innerHTML = minutes + ':' + seconds;
+
+            // If the count down is over, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("timer").innerHTML = "EXP";
+            }
+        }, 1000);
+    </script>
+
+
+}
+

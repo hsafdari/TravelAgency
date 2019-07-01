@@ -159,6 +159,7 @@
     <Compile Include="Book\Task\GridTaskViewModel.cs" />
     <Compile Include="Book\TourReserve\ApplyCouponViewModel.cs" />
     <Compile Include="Book\TourReserve\ConfirmViewModel.cs" />
+    <Compile Include="Book\TourReserve\CreateRequestViewModel.cs" />
     <Compile Include="Book\TourReserve\HotelRoomPassengerSectionViewModel.cs" />
     <Compile Include="Book\TourReserve\RoomSectionViewModel.cs" />
     <Compile Include="Book\TourReserve\RoomTypePriceInfoViewModel.cs" />
@@ -371,6 +372,7 @@
     <Compile Include="Tag\GridTagViewModel.cs" />
     <Compile Include="Tag\EditTagViewModel.cs" />
     <Compile Include="Tag\AddTagViewModel.cs" />
+    <Compile Include="TourViewModels\Request\GridRequestViewModel.cs" />
     <Compile Include="TourViewModels\RequiredDocument\AddRequiredDocumentViewModel.cs" />
     <Compile Include="TourViewModels\RequiredDocument\EditRequiredDocumentViewModel.cs" />
     <Compile Include="TourViewModels\RequiredDocument\GridRequiredDocumentViewModel.cs" />

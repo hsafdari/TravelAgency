@@ -333,3 +333,7 @@ F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\obj\R
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\obj\Release\ParvazPardaz.Web.dll
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\obj\Release\ParvazPardaz.Web.pdb
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\obj\Release\ParvazPardaz.Web.XmlSerializers.dll
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\bin\Microsoft.AspNet.SignalR.Core.pdb
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

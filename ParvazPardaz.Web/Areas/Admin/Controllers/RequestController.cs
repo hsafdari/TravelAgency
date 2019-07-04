@@ -1,4 +1,5 @@
-﻿using Kendo.Mvc.Extensions;
+﻿using Infrastructure;
+using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using ParvazPardaz.Common.Controller;
 using ParvazPardaz.DataAccess.Infrastructure;
@@ -29,7 +30,7 @@ namespace ParvazPardaz.Web.Areas.Admin.Controllers
         #endregion
 
         #region Index
-        //[CustomAuthorize(Permissionitem.List)]
+        [CustomAuthorize(Permissionitem.List)]
         //[Display(Name = "ManagementReviewItems", ResourceType = typeof(ParvazPardaz.Resource.CMS.CMS))]
         public ActionResult Index(string msg)
         {

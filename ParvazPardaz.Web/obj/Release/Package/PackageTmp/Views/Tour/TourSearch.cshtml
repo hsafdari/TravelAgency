@@ -261,7 +261,7 @@
                                                 {
                                                     <button id="btn-next" @(defaultHotelPackageList == null && !defaultHotelPackageList.Any() ? "style=\" cursor:not-allowed\"" : "") onclick="ShowLoginModal();" class="btn-1 active" type="button" name="button">ادامه فرآیند خرید</button>
                                                 }*@
-                                            <a class="btn-1 active" onclick="showpopup()">ادامه فرایند خرید</a>
+                                            <a class="btn-1 active" id="ContinueProcess">ادامه فرایند خرید</a>
                                             @*<button class="btn-4 active" type="button" name="singin" onclick="$('.modal .wrapper').removeClass('signup').removeClass('passrestore').addClass('signin')">ورود به کی سفر</button>*@
                                         </section>
                                         <div class="modal" id="autorize-modal" style="display:none;">
@@ -296,7 +296,6 @@
                                                             </ul>
                                                         </div>
                                                         <div class="alertcontentfooter">
-                                                            @*<div><a class="btn-1 active" >بله، ممنونم</a></div>*@
                                                             <img src="/ClientTheme/images/Logo/keysafarlogo.png" />
                                                         </div>
                                                     </div>
@@ -316,6 +315,58 @@
     <script>
         $(".select2").select2({
             dir: "rtl"
+        });
+
+
+        $(document).on('click', "#ContinueProcess", function () {
+            debugger;
+            var $form = $("form");
+            var data = []
+            var $this, obj;
+            $('.partialSection').each(function (i) {
+                $this = $(this);
+                adult = $this.find(".AdultCount");
+                child = $this.find(".ChildCount");
+                infant = $this.find(".InfantCount");
+                roomtype = $this.find(".SelectedRoomTypeId ");
+                obj = {};
+                obj.AdultCount = adult;
+                obj.ChildCount = child;
+                obj.InfantCount = infant;
+                obj.RoomType = roomtype;
+                data.push(obj);
+            });
+            $.ajax({
+                type: 'POST',
+                data: { viewModel: data },
+                url: '/tour/CreateRequest/',
+                datatype: 'application/json',
+                async: true,
+                complete: function (data) {
+                },
+                success: function (data) {
+                    debugger;
+                    //showpopup();
+                    //debugger;
+                    //var $boxes = $(data.view);
+                    //var $target = $('#restaurant-menu-content');
+                    //$target.removeData().html("");
+                    //$target.css({ opacity: '0.0' }).html($boxes).delay(50).animate({ opacity: '1.0' }, 300);
+                    //if (data.success) {
+                    //    ShowNotification('success', data.message, data.title, 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                    //}
+                    //else {
+                    //    ShowNotification('danger', data.message, data.title, 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                    //}
+                },
+                beforeSend: function (data, status) {
+                    //var loading = '<div class="loading" style="height:inherit;"><div class="cssload-main"><span class="cssload-spinner"></span></div></div>';
+                    //var $target = $('#restaurant-menu-content');
+                    //$target.removeData().html(loading);
+                },
+                error: function () {
+                }
+            })
         });
 
         function GetArrivalFlights(DepartureFlight) {
@@ -503,7 +554,7 @@
             //    min: $.validator.format("لطفا عددی بزرگتر یا مساوی {0} وارد کنید.")
             //});
         });
-          $(document).on('click', ".modalspan", function () {
+        $(document).on('click', ".modalspan", function () {
             $("#autorize-modal").css("display", "none");
         });
         // Arrange dynamic sections IDs
@@ -590,9 +641,9 @@
             $('.tpTitle.tpTitle_' + className + '').addClass('active');
             $('.tpTitle:not(.tpTitle_' + className + ')').removeClass('active');
         }
-        function showpopup() {      
-            $("#frm-popup").css("display", "block");
-            $("#autorize-modal").css("display", "flex");
-        }
+        //function showpopup() {
+        //    $("#frm-popup").css("display", "block");
+        //    $("#autorize-modal").css("display", "flex");
+        //}
     </script>
 }

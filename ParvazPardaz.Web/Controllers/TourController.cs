@@ -709,7 +709,7 @@ namespace ParvazPardaz.Web.Controllers
         #endregion
 
         #region 2. TourReserve
-        [Route("tour/TourReserve")]
+        [Route("tour-TourReserve")]
         [HttpPost]
         public ActionResult TourReserve(TourReserveViewModel viewModel)
         {
@@ -1362,7 +1362,7 @@ namespace ParvazPardaz.Web.Controllers
         #endregion
 
         #region FetchRoomSection
-        // [Route("tour/FetchRoomSection")]
+        [Route("tour-FetchRoomSection")]
         public ActionResult FetchRoomSection(int index, int sHotelPackageId)
         {
             if (sHotelPackageId > 0)
@@ -1782,7 +1782,7 @@ namespace ParvazPardaz.Web.Controllers
             return 0;
         }
         #endregion
-
+        [Route("tour-CreateRequest")]
         public JsonResult CreateRequest(CreateRequestViewModel viewModel)
         {
             if (User.Identity.IsAuthenticated)
@@ -1835,7 +1835,7 @@ namespace ParvazPardaz.Web.Controllers
                 };
             }
         }
-
+        [Route("tour-requestsuccess")]
         public ActionResult RequestSuccess(int request)
         {
             var model = _unitOfWork.Set<Request>().FirstOrDefault(x => x.Id == request);

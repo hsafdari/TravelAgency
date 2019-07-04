@@ -71,7 +71,7 @@
             <button name="toggle" class="btn-2">اطلاعات تور</button>
         }
     </article>
-    using (Html.BeginForm("", "TourReserve", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-reserve" }))
+    using (Html.BeginForm(actionName: "TourReserve",controllerName: "Tour",routeValues:null,method:FormMethod.Post, htmlAttributes:new { enctype = "multipart/form-data", id = "frm-reserve" }))
     {
         <input type="hidden" value="@defaultTour.Title" id="HF_TourTitle" />
         <input type="hidden" value="@defaultTour.Id" id="HF_TourID" />
@@ -331,10 +331,7 @@
         $(".select2").select2({
             dir: "rtl"
         });
-
-
-        $(document).on('click', "#ContinueProcess", function (e) {
-            debugger;
+        $(document).on('click', "#ContinueProcess", function (e) {   
             e.preventDefault();
             var $form = $("form");
             var data = []
@@ -371,7 +368,7 @@
             $.ajax({
                 type: 'POST',
                 data: { viewModel: data[0] },
-                url: '/tour/CreateRequest/',
+                url: '/tour-CreateRequest/',
                 datatype: 'application/json',
                 async: true,
                 complete: function (data) {
@@ -379,7 +376,7 @@
                 success: function (data) {
                     debugger;
                     if (data.success) {
-                        var url = '/tour/requestsuccess/' + "?request=" + data.id;
+                        var url = '/tour-requestsuccess/' + "?request=" + data.id;
                         window.location = url;
                     }
                     else {
@@ -446,7 +443,7 @@
             document.getElementById("RoomSectionIndex").value = roomSectionIndex;
             var selectedHotelPackageId = $("input:hidden[name=SelectedHotelPackageId]:checked").val();
             jQuery.ajax({
-                url: "/FetchRoomSection",
+                url: "/tour-FetchRoomSection",
                 type: "post",
                 dataType: "html",
                 cache: false,
@@ -473,7 +470,7 @@
             document.getElementById("RoomSectionIndex").value = roomSectionIndex;
             var selectedHotelPackageId = $("input:hidden[name=SelectedHotelPackageId]:checked").val();
             jQuery.ajax({
-                url: "/FetchRoomSection",
+                url: "/tour-FetchRoomSection",
                 type: "post",
                 dataType: "html",
                 cache: false,
@@ -584,7 +581,7 @@
 
         function FetchTourData(id) {
             $.ajax({
-                url: "/FetchTourData",
+                url: "/tour-FetchTourData",
                 type: "post",
                 dataType: "html",
                 cache: false,

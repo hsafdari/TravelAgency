@@ -407,7 +407,8 @@ $(document).on('click',' .profile-dropdown-toggle',function(e){
   profileDropdownToggle = (profileDropdownToggle) ? false : true
 })
 $(document).on('click',' .profile-modal-toggle',function(e){
-  e.preventDefault();
+    e.preventDefault();
+    debugger;
   $('body').addClass('freez').append(`
     <div class="fullframe modal">
     <div class="wrapper signin">

@@ -3891,3 +3891,10 @@ canvas {
     #seocontent #seodv {
         width:100%;
     }
+.img-responsive {
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+    display: block;
+    height: auto;
+}

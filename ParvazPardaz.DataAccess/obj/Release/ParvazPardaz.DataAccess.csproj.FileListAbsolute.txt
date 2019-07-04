@@ -132,3 +132,4 @@ F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.DataAcces
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.DataAccess\obj\Release\ParvazPardaz.DataAccess.pdb
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.DataAccess\obj\Release\ParvazPardaz.DataAccess.csproj.GenerateResource.Cache
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.DataAccess\obj\Release\ParvazPardaz.DataAccess.Migrations.packge.resources
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.DataAccess\obj\Release\ParvazPardaz.DataAccess.Migrations.tourRequest.resources

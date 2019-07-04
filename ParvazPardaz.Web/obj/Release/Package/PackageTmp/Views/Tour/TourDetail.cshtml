@@ -71,8 +71,13 @@
             <button name="toggle" class="btn-2">اطلاعات تور</button>
         }
     </article>
-    using (Html.BeginForm("", "TourReserve", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-reserve" }))
+    using (Html.BeginForm(actionName: "TourReserve",controllerName: "Tour",routeValues:null,method:FormMethod.Post, htmlAttributes:new { enctype = "multipart/form-data", id = "frm-reserve" }))
     {
+        <input type="hidden" value="@defaultTour.Title" id="HF_TourTitle" />
+        <input type="hidden" value="@defaultTour.Id" id="HF_TourID" />
+        <input type="hidden" value="@(System.Convert.ToInt32( ViewBag.SelectedDefaultDepFlightId))" id="HF_DepFilghtId" />
+        <input type="hidden" value="@(System.Convert.ToInt32(ViewBag.SelectedDefaultArrivalFlightId))" id="HF_ArrFilghtId" />
+
         @Html.HiddenFor(x => x.TourSearchParams.AdultCount)
         @Html.HiddenFor(x => x.TourSearchParams.ChildCount)
         @Html.HiddenFor(x => x.TourSearchParams.InfantCount)
@@ -121,204 +126,204 @@
             </div>
         </section>
 
-        if (defaultHotelPackageList != null && defaultHotelPackageList.Any())
-        {
-            <section id="HotelsSection" class="main tour-hotel white clearfix">
-                <h2 class="sectionTitle">انتخاب هتل</h2>
-                <ul class="sort-bar">
-                    <li class="">نام و اطلاعات هتل</li>
-                    <li class="sort-ascend">ستاره</li>
-                    <li class="">خدمات هتل</li>
-                    <li class="sort-descend">شروع قیمت از</li>
-                </ul>
-                <div class="form">
-                    @foreach (var item in defaultHotelPackageList.ToList())
-                    {
-                        foreach (var h in item.hotelsInPackage)
-                        {
-                            var AdultHotelRoomsInPackage = item.hotelRoomsInPackage.Where(x => x.AdultPrice > 0).OrderBy(x => x.AdultPrice).ToList();
-                            decimal pricevalue = AdultHotelRoomsInPackage.Any() ? AdultHotelRoomsInPackage.Select(x => new { price = x.AdultPrice + ((x.AdultPrice * vat) / 100) }).Select(x => x.price).First() : 0;
-                            string price = pricevalue != 0 ? pricevalue.ToString("#,0 تومان") : "";
-                             <label class="label" sortable-name="@h.HotelTitle" sortable-star="@h.RankOrderId" sortable-facility="@h.HotelBoardTitle" sortable-price="@pricevalue">
-                                <input type="radio" name="SelectedHotelPackageId" value="@item.Id" onclick="FetchTourData(@item.TourId); ResetRoomSection();" @(h.HotelId == defaultHotelId && item.Id == defaultHotelPackageId ? "Checked=Checked" : "") />
-                                <span class="radio-replace"></span>
-                                <img src="@h.Thumbnail" alt="@h.HotelTitle" class="hotel-logo">
-                                <span class="hotel-name">@h.HotelTitle</span>
-                                <img class="hotel-star" src="@h.RankLogo" alt="@h.RankOrderId" title="@h.HotelTitle" />
-
-                                <span class="hotel-facility">
-                                    <img src="@(String.IsNullOrEmpty(h.HotelBoardLogo) == true ? "#" : h.HotelBoardLogo)" title="@h.HotelBoardTitle" alt="@h.HotelBoardTitle" />
-                                    @h.HotelBoardTitle
-                                </span>
-                                <span class="hotel-price">
-                                    @(AdultHotelRoomsInPackage.Any() ? AdultHotelRoomsInPackage.Select(x => new { price = (x.AdultPrice/10) }).Select(x => x.price).First().ToString("#,0 تومان") : "")
-                                </span>
-                                <span name="toggle" class="btn-2">اطلاعات</span>
-
-                                <div class="details roll">
-                                    <p>
-                                        <b>مکان هتل:</b>
-                                        @string.Format("{0}{1}", h.CityTitle, (h.Location != null ? " ، " + h.Location : ""))
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <b>شرح خدمات:</b>
-                                        @Html.Raw(h.Summary)
-                                    </p>
-                                    <ul class="slider cards" style="direction: ltr;">
-                                        @if (h.HotelGalleryImages != null && h.HotelGalleryImages.Any())
+                            if (defaultHotelPackageList != null && defaultHotelPackageList.Any())
+                            {
+                                <section id="HotelsSection" class="main tour-hotel white clearfix">
+                                    <h2 class="sectionTitle">انتخاب هتل</h2>
+                                    <ul class="sort-bar">
+                                        <li class="">نام و اطلاعات هتل</li>
+                                        <li class="sort-ascend">ستاره</li>
+                                        <li class="">خدمات هتل</li>
+                                        <li class="sort-descend">شروع قیمت از</li>
+                                    </ul>
+                                    <div class="form">
+                                        @foreach (var item in defaultHotelPackageList.ToList())
                                         {
-                                            foreach (var img in h.HotelGalleryImages)
+                                            foreach (var h in item.hotelsInPackage)
                                             {
-                                                <li class="active"><img src="@img"></li>
+                                                var AdultHotelRoomsInPackage = item.hotelRoomsInPackage.Where(x => x.AdultPrice > 0).OrderBy(x => x.AdultPrice).ToList();
+                                                decimal pricevalue = AdultHotelRoomsInPackage.Any() ? AdultHotelRoomsInPackage.Select(x => new { price = x.AdultPrice + ((x.AdultPrice * vat) / 100) }).Select(x => x.price).First() : 0;
+                                                string price = pricevalue != 0 ? pricevalue.ToString("#,0 تومان") : "";
+                                                <label class="label" sortable-name="@h.HotelTitle" sortable-star="@h.RankOrderId" sortable-facility="@h.HotelBoardTitle" sortable-price="@pricevalue">
+                                                    <input type="radio" name="SelectedHotelPackageId" value="@item.Id" data-title="@h.HotelTitle" onclick="FetchTourData(@item.TourId); ResetRoomSection();" @(h.HotelId == defaultHotelId && item.Id == defaultHotelPackageId ? "Checked=Checked" : "") />
+                                                    <span class="radio-replace"></span>
+                                                    <img src="@h.Thumbnail" alt="@h.HotelTitle" class="hotel-logo">
+                                                    <span class="hotel-name">@h.HotelTitle</span>
+                                                    <img class="hotel-star" src="@h.RankLogo" alt="@h.RankOrderId" title="@h.HotelTitle" />
+
+                                                    <span class="hotel-facility">
+                                                        <img src="@(String.IsNullOrEmpty(h.HotelBoardLogo) == true ? "#" : h.HotelBoardLogo)" title="@h.HotelBoardTitle" alt="@h.HotelBoardTitle" />
+                                                        @h.HotelBoardTitle
+                                                    </span>
+                                                    <span class="hotel-price">
+                                                        @(AdultHotelRoomsInPackage.Any() ? AdultHotelRoomsInPackage.Select(x => new { price = (x.AdultPrice / 10) }).Select(x => x.price).First().ToString("#,0 تومان") : "")
+                                                    </span>
+                                                    <span name="toggle" class="btn-2">اطلاعات</span>
+
+                                                    <div class="details roll">
+                                                        <p>
+                                                            <b>مکان هتل:</b>
+                                                            @string.Format("{0}{1}", h.CityTitle, (h.Location != null ? " ، " + h.Location : ""))
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <b>شرح خدمات:</b>
+                                                            @Html.Raw(h.Summary)
+                                                        </p>
+                                                        <ul class="slider cards" style="direction: ltr;">
+                                                            @if (h.HotelGalleryImages != null && h.HotelGalleryImages.Any())
+                                                            {
+                                                                foreach (var img in h.HotelGalleryImages)
+                                                                {
+                                                                    <li class="active"><img src="@img"></li>
+                                                                }
+                                                            }
+                                                        </ul>
+                                                        <button class="btn-3" type="button" name="next" onclick="roll(1,this,3)"></button>
+                                                        <button class="btn-3" type="button" name="prev" onclick="roll(-1,this,3)"></button>
+                                                    </div>
+                                                </label>
+
+                                                @*<label class="label">
+                                                        <input type="radio" name="SelectedHotelPackageId" value="@item.Id" onclick="FetchTourData(@item.TourId); ResetRoomSection();" @(h.HotelId == defaultHotelId && item.Id == defaultHotelPackageId ? "Checked=Checked" : "") />
+                                                        <span class="radio-replace"></span>
+                                                        <img src="@h.Thumbnail" alt="@h.HotelTitle" class="hotel-logo">
+                                                        <span class="hotel-name">@h.HotelTitle</span>
+                                                        <span>
+                                                            <img src="@h.RankLogo" alt="@h.RankOrderId" title="@h.HotelTitle" />
+                                                        </span>
+                                                        <span class="hotel-facility">
+                                                            <img src="@(String.IsNullOrEmpty(h.HotelBoardLogo) == true ? "#" : h.HotelBoardLogo)" title="@h.HotelBoardTitle" alt="@h.HotelBoardTitle" />
+                                                        </span>
+                                                        <span class="hotel-price">
+                                                            @{
+                                                    var AdultHotelRoomsInPackage = item.hotelRoomsInPackage.Where(x => x.AdultPrice > 0).OrderBy(x => x.AdultPrice).ToList();
+                                                            }
+                                                            @(AdultHotelRoomsInPackage.Any() ? AdultHotelRoomsInPackage.Select(x => new { price = x.AdultPrice + ((x.AdultPrice * vat) / 100) }).Select(x => x.price).First().ToString("#,0 تومان") : "")
+                                                        </span>
+                                                        <span name="toggle" class="btn-2">اطلاعات</span>
+                                                    </label>
+                                                    <div class="details roll">
+                                                        <p>
+                                                            <b>مکان هتل:</b>
+                                                            @string.Format("{0}{1}", h.CityTitle, (h.Location != null ? " ، " + h.Location : ""))
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <b>شرح خدمات:</b>
+                                                        </p>
+                                                        <ul class="slider cards" style="direction: ltr;">
+                                                            @if (h.HotelGalleryImages != null && h.HotelGalleryImages.Any())
+                                                            {
+                                                                foreach (var img in h.HotelGalleryImages)
+                                                                {
+                                                                    <li class="active"><img src="@img"></li>
+                                                                }
+                                                            }
+                                                        </ul>
+                                                        <button class="btn-3" type="button" name="next" onclick="roll(1,this,3)"></button>
+                                                        <button class="btn-3" type="button" name="prev" onclick="roll(-1,this,3)"></button>
+                                                    </div>*@
                                             }
                                         }
-                                    </ul>
-                                    <button class="btn-3" type="button" name="next" onclick="roll(1,this,3)"></button>
-                                    <button class="btn-3" type="button" name="prev" onclick="roll(-1,this,3)"></button>
-                                </div>
-                            </label>
-                        
-                            @*<label class="label">
-                                <input type="radio" name="SelectedHotelPackageId" value="@item.Id" onclick="FetchTourData(@item.TourId); ResetRoomSection();" @(h.HotelId == defaultHotelId && item.Id == defaultHotelPackageId ? "Checked=Checked" : "") />
-                                <span class="radio-replace"></span>
-                                <img src="@h.Thumbnail" alt="@h.HotelTitle" class="hotel-logo">
-                                <span class="hotel-name">@h.HotelTitle</span>
-                                <span>
-                                    <img src="@h.RankLogo" alt="@h.RankOrderId" title="@h.HotelTitle" />
-                                </span>
-                                <span class="hotel-facility">
-                                    <img src="@(String.IsNullOrEmpty(h.HotelBoardLogo) == true ? "#" : h.HotelBoardLogo)" title="@h.HotelBoardTitle" alt="@h.HotelBoardTitle" />
-                                </span>
-                                <span class="hotel-price">
-                                    @{
-                            var AdultHotelRoomsInPackage = item.hotelRoomsInPackage.Where(x => x.AdultPrice > 0).OrderBy(x => x.AdultPrice).ToList();
-                                    }
-                                    @(AdultHotelRoomsInPackage.Any() ? AdultHotelRoomsInPackage.Select(x => new { price = x.AdultPrice + ((x.AdultPrice * vat) / 100) }).Select(x => x.price).First().ToString("#,0 تومان") : "")
-                                </span>
-                                <span name="toggle" class="btn-2">اطلاعات</span>
-                            </label>
-                            <div class="details roll">
-                                <p>
-                                    <b>مکان هتل:</b>
-                                    @string.Format("{0}{1}", h.CityTitle, (h.Location != null ? " ، " + h.Location : ""))
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <b>شرح خدمات:</b>
-                                </p>
-                                <ul class="slider cards" style="direction: ltr;">
-                                    @if (h.HotelGalleryImages != null && h.HotelGalleryImages.Any())
-                                    {
-                                        foreach (var img in h.HotelGalleryImages)
-                                        {
-                                            <li class="active"><img src="@img"></li>
-                                        }
-                                    }
-                                </ul>
-                                <button class="btn-3" type="button" name="next" onclick="roll(1,this,3)"></button>
-                                <button class="btn-3" type="button" name="prev" onclick="roll(-1,this,3)"></button>
-                            </div>*@
-                        }
-                    }
-                </div>
-            </section>
-        }
-        <b class="main">برای محاسبه قیمت، لطفا ویژگی‌های تور را انتخاب کنید. ارزانترین پکیج تور به طور پیشفرض انتخاب شده است.</b>
-        <section class="main tour-rooms white clearfix">
-            <h2 class="sectionTitle">تعداد مسافران و اتاق</h2>
-            <div id="MasterRoomSection">
-                <div class="row partialSection">
-                    <label>
-                        <span>نوع اتاق</span>
-                        <select id="RoomSections_0__SelectedRoomTypeId" name="RoomSections[0].SelectedRoomTypeId" class="RoomTypeDDL SelectedRoomTypeId" onchange="ManagePersonCounter(this); CalculateTotalPrice();">
-                            @foreach (var item in (ViewBag.RoomType as List<HotelRoomDDLViewModel>))
-                            {
-                                <option data-adultcurrencyprice="@item.AdultOtherCurrencyPrice" data-adultprice="@item.AdultPrice" data-adultmaxcapacity="@item.TotalAdultCapacity"
-                                        data-childcurrencyprice="@item.ChildOtherCurrencyPrice" data-childprice="@item.ChildPrice" data-childmaxcapacity="@item.TotalChildCapacity"
-                                        data-infantcurrencyprice="@item.InfantOtherCurrencyPrice" data-infantprice="@item.InfantPrice" data-infantmaxcapacity="@item.TotalInfantCapacity"
-                                        data-currencyid="#cur_@item.CurrencyId" value="@item.Value">
-                                    @item.Title
-                                </option>
+                                    </div>
+                                </section>
                             }
-                        </select>
-                    </label>
-                    <label>
-                        <span>تعداد بزرگسال</span>
-                        @Html.TextBoxFor(x => x.RoomSections[0].AdultCount, new { @class = "AdultCount", @type = "number", @Value = 1, @onchange = "CalculateTotalPrice()" })
-                    </label>
-                    <label>
-                        <span>تعداد کودک (۳ تا ۶ سال)</span>
-                        @Html.TextBoxFor(x => x.RoomSections[0].ChildCount, new { @class = "ChildCount", @type = "number", @Value = 0, @onchange = "CalculateTotalPrice()" })
-                    </label>
-                    <label>
-                        <span>تعداد نوزاد (بدون تخت)</span>
-                        @Html.TextBoxFor(x => x.RoomSections[0].InfantCount, new { @class = "InfantCount", @type = "number", @Value = 0, @onchange = "CalculateTotalPrice()" })
-                    </label>
-                </div>
-                <div id="RoomSection"></div>
-            </div>
-            <input type="button" onclick="FetchRoomSection()" name="add-room" value="اضافه ‌کردن اتاق جدید">
-        </section>
-        <section class="main tour-price clearfix">
-            <div class="sum">
-                <span>قیمت تمام شده : </span>
-                <span id="totalpaysection"></span>
-                <span> تومان</span>
-            </div>
-            @*@if (User.Identity.IsAuthenticated)
-            {
-                <button id="btn-next" @(defaultHotelPackageList == null && !defaultHotelPackageList.Any() ? "disabled style=\" cursor:not-allowed\"" : "") class="btn-1 active" type="submit" name="button">ادامه فرآیند خرید</button>
-            }
-            else
-            {
-                <button id="btn-next" @(defaultHotelPackageList == null && !defaultHotelPackageList.Any() ? "style=\" cursor:not-allowed\"" : "") onclick="ShowLoginModal();" class="btn-1 active" type="button" name="button">ادامه فرآیند خرید</button>
-            }*@
-            <a class="btn-1 active" onclick="showpopup()">ادامه فرایند خرید</a>
-        </section>
-        <div class="modal" id="autorize-modal" style="display:none;">
-            <div class="dvmodalinternal">
-                <span class="modalspan" style="cursor:pointer;" >&times;</span>
-                <div class="wrapper signin">
-                    <div id="frm-popup" class="form signup">
-                        <div class="alertheader">برای رزرو یا کسب اطلاعات کامل تور <div class="alertheadercall">با ما تماس بگیرید</div></div>
-                        <h2><a href="tel:+98212779">021-2779</a></h2>
-                        <div>
-                            <ul class="alertcontent">
-                                <li class="alertcontentheader">داخلی:</li>
-                                <li>
-                                    <ul class="alertinercontent">
-                                        <li><div class="alertcontentcol">تور مشهد:</div><div class="alertcontentcol2">داخلی 701</div></li>
-                                        <li><div class="alertcontentcol">تور کیش:</div><div class="alertcontentcol2">داخلی 702</div></li>
-                                        <li><div class="alertcontentcol">تور قشم:</div><div class="alertcontentcol2">داخلی 703</div></li>
-                                        <li><div class="alertcontentcol">سایر تورهای داخلی:</div><div class="alertcontentcol2">داخلی 704</div></li>
-                                    </ul>
-                                </li>
-                                <li class="alertcontentheader">خارجی:</li>
-                                <li>
-                                    <ul class="alertinercontent">
-                                        <li><div class="alertcontentcol">تور استانبول:</div><div class="alertcontentcol2">داخلی 705</div></li>
-                                        <li><div class="alertcontentcol">تور آنتالیا:</div><div class="alertcontentcol2">داخلی 706</div></li>
-                                        <li><div class="alertcontentcol">تور تفلیس:</div><div class="alertcontentcol2">داخلی 707</div></li>
-                                        <li><div class="alertcontentcol">تور مسقط:</div><div class="alertcontentcol2">داخلی 708</div></li>
-                                        <li><div class="alertcontentcol">تور باکو:</div><div class="alertcontentcol2">داخلی 709</div></li>
-                                        <li><div class="alertcontentcol">سایر تورهای خارجی:</div><div class="alertcontentcol2">داخلی 710</div></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="alertcontentfooter">
-                            @*<div><a class="btn-1 active" >بله، ممنونم</a></div>*@
-                            <img src="/ClientTheme/images/Logo/keysafarlogo.png" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                            <b class="main">برای محاسبه قیمت، لطفا ویژگی‌های تور را انتخاب کنید. ارزانترین پکیج تور به طور پیشفرض انتخاب شده است.</b>
+                            <section class="main tour-rooms white clearfix">
+                                <h2 class="sectionTitle">تعداد مسافران و اتاق</h2>
+                                <div id="MasterRoomSection">
+                                    <div class="row partialSection">
+                                        <label>
+                                            <span>نوع اتاق</span>
+                                            <select id="RoomSections_0__SelectedRoomTypeId" name="RoomSections[0].SelectedRoomTypeId" class="RoomTypeDDL SelectedRoomTypeId" onchange="ManagePersonCounter(this); CalculateTotalPrice();">
+                                                @foreach (var item in (ViewBag.RoomType as List<HotelRoomDDLViewModel>))
+                                                {
+                                                    <option data-adultcurrencyprice="@item.AdultOtherCurrencyPrice" data-adultprice="@item.AdultPrice" data-adultmaxcapacity="@item.TotalAdultCapacity"
+                                                            data-childcurrencyprice="@item.ChildOtherCurrencyPrice" data-childprice="@item.ChildPrice" data-childmaxcapacity="@item.TotalChildCapacity"
+                                                            data-infantcurrencyprice="@item.InfantOtherCurrencyPrice" data-infantprice="@item.InfantPrice" data-infantmaxcapacity="@item.TotalInfantCapacity"
+                                                            data-currencyid="#cur_@item.CurrencyId" value="@item.Value">
+                                                        @item.Title
+                                                    </option>
+                                                }
+                                            </select>
+                                        </label>
+                                        <label>
+                                            <span>تعداد بزرگسال</span>
+                                            @Html.TextBoxFor(x => x.RoomSections[0].AdultCount, new { @class = "AdultCount", @type = "number", @Value = 1, @onchange = "CalculateTotalPrice()" })
+                                        </label>
+                                        <label>
+                                            <span>تعداد کودک (۳ تا ۶ سال)</span>
+                                            @Html.TextBoxFor(x => x.RoomSections[0].ChildCount, new { @class = "ChildCount", @type = "number", @Value = 0, @onchange = "CalculateTotalPrice()" })
+                                        </label>
+                                        <label>
+                                            <span>تعداد نوزاد (بدون تخت)</span>
+                                            @Html.TextBoxFor(x => x.RoomSections[0].InfantCount, new { @class = "InfantCount", @type = "number", @Value = 0, @onchange = "CalculateTotalPrice()" })
+                                        </label>
+                                    </div>
+                                    <div id="RoomSection"></div>
+                                </div>
+                                <input type="button" onclick="FetchRoomSection()" name="add-room" value="اضافه ‌کردن اتاق جدید">
+                            </section>
+                            <section class="main tour-price clearfix">
+                                <div class="sum">
+                                    <span>قیمت تمام شده : </span>
+                                    <span id="totalpaysection"></span>
+                                    <input type="hidden" id="HF_TotalPay" />
+                                    <span> تومان</span>
+                                </div>
+                                @*@if (User.Identity.IsAuthenticated)
+                                    {
+                                        <button id="btn-next" @(defaultHotelPackageList == null && !defaultHotelPackageList.Any() ? "disabled style=\" cursor:not-allowed\"" : "") class="btn-1 active" type="submit" name="button">ادامه فرآیند خرید</button>
+                                    }
+                                    else
+                                    {
+                                        <button id="btn-next" @(defaultHotelPackageList == null && !defaultHotelPackageList.Any() ? "style=\" cursor:not-allowed\"" : "") onclick="ShowLoginModal();" class="btn-1 active" type="button" name="button">ادامه فرآیند خرید</button>
+                                    }*@
+                                <a class="btn-1 active" id="ContinueProcess">ادامه فرایند خرید</a>
+                            </section>
+                            <div class="modal" id="autorize-modal" style="display:none;">
+                                <div class="dvmodalinternal">
+                                    <span class="modalspan" style="cursor:pointer;">&times;</span>
+                                    <div class="wrapper signin">
+                                        <div id="frm-popup" class="form signup">
+                                            <div class="alertheader">برای رزرو یا کسب اطلاعات کامل تور <div class="alertheadercall">با ما تماس بگیرید</div></div>
+                                            <h2><a href="tel:+98212779">021-2779</a></h2>
+                                            <div>
+                                                <ul class="alertcontent">
+                                                    <li class="alertcontentheader">داخلی:</li>
+                                                    <li>
+                                                        <ul class="alertinercontent">
+                                                            <li><div class="alertcontentcol">تور مشهد:</div><div class="alertcontentcol2">داخلی 701</div></li>
+                                                            <li><div class="alertcontentcol">تور کیش:</div><div class="alertcontentcol2">داخلی 702</div></li>
+                                                            <li><div class="alertcontentcol">تور قشم:</div><div class="alertcontentcol2">داخلی 703</div></li>
+                                                            <li><div class="alertcontentcol">سایر تورهای داخلی:</div><div class="alertcontentcol2">داخلی 704</div></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="alertcontentheader">خارجی:</li>
+                                                    <li>
+                                                        <ul class="alertinercontent">
+                                                            <li><div class="alertcontentcol">تور استانبول:</div><div class="alertcontentcol2">داخلی 705</div></li>
+                                                            <li><div class="alertcontentcol">تور آنتالیا:</div><div class="alertcontentcol2">داخلی 706</div></li>
+                                                            <li><div class="alertcontentcol">تور تفلیس:</div><div class="alertcontentcol2">داخلی 707</div></li>
+                                                            <li><div class="alertcontentcol">تور مسقط:</div><div class="alertcontentcol2">داخلی 708</div></li>
+                                                            <li><div class="alertcontentcol">تور باکو:</div><div class="alertcontentcol2">داخلی 709</div></li>
+                                                            <li><div class="alertcontentcol">سایر تورهای خارجی:</div><div class="alertcontentcol2">داخلی 710</div></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="alertcontentfooter">
+                                                <img src="/ClientTheme/images/Logo/keysafarlogo.png" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                                 }
                             }
                             else
                             {
-    <section class="main tour-flight flight-go white clearfix" style="margin-top:24px;">
-        <p><strong>کاربر گرامی!</strong> جستجوی شما نتیجه ای دربر نداشت. لطفا دوباره تلاش نمایید . . . </p>
-    </section>
-}
+                                <section class="main tour-flight flight-go white clearfix" style="margin-top:24px;">
+                                    <p><strong>کاربر گرامی!</strong> جستجوی شما نتیجه ای دربر نداشت. لطفا دوباره تلاش نمایید . . . </p>
+                                </section>
+                            }
 <input id="RoomSectionIndex" type="hidden" value="@Model.RoomSectionIndex" />
 
 @section scripts{
@@ -326,6 +331,69 @@
         $(".select2").select2({
             dir: "rtl"
         });
+        $(document).on('click', "#ContinueProcess", function (e) {   
+            e.preventDefault();
+            var $form = $("form");
+            var data = []
+            var $this, obj;
+            $('.partialSection').each(function (i) {
+                $this = $(this);
+                var adult = $this.find(".AdultCount").val();
+                var child = $this.find(".ChildCount").val();
+                var infant = $this.find(".InfantCount").val();
+                var roomtype = $this.find(".SelectedRoomTypeId option:selected").text();
+                var selectedHotelPackageId = $("input:hidden[name=SelectedHotelPackageId]:checked").val();
+                var selectedHotelPackageTitle = $("input:hidden[name=SelectedHotelPackageId]:checked").attr("data-title");
+                var tourTitle = $("#HF_TourTitle").val();
+                var tourId = $("#HF_TourID").val()
+                var depFlightId = $("#HF_DepFilghtId").val();
+                var arrivalFlightid = $("#HF_ArrFilghtId").val();
+                var totalPrice = $("#HF_TotalPay").val();
+                obj = {};
+                obj.AdultCount = adult;
+                obj.ChildCount = child;
+                obj.InfantCount = infant;
+                obj.RoomType = roomtype.trim();
+                obj.RoomTypeId = $this.find(".SelectedRoomTypeId option:selected").val();
+                obj.HotelPackageId = selectedHotelPackageId;
+                obj.HotelPackageTitle = selectedHotelPackageTitle;
+                obj.TourPackageId = tourId;
+                obj.TourPackageTitle = tourTitle;
+                obj.DepartureFlightId = depFlightId;
+                obj.ArrivalFlightId = arrivalFlightid;
+                obj.TotalPrice = totalPrice;
+                data.push(obj);
+            });
+
+            $.ajax({
+                type: 'POST',
+                data: { viewModel: data[0] },
+                url: '/tour-CreateRequest/',
+                datatype: 'application/json',
+                async: true,
+                complete: function (data) {
+                },
+                success: function (data) {
+                    debugger;
+                    if (data.success) {
+                        var url = '/tour-requestsuccess/' + "?request=" + data.id;
+                        window.location = url;
+                    }
+                    else {
+                        $('.profile-dropdown').toggleClass('active')
+                        ShowLoginModal();
+                    }
+                },
+                beforeSend: function (data, status) {
+                    //var loading = '<div class="loading" style="height:inherit;"><div class="cssload-main"><span class="cssload-spinner"></span></div></div>';
+                    //var $target = $('#restaurant-menu-content');
+                    //$target.removeData().html(loading);
+                },
+                error: function () {
+                }
+            })
+        });
+
 
         function GetArrivalFlights(DepartureFlight) {
             jQuery.ajax({
@@ -375,7 +443,7 @@
             document.getElementById("RoomSectionIndex").value = roomSectionIndex;
             var selectedHotelPackageId = $("input:hidden[name=SelectedHotelPackageId]:checked").val();
             jQuery.ajax({
-                url: "/FetchRoomSection",
+                url: "/tour-FetchRoomSection",
                 type: "post",
                 dataType: "html",
                 cache: false,
@@ -402,7 +470,7 @@
             document.getElementById("RoomSectionIndex").value = roomSectionIndex;
             var selectedHotelPackageId = $("input:hidden[name=SelectedHotelPackageId]:checked").val();
             jQuery.ajax({
-                url: "/FetchRoomSection",
+                url: "/tour-FetchRoomSection",
                 type: "post",
                 dataType: "html",
                 cache: false,
@@ -513,7 +581,7 @@
 
         function FetchTourData(id) {
             $.ajax({
-                url: "/FetchTourData",
+                url: "/tour-FetchTourData",
                 type: "post",
                 dataType: "html",
                 cache: false,
@@ -574,11 +642,13 @@
                 totalPayPrice = Math.ceil(((totalAdult + totalChild + totalInfant) / 10));
 
             });
+             ;
             $("#totalpaysection").text(totalPayPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $("#HF_TotalPay").val(totalPayPrice);
         }
         function showpopup() {
             $("#frm-popup").css("display", "block");
             $("#autorize-modal").css("display", "flex");
-        }    
+        }
     </script>
 }

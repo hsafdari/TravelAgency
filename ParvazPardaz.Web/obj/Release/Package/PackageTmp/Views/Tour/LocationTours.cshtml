@@ -7,6 +7,7 @@
 
 @Styles.Render("~/bundles/TourCustomCss")
 <section class="header-image">
+    <img src="~/ClientTheme/images/summer-2.png" class="offerEyd" />  
     <img src="@(Model.ImageURL==null?"/ClientTheme/Blog/Tour/img/icons/bgmashhad.jpg":Model.ImageURL)" alt="@Model.Title" />
     <h1 class="sectionTitle">@Model.Title</h1>
 </section>
@@ -16,7 +17,7 @@
             <div class="filtermobilebody">
                 <input type="hidden" name="pageNumber" id="hdnpageNumber" value="0" />
                 <input type="hidden" name="FilterType" id="hdnFilterType" value="@Model.FilterType" />
-                <input type="hidden" name="enTitle" id="hdnenTitle" value="@Model.UrlName" />                
+                <input type="hidden" name="enTitle" id="hdnenTitle" value="@Model.UrlName" />
                 <div class="filterCitycontent">
                     <div class="filtercontent">
                         <div class="colfiltertitle">شــهر مبـدا</div>
@@ -39,7 +40,7 @@
                             {
                                 <input type="hidden" name="hdntocities" value="@item.Id" />
                                 <label class="label">
-                                    <input type="checkbox" name="tocities" class="checkbox-custom tocities" value="@item.Id">                                  
+                                    <input type="checkbox" name="tocities" class="checkbox-custom tocities" value="@item.Id">
                                     <span class="checkbox-replace"></span>
                                     <span class="radiotitle">@item.Title</span>
                                 </label>
@@ -61,11 +62,11 @@
                         <div class="tourlocationLsidebody">
                             @foreach (var item in Model.ToursDays)
             {
-                                <label class="label">
-                                    <input type="checkbox" name="days" class="checkbox-custom" value="@item.Id">
-                                    <span class="checkbox-replace"></span>
-                                    <span class="radiotitle">@item.Title</span>
-                                </label>
+                            <label class="label">
+                                <input type="checkbox" name="days" class="checkbox-custom" value="@item.Id">
+                                <span class="checkbox-replace"></span>
+                                <span class="radiotitle">@item.Title</span>
+                            </label>
                             }
                         </div>
                     </div>
@@ -74,11 +75,11 @@
                         <div class="tourlocationLsidebody">
                             @foreach (var item in Model.CompayTransfers)
             {
-                                <label class="label">
-                                    <input type="checkbox" name="airlines" class="checkbox-custom" value="@item.Id">
-                                    <span class="checkbox-replace"></span>
-                                    <span class="radiotitle">@item.Title</span>
-                                </label>
+                            <label class="label">
+                                <input type="checkbox" name="airlines" class="checkbox-custom" value="@item.Id">
+                                <span class="checkbox-replace"></span>
+                                <span class="radiotitle">@item.Title</span>
+                            </label>
                             }
                         </div>
                     </div>
@@ -87,16 +88,16 @@
                         <div class="tourlocationLsidebody">
                             @foreach (var item in Model.HotelRates)
             {
-                                <label class="label">
-                                    <input type="checkbox" name="hotelrates" class="checkbox-custom" value="@item.Id">
-                                    <span class="checkbox-replace"></span>
-                                    <span class="radiotitle"><img src="@item.Icon" alt="@item.Title"  /></span>
-                                    @*<span class="radiotitle">@item.Title</span>*@
-                                </label>
+                            <label class="label">
+                                <input type="checkbox" name="hotelrates" class="checkbox-custom" value="@item.Id">
+                                <span class="checkbox-replace"></span>
+                                <span class="radiotitle"><img src="@item.Icon" alt="@item.Title" /></span>
+                                @*<span class="radiotitle">@item.Title</span>*@
+                            </label>
                             }
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             <div id="btnfilterdo">
@@ -163,7 +164,7 @@
             dir: "rtl"
         });
         $(".tourlocationRside :input").change(function()
-        {           
+        {
             $(".nexnav").removeClass("active");
             $("#hdnpageNumber").val(0);
             $("#btnnxtpg").addClass("active");
@@ -181,7 +182,7 @@
             }
         });
          function filterItems()
-         {           
+         {
              var filterType=$("#hdnFilterType").val();
              if (filterType == "country") {
                  if (!$(".tocities").is(':checked'))
@@ -190,7 +191,7 @@
                          var row = $('[name="hdntocities"]')[0].value;
 
                      }
-                 }                 
+                 }
              }
             $.ajax({
                 type: "POST",
@@ -253,7 +254,13 @@
          {
              $("#dvbgfilter").css("display", "block");
              $("body").css("overflow", "hidden");
-         }       
+         }
+
+    </script>
+    <script type="text/javascript">
+         $(document).ready(function () {
+             $(".seocontent img").addClass("img-responsive");
+         });
     </script>
     @*<script src="~/Plugins/owlcarousel/owl.carousel.min.js"></script>*@
     @*<script>

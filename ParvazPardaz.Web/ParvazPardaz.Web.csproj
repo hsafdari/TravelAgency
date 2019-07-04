@@ -52,7 +52,6 @@
     </Reference>
     <Reference Include="DataTables.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\datatables.mvc5.0.1.0\lib\net45\DataTables.Mvc.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="effts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EfFts.1.0.0\lib\effts.dll</HintPath>
@@ -121,8 +120,8 @@
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -178,7 +177,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -193,30 +191,25 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -7329,39 +7322,6 @@
     <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
     <Content Include="CodeTemplates\MvcView\List.cs.t4" />
     <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap.min.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap4.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap4.min.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.foundation.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.foundation.min.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.jqueryui.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.jqueryui.min.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.semanticui.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\dataTables.semanticui.min.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\jquery.dataTables.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\css\jquery.dataTables.min.css" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\images\sort_asc.png" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\images\sort_asc_disabled.png" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\images\sort_both.png" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\images\sort_desc.png" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\images\sort_desc_disabled.png" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap.js" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap.min.js" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap4.js" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap4.min.js" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.foundation.js" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.foundation.min.js" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.jqueryui.js" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.jqueryui.min.js" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.semanticui.js" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\dataTables.semanticui.min.js" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\jquery.dataTables.js" />
-    <Content Include="lib\DataTables\DataTables-1.10.18\js\jquery.dataTables.min.js" />
-    <Content Include="lib\DataTables\datatables.css" />
-    <Content Include="lib\DataTables\datatables.js" />
-    <Content Include="lib\DataTables\datatables.min.css" />
-    <Content Include="lib\DataTables\datatables.min.js" />
     <Content Include="OpenSearchDescription.xml" />
     <Content Include="jsonTest\test.json" />
     <Content Include="Plugins\bootstrap-datepicker\bootstrap-theme.css" />

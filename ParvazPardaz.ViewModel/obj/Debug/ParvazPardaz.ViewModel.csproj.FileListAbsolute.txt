@@ -161,3 +161,6 @@ C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.ViewModel\obj\Debug\Parvaz
 C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.ViewModel\obj\Debug\ParvazPardaz.ViewModel.dll
 C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.ViewModel\obj\Debug\ParvazPardaz.ViewModel.pdb
 C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.ViewModel\bin\Debug\Newtonsoft.Json.xml
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.ViewModel\bin\Debug\RazorEngine.dll
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.ViewModel\bin\Debug\RazorEngine.pdb
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.ViewModel\bin\Debug\RazorEngine.xml

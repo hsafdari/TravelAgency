@@ -442,3 +442,7 @@ C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Web\bin\fa-IR\ParvazPardaz
 C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Web\obj\Debug\ParvazPardaz.Web.csprojResolveAssemblyReference.cache
 C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Web\obj\Debug\ParvazPardaz.Web.dll
 C:\Users\Home\Source\Repos\TravelAgency4\ParvazPardaz.Web\obj\Debug\ParvazPardaz.Web.pdb
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\bin\Microsoft.AspNet.SignalR.Core.pdb
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

@@ -121,3 +121,6 @@ F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.ViewModel
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.ViewModel\obj\Release\ParvazPardaz.ViewModel.dll
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.ViewModel\obj\Release\ParvazPardaz.ViewModel.pdb
 F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.ViewModel\bin\Release\Newtonsoft.Json.xml
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.ViewModel\bin\Release\RazorEngine.dll
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.ViewModel\bin\Release\RazorEngine.pdb
+F:\Work\MVC Projects\TFS Projects\Charteran\CharteranTour\ParvazPardaz.ViewModel\bin\Release\RazorEngine.xml
